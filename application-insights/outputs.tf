@@ -29,4 +29,5 @@ output "dependent_on" {
 output "instrumentation_key" {
   value       = azurerm_application_insights.main.instrumentation_key
   description = "The Instrumentation Key for this Application Insights component."
+  sensitive   = true
 }
