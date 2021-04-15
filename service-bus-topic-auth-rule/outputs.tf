@@ -29,4 +29,5 @@ output "dependent_on" {
 output "primary_connection_string" {
   value       = azurerm_servicebus_topic_authorization_rule.main.primary_connection_string
   description = "The Primary Connection String for the Authorization Rule."
+  sensitive   = true
 }

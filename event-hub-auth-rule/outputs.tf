@@ -29,4 +29,5 @@ output "dependent_on" {
 output "primary_connection_string" {
   value       = azurerm_eventhub_authorization_rule.main.primary_connection_string
   description = "The Primary Connection String for the Event Hubs authorization Rule."
+  sensitive   = true
 }

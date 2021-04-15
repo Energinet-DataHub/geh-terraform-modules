@@ -24,6 +24,7 @@ output endpoint {
 output "primary_access_key" {
   value       = azurerm_eventgrid_topic.main.primary_access_key
   description = "The Primary Shared Access Key associated with the EventGrid Topic."
+  sensitive   = true
 }
 
 output "secondary_access_key" {
