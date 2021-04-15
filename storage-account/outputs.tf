@@ -29,11 +29,13 @@ output "dependent_on" {
 output "primary_connection_string" {
   value       = azurerm_storage_account.main.primary_connection_string
   description = "The connection string associated with the primary location."
+  sensitive   = true
 }
 
 output "primary_access_key" {
   value       = azurerm_storage_account.main.primary_access_key
   description = "The primary access key for the storage account."
+  sensitive   = true
 }
 
 output "primary_blob_endpoint" {
