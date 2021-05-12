@@ -34,4 +34,5 @@ output "version" {
 output "value" {
   value       = var.value
   description = "The Key Vault Secret value."
+  sensitive   = true
 }
