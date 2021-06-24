@@ -13,7 +13,7 @@
 # limitations under the License.
 output "id" {
   value       = azurerm_eventgrid_topic.main.id
-  description = "The EventGrid Topic ID."
+  description = "The ID of the EventGrid Event Subscription."
 }
 
 output "dependent_on" {
