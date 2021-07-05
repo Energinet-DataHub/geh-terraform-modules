@@ -32,4 +32,7 @@ resource "azurerm_sql_server" "main" {
   administrator_login           = var.administrator_login
   administrator_login_password  = var.administrator_login_password
   tags                          = var.tags
+  identity                      = {
+    type  = "SystemAssigned" 
+  }
 }
