@@ -25,6 +25,7 @@ resource "azurerm_servicebus_queue" "main" {
   name                = var.name
   resource_group_name = var.resource_group_name
   namespace_name      = var.namespace_name
-
+  
+  requires_session    = var.requires_session
   enable_partitioning = true
 }
