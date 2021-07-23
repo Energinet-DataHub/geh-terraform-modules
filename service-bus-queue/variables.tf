@@ -26,6 +26,12 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the namespace. Changing this forces a new resource to be created."
 }
 
+variable requires_session {
+  type        = bool
+  description = "(Optional) Should the queue require sessions? Defaults to false"
+  default     = false
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
