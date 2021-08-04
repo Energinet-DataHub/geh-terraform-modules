@@ -36,6 +36,12 @@ variable max_delivery_count {
   description = "(Required) The maximum number of deliveries."
 }
 
+variable forward_to {
+  type        = string
+  description = "(Optional) The name of a Queue or Topic to automatically forward messages to."
+  default     = null
+}
+
 variable dependencies {
   type        = list
   description = "A mapping of dependencies which this module depends on."

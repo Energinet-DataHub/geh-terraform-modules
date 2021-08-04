@@ -27,4 +27,5 @@ resource "azurerm_servicebus_subscription" "main" {
   topic_name          = var.topic_name
   resource_group_name = var.resource_group_name
   max_delivery_count  = var.max_delivery_count
+  forward_to          = var.forward_to
 }
