@@ -28,33 +28,39 @@ resource "null_resource" "dependency_setter" {
 }
 
 resource "azurerm_monitor_metric_alert" "main" {
-  depends_on               = [null_resource.dependency_getter]
-  name                     = var.name
-  resource_group_name      = var.resource_group_name 
-  scopes                   = [ var.application_insight_id ]
-  description              = var.description
+  depends_on              = [null_resource.dependency_getter]
+  name                    = var.name
+  resource_group_name     = var.resource_group_name 
+  scopes                  = [
+    var.application_insight_id
+  ]
+  description             = var.description
   
   criteria {
-    metric_namespace       = "Microsoft.Insights/components"
-    metric_name            = "availabilityResults/count"
-    aggregation            = "Count"
-    operator               = "GreaterThan"
-    threshold              = var.threshold
+    metric_namespace      = "Microsoft.Insights/components"
+    metric_name           = "availabilityResults/count"
+    aggregation           = "Count"
+    operator              = "GreaterThan"
+    threshold             = var.threshold
     dimension {
-      name                 = "availabilityResult/name"
-      operator             = "Include"
-      values               = [ var.ping_test_name ]
-    }
+      name                = "availabilityResult/name"
+      operator            = "Include"
+    values                = [
+      var.ping_test_name
+    ]
+  }
 	dimension {
-      name                 = "availabilityResult/success"
-      operator             = "Include"
-      values               = [ "0" ]
+      name                = "availabilityResult/success"
+      operator            = "Include"
+      values              = [
+        "0"
+      ]
     }
   }
   action {
-    action_group_id        = var.action_group_id
+    action_group_id       = var.action_group_id
   }
-  frequency                = var.frequency
-  window_size              = var.window_size
-  tags                     = var.tags
+  frequency               = var.frequency
+  window_size             = var.window_size
+  tags                    = var.tags
 }

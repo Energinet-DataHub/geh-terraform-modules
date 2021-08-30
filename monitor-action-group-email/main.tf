@@ -17,18 +17,20 @@ resource "null_resource" "dependency_getter" {
   }
 }
 resource "null_resource" "dependency_setter" {
-  depends_on = [azurerm_monitor_action_group.main]
+  depends_on = [
+    azurerm_monitor_action_group.main
+  ]
 }
 
 resource "azurerm_monitor_action_group" "main" {
-  depends_on             = [null_resource.dependency_getter]
-  name                   = var.name
-  resource_group_name    = var.resource_group_name 
-  short_name			 = var.short_name
-  enabled                = var.enabled
+  depends_on              = [null_resource.dependency_getter]
+  name                    = var.name
+  resource_group_name     = var.resource_group_name 
+  short_name              = var.short_name
+  enabled                 = var.enabled
   email_receiver {
-    name                 = var.email_receiver.name
-    email_address        = var.email_receiver.email_address
+    name                  = var.email_receiver.name
+    email_address         = var.email_receiver.email_address
   }
-  tags                   = var.tags
+  tags                    = var.tags
 }
