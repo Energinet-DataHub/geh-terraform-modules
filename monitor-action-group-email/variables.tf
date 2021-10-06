@@ -21,6 +21,21 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the storage account. Changing this forces a new resource to be created."
 }
 
+variable organisation_name {
+  type        = string
+  description = "(Required) Name of your organisation."
+}
+
+variable project_name {
+  type        = string
+  description = "(Required) Name of your project."
+}
+
+variable environment_short {
+  type        = string
+  description = "(Required) Specifies the environment short, of the environment."
+}
+
 variable short_name {
   type        = string
   description = "(Required) Species the name used if the email is relayed to SMS. Must be between 1 and 12 characters."

@@ -21,15 +21,24 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the storage account. Changing this forces a new resource to be created."
 }
 
+variable organisation_name {
+  type        = string
+  description = "(Required) Name of your organisation."
+}
+
+variable project_name {
+  type        = string
+  description = "(Required) Name of your project."
+}
+
+variable environment_short {
+  type        = string
+  description = "(Required) Specifies the environment short, of the environment."
+}
+
 variable location {
   type        = string
   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
-}
-
-variable account_kind {
-  type        = string
-  description = "(Optional) Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Changing this forces a new resource to be created. Defaults to StorageV2."
-  default     = "StorageV2"
 }
 
 variable account_tier {
@@ -63,4 +72,10 @@ variable dependencies {
 variable is_hns_enabled {
   description = "Enable Hierarchical Namespace"
   default = false
+}
+
+variable account_kind {
+  type        = string
+  description = "(Optional) Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Changing this forces a new resource to be created. Defaults to StorageV2."
+  default     = "StorageV2"
 }

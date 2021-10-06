@@ -21,6 +21,21 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the Application Insights component."
 }
 
+variable organisation_name {
+  type        = string
+  description = "(Required) Name of your organisation."
+}
+
+variable project_name {
+  type        = string
+  description = "(Required) Name of your project."
+}
+
+variable environment_short {
+  type        = string
+  description = "(Required) Specifies the environment short, of the environment."
+}
+
 variable location {
   type        = string
   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."

@@ -24,13 +24,13 @@ resource "null_resource" "dependency_setter" {
 }
 
 resource "azurerm_storage_account" "main" {
-  depends_on                        = [null_resource.dependency_getter]
-  name                              = var.name
-  resource_group_name               = var.resource_group_name 
-  location                          = var.location 
-  account_tier                      = "Standard"
-  account_replication_type          = "LRS"
-  is_hns_enabled                    = var.is_hns_enabled  
-  min_tls_version                   = "TLS1_2"
-  tags                              = var.tags
+  depends_on                = [null_resource.dependency_getter]
+  name                      = "st${lower(var.name)}${lower(var.project_name)}${lower(var.organisation_name)}${lower(var.environment_short)}"
+  resource_group_name       = var.resource_group_name 
+  location                  = var.location 
+  account_tier              = "Standard"
+  account_replication_type  = "LRS"
+  is_hns_enabled            = var.is_hns_enabled  
+  min_tls_version           = "TLS1_2"
+  tags                      = var.tags
 }

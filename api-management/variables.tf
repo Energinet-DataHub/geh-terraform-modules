@@ -21,6 +21,21 @@ variable resource_group_name {
   description = "(Required) The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created."
 }
 
+variable organisation_name {
+  type        = string
+  description = "(Required) Name of your organisation."
+}
+
+variable project_name {
+  type        = string
+  description = "(Required) Name of your project."
+}
+
+variable environment_short {
+  type        = string
+  description = "(Required) Specifies the environment short, of the environment."
+}
+
 variable location {
   type        = string
   description = "(Required) The Azure location where the API Management Service exists. Changing this forces a new resource to be created."

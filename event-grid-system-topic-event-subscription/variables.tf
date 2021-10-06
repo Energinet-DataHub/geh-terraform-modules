@@ -20,6 +20,21 @@ variable resource_group_name {
   description = "(Required) The name of the Resource Group where the System Topic exists. Changing this forces a new Event Subscription to be created."
 }
 
+variable organisation_name {
+  type        = string
+  description = "(Required) Name of your organisation."
+}
+
+variable project_name {
+  type        = string
+  description = "(Required) Name of your project."
+}
+
+variable environment_short {
+  type        = string
+  description = "(Required) Specifies the environment short, of the environment."
+}
+
 variable system_topic {
   type        = string
   description = "(Required) The System Topic where the Event Subscription should be created in. Changing this forces a new Event Subscription to be created."

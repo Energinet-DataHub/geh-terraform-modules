@@ -15,3 +15,8 @@ output "name" {
   value       = azurerm_storage_container.main.name
   description = "The name of the storage container"
 }
+
+output "dependent_on" {
+  value       = null_resource.dependency_setter.id
+  description = "The dependencies of the resource created."
+}

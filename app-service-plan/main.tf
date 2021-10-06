@@ -25,7 +25,7 @@ resource "null_resource" "dependency_setter" {
 
 resource "azurerm_app_service_plan" "main" {
   depends_on          = [null_resource.dependency_getter]
-  name                = var.name
+  name                = "plan-${var.name}-${var.project_name}-${var.organisation_name}-${var.environment_short}"
   resource_group_name = var.resource_group_name
   location            = var.location
   kind                = var.kind
