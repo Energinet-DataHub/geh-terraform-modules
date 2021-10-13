@@ -25,7 +25,7 @@ resource "null_resource" "dependency_setter" {
 
 resource "azurerm_api_management" "main" {
   depends_on          = [null_resource.dependency_getter]
-  name                = var.name
+  name                = "appi-${lower(var.project)}-${lower(var.organisation)}-${lower(var.environment)}"
   resource_group_name = var.resource_group_name
   location            = var.location
   publisher_name      = var.publisher_name

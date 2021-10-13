@@ -16,6 +16,21 @@ variable name {
   description = "(Required) Specifies the name of the App Service Plan component. Changing this forces a new resource to be created."
 }
 
+variable organisation_name {
+  type        = string
+  description = "(Required) Name of your organisation."
+}
+
+variable project_name {
+  type        = string
+  description = "(Required) Name of your project."
+}
+
+variable environment_short {
+  type        = string
+  description = "(Required) Specifies the environment short, of the environment."
+}
+
 variable resource_group_name {
   type        = string
   description = "(Required) The name of the resource group in which to create the App Service Plan component."

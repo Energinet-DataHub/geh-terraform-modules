@@ -24,8 +24,8 @@ resource "null_resource" "dependency_setter" {
 }
 
 resource "azurerm_eventgrid_event_subscription" "main" {
-  depends_on          = [null_resource.dependency_getter]
-  name                = var.name
-  scope               = var.scope
-  tags                = var.tags
+  depends_on  = [null_resource.dependency_getter]
+  name        = "evges-${lower(var.name)}-${lower(var.project_name)}-${lower(var.organisation_name)}-${lower(var.environment_short)}"
+  scope       = var.scope
+  tags        = var.tags
 }

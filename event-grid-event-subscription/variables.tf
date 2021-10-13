@@ -16,6 +16,21 @@ variable name {
   description = "(Required) Specifies the name of the EventGrid Topic resource. Changing this forces a new resource to be created."
 }
 
+variable organisation_name {
+  type        = string
+  description = "(Required) Name of your organisation."
+}
+
+variable project_name {
+  type        = string
+  description = "(Required) Name of your project."
+}
+
+variable environment_short {
+  type        = string
+  description = "(Required) Specifies the environment short, of the environment."
+}
+
 variable scope {
   type        = string
   description = "(Required) Specifies the scope at which the EventGrid Event Subscription should be created. Changing this forces a new resource to be created."

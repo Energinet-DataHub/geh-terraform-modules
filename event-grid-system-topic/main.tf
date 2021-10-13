@@ -25,7 +25,7 @@ resource "null_resource" "dependency_setter" {
 
 resource "azurerm_eventgrid_system_topic" "main" {
   depends_on              = [null_resource.dependency_getter]
-  name                    = var.name
+  name                    = "evgst-${lower(var.name)}-${lower(var.project_name)}-${lower(var.organisation_name)}-${lower(var.environment_short)}"
   resource_group_name     = var.resource_group_name
   location                = var.location
   source_arm_resource_id  = var.source_arm_resource_id

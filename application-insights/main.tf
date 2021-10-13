@@ -23,7 +23,7 @@ resource "null_resource" "dependency_setter" {
 
 resource "azurerm_application_insights" "main" {
   depends_on          = [null_resource.dependency_getter]
-  name                = var.name
+  name                = "appi-${lower(var.name)}-${lower(var.project_name)}-${lower(var.organisation_name)}-${lower(var.environment_short)}"
   resource_group_name = var.resource_group_name
   location            = var.location
   application_type    = "web"

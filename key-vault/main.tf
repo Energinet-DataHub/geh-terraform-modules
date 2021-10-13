@@ -28,12 +28,24 @@ data "azurerm_client_config" "main" {}
 
 resource "azurerm_key_vault" "main" {
   depends_on          = [null_resource.dependency_getter]
-  name                = var.name
+  name                = "kv${lower(var.name)}${lower(var.project_name)}${lower(var.organisation_name)}${lower(var.environment_short)}"
   location            = var.location
   resource_group_name = var.resource_group_name
   tenant_id           = data.azurerm_client_config.main.tenant_id
   sku_name            = var.sku_name
   tags                = var.tags
+}
+
+resource "azurerm_key_vault_access_policy" "selfpermissions" {
+  depends_on    = [azurerm_key_vault.main]
+  key_vault_id  = azurerm_key_vault.main.id
+  tenant_id     = data.azurerm_client_config.main.tenant_id
+  object_id     = data.azurerm_client_config.main.object_id
+
+  secret_permissions      = ["delete", "list", "get", "set"]
+  key_permissions         = ["create", "list", "delete", "get"]
+  certificate_permissions = ["create", "list", "delete", "get"]
+  storage_permissions     = ["delete", "get", "set"]
 }
 
 resource "azurerm_key_vault_access_policy" "main" {
