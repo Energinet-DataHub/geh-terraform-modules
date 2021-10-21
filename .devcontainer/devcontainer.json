@@ -55,7 +55,7 @@
 	"features": {
 		"kubectl-helm-minikube": "latest",
 		"terraform": "latest",
-		"git": "os-provided",
+		"git": "latest",
 		"azure-cli": "latest"
 	}
 }
