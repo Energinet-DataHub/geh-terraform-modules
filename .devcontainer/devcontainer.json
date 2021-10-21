@@ -41,7 +41,8 @@
 		"hashicorp.terraform",
 		"ms-vscode.azurecli",
 		"ms-azuretools.vscode-azureterraform",
-		"ms-azuretools.vscode-docker"
+		"ms-azuretools.vscode-docker",
+		"yzhang.markdown-all-in-one"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
