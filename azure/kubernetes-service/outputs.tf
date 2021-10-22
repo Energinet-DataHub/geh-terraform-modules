@@ -27,8 +27,8 @@ output "principal_id" {
   description = "The ID of the pricipal created for the cluster."
 }
 
-output "kube_config" {
-  description = "Outputs the kube_config for the cluster."
-  value       = azurerm_kubernetes_cluster.this.kube_config
+output "kube_admin_config" {
+  description = "Outputs the kube_admin_config for the cluster."
+  value       = azurerm_kubernetes_cluster.this.kube_admin_config 
   sensitive   = true
 }
