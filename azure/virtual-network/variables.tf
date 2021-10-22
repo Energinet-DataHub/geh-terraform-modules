@@ -49,11 +49,12 @@ variable "address_spaces" {
 }
 
 variable "subnets" {
-  type = map(object({
+  type = list(object({
+    name = string
     address_prefixes = list(string)
     security_group = string
   }))
-  description = "(Required) List of Subnets creates in the virtual network, the key will be used as name for the subnet."
+  description = "(Required) List of Subnets creates in the virtual network."
 }
 
 variable "dns_servers" {
