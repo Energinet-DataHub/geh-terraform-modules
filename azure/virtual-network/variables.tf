@@ -69,3 +69,8 @@ variable "ddos_protection_plan_id" {
   default     = null
 }
 
+variable dependencies {
+  type        = list
+  description = "A mapping of dependencies which this module depends on."
+  default     = []
+}
