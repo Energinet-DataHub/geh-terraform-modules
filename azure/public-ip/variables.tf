@@ -50,50 +50,54 @@ variable "dependencies" {
 }
 
 variable "allocation_method" {
-  type = "string"
+  type        = string
   description = "(Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic"
 }
 
-
 variable "sku" {
-  type = "string"
+  type        = string
   description = "The SKU of the Public IP. Accepted values are Basic and Standard."
-  default = "Basic"
+  default     = "Basic"
 }
 
 variable "sku_tier" {
-  type = "string"
+  type        = string
   description = "The SKU Tier that should be used for the Public IP. Possible values are Regional and Global"
-  default = "Regional"
+  default     = "Regional"
 }
 
 variable "availability_zone" {
-  type = "string"
+  type        = string
   description = "The availability zone to allocate the Public IP in. Possible values are Zone-Redundant, 1, 2, 3, and No-Zone."
-  default = "Zone-Redundant"
+  default     = "Zone-Redundant"
 }
+
 variable "ip_version" {
-  type = "string"
+  type        = string
   description = "The IP Version to use, IPv6 or IPv4"
-  default = "IPv4"
+  default     = "IPv4"
 }
+
 variable "idle_timeout_in_minutes" {
-  type = "string"
+  type        = string
   description = "Specifies the timeout for the TCP idle connection. The value can be set between 4 and 30 minutes."
-  default = "4"
+  default     = "4"
 }
+
 variable "domain_name_label" {
-  type = "string"
+  type        = string
   description = "Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
-  default = null
+  default     = null
 }
+
 variable "reverse_fqdn" {
-  type = "string"
+  type        = string
   description = "A fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN"
-  default = null
+  default     = null
 }
+
 variable "public_ip_prefix_id" {
-  type = "string"
+  type        = string
   description = "If specified then public IP address allocated will be provided from the public IP prefix resource"
-  default = null
+  default     = null
 }
