@@ -47,7 +47,9 @@ resource "azurerm_kubernetes_cluster" "this" {
     network_mode            = "transparent"
     outbound_type           = "loadBalancer"
     load_balancer_sku       = "Standard"
-    outbound_ip_address_ids = var.outbound_ip_address_ids
+    load_balancer_profile {
+      outbound_ip_address_ids = var.outbound_ip_address_ids
+    }
   }
 
   default_node_pool {
