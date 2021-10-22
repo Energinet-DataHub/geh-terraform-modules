@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 output "id" {
-  value       = azurerm_servicebus_queue.this.id
+  value       = azurerm_virtual_network.this.id
   description = "The Virtual Network ID."
 }
 
 output "name" {
-  value       = azurerm_servicebus_queue.this.name
+  value       = azurerm_virtual_network.this.name
   description = "The Virtual Network name."
 }
 

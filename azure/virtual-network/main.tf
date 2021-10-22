@@ -41,10 +41,12 @@ resource "azurerm_virtual_network" "this" {
   address_space = var.address_spaces
   dns_servers   = var.dns_servers
 
-  ddos_protection_plan {
-    count  = var.ddos_protection_plan_id == null ? 0 : 1
-    id     = var.ddos_protection_plan_id
-    enable = true
+  dynamic "ddos_protection_plan" {
+    count = var.ddos_protection_plan_id == null ? 0 : 1
+    content {
+      id     = var.ddos_protection_plan_id
+      enable = true 
+    }
   }
 
   lifecycle {
