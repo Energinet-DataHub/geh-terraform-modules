@@ -63,10 +63,10 @@ resource "azurerm_subnet" "this" {
     azurerm_virtual_network.this
   ]
   for_each             = var.subnets
-  name                 = each.name
+  name                 = each.value.name
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = each.address_prefixes
+  address_prefixes     = each.value.address_prefixes
 
   # TODO extend with further functionality https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet
 }
