@@ -20,13 +20,14 @@ locals {
 }
 
 resource "azurerm_kubernetes_cluster" "this" {
-  name                = "ks-${var.name}-${var.environment_short}-${var.environment_instance}"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  node_resource_group = "rg-nodes-${var.name}-${var.environment_short}-${var.environment_instance}"
-  dns_prefix          = "${var.name}-${var.environment_short}-${var.environment_instance}"
-  tags                = merge(var.tags, local.module_tags)
-  kubernetes_version  = var.kubernetes_version
+  name                            = "ks-${var.name}-${var.environment_short}-${var.environment_instance}"
+  location                        = var.location
+  resource_group_name             = var.resource_group_name
+  node_resource_group             = "rg-nodes-${var.name}-${var.environment_short}-${var.environment_instance}"
+  dns_prefix                      = "${var.name}-${var.environment_short}-${var.environment_instance}"
+  tags                            = merge(var.tags, local.module_tags)
+  kubernetes_version              = var.kubernetes_version
+  api_server_authorized_ip_ranges = []
 
   identity {
     type = "SystemAssigned"
@@ -43,10 +44,10 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   network_profile {
-    network_plugin          = "azure"
-    network_mode            = "transparent"
-    outbound_type           = "loadBalancer"
-    load_balancer_sku       = "Standard"
+    network_plugin    = "azure"
+    network_mode      = "transparent"
+    outbound_type     = "loadBalancer"
+    load_balancer_sku = "Standard"
     load_balancer_profile {
       outbound_ip_address_ids = var.outbound_ip_address_ids
     }
@@ -64,6 +65,8 @@ resource "azurerm_kubernetes_cluster" "this" {
     node_count          = var.default_nodes.min_count
     min_count           = var.default_nodes.min_count
     max_count           = var.default_nodes.max_count
+    node_taints         = []
+    tags                = {}
 
     enable_host_encryption       = false
     enable_node_public_ip        = false
