@@ -77,7 +77,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   lifecycle {
     ignore_changes = [
       # Ignore node_count as not to update if the value is changed by Azure.
-      default_node_pool[node_count],
+      default_node_pool.node_count,
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.
       tags,
