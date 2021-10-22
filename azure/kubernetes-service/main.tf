@@ -38,7 +38,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     enabled = true
     azure_active_directory {
       managed                = true
-      admin_group_object_ids = local.admin_group_object_ids
+      admin_group_object_ids = var.admin_group_object_ids
     }
   }
 
@@ -47,7 +47,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     network_mode            = "transparent"
     outbound_type           = "loadBalancer"
     load_balancer_sku       = "Standard"
-    outbound_ip_address_ids = [module.public_ip.public_ip[0].aks_outbound_ip.id]
+    outbound_ip_address_ids = var.outbound_ip_address_ids
   }
 
   default_node_pool {

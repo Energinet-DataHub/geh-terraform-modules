@@ -69,6 +69,18 @@ variable "default_nodes" {
   }
 }
 
+variable "outbound_ip_address_ids" {
+  type        = list(string)
+  description = "A list of the ids for the public ips to use for outbound trafic"
+  default     = []
+}
+
+variable "admin_group_object_ids" {
+  type        = list(string)
+  description = "A list of the ids to add as administrators on the cluster"
+  default     = []
+}
+
 variable "tags" {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
