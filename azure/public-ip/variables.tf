@@ -57,7 +57,7 @@ variable "allocation_method" {
 variable "sku" {
   type        = string
   description = "The SKU of the Public IP. Accepted values are Basic and Standard."
-  default     = "Basic"
+  default     = "Standard"
 }
 
 variable "sku_tier" {
