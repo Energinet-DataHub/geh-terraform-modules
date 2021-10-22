@@ -42,7 +42,7 @@ resource "azurerm_virtual_network" "this" {
   dns_servers   = var.dns_servers
 
   dynamic "ddos_protection_plan" {
-    count = var.ddos_protection_plan_id == null ? 0 : 1
+    for_each = var.ddos_protection_plan_id == null ? [] : [1]
     content {
       id     = var.ddos_protection_plan_id
       enable = true 
