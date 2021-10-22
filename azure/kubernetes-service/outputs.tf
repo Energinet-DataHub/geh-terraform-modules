@@ -23,7 +23,7 @@ output "name" {
 }
 
 output "principal_id" {
-  value       = azurerm_kubernetes_cluster.this.identity.principal_id
+  value       = azurerm_kubernetes_cluster.this.identity[0].principal_id
   description = "The ID of the pricipal created for the cluster."
 }
 
