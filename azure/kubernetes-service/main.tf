@@ -36,7 +36,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   role_based_access_control {
     enabled = true
-    azure_active_directory = {
+    azure_active_directory {
       managed                = true
       admin_group_object_ids = local.admin_group_object_ids
     }
@@ -66,7 +66,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     enable_host_encryption       = false
     enable_node_public_ip        = false
     only_critical_addons_enabled = false
-    upgrade_settings = {
+    upgrade_settings {
       max_surge = 1
     }
   }
