@@ -34,7 +34,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   sku_tier = var.sku_tier
 
-  role_based_access_control = {
+  role_based_access_control {
     enabled = true
     azure_active_directory = {
       managed                = true
@@ -42,10 +42,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
 
-  private_dns_zone_id   = null
-  enable_node_public_ip = false
-
-  network_profile = {
+  network_profile {
     network_plugin          = "azure"
     network_mode            = "transparent"
     outbound_type           = "loadBalancer"
