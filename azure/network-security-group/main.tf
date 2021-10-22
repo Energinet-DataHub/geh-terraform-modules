@@ -36,6 +36,7 @@ resource "azurerm_network_security_group" "this" {
   location            = var.location
   resource_group_name = var.resource_group_name
   tags                = merge(var.tags, local.module_tags)
+  security_rule       = []
 
   lifecycle {
     ignore_changes = [
