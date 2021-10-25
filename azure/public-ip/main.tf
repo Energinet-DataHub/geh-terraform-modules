@@ -33,7 +33,7 @@ locals {
 
 
 resource "azurerm_public_ip" "this" {
-  name                = "pip-${var.name}-${var.environment_short}-${var.environment_instance}"
+  name                = "nsg-${var.name}-${var.environment_short}-${var.environment_instance}"
   location            = var.location
   resource_group_name = var.resource_group_name
   tags                = merge(var.tags, local.module_tags)
