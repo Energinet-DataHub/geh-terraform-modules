@@ -52,7 +52,7 @@ variable "subnets" {
   type = list(object({
     name = string
     address_prefixes = list(string)
-    security_group = string
+    security_group_id = string
   }))
   description = "(Required) List of Subnets creates in the virtual network."
 }
