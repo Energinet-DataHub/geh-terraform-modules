@@ -1,5 +1,14 @@
 # Terraform Modules
 
-## Intro
+## Azure Modules
 
-This repository contains terraform modules created on top of the [Azure Resource Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs).
+- [Azure API Management](./azure/api-management)
+  - [Azure API Management API](./azure/api-management-api)
+  - [Azure API Management API Operation](./azure/api-management-api-operation)
+- [Azure Key Vault](./azure/key-vault)
+  - [Azure Key Vault Secret](./azure/key-vault-secret)
+- [Azure Storage Account](./azure/storage-account)
+- [Azure SQL Server](./azure/sql-server)
+- [Azure Service Bus Namespace](./azure/service-bus-namespace)
+  - [Azure Service Bus Queue](./azure/service-bus-queue)
+  - [Azure Service Bus Topic](./azure/service-bus-topic)
