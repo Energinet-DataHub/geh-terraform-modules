@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "3.1.0"
+    "ModuleVersion" = "4.1.0"
     "ModuleId"      = "azure-key-vault"
   }
 }

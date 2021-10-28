@@ -11,7 +11,7 @@
 This module creates the following resources.
 
 - [Azure Service Bus Topic](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_topic)
-- [Azure Service Bus Topic](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_subscription)
+- [Azure Service Bus Subscription](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_subscription)
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ This module creates the following resources.
 
 | Name | Type | Default | Required | Description |
 |-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Service Bus Topic resource. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `sbq-{var.name}` and be in lowercase. |
+| `name` | `string` | | **Required** | Specifies the name of the Service Bus Topic resource. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `sbt-{var.name}` and be in lowercase. |
 | `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the topic. Changing this forces a new resource to be created. |
 | `namespace_name` | `string` | | **Required** | The name of the Service Bus Namespace to create this topic in. Changing this forces a new resource to be created. |
 | `requires_session` | `false` | | | Boolean flag which controls whether the Queue requires sessions. This will allow ordered handling of unbounded sequences of related messages. With sessions enabled a queue can guarantee first-in-first-out delivery of messages. Changing this forces a new resource to be created. Defaults to false. |
@@ -40,7 +40,7 @@ This module creates the following resources.
 
 ```ruby
 module "service_bus_topic_example" { 
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-topic?ref=3.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-topic?ref=4.1.0"
   name                = "example-name"
   namespace_name      = "example-namespace-name"
   subscriptions       = [

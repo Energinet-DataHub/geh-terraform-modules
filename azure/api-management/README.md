@@ -35,7 +35,7 @@ This module creates the following resources.
 
 ```ruby
 module "api_management_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=3.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=4.1.0"
 
   name                  = "example-name"
   environment_short     = ""
@@ -53,7 +53,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "3.1.0"
+    "ModuleVersion" = "4.1.0"
     "ModuleId"      = "azure-api-management"
   }
 }
