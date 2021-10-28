@@ -44,7 +44,7 @@ This module creates the following resources.
 
 ```ruby
 module "sql_server_example" { 
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=3.1.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=4.1.0"
 
   name                          = "example-name"
   environment_short             = "p"
@@ -71,7 +71,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "3.1.0"
+    "ModuleVersion" = "4.1.0"
     "ModuleId"      = "azure-sql-server"
   }
 }
