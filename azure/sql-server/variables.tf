@@ -16,6 +16,11 @@ variable name {
   description = "(Required) The name of the Microsoft SQL Server. This needs to be globally unique within Azure."
 }
 
+variable project_name {
+  type          = string
+  description   = "Name of the project this infrastructure is a part of."
+}
+
 variable environment_short {
   type        = string
   description = "(Required) The short value name of your environment."

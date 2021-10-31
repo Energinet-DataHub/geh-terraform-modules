@@ -14,14 +14,32 @@
 output "id" {
   value       = azurerm_key_vault.this.id
   description = "The ID of the Key Vault."
+
+  depends_on  = [
+    azurerm_key_vault.this,
+    azurerm_key_vault_access_policy.selfpermissions,
+    azurerm_key_vault_access_policy.this,
+  ]
 }
 
 output "name" {
   value       = azurerm_key_vault.this.name
   description = "The name of the Key Vault."
+
+  depends_on  = [
+    azurerm_key_vault.this,
+    azurerm_key_vault_access_policy.selfpermissions,
+    azurerm_key_vault_access_policy.this,
+  ]
 }
 
 output "vault_uri" {
   value       = azurerm_key_vault.this.vault_uri
   description = "The URI of the Key Vault, used for performing operations on keys and secrets."
+
+  depends_on  = [
+    azurerm_key_vault.this,
+    azurerm_key_vault_access_policy.selfpermissions,
+    azurerm_key_vault_access_policy.this,
+  ]
 }

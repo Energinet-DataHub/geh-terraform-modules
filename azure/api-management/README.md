@@ -21,7 +21,8 @@ This module creates the following resources.
 
 | Name | Type | Default | Required | Description |
 |-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Function App. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `appi-{var.name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
+| `name` | `string` | | **Required** | Specifies the name of the Function App. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `appi-{var.name}-${var.project_name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
+| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.|
@@ -38,6 +39,7 @@ module "api_management_example" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=4.1.0"
 
   name                  = "example-name"
+  project_name          = "example-project-name"
   environment_short     = ""
   environment_instance  = "001"
   resource_group_name   = "example-resource-group-name"
@@ -53,7 +55,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "4.1.0"
+    "ModuleVersion" = "5.0.0"
     "ModuleId"      = "azure-api-management"
   }
 }

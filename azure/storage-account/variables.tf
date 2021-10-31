@@ -22,6 +22,11 @@ variable name {
   description = "(Required) Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group."
 }
 
+variable project_name {
+  type          = string
+  description   = "Name of the project this infrastructure is a part of."
+}
+
 variable environment_short {
   type        = string
   description = "(Required) The short value name of your environment."
