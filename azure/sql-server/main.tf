@@ -13,13 +13,13 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "4.1.0"
+    "ModuleVersion" = "5.0.0"
     "ModuleId"      = "azure-sql-server"
   }
 }
 
 resource "azurerm_sql_server" "this" {
-  name                          = "sql-${lower(var.name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  name                          = "sql-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name           = var.resource_group_name
   location                      = var.location
   version                       = var.sql_version
@@ -43,7 +43,7 @@ resource "azurerm_sql_server" "this" {
 resource "azurerm_sql_firewall_rule" "this" {
   count               = length(var.firewall_rules)
 
-  name                = "${lower(try(var.firewall_rules[count.index].start_ip_address, null))}-${lower(var.name)}-${lower(var.environment_short)}-${var.environment_instance}"
+  name                = "${lower(try(var.firewall_rules[count.index].start_ip_address, null))}-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${var.environment_instance}"
   resource_group_name = var.resource_group_name
   server_name         = azurerm_sql_server.this.name
   start_ip_address    = try(var.firewall_rules[count.index].start_ip_address, null)

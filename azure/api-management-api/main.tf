@@ -13,13 +13,13 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "4.1.0"
+    "ModuleVersion" = "5.0.0"
     "ModuleId"      = "azure-api-management-api"
   }
 }
 
 resource "azurerm_api_management_api" "this" {
-  name                  = "apima-${lower(var.name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  name                  = "apima-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name   = var.resource_group_name
   api_management_name   = var.api_management_name
   revision              = var.revision

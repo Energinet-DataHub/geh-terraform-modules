@@ -14,26 +14,51 @@
 output id {
   value       = azurerm_storage_account.this.id
   description = "The ID of the Storage Account"
+
+  depends_on  = [
+    azurerm_storage_account.this,
+    azurerm_storage_container.this,
+  ]
 }
 
 output name {
   value       = azurerm_storage_account.this.name
   description = "The name of the Storage Account."
+
+  depends_on  = [
+    azurerm_storage_account.this,
+    azurerm_storage_container.this,
+  ]
 }
 
 output primary_connection_string {
   value       = azurerm_storage_account.this.primary_connection_string
   description = "The connection string associated with the primary location."
   sensitive   = true
+
+  depends_on  = [
+    azurerm_storage_account.this,
+    azurerm_storage_container.this,
+  ]
 }
 
 output primary_access_key {
   value       = azurerm_storage_account.this.primary_access_key
   description = "The primary access key for the storage account."
   sensitive   = true
+
+  depends_on  = [
+    azurerm_storage_account.this,
+    azurerm_storage_container.this,
+  ]
 }
 
 output primary_blob_endpoint {
   value       = azurerm_storage_account.this.primary_blob_endpoint 
   description = "The endpoint URL for blob storage in the primary location."
+
+  depends_on  = [
+    azurerm_storage_account.this,
+    azurerm_storage_container.this,
+  ]
 }

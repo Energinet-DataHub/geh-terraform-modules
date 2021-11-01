@@ -11,15 +11,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+resource "null_resource" "dependency_setter" {
+  depends_on = [
+    azurerm_storage_account.this,
+    azurerm_storage_container.this,
+  ]
+}
+
 locals {
   module_tags = {
-    "ModuleVersion" = "4.1.0"
+    "ModuleVersion" = "5.0.0"
     "ModuleId"      = "azure-storage-account"
   }
 }
 
 resource "azurerm_storage_account" "this" {
-  name                      = "st${lower(var.name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  name                      = "st${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
   resource_group_name       = var.resource_group_name 
   location                  = var.location 
   account_tier              = "Standard"

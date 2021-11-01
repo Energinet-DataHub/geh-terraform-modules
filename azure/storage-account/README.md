@@ -22,6 +22,7 @@ This module creates the following resources.
 | Name | Type | Default | Description |
 |-|-|-|-|
 | `name` | `string` | | **Required** Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group. The final name of the resource will follow this syntax `st{var.name}{var.environment_short}` and be in lowercase. |
+| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
 | `environment_short` | `string` | | **Required** The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** The name of the resource group in which to create the storage account. Changing this forces a new resource to be created. |
@@ -48,6 +49,7 @@ module "storage_account_example" {
   source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
 
   name                      = "example-name"
+  project_name              = "example-project-name"
   environment_short         = "p"
   environment_instance      = "001"
   resource_group_name       = "example-resource-group-name"
@@ -72,7 +74,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "4.1.0"
+    "ModuleVersion" = "5.0.0"
     "ModuleId"      = "azure-storage-account"
   }
 }

@@ -16,6 +16,11 @@ variable name {
   description = "(Required) Specifies the name of the Key Vault. Changing this forces a new resource to be created."
 }
 
+variable project_name {
+  type          = string
+  description   = "Name of the project this infrastructure is a part of."
+}
+
 variable environment_short {
   type        = string
   description = "(Required) The short value name of your environment."

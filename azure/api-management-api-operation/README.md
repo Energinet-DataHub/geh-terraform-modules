@@ -74,7 +74,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "4.1.0"
+    "ModuleVersion" = "5.0.0"
     "ModuleId"      = "api-management-api-operation"
   }
 }
