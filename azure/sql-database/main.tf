@@ -11,33 +11,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "null_resource" "dependency_getter" {
-  provisioner "local-exec" {
-    command = "echo ${length(var.dependencies)}"
-  }
-}
-
-resource "null_resource" "dependency_setter" {
-  depends_on = [azurerm_application_insights.this]
-}
-
 locals {
   module_tags = {
-    "ModuleVersion" = "3.1.0"
+    "ModuleVersion" = "5.1.0"
+    "ModuleId"      = "azure-sql-database"
   }
 }
 
-resource "azurerm_application_insights" "this" {
-  name                = "appi-${lower(var.name)}-${lower(var.project_name)}-${lower(var.organisation_name)}-${lower(var.environment_short)}"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  application_type    = "web"
+resource "azurerm_sql_database" "this" {
+  name                              = "sqldb-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name               = var.resource_group_name
+  location                          = var.location
+  server_name                       = var.server_name
+  edition                           = var.edition
+  requested_service_objective_name  = var.requested_service_objective_name
 
-  tags                = merge(var.tags, local.module_tags)
-
-  depends_on          = [
-    null_resource.dependency_getter,
-  ]
+  tags                              = merge(var.tags, local.module_tags)
 
   lifecycle {
     ignore_changes = [

@@ -21,11 +21,6 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the Application Insights component."
 }
 
-variable organisation_name {
-  type        = string
-  description = "(Required) The name of your organisation."
-}
-
 variable project_name {
   type        = string
   description = "(Required) The name of your project."
@@ -34,6 +29,11 @@ variable project_name {
 variable environment_short {
   type        = string
   description = "(Required) The short value name of your environment."
+}
+
+variable environment_instance {
+  type        = string
+  description = "(Required) The instance value of your environment."
 }
 
 variable location {
@@ -45,10 +45,4 @@ variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
   default     = {}
-}
-
-variable dependencies {
-  type        = list
-  description = "A mapping of dependencies which this module depends on."
-  default     = []
 }

@@ -11,6 +11,7 @@
 This module creates the following resources.
 
 - [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_namespace)
+- [Azure Service Bus Namespace Authorization Rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_authorization_rule)
 
 ## Prerequisites
 
@@ -44,7 +45,7 @@ This module creates the following resources.
 
 ```ruby
 module "service_bus_namespace_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=4.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=5.1.0"
 
   name                  = "example-name"
   project_name          = "example-project-name"
@@ -73,7 +74,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }

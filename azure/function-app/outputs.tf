@@ -21,11 +21,6 @@ output "name" {
   description = "The name of the Function App."
 }
 
-output "dependent_on" {
-  value       = null_resource.dependency_setter.id
-  description = "The dependencies of the Function App."
-}
-
 output "default_hostname" {
   value       = azurerm_function_app.this.default_hostname
   description = "The default hostname associated with the Function App - such as mysite.azurewebsites.net"
@@ -55,11 +50,3 @@ output "kind" {
   value       = azurerm_function_app.this.kind
   description = "The Function App kind - such as functionapp,linux,container"
 }
-
-# The identity block exports the following:
-# principal_id - The Principal ID for the Service Principal associated with the Managed Service Identity of this App Service.
-# tenant_id - The Tenant ID for the Service Principal associated with the Managed Service Identity of this App Service.
-
-# The site_credential block exports the following:
-# username - The username which can be used to publish to this App Service
-# password - The password associated with the username, which can be used to publish to this App Service.

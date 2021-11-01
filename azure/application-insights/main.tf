@@ -11,28 +11,26 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "null_resource" "dependency_getter" {
-  provisioner "local-exec" {
-    command = "echo ${length(var.dependencies)}"
+locals {
+  module_tags = {
+    "ModuleVersion" = "5.1.0",
+    "ModuleId"      = "azure-application-insights"
   }
 }
 
-resource "null_resource" "dependency_setter" {
-  depends_on = [
-    azurerm_app_service_plan.main,
-  ]
-}
-
-resource "azurerm_app_service_plan" "main" {
-  depends_on          = [null_resource.dependency_getter]
-  name                = "plan-${var.name}-${var.project_name}-${var.organisation_name}-${var.environment_short}"
+resource "azurerm_application_insights" "this" {
+  name                = "appi-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name = var.resource_group_name
   location            = var.location
-  kind                = var.kind
-  tags                = var.tags
+  application_type    = "web"
 
-  sku {
-    size = var.sku.size
-    tier = var.sku.tier
+  tags                = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
   }
 }

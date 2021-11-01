@@ -12,3 +12,6 @@
 - [Azure Service Bus Namespace](./azure/service-bus-namespace)
   - [Azure Service Bus Queue](./azure/service-bus-queue)
   - [Azure Service Bus Topic](./azure/service-bus-topic)
+- [Azure Application Insights](./azure/application-insights)
+- [Azure Function App](./azure/function-app)
+- [Azure App Service Plan](./azure/app-service-plan)

@@ -11,32 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-###
-### REQUIRED VARIABLES
-###
 variable name {
   type        = string
   description = "(Required) Specifies the name of the Function App. Changing this forces a new resource to be created."
-
-  validation {
-    condition     = can(regex("^[\\w]{1}[\\-\\w]{2,61}[\\w]{1}$", var.name))
-    error_message = "The value must consist of alphanumerics and hyphens. Must start and end with alphanumeric."
-  }
-}
-
-variable organisation_name {
-  type        = string
-  description = "(Required) The name of your organisation."
 }
 
 variable project_name {
-  type        = string
-  description = "(Required) The name of your project."
+  type          = string
+  description   = "Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
   description = "(Required) The short value name of your environment."
+}
+
+variable environment_instance {
+  type        = string
+  description = "(Required) The instance value of your environment."
 }
 
 variable resource_group_name {
@@ -59,14 +51,6 @@ variable application_insights_instrumentation_key {
   description = "(Required) The application insights instrumentation key for which data is to be logged into."
 }
 
-variable application_insights_id {
-  type        = string
-  description = "(Required) The application insights instrumentation id for which data is to be logged into."
-}
-
-###
-### OPTIONAL VARIABLES
-###
 variable app_settings {
   type        = map(string)
   description = "(Optional) A map of key-value pairs for App Settings and custom values." 
@@ -89,10 +73,4 @@ variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
   default     = {}
-}
-
-variable dependencies {
-  type        = list
-  description = "A mapping of dependencies which this module depends on."
-  default     = []
 }

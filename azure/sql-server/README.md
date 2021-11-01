@@ -1,4 +1,4 @@
-# Azure Microsoft SQL Azure Database Server
+# Azure Microsoft SQL Server
 
 - [Resources Created](#resources-created)
 - [Prerequisites](#prerequisites)
@@ -10,7 +10,7 @@
 
 This module creates the following resources.
 
-- [Azure Microsoft SQL Azure Database Server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server)
+- [Azure Microsoft SQL Server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server)
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ This module creates the following resources.
 
 ```ruby
 module "sql_server_example" { 
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=4.1.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=5.1.0"
 
   name                          = "example-name"
   project_name                  = "example-project-name"
@@ -73,7 +73,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-sql-server"
   }
 }

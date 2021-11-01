@@ -45,8 +45,8 @@ A `policies` item consists of the following:
 ## Usage
 
 ```ruby
-module "api_management_api_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=4.1.0"
+module "apima_example" { 
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.1.0"
 
   name                  = "example-name"
   project_name          = "example-project-name"
@@ -74,7 +74,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-api-management-api"
   }
 }

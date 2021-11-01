@@ -30,7 +30,7 @@ This module creates the following resources.
 
 ```ruby
 module "key_vault_secret_example" { 
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=4.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
   name          = "EXAMPLE-NAME"
   value         = "example-value"
@@ -45,7 +45,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-key-vault-secret"
   }
 }

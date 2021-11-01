@@ -20,7 +20,7 @@ resource "null_resource" "dependency_setter" {
 
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-storage-account"
   }
 }

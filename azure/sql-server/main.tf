@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-sql-server"
   }
 }

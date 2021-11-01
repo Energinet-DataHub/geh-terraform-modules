@@ -16,19 +16,19 @@ variable name {
   description = "(Required) Specifies the name of the App Service Plan component. Changing this forces a new resource to be created."
 }
 
-variable organisation_name {
-  type        = string
-  description = "(Required) The name of your organisation."
-}
-
 variable project_name {
-  type        = string
-  description = "(Required) The name of your project."
+  type          = string
+  description   = "Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) Specifies the environment short, of the environment."
+  description = "(Required) The short value name of your environment."
+}
+
+variable environment_instance {
+  type        = string
+  description = "(Required) The instance value of your environment."
 }
 
 variable resource_group_name {
@@ -47,8 +47,11 @@ variable kind {
 }
 
 variable sku {
-  type        = any
-  description = "(Required) A sku block as documented below."
+  type        = object({
+    size  = string
+    tier  = string
+  })
+  description = "An object describing the sku for the App Service Plan."
 }
 
 variable tags {
