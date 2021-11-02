@@ -81,6 +81,18 @@ variable "admin_group_object_ids" {
   default     = []
 }
 
+variable "identity_type" {
+  type        = string
+  description = "(Optional) An identity type. Either SystemAssigned or UserAssigned"
+  default     = "SystemAssigned"
+}
+
+variable "identity_id" {
+  type        = string
+  description = "(Optional) The id of the user assigned identity. Required if identity_type is UserAssigned"
+  default     = null
+}
+
 variable "tags" {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."

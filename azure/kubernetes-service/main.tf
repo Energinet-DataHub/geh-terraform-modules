@@ -30,7 +30,8 @@ resource "azurerm_kubernetes_cluster" "this" {
   api_server_authorized_ip_ranges = []
 
   identity {
-    type = "SystemAssigned"
+    type = var.identity_type
+    user_assigned_identity_id = var.identity_type == "UserAssigned" ? var.identity_id : null
   }
 
   sku_tier = var.sku_tier
