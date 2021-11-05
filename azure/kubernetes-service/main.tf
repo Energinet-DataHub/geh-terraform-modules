@@ -45,7 +45,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   network_profile {
-    network_plugin    = "azure"
+    network_plugin    = "kubenet"
     network_mode      = "transparent"
     outbound_type     = "loadBalancer"
     load_balancer_sku = "Standard"
