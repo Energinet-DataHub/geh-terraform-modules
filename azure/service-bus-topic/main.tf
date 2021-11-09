@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 resource "azurerm_servicebus_topic" "this" {
-  name                = "sbt-${lower(var.name)}"
+  name                = lower(var.name)
   resource_group_name = var.resource_group_name
   namespace_name      = var.namespace_name 
   enable_partitioning = true
@@ -21,7 +21,7 @@ resource "azurerm_servicebus_topic" "this" {
 resource "azurerm_servicebus_subscription" "this" {
   count               = length(var.subscriptions)
 
-  name                = "sbs-${lower(try(var.subscriptions[count.index].name, null))}"
+  name                = lower(try(var.subscriptions[count.index].name, null))
   namespace_name      = var.namespace_name
   topic_name          = azurerm_servicebus_topic.this.name
   max_delivery_count  = try(var.subscriptions[count.index].max_delivery_count, null)

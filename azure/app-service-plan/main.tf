@@ -23,6 +23,7 @@ resource "azurerm_app_service_plan" "this" {
   resource_group_name = var.resource_group_name
   location            = var.location
   kind                = var.kind
+  reserved            = var.reserved
   sku {
     size = var.sku.size
     tier = var.sku.tier
