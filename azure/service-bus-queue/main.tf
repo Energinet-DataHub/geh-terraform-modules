@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 resource "azurerm_servicebus_queue" "this" {
-  name                = "sbq-${lower(var.name)}"
+  name                = lower(var.name)
   resource_group_name = var.resource_group_name
   namespace_name      = var.namespace_name
   enable_partitioning = true
