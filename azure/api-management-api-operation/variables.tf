@@ -46,6 +46,16 @@ variable url_template {
   description = "(Required) The relative URL Template identifying the target resource for this operation, which may include parameters."
 }
 
+variable template_parameter {
+  type        = list(object({
+    name        = string
+    required    = bool
+    type        = string
+  }))
+  description = "(Optional) One or more template_parameter blocks."
+  default     = []
+}
+
 variable description {
   type        = string
   description = "(Optional) A description for this API Operation, which may include HTML formatting tags."
