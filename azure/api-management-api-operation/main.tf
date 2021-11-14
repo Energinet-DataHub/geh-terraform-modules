@@ -29,9 +29,9 @@ resource "azurerm_api_management_api_operation" "this" {
   dynamic "template_parameter" {
     for_each = var.template_parameters
     content {
-      name = template_parameters.name
-      required = template_parameters.required
-      type = template_parameters.type
+      name = template_parameters.value.name
+      required = template_parameters.value.required
+      type = template_parameters.value.type
     }
   }
 }
