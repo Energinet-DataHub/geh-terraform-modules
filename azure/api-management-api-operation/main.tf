@@ -26,10 +26,13 @@ resource "azurerm_api_management_api_operation" "this" {
   display_name        = var.display_name
   method              = var.method
   url_template        = var.url_template
-  template_parameter {    
-    name        = var.template_parameter.name
-    required    = var.template_parameter.required
-    type        = var.template_parameter.type
+  dynamic "template_parameter" {
+    for_each = var.template_parameters
+    content {
+      name = template_parameters.value["name"]
+      required = template_parameters.value["required"]
+      type = template_parameters.value["type"]
+    }
   }
 }
 

@@ -46,7 +46,7 @@ variable url_template {
   description = "(Required) The relative URL Template identifying the target resource for this operation, which may include parameters."
 }
 
-variable template_parameter {
+variable template_parameters {
   type        = list(object({
     name        = string
     required    = bool
