@@ -30,7 +30,7 @@ resource "azurerm_api_management_api_operation" "this" {
     for_each = var.template_parameters
     content {
       name = template_parameter.value.name
-      required = template_parameter.valuerequired
+      required = template_parameter.value.required
       type = template_parameter.value.type
     }
   }
