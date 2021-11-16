@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 output "id" {
-  value       = azurerm_eventhub.main.id
+  value       = azurerm_eventhub.this.id
   description = "The ID of the EventHub."
 }
 
 output "name" {
-  value       = azurerm_eventhub.main.name
+  value       = azurerm_eventhub.this.name
   description = "The name of the EventHub."
 }
 
