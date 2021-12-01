@@ -23,7 +23,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   name                            = "ks-${var.name}-${var.environment_short}-${var.environment_instance}"
   location                        = var.location
   resource_group_name             = var.resource_group_name
-  node_resource_group             = "rg-nodes-${var.name}-${var.environment_short}-${var.environment_instance}"
+  node_resource_group             = "${var.resource_group_name.name}-nodes"
   dns_prefix                      = "${var.name}-${var.environment_short}-${var.environment_instance}"
   tags                            = merge(var.tags, local.module_tags)
   kubernetes_version              = var.kubernetes_version
