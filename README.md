@@ -15,3 +15,4 @@
 - [Azure Application Insights](./azure/application-insights)
 - [Azure Function App](./azure/function-app)
 - [Azure App Service Plan](./azure/app-service-plan)
+- [Azure Event Hub](./azure/eventhub-namespace)
