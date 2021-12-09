@@ -26,3 +26,8 @@ output "ip_address" {
   value = azurerm_public_ip.this.ip_address
   description = "The allocated ip address."
 }
+
+output "fqdn" {
+  value = azurerm_public_ip.this.fqdn
+  description = "The fqdn if defined."
+}
