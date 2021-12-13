@@ -11,35 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-locals {
-  module_tags = {
-    "ModuleVersion" = "5.1.0"
-    "ModuleId"      = "azure-service-bus-namespace"
-  }
-}
-
-resource "azurerm_servicebus_namespace" "this" {
-  name                = "sb-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  location            = var.location
+resource "azurerm_eventhub" "this" {
+  name                = lower(var.name)
+  namespace_name      = var.namespace_name
   resource_group_name = var.resource_group_name
-  sku                 = var.sku
-
-  tags                = merge(var.tags, local.module_tags)
-
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
-  }
+  partition_count     = var.partition_count
+  message_retention   = var.message_retention
 }
 
-resource "azurerm_servicebus_namespace_authorization_rule" "this" {
+resource "azurerm_eventhub_authorization_rule" "this" {
   count               = length(var.auth_rules)
- 
+
   name                = try(var.auth_rules[count.index].name, null)
-  namespace_name      = azurerm_servicebus_namespace.this.name
+  namespace_name      = var.namespace_name
+  eventhub_name       = azurerm_eventhub.this.name
   resource_group_name = var.resource_group_name
   listen              = try(var.auth_rules[count.index].listen, false)
   send                = try(var.auth_rules[count.index].send, false)

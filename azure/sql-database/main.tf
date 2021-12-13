@@ -13,20 +13,20 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0",
-    "ModuleId"      = "azure-api-management"
+    "ModuleVersion" = "5.1.0"
+    "ModuleId"      = "azure-sql-database"
   }
 }
 
-resource "azurerm_api_management" "this" {
-  name                = "apim-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  publisher_name      = var.publisher_name
-  publisher_email     = var.publisher_email
-  sku_name            = var.sku_name
+resource "azurerm_sql_database" "this" {
+  name                              = "sqldb-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name               = var.resource_group_name
+  location                          = var.location
+  server_name                       = var.server_name
+  edition                           = var.edition
+  requested_service_objective_name  = var.requested_service_objective_name
 
-  tags                = merge(var.tags, local.module_tags)
+  tags                              = merge(var.tags, local.module_tags)
 
   lifecycle {
     ignore_changes = [

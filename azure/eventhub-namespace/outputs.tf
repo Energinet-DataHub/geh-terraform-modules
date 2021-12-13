@@ -11,25 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-locals {
-  module_tags = {
-    "ModuleVersion" = "5.1.0"
-    "ModuleId"      = "azure-key-vault-secret"
-  }
+output "id" {
+  value       = azurerm_eventhub_namespace.this.id
+  description = "The EventHub Namespace ID."
 }
 
-resource "azurerm_key_vault_secret" "this" {
-  name          = var.name
-  value         = var.value
-  key_vault_id  = var.key_vault_id
-
-  tags          = merge(var.tags, local.module_tags)
-
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
-  }
+output "name" {
+  value       = azurerm_eventhub_namespace.this.name
+  description = "The EventHub Namespace name."
 }

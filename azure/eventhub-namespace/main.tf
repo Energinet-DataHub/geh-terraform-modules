@@ -13,18 +13,17 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0",
-    "ModuleId"      = "azure-api-management"
+    "ModuleVersion" = "5.1.0"
+    "ModuleId"      = "azure-eventhub-namespace"
   }
 }
 
-resource "azurerm_api_management" "this" {
-  name                = "apim-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name = var.resource_group_name
+resource "azurerm_eventhub_namespace" "this" {
+  name                = "evhns-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
-  publisher_name      = var.publisher_name
-  publisher_email     = var.publisher_email
-  sku_name            = var.sku_name
+  resource_group_name = var.resource_group_name
+  sku                 = var.sku
+  capacity            = var.capacity
 
   tags                = merge(var.tags, local.module_tags)
 

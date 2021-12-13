@@ -11,6 +11,7 @@
 This module creates the following resources.
 
 - [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_namespace)
+- [Azure Service Bus Namespace Authorization Rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_authorization_rule)
 
 ## Prerequisites
 
@@ -27,7 +28,7 @@ This module creates the following resources.
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `sku` | `string` | | **Required** |  Defines which tier to use. Options are basic, standard or premium. Changing this forces a new resource to be created. |
+| `sku` | `string` | | **Required** |  Defines which tier to use. Options are `basic`, `standard` or `premium`. Changing this forces a new resource to be created. |
 | `auth_rules` | `list` | | **Required** | A list of objects describing the auth rules of the Service Bus Namespace. See [Auth Rule](#auth-rule). |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
@@ -44,7 +45,7 @@ This module creates the following resources.
 
 ```ruby
 module "service_bus_namespace_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=4.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=5.1.0"
 
   name                  = "example-name"
   project_name          = "example-project-name"
@@ -73,7 +74,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }

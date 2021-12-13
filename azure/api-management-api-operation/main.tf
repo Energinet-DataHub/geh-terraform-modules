@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "api-management-api-operation"
   }
 }
@@ -26,6 +26,14 @@ resource "azurerm_api_management_api_operation" "this" {
   display_name        = var.display_name
   method              = var.method
   url_template        = var.url_template
+  dynamic "template_parameter" {
+    for_each = var.template_parameters
+    content {
+      name = template_parameter.value.name
+      required = template_parameter.value.required
+      type = template_parameter.value.type
+    }
+  }
 }
 
 resource "azurerm_api_management_api_operation_policy" "this" {

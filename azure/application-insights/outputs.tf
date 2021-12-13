@@ -11,25 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-locals {
-  module_tags = {
-    "ModuleVersion" = "5.1.0"
-    "ModuleId"      = "azure-key-vault-secret"
-  }
+output id {
+  value       = azurerm_application_insights.this.id
+  description = "The ID of the Application Insights component."
 }
 
-resource "azurerm_key_vault_secret" "this" {
-  name          = var.name
-  value         = var.value
-  key_vault_id  = var.key_vault_id
+output name {
+  value       = azurerm_application_insights.this.name
+  description = "The name of the Application Insights component."
+}
 
-  tags          = merge(var.tags, local.module_tags)
-
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
-  }
+output instrumentation_key {
+  value       = azurerm_application_insights.this.instrumentation_key
+  description = "The Instrumentation Key for this Application Insights component."
+  sensitive   = true
 }
