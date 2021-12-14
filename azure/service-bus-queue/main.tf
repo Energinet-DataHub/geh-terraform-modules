@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 resource "azurerm_servicebus_queue" "this" {
-  name                = lower(var.name)
-  resource_group_name = var.resource_group_name
-  namespace_name      = var.namespace_name
-  requires_session    = var.requires_session
-  enable_partitioning = true
+  name                         = lower(var.name)
+  resource_group_name          = var.resource_group_name
+  namespace_name               = var.namespace_name
+  requires_session             = var.requires_session
+  requires_duplicate_detection = var.requires_duplicate_detection
+  enable_partitioning          = true
 }
