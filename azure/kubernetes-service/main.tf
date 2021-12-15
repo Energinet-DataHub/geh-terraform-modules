@@ -62,7 +62,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     availability_zones  = [1, 2, 3]
     vm_size             = var.default_nodes.vm_size
     enable_auto_scaling = true
-    os_disk_type        = Ephemeral
+    os_disk_type        = "Ephemeral"
     node_count          = var.default_nodes.min_count
     min_count           = var.default_nodes.min_count
     max_count           = var.default_nodes.max_count
