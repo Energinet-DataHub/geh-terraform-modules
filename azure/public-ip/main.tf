@@ -40,7 +40,7 @@ resource "azurerm_public_ip" "this" {
 
 
   lifecycle {
-    prevent_destroy = var.prevent_destroy
+    prevent_destroy = true
     ignore_changes = [
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.

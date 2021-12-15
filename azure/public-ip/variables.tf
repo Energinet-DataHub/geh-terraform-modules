@@ -95,9 +95,3 @@ variable "public_ip_prefix_id" {
   description = "If specified then public IP address allocated will be provided from the public IP prefix resource"
   default     = null
 }
-
-variable "prevent_destroy" {
-  type        = bool
-  description = "If set to true, will prevent the IP from being deallocated by mistake."
-  default     = false
-}
