@@ -27,11 +27,10 @@ resource "azurerm_kubernetes_cluster" "this" {
   dns_prefix                      = "${var.name}-${var.environment_short}-${var.environment_instance}"
   tags                            = merge(var.tags, local.module_tags)
   kubernetes_version              = var.kubernetes_version
-  api_server_authorized_ip_ranges = []
-  os_disk_type                    = Ephemeral 
+  api_server_authorized_ip_ranges = ["0.0.0.0/32"]
 
   identity {
-    type = var.identity_type
+    type                      = var.identity_type
     user_assigned_identity_id = var.identity_type == "UserAssigned" ? var.identity_id : null
   }
 
@@ -63,6 +62,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     availability_zones  = [1, 2, 3]
     vm_size             = var.default_nodes.vm_size
     enable_auto_scaling = true
+    os_disk_type        = Ephemeral
     node_count          = var.default_nodes.min_count
     min_count           = var.default_nodes.min_count
     max_count           = var.default_nodes.max_count
