@@ -28,6 +28,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   tags                            = merge(var.tags, local.module_tags)
   kubernetes_version              = var.kubernetes_version
   api_server_authorized_ip_ranges = []
+  os_disk_type                    = Ephemeral 
 
   identity {
     type = var.identity_type
