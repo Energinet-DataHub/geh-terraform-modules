@@ -62,7 +62,7 @@ variable "default_nodes" {
   })
   description = "Configures the default nodes in the cluster."
   default = {
-    vm_size    = "Standard_DS2_v3"
+    vm_size    = "Standard_DS3_v2"
     node_count = 1
     min_count  = 1
     max_count  = 3
