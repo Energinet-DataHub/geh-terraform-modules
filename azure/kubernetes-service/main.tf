@@ -27,7 +27,8 @@ resource "azurerm_kubernetes_cluster" "this" {
   dns_prefix                      = "${var.name}-${var.environment_short}-${var.environment_instance}"
   tags                            = merge(var.tags, local.module_tags)
   kubernetes_version              = var.kubernetes_version
-  private_cluster_enabled         = true
+  api_server_authorized_ip_ranges = []
+  private_cluster_enabled         = false
 
   identity {
     type                      = var.identity_type
