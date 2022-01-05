@@ -43,6 +43,11 @@ resource "random_string" "this" {
   upper   = false
 }
 
+resource "azurerm_app_service_virtual_network_swift_connection" "testtwo_integration" {
+  app_service_id = azurerm_function_app.this.id
+  subnet_id      = var.subnet_id
+}
+
 resource "azurerm_function_app" "this" {
   name                        = "func-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location                    = var.location
