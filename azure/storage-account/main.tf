@@ -45,6 +45,7 @@ resource "azurerm_storage_account" "this" {
   }
 }
 
+#please note that this https://github.com/hashicorp/terraform-provider-azurerm/pull/14220 might be an issue until it is fixed
 resource "azurerm_storage_container" "this" {
   count                 = length(var.containers)
 
@@ -66,6 +67,9 @@ resource "azurerm_storage_account_network_rules" "this" {
   ]
   bypass                     = [
     "Metrics"
+  ]
+  depends_on = [
+    azurerm_storage_container.this,
   ]
 }
 
