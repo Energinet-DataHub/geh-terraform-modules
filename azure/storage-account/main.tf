@@ -20,7 +20,7 @@ resource "null_resource" "dependency_setter" {
 
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-storage-account"
   }
 }
@@ -51,4 +51,33 @@ resource "azurerm_storage_container" "this" {
   name                  = try(var.containers[count.index].name, null)
   storage_account_name  = azurerm_storage_account.this.name
   container_access_type = try(var.containers[count.index].access_type, "private")
+}
+
+resource "azurerm_storage_account_network_rules" "this" {
+  resource_group_name  = var.resource_group_name
+  storage_account_name = azurerm_storage_account.this.name
+
+  default_action             = "Deny"
+  ip_rules                   = [
+    "127.0.0.1"
+  ]
+  virtual_network_subnet_ids = [
+    var.consumers_subnet_id
+  ]
+  bypass                     = [
+    "Metrics"
+  ]
+}
+
+resource "azurerm_private_endpoint" "this" {
+   name                = "pe${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+   location            = var.location
+   resource_group_name = var.resource_group_name
+   subnet_id           = var.private_endpoint_subnet_id
+   private_service_connection {
+     name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+     private_connection_resource_id = azurerm_storage_account.this.id
+     is_manual_connection           = false
+     subresource_names              = ["blob,file,queue,table,web"]
+  }
 }

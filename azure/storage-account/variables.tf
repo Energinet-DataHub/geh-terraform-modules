@@ -57,6 +57,16 @@ variable account_replication_type {
   description = "(Required) Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS."
 }
 
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The id of the private endpoint subnet where this function will reside."
+}
+variable consumers_subnet_id {
+  type        = string
+  description = "(Required) The id of the subnet where services that will consume this storage account will reside. Typically a vnet integration subnet"
+}
+
+
 variable access_tier {
   type        = string
   description = "(Optional) Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot and Cool, defaults to Hot."
