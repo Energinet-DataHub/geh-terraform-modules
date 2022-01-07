@@ -51,6 +51,11 @@ variable application_insights_instrumentation_key {
   description = "(Required) The application insights instrumentation key for which data is to be logged into."
 }
 
+variable vnet_integration_subnet_id {
+  type        = string
+  description = "(Required) The id of the vnet integration subnet where this function will reside."
+}
+
 variable app_settings {
   type        = map(string)
   description = "(Optional) A map of key-value pairs for App Settings and custom values." 

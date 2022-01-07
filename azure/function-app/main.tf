@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0",
+    "ModuleVersion" = "6.0.0",
     "ModuleId"      = "azure-function-app"
   }
 }
@@ -41,6 +41,11 @@ resource "random_string" "this" {
   length  = 10
   special = false
   upper   = false
+}
+
+resource "azurerm_app_service_virtual_network_swift_connection" "this" {
+  app_service_id = azurerm_function_app.this.id
+  subnet_id      = var.vnet_integration_subnet_id
 }
 
 resource "azurerm_function_app" "this" {
