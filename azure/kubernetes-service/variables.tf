@@ -50,7 +50,7 @@ variable "vnet_subnet_id" {
 variable "kubernetes_version" {
   type        = string
   description = "The version of the Kubernetes cluster. Will be centrally updated unless specified."
-  default     = "1.20.9"
+  default     = "1.21.7"
 }
 
 variable "default_nodes" {
@@ -62,7 +62,7 @@ variable "default_nodes" {
   })
   description = "Configures the default nodes in the cluster."
   default = {
-    vm_size    = "Standard_DS3_v2"
+    vm_size    = "standard_ds3_v2"
     node_count = 1
     min_count  = 1
     max_count  = 3

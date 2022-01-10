@@ -48,9 +48,9 @@ module "kubernetes_service_example" {
   location              = "westeurope"
   sku_tier              = "Free"
   vnet_subnet_id        = "0000000-1111-2222-3333-444444444"
-  kubernetes_version = "1.20.9"
+  kubernetes_version = "1.21.7"
   default_nodes       =  {
-    vm_size    = "Standard_DS2_v3"
+    vm_size    = "standard_ds2_v3"
     node_count = 1
     min_count  = 1
     max_count  = 3
