@@ -68,7 +68,6 @@ resource "azurerm_storage_account_network_rules" "this" {
    bypass                     = [
     "Logging",
     "Metrics",
-    "AzureServices"
   ]
   depends_on = [
     azurerm_storage_container.this,
