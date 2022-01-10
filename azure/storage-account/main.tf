@@ -70,7 +70,7 @@ resource "azurerm_storage_account_network_rules" "this" {
     "Metrics",
   ]
   depends_on = [
-    azurerm_storage_container.this,
+    azurerm_private_endpoint.this,
   ]
 }
 
@@ -85,4 +85,7 @@ resource "azurerm_private_endpoint" "this" {
      is_manual_connection           = false
      subresource_names              = ["blob"]
   }
+    depends_on = [
+    azurerm_storage_container.this,
+  ]
 }
