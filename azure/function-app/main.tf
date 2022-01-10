@@ -37,6 +37,27 @@ resource "azurerm_storage_account" "this" {
   }
 }
 
+resource "azurerm_storage_account_network_rules" "this" {
+  resource_group_name  = var.resource_group_name
+  storage_account_name = azurerm_storage_account.this.name
+
+  default_action             = "Deny"
+  ip_rules                   = [
+    "127.0.0.1"
+  ]
+  virtual_network_subnet_ids = [
+    var.vnet_integration_subnet_id
+  ]
+   bypass                     = [
+    "Logging",
+    "Metrics",
+    "AzureServices"
+  ]
+  depends_on = [
+    azurerm_storage_account.this,
+  ]
+}
+
 resource "random_string" "this" {
   length  = 10
   special = false
