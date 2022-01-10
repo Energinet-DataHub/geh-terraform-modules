@@ -65,8 +65,10 @@ resource "azurerm_storage_account_network_rules" "this" {
   virtual_network_subnet_ids = [
     var.consumers_subnet_id
   ]
-  bypass                     = [
-    "Metrics"
+   bypass                     = [
+    "Logging",
+    "Metrics",
+    "AzureServices"
   ]
   depends_on = [
     azurerm_storage_container.this,
