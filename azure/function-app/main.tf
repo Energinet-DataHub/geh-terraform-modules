@@ -58,19 +58,6 @@ resource "azurerm_storage_account_network_rules" "this" {
   ]
 }
 
-resource "azurerm_private_endpoint" "this" {
-   name                = "pe${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-   location            = var.location
-   resource_group_name = var.resource_group_name
-   subnet_id           = var.vnet_integration_subnet_id
-   private_service_connection {
-     name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-     private_connection_resource_id = azurerm_storage_account.this.id
-     is_manual_connection           = false
-     subresource_names              = ["blob"]
-  }
-}
-
 resource "random_string" "this" {
   length  = 10
   special = false
