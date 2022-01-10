@@ -31,6 +31,7 @@ This module creates the following resources.
 | `revision` | `string` | | **Required** | The Revision which used for this API. |
 | `display_name` | `string` | | | The display name of the API. |
 | `protocols` | `list(string)` | `["https"]` | | A list of protocols the operations in this API can be invoked. Possible values are http and https. |
+| `authorization_server_name` | `string` | | | The name of the OAuth 2 authorization server used for authorizing call made to the API |
 | `subscription_required` | `boolean` | `false` | | Should this API require a subscription key |
 | `policies` | `list` | `[]` | | A list of objects describing the API policies. See [Policy](#policy). |
 
@@ -45,17 +46,18 @@ A `policies` item consists of the following:
 ## Usage
 
 ```ruby
-module "api_management_api_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=4.1.0"
+module "apima_example" { 
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.1.0"
 
-  name                  = "example-name"
-  project_name          = "example-project-name"
-  environment_short     = "p"
-  environment_instance  = "001"
-  resource_group_name   = "example-resource-group-name"
-  api_management_name   = "example-api-management-name"
-  revision              = "1"
-  policies              = [
+  name                      = "example-name"
+  project_name              = "example-project-name"
+  environment_short         = "p"
+  environment_instance      = "001"
+  resource_group_name       = "example-resource-group-name"
+  api_management_name       = "example-api-management-name"
+  revision                  = "1"
+  authorization_server_name = "example-oauth-server-name"
+  policies                  = [
     {
       xml_content = <<XML
         <policies>
@@ -74,7 +76,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-api-management-api"
   }
 }

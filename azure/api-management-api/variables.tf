@@ -72,3 +72,8 @@ variable policies {
   description = "(Optional) A list of objects describing the policies for the API policies."
   default     = []
 }
+
+variable authorization_server_name {
+  type        = string
+  description = "(Required) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
+}

@@ -11,11 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "azurerm_servicebus_queue" "this" {
-  name                         = lower(var.name)
-  resource_group_name          = var.resource_group_name
-  namespace_name               = var.namespace_name
-  requires_session             = var.requires_session
-  requires_duplicate_detection = var.requires_duplicate_detection
-  enable_partitioning          = true
+output id {
+  value       = azurerm_application_insights.this.id
+  description = "The ID of the Application Insights component."
+}
+
+output name {
+  value       = azurerm_application_insights.this.name
+  description = "The name of the Application Insights component."
+}
+
+output instrumentation_key {
+  value       = azurerm_application_insights.this.instrumentation_key
+  description = "The Instrumentation Key for this Application Insights component."
+  sensitive   = true
 }

@@ -35,12 +35,12 @@ This module creates the following resources.
 ## Usage
 
 ```ruby
-module "api_management_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=4.1.0"
+module "appi_example" { 
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.1.0"
 
   name                  = "example-name"
   project_name          = "example-project-name"
-  environment_short     = ""
+  environment_short     = "p"
   environment_instance  = "001"
   resource_group_name   = "example-resource-group-name"
   location              = "westeurope"
@@ -55,7 +55,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.0.0"
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-api-management"
   }
 }

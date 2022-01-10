@@ -11,11 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "azurerm_servicebus_queue" "this" {
-  name                         = lower(var.name)
-  resource_group_name          = var.resource_group_name
-  namespace_name               = var.namespace_name
-  requires_session             = var.requires_session
-  requires_duplicate_detection = var.requires_duplicate_detection
-  enable_partitioning          = true
+output "id" {
+  value       = azurerm_eventhub.this.id
+  description = "The ID of the EventHub."
+}
+
+output "name" {
+  value       = azurerm_eventhub.this.name
+  description = "The name of the EventHub."
+}
+
+output "primary_connection_strings" {
+  value       = { for instance in azurerm_eventhub_authorization_rule.this: instance.name => instance.primary_connection_string }
+  description = "A list of Auth Rule connection strings"
 }
