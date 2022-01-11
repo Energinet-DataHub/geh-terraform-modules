@@ -91,15 +91,16 @@ resource "azurerm_private_endpoint" "this" {
 }
 
 # Create the blob.core.windows.net Private DNS Zone
-resource "azurerm_private_dns_zone" "private" {
+resource "azurerm_private_dns_zone" "this" {
   name                = "privatelink.blob.core.windows.net"
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = var.resource_group_name
 }
 
-resource "azurerm_private_dns_cname_record" "cname" {
-  name                = "${azurerm_storage_account.this.name}.blob.core.windows.net"
-  zone_name           = azurerm_private_dns_zone.private.name
-  resource_group_name = azurerm_resource_group.rg.name
-  ttl                 = 300
-  record              = "${azurerm_storage_account.this.name}.privatelink.blob.core.windows.net"
+# Create an A record pointing to the Storage Account private endpoint
+resource "azurerm_private_dns_a_record" "sa" {
+  name                = azurerm_storage_account.this.name
+  zone_name           = azurerm_private_dns_zone.this.name
+  resource_group_name = var.resource_group_name
+  ttl                 = 3600
+  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
 }
