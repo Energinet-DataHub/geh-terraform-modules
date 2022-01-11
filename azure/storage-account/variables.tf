@@ -65,6 +65,10 @@ variable consumers_subnet_id {
   type        = string
   description = "(Required) The id of the subnet where services that will consume this storage account will reside. Typically a vnet integration subnet"
 }
+variable vnet_id {
+  type        = string
+  description = "(Required) The id of the vnet"
+}
 
 
 variable access_tier {
