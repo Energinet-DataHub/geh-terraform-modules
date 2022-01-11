@@ -71,33 +71,14 @@ resource "azurerm_private_endpoint" "this" {
     azurerm_storage_account.this,
   ]
 }
-
-# Create the blob.core.windows.net Private DNS Zone
-# resource "azurerm_private_dns_zone" "this" {
-#   name                = "privatelink.blob.core.windows.net"
-#   resource_group_name = var.resource_group_name
-# }
-
 # Create an A record pointing to the Storage Account private endpoint
-# resource "azurerm_private_dns_a_record" "this" {
-#   name                = azurerm_storage_account.this.name
-#   zone_name           = azurerm_private_dns_zone.this.name
-#   resource_group_name = var.resource_group_name
-#   ttl                 = 3600
-#   records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
-# }
-
-# Link the Private Zone with the VNet
-# resource "azurerm_private_dns_zone_virtual_network_link" "this" {
-#   name                  = "${azurerm_storage_account.this.name}link"
-#   resource_group_name   = var.resource_group_name
-#   private_dns_zone_name = azurerm_private_dns_zone.this.name
-#   virtual_network_id    = var.vnet_id
-  
-#   depends_on = [
-#     azurerm_private_dns_zone.this,
-#   ]
-# }
+resource "azurerm_private_dns_a_record" "this" {
+  name                = azurerm_storage_account.this.name
+  zone_name           = var.private_dns_zone_name
+  resource_group_name = var.resource_group_name
+  ttl                 = 3600
+  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
+}
 
 resource "random_string" "this" {
   length  = 10

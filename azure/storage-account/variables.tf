@@ -65,9 +65,9 @@ variable consumers_subnet_id {
   type        = string
   description = "(Required) The id of the subnet where services that will consume this storage account will reside. Typically a vnet integration subnet"
 }
-variable vnet_id {
+variable private_dns_zone_name {
   type        = string
-  description = "(Required) The id of the vnet"
+  description = "(Required) The name of the private dns zone"
 }
 
 
