@@ -89,3 +89,17 @@ resource "azurerm_private_endpoint" "this" {
     azurerm_storage_container.this,
   ]
 }
+
+# Create the blob.core.windows.net Private DNS Zone
+resource "azurerm_private_dns_zone" "private" {
+  name                = "privatelink.blob.core.windows.net"
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+resource "azurerm_private_dns_cname_record" "cname" {
+  name                = "${azurerm_storage_account.this.name}.blob.core.windows.net"
+  zone_name           = azurerm_private_dns_zone.private.name
+  resource_group_name = azurerm_resource_group.rg.name
+  ttl                 = 300
+  record              = "${azurerm_storage_account.this.name}.privatelink.blob.core.windows.net"
+}
