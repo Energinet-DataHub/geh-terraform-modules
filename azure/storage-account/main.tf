@@ -54,6 +54,24 @@ resource "azurerm_storage_container" "this" {
   container_access_type = try(var.containers[count.index].access_type, "private")
 }
 
+resource "azurerm_storage_account_network_rules" "this" {
+  resource_group_name  = var.resource_group_name
+  storage_account_name = azurerm_storage_account.this.name
+
+  default_action             = "Deny"
+  ip_rules                   = [
+    "127.0.0.1"
+  ]
+  
+   bypass                     = [
+    "Logging",
+    "Metrics",
+  ]
+  depends_on = [
+    azurerm_private_endpoint.this,
+  ]
+}
+
 resource "azurerm_private_endpoint" "this" {
    name                = "pe${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
    location            = var.location
