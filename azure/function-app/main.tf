@@ -68,7 +68,7 @@ resource "azurerm_private_endpoint" "this" {
      subresource_names              = ["blob"]
   }
     depends_on = [
-    azurerm_storage_container.this,
+    azurerm_storage_account.this,
   ]
 }
 
