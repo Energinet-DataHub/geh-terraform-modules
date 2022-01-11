@@ -43,6 +43,7 @@ resource "azurerm_storage_account_network_rules" "this" {
   storage_account_name = azurerm_storage_account.this.name
 
   default_action             = "Deny"
+  virtual_network_subnet_ids = [var.vnet_integration_subnet_id]
   ip_rules                   = [
     "127.0.0.1"
   ]
@@ -103,7 +104,7 @@ resource "azurerm_function_app" "this" {
   app_settings                = merge({
     APPINSIGHTS_INSTRUMENTATIONKEY = var.application_insights_instrumentation_key
     WEBSITE_VNET_ROUTE_ALL                = "1"
-    WEBSITE_DNS_SERVER                    = "168.63.129.16"
+    WEBSITE_CONTENTOVERVNET               = "1"
   },var.app_settings)
   identity {
     type = "SystemAssigned"
