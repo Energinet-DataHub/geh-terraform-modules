@@ -90,7 +90,7 @@ resource "azurerm_private_endpoint" "this" {
 
 # Create the blob.core.windows.net Private DNS Zone
 resource "azurerm_private_dns_zone" "this" {
-  name                = "privatelink.blob.core.windows.net"
+  name                = "${azurerm_storage_account.this.name}.dns"
   resource_group_name = var.resource_group_name
 }
 
