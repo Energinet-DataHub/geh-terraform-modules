@@ -56,6 +56,16 @@ variable administrator_login_password {
   description = "(Required) The password associated with the administrator_login user. Needs to comply with Azure's Password Policy"
 }
 
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The id of the private endpoint subnet where this function will reside."
+}
+
+variable private_dns_zone_name {
+  type        = string
+  description = "(Required) The name of the private dns zone"
+}
+
 variable firewall_rules {
   type        = list(object({
     name              = string
