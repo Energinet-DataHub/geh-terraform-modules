@@ -41,12 +41,12 @@ resource "azurerm_mssql_server" "this" {
   }
 }
 
-resource "azurerm_sql_virtual_network_rule" "sqlvnetrule" {
-  name                = "sql-vnet-rule"
-  resource_group_name = var.resource_group_name
-  server_name         = azurerm_mssql_server.this.name
-  subnet_id           = var.private_endpoint_subnet_id
-}
+#resource "azurerm_sql_virtual_network_rule" "sqlvnetrule" {
+#  name                = "sql-vnet-rule"
+#  resource_group_name = var.resource_group_name
+#  server_name         = azurerm_mssql_server.this.name
+#  subnet_id           = var.private_endpoint_subnet_id
+#}
 
 
 resource "azurerm_private_endpoint" "this" {
