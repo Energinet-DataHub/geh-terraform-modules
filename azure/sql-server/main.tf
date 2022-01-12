@@ -60,7 +60,7 @@ resource "azurerm_private_endpoint" "this" {
      name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
      private_connection_resource_id = azurerm_sql_server.this.id
      is_manual_connection           = false
-     subresource_names              = ["blob"]
+     subresource_names              = ["sqlServer"]
   }
     depends_on = [
     azurerm_sql_server.this,
