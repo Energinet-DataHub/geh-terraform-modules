@@ -61,10 +61,6 @@ variable private_endpoint_subnet_id {
   type        = string
   description = "(Required) The id of the private endpoint subnet where this function will reside."
 }
-variable consumers_subnet_id {
-  type        = string
-  description = "(Required) The id of the subnet where services that will consume this storage account will reside. Typically a vnet integration subnet"
-}
 variable private_dns_zone_name {
   type        = string
   description = "(Required) The name of the private dns zone"
