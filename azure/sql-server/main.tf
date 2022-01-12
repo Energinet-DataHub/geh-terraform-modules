@@ -18,13 +18,14 @@ locals {
   }
 }
 
-resource "azurerm_sql_server" "this" {
+resource "azurerm_mssql_server" "this" {
   name                          = "sql-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name           = var.resource_group_name
   location                      = var.location
   version                       = var.sql_version
   administrator_login           = var.administrator_login
   administrator_login_password  = var.administrator_login_password
+  public_network_access_enabled = false
   identity {
     type  = "SystemAssigned" 
   }
@@ -40,14 +41,11 @@ resource "azurerm_sql_server" "this" {
   }
 }
 
-resource "azurerm_sql_firewall_rule" "this" {
-  count               = length(var.firewall_rules)
-
-  name                = "${lower(try(var.firewall_rules[count.index].start_ip_address, null))}-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${var.environment_instance}"
+resource "azurerm_sql_virtual_network_rule" "sqlvnetrule" {
+  name                = "sql-vnet-rule"
   resource_group_name = var.resource_group_name
   server_name         = azurerm_sql_server.this.name
-  start_ip_address    = try(var.firewall_rules[count.index].start_ip_address, null)
-  end_ip_address      = try(var.firewall_rules[count.index].end_ip_address, null)
+  subnet_id           = var.private_endpoint_subnet_id
 }
 
 
