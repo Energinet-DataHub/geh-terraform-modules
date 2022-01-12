@@ -44,7 +44,7 @@ resource "azurerm_mssql_server" "this" {
 resource "azurerm_sql_virtual_network_rule" "sqlvnetrule" {
   name                = "sql-vnet-rule"
   resource_group_name = var.resource_group_name
-  server_name         = azurerm_sql_server.this.name
+  server_name         = azurerm_mssql_server.this.name
   subnet_id           = var.private_endpoint_subnet_id
 }
 
@@ -56,17 +56,17 @@ resource "azurerm_private_endpoint" "this" {
    subnet_id           = var.private_endpoint_subnet_id
    private_service_connection {
      name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-     private_connection_resource_id = azurerm_sql_server.this.id
+     private_connection_resource_id = azurerm_mssql_server.this.id
      is_manual_connection           = false
      subresource_names              = ["sqlServer"]
   }
     depends_on = [
-    azurerm_sql_server.this,
+    azurerm_mssql_server.this,
   ]
 }
 # Create an A record pointing to the Storage Account private endpoint
 resource "azurerm_private_dns_a_record" "this" {
-  name                = azurerm_sql_server.this.name
+  name                = azurerm_mssql_server.this.name
   zone_name           = var.private_dns_zone_name
   resource_group_name = var.resource_group_name
   ttl                 = 3600
