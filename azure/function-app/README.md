@@ -6,6 +6,13 @@
 - [Usage](#usage)
 - [Outputs](#outputs)
 
+## Module basis
+
+This module is based on the knowledge derived from these resources
+
+- [How to configure Azure Functions with a virtual network](https://docs.microsoft.com/en-us/azure/azure-functions/configure-networking-how-to#restrict-your-storage-account-to-a-virtual-network)
+- [Private Endpoints with Terraform](https://jfarrell.net/2021/07/03/private-endpoints-with-terraform/)
+
 ## Resources Created
 
 This module creates the following resources.
