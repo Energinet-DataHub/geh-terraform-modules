@@ -39,9 +39,12 @@ resource "azurerm_mssql_server" "this" {
       tags,
     ]
   }
+    depends_on = [
+    azurerm_sql_virtual_network_rule.this,
+  ]
 }
 
-resource "azurerm_sql_virtual_network_rule" "sqlvnetrule" {
+resource "azurerm_sql_virtual_network_rule" "this" {
  name                = "sql-vnet-rule"
  resource_group_name = var.resource_group_name
  server_name         = azurerm_mssql_server.this.name
