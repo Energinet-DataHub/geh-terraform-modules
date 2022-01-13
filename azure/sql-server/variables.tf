@@ -61,11 +61,6 @@ variable private_endpoint_subnet_id {
   description = "(Required) The id of the private endpoint subnet where this function will reside."
 }
 
-variable consumers_subnet_id {
-  type        = string
-  description = "(Required) The id of the subnet where the consumers of the sql server reside"
-}
-
 variable private_dns_zone_name {
   type        = string
   description = "(Required) The name of the private dns zone"
