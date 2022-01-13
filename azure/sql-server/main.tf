@@ -39,9 +39,6 @@ resource "azurerm_mssql_server" "this" {
       tags,
     ]
   }
-    depends_on = [
-    azurerm_sql_virtual_network_rule.this,
-  ]
 }
 
 resource "azurerm_sql_virtual_network_rule" "this" {
