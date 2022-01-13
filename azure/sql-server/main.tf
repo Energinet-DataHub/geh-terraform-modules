@@ -46,6 +46,7 @@ resource "azurerm_sql_virtual_network_rule" "this" {
  resource_group_name = var.resource_group_name
  server_name         = azurerm_mssql_server.this.name
  subnet_id           = var.consumers_subnet_id
+ ignore_missing_vnet_service_endpoint = true
 }
 
 
