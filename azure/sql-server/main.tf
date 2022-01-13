@@ -52,9 +52,6 @@ resource "azurerm_private_endpoint" "this" {
      is_manual_connection           = false
      subresource_names              = ["sqlServer"]
   }
-    depends_on = [
-    azurerm_mssql_server.this,
-  ]
 }
 # Create an A record pointing to the Storage Account private endpoint
 resource "azurerm_private_dns_a_record" "this" {
