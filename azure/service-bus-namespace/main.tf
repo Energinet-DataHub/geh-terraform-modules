@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }
@@ -33,6 +33,11 @@ resource "azurerm_servicebus_namespace" "this" {
       tags,
     ]
   }
+}
+
+resource "azurerm_servicebus_namespace_network_rule_set" "this" {
+  namespace_id = azurerm_servicebus_namespace.this.id
+  default_action = "Deny"
 }
 
 resource "azurerm_servicebus_namespace_authorization_rule" "this" {
