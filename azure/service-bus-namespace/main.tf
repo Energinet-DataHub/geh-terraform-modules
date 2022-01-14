@@ -42,11 +42,6 @@ resource "azurerm_servicebus_namespace_network_rule_set" "this" {
   ip_rules                   = [
     "127.0.0.1"
   ]
-  
-  bypass                     = [
-    "Logging",
-    "Metrics",
-  ]
 }
 
 resource "azurerm_servicebus_namespace_authorization_rule" "this" {
