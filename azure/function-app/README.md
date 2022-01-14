@@ -6,6 +6,13 @@
 - [Usage](#usage)
 - [Outputs](#outputs)
 
+## Module basis
+
+This module is based on the knowledge derived from these resources
+
+- [How to configure Azure Functions with a virtual network](https://docs.microsoft.com/en-us/azure/azure-functions/configure-networking-how-to#restrict-your-storage-account-to-a-virtual-network)
+- [Private Endpoints with Terraform](https://jfarrell.net/2021/07/03/private-endpoints-with-terraform/)
+
 ## Resources Created
 
 This module creates the following resources.
@@ -14,8 +21,8 @@ This module creates the following resources.
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- Terraform version 1.1.2+
+- AzureRM provider version 2.71.0+
 
 ## Arguments and defaults
 
@@ -29,6 +36,7 @@ This module creates the following resources.
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `app_service_plan_id` | `string` | | **Required** | The ID of the App Service Plan within which to create this Function App. |
 | `application_insights_instrumentation_key` | `string` | | **Required** | The application insights instrumentation key for which data is to be logged into. |
+| `vnet_integration_subnet_id` | `string` | | **Required** | The id of the vnet integration subnet where this function will reside. |
 | `app_settings` | `string` | `{}` | | The application insights instrumentation id for which data is to be logged into. |
 | `connection_strings` | `map(string)` | `{}` | | A map of key-value pairs for App Settings and custom values. |
 | `always_on` | `map(string)` | `{}` | | Should the Function App be loaded at all times? Defaults to false. |
@@ -38,7 +46,7 @@ This module creates the following resources.
 
 ```ruby
 module "func_example" { 
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=5.1.0"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=6.0.0"
 
   name                                      = "example-name"
   project_name                              = "example-project-name"
@@ -48,6 +56,7 @@ module "func_example" {
   location                                  = "westeurope"
   app_service_plan_id                       = "id-example"
   application_insights_instrumentation_key  = "app-insights-instrumentation-key-example"
+  vnet_integration_subnet_id                = "vnet-integration-subnet-id"
   app_settings                              = {
     "example-key1" = "example-value1"
     "example-key2" = "example-value2"

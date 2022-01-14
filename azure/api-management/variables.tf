@@ -56,6 +56,16 @@ variable sku_name {
   description = "(Required) sku_name is a string consisting of two parts separated by an underscore(_). The first part is the name, valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1)."
 }
 
+variable virtual_network_type {
+  type        = string
+  description = "(Required) The type of virtual network you want to use, valid values include: Internal or External"
+}
+
+variable subnet_id {
+  type        = string
+  description = "(Required) The id of the subnet that will be used for the API Management."
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."

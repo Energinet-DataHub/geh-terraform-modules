@@ -14,8 +14,8 @@ This module creates the following resources.
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- Terraform version 1.1.2+
+- AzureRM provider version 2.71.0+
 
 ## Arguments and defaults
 
@@ -29,6 +29,8 @@ This module creates the following resources.
 | `location` | `string` | | **Required** Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `account_tier` | `string` | | **Required** Defines the Tier to use for this storage account. Valid options are `Standard` and `Premium`. For BlockBlobStorage and FileStorage accounts only `Premium` is valid. Changing this forces a new resource to be created. |
 | `account_replication_type` | `string` | | **Required** Defines the type of replication to use for this storage account. Valid options are `LRS`, `GRS`, `RAGRS`, `ZRS`, `GZRS` and `RAGZRS`. |
+| `private_endpoint_subnet_id` | `string` | | **Required**  The terraform id of the private endpoint subnet
+| `private_dns_zone_name` | `string` | | **Required**   The name of the private dns zone
 | `access_tier` | `string` | `"Hot"` | Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are `Hot` and `Cool`, defaults to `Hot`. |
 | `is_hns_enabled` | `string` | `false` | Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 ([see here for more information](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-quickstart-create-account/)). Changing this forces a new resource to be created. |
 | `account_kind` | `string` | `"StorageV2"` | Defines the Kind of account. Valid options are `BlobStorage`, `BlockBlobStorage`, `FileStorage`, `Storage` and `StorageV2`. Changing this forces a new resource to be created. Defaults to `StorageV2`. |

@@ -51,6 +51,19 @@ variable application_insights_instrumentation_key {
   description = "(Required) The application insights instrumentation key for which data is to be logged into."
 }
 
+variable vnet_integration_subnet_id {
+  type        = string
+  description = "(Required) The id of the vnet integration subnet where this function will reside."
+}
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The id of the private endpoint subnet where this function will reside."
+}
+variable private_dns_zone_name {
+  type        = string
+  description = "(Required) The name of the private dns zone"
+}
+
 variable app_settings {
   type        = map(string)
   description = "(Optional) A map of key-value pairs for App Settings and custom values." 
