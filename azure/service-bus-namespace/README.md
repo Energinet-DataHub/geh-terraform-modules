@@ -30,6 +30,8 @@ This module creates the following resources.
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `sku` | `string` | | **Required** |  Defines which tier to use. Options are `basic`, `standard` or `premium`. Changing this forces a new resource to be created. |
 | `auth_rules` | `list` | | **Required** | A list of objects describing the auth rules of the Service Bus Namespace. See [Auth Rule](#auth-rule). |
+| `private_endpoint_subnet_id` | `string` | | **Required**  The terraform id of the private endpoint subnet
+| `private_dns_zone_name` | `string` | | **Required**   The name of the private dns zone
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
 ### Auth Rule

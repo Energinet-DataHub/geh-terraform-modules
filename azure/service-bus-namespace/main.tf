@@ -45,3 +45,28 @@ resource "azurerm_servicebus_namespace_authorization_rule" "this" {
   send                = try(var.auth_rules[count.index].send, false)
   manage              = try(var.auth_rules[count.index].manage, false)
 }
+
+resource "azurerm_private_endpoint" "this" {
+   name                = "pe${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+   location            = var.location
+   resource_group_name = var.resource_group_name
+   subnet_id           = var.private_endpoint_subnet_id
+   private_service_connection {
+     name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+     private_connection_resource_id = azurerm_servicebus_namespace.this.id
+     is_manual_connection           = false
+     subresource_names              = ["namespace"]
+  }
+    depends_on = [
+    azurerm_servicebus_namespace.this,
+  ]
+}
+
+# Create an A record pointing to the namespace private endpoint
+resource "azurerm_private_dns_a_record" "this" {
+  name                = azurerm_servicebus_namespace.this.name
+  zone_name           = var.private_dns_zone_name
+  resource_group_name = var.resource_group_name
+  ttl                 = 3600
+  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
+}
