@@ -11,6 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+terraform {
+  experiments = [
+    module_variable_optional_attrs,
+  ]
+}
+
 variable name {
   type        = string
   description = "(Required) Specifies the name of the Function App. Changing this forces a new resource to be created."
@@ -57,8 +63,14 @@ variable delegations {
   type        = list(object({
     name                        = string
     service_delegation_name     = string
-    service_delegation_actions  = list(string)
+    service_delegation_actions  = optional(list(string))
   }))
   default     = []
   description = "(Optional) One or more delegation blocks as defined below."
+}
+
+variable tags {
+  type        = any
+  description = "(Optional) A mapping of tags to assign to the resource."
+  default     = {}
 }
