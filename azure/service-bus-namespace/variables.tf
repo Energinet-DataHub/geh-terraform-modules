@@ -71,6 +71,11 @@ variable private_dns_zone_name {
   description = "(Required) The name of the private dns zone"
 }
 
+variable capacity {
+  type        = string
+  description = "(Optional) The capcity when using premium sku"
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
