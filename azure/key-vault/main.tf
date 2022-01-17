@@ -50,10 +50,10 @@ resource "azurerm_key_vault" "this" {
     ip_rules                   = [
     "127.0.0.1"
   ]
-  bypass                     = [
-    "Logging",
-    "Metrics",
-  ]
+    bypass                     = [
+        "Logging",
+        "Metrics",
+    ]
   }
 }
 
