@@ -77,7 +77,7 @@ variable capacity {
   default     = 1
   validation {
     condition     = contains([1,2,4,8,16], var.capacity)
-    error_message = "Valid values for var: capacity are (1,2,4,8,16)"
+    error_message = "Valid values for var: capacity are (1,2,4,8,16)."
   } 
 }
 
