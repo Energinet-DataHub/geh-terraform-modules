@@ -28,24 +28,12 @@ resource "azurerm_subnet" "this" {
   dynamic "delegation" {
     for_each  = var.delegations
     content {
-      delegation {
-        name = setting.value["namespace"]
-    
-        service_delegation {
-          name    = setting.value["service_delegation_name"]
-          actions = setting.value["service_delegation_actions"]
-        }
+      name = delegation.value["name"]
+  
+      service_delegation {
+        name    = delegation.value["service_delegation_name"]
+        actions = delegation.value["service_delegation_actions"]
       }
     }
-  }
-
-  tags                                          = merge(var.tags, local.module_tags)
-
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
   }
 }

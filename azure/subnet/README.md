@@ -1,4 +1,4 @@
-# Azure Api Management
+# Azure Subnet
 
 - [Resources Created](#resources-created)
 - [Prerequisites](#prerequisites)
@@ -10,7 +10,7 @@
 
 This module creates the following resources.
 
-- [Azure Api Management](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management)
+- [Azure Subnet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet)
 
 ## Prerequisites
 
@@ -28,12 +28,12 @@ This module creates the following resources.
 | `resource_group_name` | `string` | | **Required** | The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created. |
 | `virtual_network_name` | `string` | | **Required** | The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created. |
 | `enforce_private_link_service_network_policies` | `string` | | | (Optional) Enable or Disable network policies for the private link endpoint on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false. |
-| `delegations` | `list` | `[]` | |  A list of objects describing delegations. See [Access Policy](#access-policy). |
+| `delegations` | `list` | `[]` | |  A list of objects describing delegations. See [Delegation](#delegation). |
 | `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
 
-### Access Policy
+### Delegation
 
-An `access_policy` item consists of the following:
+An `delegation` item consists of the following:
 
 | Name | Type | Default | Required | Description |
 |-|-|-|-|-|
@@ -66,15 +66,8 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
-    "ModuleId"      = "azure-api-management"
+    "ModuleVersion" = "6.0.0"
+    "ModuleId"      = "azure-subnet"
   }
 }
 ```
-
-## Outputs
-
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The ID of the API Management Service. | |
-| `name` | The name of the API Management Service. | |
