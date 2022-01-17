@@ -72,8 +72,13 @@ variable private_dns_zone_name {
 }
 
 variable capacity {
-  type        = string
+  type        = number
   description = "(Optional) The capcity when using premium sku"
+  default     = 1
+  validation {
+    condition     = contains([1,2,4,8,16], var.capacity)
+    error_message = "Valid values for var: capacity are (1,2,4,8,16)"
+  } 
 }
 
 variable tags {
