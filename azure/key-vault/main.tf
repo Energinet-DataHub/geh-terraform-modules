@@ -47,9 +47,6 @@ resource "azurerm_key_vault" "this" {
   }
   network_acls {
     default_action = "Deny"
-    ip_rules                   = [
-    "127.0.0.1"
-  ]
     bypass = "AzureServices"
   }
 }
