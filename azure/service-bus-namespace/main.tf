@@ -56,7 +56,7 @@ resource "azurerm_servicebus_namespace_authorization_rule" "this" {
 }
 
 resource "azurerm_private_endpoint" "this" {
-   name                = "pe${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+   name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
    location            = var.location
    resource_group_name = var.resource_group_name
    subnet_id           = var.private_endpoint_subnet_id
