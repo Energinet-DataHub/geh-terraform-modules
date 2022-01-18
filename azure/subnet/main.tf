@@ -19,7 +19,7 @@ locals {
 }
 
 resource "azurerm_subnet" "this" {
-  name                                          = "${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  name                                          = "snet-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                           = var.resource_group_name
   virtual_network_name                          = var.virtual_network_name
   address_prefixes                              = var.address_prefixes
