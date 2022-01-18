@@ -26,7 +26,7 @@ This module creates the following resources.
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the Resource Group in which the Subnet should be exist. Changing this forces a new resource to be created. |
-| `virtual_network_name` | `string` | | **Required** | The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created. |
+| `virtual_network_name` | `string` | | **Required** | The name of the virtual network where the subnet will reside. Changing this forces a new resource to be created. |
 | `enforce_private_link_service_network_policies` | `string` | | | (Optional) Enable or Disable network policies for the private link endpoint on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false. |
 | `delegations` | `list` | `[]` | |  A list of objects describing delegations. See [Delegation](#delegation). |
 | `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
