@@ -21,7 +21,7 @@ This module creates the following resources.
 
 | Name | Type | Default | Required | Description |
 |-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Function App. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `appi-{var.name}-${var.project_name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
+| `name` | `string` | | **Required** | Specifies the name of the Subnet. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `snet-${var.name}-${var.project_name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
 | `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
