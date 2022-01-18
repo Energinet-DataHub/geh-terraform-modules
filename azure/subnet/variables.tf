@@ -19,7 +19,7 @@ terraform {
 
 variable name {
   type        = string
-  description = "(Required) Specifies the name of the Function App. Changing this forces a new resource to be created."
+  description = "(Required) Specifies the name of the Subnet. Changing this forces a new resource to be created."
 }
 
 variable project_name {
