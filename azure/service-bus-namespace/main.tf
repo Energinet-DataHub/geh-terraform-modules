@@ -49,7 +49,6 @@ resource "azurerm_servicebus_namespace_authorization_rule" "this" {
  
   name                = try(var.auth_rules[count.index].name, null)
   namespace_id      = azurerm_servicebus_namespace.this.id
-  resource_group_name = var.resource_group_name
   listen              = try(var.auth_rules[count.index].listen, false)
   send                = try(var.auth_rules[count.index].send, false)
   manage              = try(var.auth_rules[count.index].manage, false)
