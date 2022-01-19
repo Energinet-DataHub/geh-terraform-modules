@@ -14,6 +14,8 @@
 resource "null_resource" "dependency_setter" {
   depends_on = [
     azurerm_key_vault.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
     azurerm_key_vault_access_policy.selfpermissions,
     azurerm_key_vault_access_policy.this,
   ]
