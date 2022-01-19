@@ -55,6 +55,12 @@ variable address_prefixes {
 
 variable enforce_private_link_service_network_policies {
   type        = string
+  description = "(Optional) Enable or Disable network policies for the private link service on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false."
+  default     = false
+}
+
+var enforce_private_link_endpoint_network_policies{
+     type        = string
   description = "(Optional) Enable or Disable network policies for the private link endpoint on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false."
   default     = false
 }
