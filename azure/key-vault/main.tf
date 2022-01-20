@@ -61,11 +61,10 @@ resource "azurerm_private_endpoint" "this" {
 resource "azurerm_private_dns_a_record" "this" {
   name                = azurerm_key_vault.this.name
   zone_name           = "privatelink.vaultcore.azure.net"
-  resource_group_name = var.resource_group_name
+  resource_group_name = var.vnet_resource_group_name
   ttl                 = 3600
   records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
 }
-
 
 resource "azurerm_key_vault_access_policy" "selfpermissions" {
   key_vault_id            = azurerm_key_vault.this.id
