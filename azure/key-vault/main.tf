@@ -11,15 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "null_resource" "dependency_setter" {
-  depends_on = [
-    azurerm_key_vault.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
-    azurerm_key_vault_access_policy.selfpermissions,
-    azurerm_key_vault_access_policy.this,
-  ]
-}
 
 locals {
   module_tags = {
