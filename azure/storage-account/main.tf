@@ -27,11 +27,11 @@ locals {
 
 resource "azurerm_storage_account" "this" {
   name                      = "st${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-  resource_group_name       = var.resource_group_name 
-  location                  = var.location 
+  resource_group_name       = var.resource_group_name
+  location                  = var.location
   account_tier              = "Standard"
   account_replication_type  = "LRS"
-  is_hns_enabled            = var.is_hns_enabled  
+  is_hns_enabled            = var.is_hns_enabled
   min_tls_version           = "TLS1_2"
 
   tags                      = merge(var.tags, local.module_tags)
@@ -62,7 +62,7 @@ resource "azurerm_storage_account_network_rules" "this" {
   ip_rules                   = [
     "127.0.0.1"
   ]
-  
+
    bypass                     = [
     "Logging",
     "Metrics",
@@ -73,7 +73,7 @@ resource "azurerm_storage_account_network_rules" "this" {
 }
 
 resource "azurerm_private_endpoint" "this" {
-   name                = "pe${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+   name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
    location            = var.location
    resource_group_name = var.resource_group_name
    subnet_id           = var.private_endpoint_subnet_id
