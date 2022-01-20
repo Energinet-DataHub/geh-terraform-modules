@@ -51,11 +51,6 @@ variable private_endpoint_subnet_id {
   description = "(Required) The id of the private endpoint subnet where this function will reside."
 }
 
-variable private_dns_zone_name {
-  type        = string
-  description = "(Required) The name of the private dns zone"
-}
-
 variable access_policies {
   type        = list(object({
     tenant_id               = string
