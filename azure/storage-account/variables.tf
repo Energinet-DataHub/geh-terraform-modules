@@ -42,6 +42,11 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the storage account. Changing this forces a new resource to be created."
 }
 
+variable vnet_resource_group_name {
+  type        = string
+  description = "(Required) The name of the vnet resource group. This will be used to link the private endpoint to the private dns zone"
+}
+
 variable location {
   type        = string
   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
@@ -61,11 +66,6 @@ variable private_endpoint_subnet_id {
   type        = string
   description = "(Required) The id of the private endpoint subnet where this function will reside."
 }
-variable private_dns_zone_name {
-  type        = string
-  description = "(Required) The name of the private dns zone"
-}
-
 
 variable access_tier {
   type        = string
