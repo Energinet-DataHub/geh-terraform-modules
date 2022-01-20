@@ -62,8 +62,28 @@ variable auth_rules {
   description = "(Required) A list of objects describing the Service Bus Namespace auth rules."
 }
 
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The id of the private endpoint subnet where this function will reside."
+}
+variable private_dns_zone_name {
+  type        = string
+  description = "(Required) The name of the private dns zone"
+}
+
+variable capacity {
+  type        = number
+  description = "(Optional) The capcity when using premium sku"
+  default     = 1
+  validation {
+    condition     = contains([1,2,4,8,16], var.capacity)
+    error_message = "Valid values for var: capacity are (1,2,4,8,16)."
+  } 
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
   default     = {}
 }
+

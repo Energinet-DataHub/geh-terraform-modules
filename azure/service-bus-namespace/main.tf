@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }
@@ -23,7 +23,7 @@ resource "azurerm_servicebus_namespace" "this" {
   location            = var.location
   resource_group_name = var.resource_group_name
   sku                 = var.sku
-
+  capacity            = var.capacity
   tags                = merge(var.tags, local.module_tags)
 
   lifecycle {
@@ -35,13 +35,46 @@ resource "azurerm_servicebus_namespace" "this" {
   }
 }
 
+resource "azurerm_servicebus_namespace_network_rule_set" "this" {
+  namespace_id = azurerm_servicebus_namespace.this.id
+
+  default_action = "Deny"
+  ip_rules                   = [
+    "127.0.0.1"
+  ]
+}
+
 resource "azurerm_servicebus_namespace_authorization_rule" "this" {
   count               = length(var.auth_rules)
  
   name                = try(var.auth_rules[count.index].name, null)
-  namespace_name      = azurerm_servicebus_namespace.this.name
-  resource_group_name = var.resource_group_name
+  namespace_id      = azurerm_servicebus_namespace.this.id
   listen              = try(var.auth_rules[count.index].listen, false)
   send                = try(var.auth_rules[count.index].send, false)
   manage              = try(var.auth_rules[count.index].manage, false)
+}
+
+resource "azurerm_private_endpoint" "this" {
+   name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+   location            = var.location
+   resource_group_name = var.resource_group_name
+   subnet_id           = var.private_endpoint_subnet_id
+   private_service_connection {
+     name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+     private_connection_resource_id = azurerm_servicebus_namespace.this.id
+     is_manual_connection           = false
+     subresource_names              = ["namespace"]
+  }
+    depends_on = [
+    azurerm_servicebus_namespace.this,
+  ]
+}
+
+# Create an A record pointing to the namespace private endpoint
+resource "azurerm_private_dns_a_record" "this" {
+  name                = azurerm_servicebus_namespace.this.name
+  zone_name           = var.private_dns_zone_name
+  resource_group_name = var.resource_group_name
+  ttl                 = 3600
+  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
 }
