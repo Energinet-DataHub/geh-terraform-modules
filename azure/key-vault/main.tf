@@ -11,17 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "null_resource" "dependency_setter" {
-  depends_on = [
-    azurerm_key_vault.this,
-    azurerm_key_vault_access_policy.selfpermissions,
-    azurerm_key_vault_access_policy.this,
-  ]
-}
 
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-key-vault"
   }
 }
@@ -45,7 +38,34 @@ resource "azurerm_key_vault" "this" {
       tags,
     ]
   }
+  network_acls {
+    default_action = "Deny"
+    bypass = "AzureServices"
+  }
 }
+
+resource "azurerm_private_endpoint" "this" {
+   name                = "pe${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+   location            = var.location
+   resource_group_name = var.resource_group_name
+   subnet_id           = var.private_endpoint_subnet_id
+   private_service_connection {
+     name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+     private_connection_resource_id = azurerm_key_vault.this.id
+     is_manual_connection           = false
+     subresource_names              = ["Vault"]
+  }
+}
+
+# Create an A record pointing to the keyvalut private endpoint
+resource "azurerm_private_dns_a_record" "this" {
+  name                = azurerm_key_vault.this.name
+  zone_name           = var.private_dns_zone_name
+  resource_group_name = var.resource_group_name
+  ttl                 = 3600
+  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
+}
+
 
 resource "azurerm_key_vault_access_policy" "selfpermissions" {
   key_vault_id            = azurerm_key_vault.this.id
