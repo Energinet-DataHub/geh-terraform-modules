@@ -53,11 +53,12 @@ resource "azurerm_private_endpoint" "this" {
      subresource_names              = ["sqlServer"]
   }
 }
+
 # Create an A record pointing to the Storage Account private endpoint
 resource "azurerm_private_dns_a_record" "this" {
-  name                = azurerm_mssql_server.this.name
+  name                = "privatelink.database.windows.net"
   zone_name           = var.private_dns_zone_name
-  resource_group_name = var.resource_group_name
+  resource_group_name = var.vnet_resource_group_name
   ttl                 = 3600
   records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
 }
