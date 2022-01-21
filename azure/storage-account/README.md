@@ -19,23 +19,23 @@ This module creates the following resources.
 
 ## Arguments and defaults
 
-| Name | Type | Default | Description |
-|-|-|-|-|
-| `name` | `string` | | **Required** Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group. The final name of the resource will follow this syntax `st{var.name}{var.environment_short}` and be in lowercase. |
+| Name | Type | Default | Required | Description |
+|-|-|-|-|-|
+| `name` | `string` | | **Required** | Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group. The final name of the resource will follow this syntax `st{var.name}{var.environment_short}` and be in lowercase. |
 | `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** The name of the resource group in which to create the storage account. Changing this forces a new resource to be created. |
-| `location` | `string` | | **Required** Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `account_tier` | `string` | | **Required** Defines the Tier to use for this storage account. Valid options are `Standard` and `Premium`. For BlockBlobStorage and FileStorage accounts only `Premium` is valid. Changing this forces a new resource to be created. |
-| `account_replication_type` | `string` | | **Required** Defines the type of replication to use for this storage account. Valid options are `LRS`, `GRS`, `RAGRS`, `ZRS`, `GZRS` and `RAGZRS`. |
-| `private_endpoint_subnet_id` | `string` | | **Required**  The terraform id of the private endpoint subnet
-| `private_dns_zone_name` | `string` | | **Required**   The name of the private dns zone
-| `access_tier` | `string` | `"Hot"` | Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are `Hot` and `Cool`, defaults to `Hot`. |
-| `is_hns_enabled` | `string` | `false` | Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 ([see here for more information](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-quickstart-create-account/)). Changing this forces a new resource to be created. |
-| `account_kind` | `string` | `"StorageV2"` | Defines the Kind of account. Valid options are `BlobStorage`, `BlockBlobStorage`, `FileStorage`, `Storage` and `StorageV2`. Changing this forces a new resource to be created. Defaults to `StorageV2`. |
-| `containers` | `list` | `[]` | A list of objects describing the containers, to create in the Storage Account. [Container](#container). |
-| `tags` | `any` | `{}` | A mapping of tags to assign to the resource. |
+| `environment_short` | `string` | | **Required** | The short value name of your environment. |
+| `environment_instance` | `string` | | **Required** | The instance number of your environment. |
+| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the storage account. Changing this forces a new resource to be created. |
+| `private_dns_resource_group_name` | `string` | | **Required** | Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created. |
+| `private_endpoint_subnet_id` | `string` | | **Required** | The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created.
+| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
+| `account_tier` | `string` | | **Required** | Defines the Tier to use for this storage account. Valid options are `Standard` and `Premium`. For BlockBlobStorage and FileStorage accounts only `Premium` is valid. Changing this forces a new resource to be created. |
+| `account_replication_type` | `string` | | **Required** | Defines the type of replication to use for this storage account. Valid options are `LRS`, `GRS`, `RAGRS`, `ZRS`, `GZRS` and `RAGZRS`. |
+| `access_tier` | `string` | `"Hot"` | | Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are `Hot` and `Cool`, defaults to `Hot`. |
+| `is_hns_enabled` | `string` | `false` | | Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 ([see here for more information](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-quickstart-create-account/)). Changing this forces a new resource to be created. |
+| `account_kind` | `string` | `"StorageV2"` | | Defines the Kind of account. Valid options are `BlobStorage`, `BlockBlobStorage`, `FileStorage`, `Storage` and `StorageV2`. Changing this forces a new resource to be created. Defaults to `StorageV2`. |
+| `containers` | `list` | `[]` | | A list of objects describing the containers, to create in the Storage Account. [Container](#container). |
+| `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
 
 ### Container
 
@@ -48,17 +48,20 @@ This module creates the following resources.
 
 ```ruby
 module "storage_account_example" { 
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
 
-  name                      = "example-name"
-  project_name              = "example-project-name"
-  environment_short         = "p"
-  environment_instance      = "001"
-  resource_group_name       = "example-resource-group-name"
-  location                  = "westeurope"
-  account_tier              = "Standard"
-  account_replication_type  = "LRS"
-  containers                = [
+  name                            = "example-name"
+  project_name                    = "example-project-name"
+  environment_short               = "p"
+  environment_instance            = "001"
+  resource_group_name             = "example-resource-group-name"
+  private_dns_resource_group_name = "example-private-dns-resource-group-name"
+  private_endpoint_subnet_id      = "example-private-endpoint-subnet-id"
+  location                        = "westeurope"
+  account_tier                    = "Standard"
+  account_replication_type        = "LRS"
+  account_replication_type        = "LRS"
+  containers                      = [
     {
       name = "example-container-name-1",
     },
@@ -67,7 +70,7 @@ module "storage_account_example" {
     },
   ]
 
-  tags                      = {}
+  tags                            = {}
 }
 ```
 
