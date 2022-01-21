@@ -14,7 +14,7 @@ This module creates the following resources.
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
+- Terraform version 1.1.2+
 - AzureRM provider version 2.70.0+
 
 ## Arguments and defaults
@@ -26,10 +26,13 @@ This module creates the following resources.
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
+| `vnet_resource_group_name` | `string` | | **Required** | The name of the vnet resource group. This will be used to link the private endpoint to the private dns zone |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `sql_version` | `string` | | **Required** | The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). |
 | `administrator_login` | `string` | | **Required** | The administrator login name for the new server. Changing this forces a new resource to be created. |
 | `administrator_login_password` | `string` | | **Required** | The password associated with the administrator_login user. Needs to comply with Azure's [Password Policy](https://msdn.microsoft.com/library/ms161959.aspx) |
+| `private_endpoint_subnet_id` | `string` |  **Required**|  The ID of the private endpoint subnet
+private_dns_zone_name
 | `firewall_rules` | `any` | `[]` | | A list of objects describing the firewall rules of the Microsoft SQL Server. See [Firewall Rule](#firewall-rule). |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 

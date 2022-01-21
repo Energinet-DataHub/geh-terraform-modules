@@ -36,6 +36,11 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the Microsoft SQL Server."
 }
 
+variable vnet_resource_group_name {
+  type        = string
+  description = "(Required) The name of the vnet resource group. This will be used to link the private endpoint to the private dns zone"
+}
+
 variable location {
   type        = string
   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
@@ -54,6 +59,11 @@ variable administrator_login {
 variable administrator_login_password {
   type        = string
   description = "(Required) The password associated with the administrator_login user. Needs to comply with Azure's Password Policy"
+}
+
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The id of the private endpoint subnet where this function will reside."
 }
 
 variable firewall_rules {
