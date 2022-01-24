@@ -43,7 +43,7 @@ variable location {
 
 variable app_service_plan_id {
   type        = string
-  description = "(Required) The ID of the App Service Plan within which to create this Function App." 
+  description = "(Required) The ID of the App Service Plan within which to create this Function App."
 }
 
 variable application_insights_instrumentation_key {
@@ -55,10 +55,12 @@ variable vnet_integration_subnet_id {
   type        = string
   description = "(Required) The id of the vnet integration subnet where this function will reside."
 }
+
 variable private_endpoint_subnet_id {
   type        = string
   description = "(Required) The id of the private endpoint subnet where this function will reside."
 }
+
 variable private_dns_zone_name {
   type        = string
   description = "(Required) The name of the private dns zone"
@@ -66,7 +68,7 @@ variable private_dns_zone_name {
 
 variable app_settings {
   type        = map(string)
-  description = "(Optional) A map of key-value pairs for App Settings and custom values." 
+  description = "(Optional) A map of key-value pairs for App Settings and custom values."
   default     = {}
 }
 

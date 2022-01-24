@@ -57,7 +57,7 @@ resource "azurerm_private_endpoint" "this" {
   }
 }
 
-# Create an A record pointing to the keyvalut private endpoint
+# Create an A record pointing to the key vault private endpoint
 resource "azurerm_private_dns_a_record" "this" {
   name                = azurerm_key_vault.this.name
   zone_name           = "privatelink.vaultcore.azure.net"
