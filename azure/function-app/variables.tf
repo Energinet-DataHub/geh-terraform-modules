@@ -61,6 +61,11 @@ variable private_endpoint_subnet_id {
   description = "(Required) The id of the private endpoint subnet where this function will reside."
 }
 
+variable vnet_resource_group_name {
+  type        = string
+  description = "(Required) The name of the vnet resource group. This will be used to link the storage account (blob) private endpoint to the private dns zone"
+}
+
 variable app_settings {
   type        = map(string)
   description = "(Optional) A map of key-value pairs for App Settings and custom values."
