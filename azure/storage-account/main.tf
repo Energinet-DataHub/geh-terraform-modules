@@ -63,7 +63,7 @@ resource "azurerm_storage_account_network_rules" "this" {
     "127.0.0.1"
   ]
 
-   bypass                     = [
+  bypass                     = [
     "Logging",
     "Metrics",
   ]

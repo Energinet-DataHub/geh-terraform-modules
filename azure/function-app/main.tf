@@ -20,13 +20,13 @@ locals {
 
 resource "azurerm_storage_account" "this" {
   name                      = "st${random_string.this.result}"
-  resource_group_name       = var.resource_group_name 
-  location                  = var.location 
+  resource_group_name       = var.resource_group_name
+  location                  = var.location
   account_tier              = "Standard"
   account_replication_type  = "LRS"
   min_tls_version           = "TLS1_2"
 
-  tags                      = merge(var.tags,local.module_tags)
+  tags                      = merge(var.tags, local.module_tags)
 
   lifecycle {
     ignore_changes = [
@@ -37,7 +37,6 @@ resource "azurerm_storage_account" "this" {
   }
 }
 
-
 resource "azurerm_storage_account_network_rules" "this" {
   resource_group_name  = var.resource_group_name
   storage_account_name = azurerm_storage_account.this.name
@@ -47,8 +46,8 @@ resource "azurerm_storage_account_network_rules" "this" {
   ip_rules                   = [
     "127.0.0.1"
   ]
-  
-   bypass                     = [
+
+  bypass                     = [
     "Logging",
     "Metrics",
   ]
@@ -58,20 +57,21 @@ resource "azurerm_storage_account_network_rules" "this" {
 }
 
 resource "azurerm_private_endpoint" "this" {
-   name                = "pe${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-   location            = var.location
-   resource_group_name = var.resource_group_name
-   subnet_id           = var.private_endpoint_subnet_id
-   private_service_connection {
-     name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-     private_connection_resource_id = azurerm_storage_account.this.id
-     is_manual_connection           = false
-     subresource_names              = ["blob"]
+  name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+  private_service_connection {
+    name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    private_connection_resource_id = azurerm_storage_account.this.id
+    is_manual_connection           = false
+    subresource_names              = ["blob"]
   }
     depends_on = [
     azurerm_storage_account.this,
   ]
 }
+
 # Create an A record pointing to the Storage Account private endpoint
 resource "azurerm_private_dns_a_record" "this" {
   name                = azurerm_storage_account.this.name
@@ -125,7 +125,7 @@ resource "azurerm_function_app" "this" {
   }
 
   tags                        = merge(var.tags, local.module_tags)
-  
+
   depends_on                  = [
     azurerm_storage_account.this,
   ]
