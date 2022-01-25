@@ -8,9 +8,10 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
-- [Azure Microsoft SQL Server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server)
+- [Azure Microsoft SQL Server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/mssql_server)
+- [Azure Microsoft SQL firewall rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule)
 
 ## Prerequisites
 
