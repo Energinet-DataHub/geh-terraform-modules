@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 output id {
-  value       = azurerm_subnet.this.id
+  value       = azurerm_virtual_network.this.id
   description = "The virtual NetworkConfiguration ID."
 }
 
 output name {
-  value       = azurerm_subnet.this.name
+  value       = azurerm_virtual_network.this.name
   description = "The name of the virtual network."
   depends_on = [
     azurerm_virtual_network.this,
