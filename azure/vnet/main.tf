@@ -19,7 +19,7 @@ locals {
 }
 
 resource "azurerm_virtual_network" "this" {
-  name                = "vnet-${lower(var.name)}-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  name                = "vnet-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
 
