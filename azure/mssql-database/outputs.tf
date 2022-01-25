@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 output "id" {
-  value       = azurerm_sql_database.this.id
+  value       = azurerm_mssql_database.this.id
   description = "The SQL Database ID."
 }
 
 output "name" {
-  value       = azurerm_sql_database.this.name
+  value       = azurerm_mssql_database.this.name
   description = "The SQL Database name."
 }
