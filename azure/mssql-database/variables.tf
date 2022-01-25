@@ -42,6 +42,12 @@ variable sku_name {
   description = "(Optional) Specifies the name of the SKU used by the database. For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0, P2 ,DW100c, DS100. Changing this from the HyperScale service tier to another service tier will force a new resource to be created."
 }
 
+variable min_capacity {
+  type        = number
+  default     = 1
+  description = "(Optional) Minimal capacity that database will always have allocated, if not paused. This property is only settable for General Purpose Serverless databases."
+}
+
 variable auto_pause_delay_in_minutes {
   type        = number
   default     = "-1"

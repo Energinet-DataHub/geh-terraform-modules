@@ -22,6 +22,7 @@ resource "azurerm_mssql_database" "this" {
   name                          = "mssqldb-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   server_id                     = var.server_id
   sku_name                      = var.sku_name
+  min_capacity                  = var.min_capacity
   auto_pause_delay_in_minutes   = var.auto_pause_delay_in_minutes
 
   tags                              = merge(var.tags, local.module_tags)
