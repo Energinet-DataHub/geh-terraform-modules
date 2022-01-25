@@ -25,7 +25,7 @@ resource "azurerm_virtual_network" "this" {
 
   address_space       = var.address_space
 
-  tags                = azurerm_resource_group.this.tags
+  tags                = var.tags
 
   lifecycle {
     ignore_changes = [
