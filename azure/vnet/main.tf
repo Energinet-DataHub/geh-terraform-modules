@@ -35,3 +35,12 @@ resource "azurerm_virtual_network" "this" {
     ]
   }
 }
+
+resource "azurerm_virtual_network_peering" "this" {
+  count                     = length(var.peerings)
+
+  name                      = "${lower(try(var.peerings[count.index].name, null))}"
+  resource_group_name       = var.resource_group_name
+  virtual_network_name      = azurerm_virtual_network.this.name
+  remote_virtual_network_id = try(var.peerings[count.index].remote_virtual_network_id, null)
+}

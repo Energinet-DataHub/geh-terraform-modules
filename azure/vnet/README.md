@@ -28,7 +28,17 @@ This module creates the following resources.
 | `resource_group_name` | `string` | | **Required** | The name of the Resource Group in which the Subnet should be exist. Changing this forces a new resource to be created. |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `address_space` | `list(string)` | | **Required** | The address space that is used the virtual network. You can supply more than one address space. |
+| `peerings` | `list()` | `[]` | |  A list of objects describing the virtual network peerings. See [Peering](#peering). |
 | `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
+
+### Peering
+
+An `peering` item consists of the following:
+
+| Name | Type | Default | Required | Description |
+|-|-|-|-|-|
+| `name` | `string` | | **Required** | The name of the virtual network peering. Changing this forces a new resource to be created. The final name will be in lowercase |
+| `remote_virtual_network_id` | `string` | | **Required** | The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created. |
 
 ## Usage
 
@@ -43,6 +53,12 @@ module "vnet_example" {
   environment_instance  = "001"
   resource_group_name   = "example-resource-group-name"
   address_space         = ["10.0.0.0/16"]
+  peerings              = [
+    {
+      name                      = "example-peering"
+      remote_virtual_network_id = "example-remote-virtual-network-id"
+    }
+  ]
 }
 ```
 

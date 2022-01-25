@@ -52,6 +52,14 @@ variable address_space {
   description = "(Required) The address space that is used the virtual network. You can supply more than one address space."
 }
 
+variable peerings {
+  type        = list(object({
+    name                      = string
+    remote_virtual_network_id = string
+  }))
+  description = "Manages the virtual network peerings which allows resources to access other resources in the linked virtual networks."
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
