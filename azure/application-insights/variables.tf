@@ -41,6 +41,11 @@ variable location {
   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
 }
 
+variable retention_in_days{
+  type        = string
+  description = "(Required) How long are logs retained."
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."

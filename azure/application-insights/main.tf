@@ -23,6 +23,7 @@ resource "azurerm_application_insights" "this" {
   resource_group_name = var.resource_group_name
   location            = var.location
   application_type    = "web"
+  workspace_id        = azurerm_log_analytics_workspace.example.id
 
   tags                = merge(var.tags, local.module_tags)
 
@@ -33,4 +34,12 @@ resource "azurerm_application_insights" "this" {
       tags,
     ]
   }
+}
+
+resource "azurerm_log_analytics_workspace" "example" {
+  name                = "log-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  sku                 = "PerGB2018"
+  retention_in_days   = var.retention_in_days
 }
