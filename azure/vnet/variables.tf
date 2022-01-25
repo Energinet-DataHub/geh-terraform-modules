@@ -42,35 +42,18 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the Function App."
 }
 
-variable virtual_network_name {
+variable location {
   type        = string
-  description = "(Required) The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created."
+  description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
 }
 
-variable address_prefixes {
+variable address_space {
   type        = list(string)
-  description = "The address prefixes to use for the subnet."
-  default     = null
+  description = "(Required) The address space that is used the virtual network. You can supply more than one address space."
 }
 
-variable enforce_private_link_service_network_policies {
-  type        = string
-  description = "(Optional) Enable or Disable network policies for the private link service on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false."
-  default     = false
-}
-
-variable enforce_private_link_endpoint_network_policies{
-     type        = string
-  description = "(Optional) Enable or Disable network policies for the private link endpoint on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false."
-  default     = false
-}
-
-variable delegations {
-  type        = list(object({
-    name                        = string
-    service_delegation_name     = string
-    service_delegation_actions  = optional(list(string))
-  }))
-  default     = []
-  description = "(Optional) One or more delegation blocks as defined below."
+variable tags {
+  type        = any
+  description = "(Optional) A mapping of tags to assign to the resource."
+  default     = {}
 }

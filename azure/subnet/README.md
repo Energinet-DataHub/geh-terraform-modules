@@ -29,7 +29,6 @@ This module creates the following resources.
 | `virtual_network_name` | `string` | | **Required** | The name of the virtual network where the subnet will reside. Changing this forces a new resource to be created. |
 | `enforce_private_link_service_network_policies` | `string` | | | (Optional) Enable or Disable network policies for the private link endpoint on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false. |
 | `delegations` | `list` | `[]` | |  A list of objects describing delegations. See [Delegation](#delegation). |
-| `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
 
 ### Delegation
 
@@ -58,16 +57,5 @@ module "snet_example" {
       service_delegation_name     = "Microsoft.Web/serverFarms"
     }
   ]
-}
-```
-
-Two tags is added by default
-
-```ruby
-locals {
-  module_tags = {
-    "ModuleVersion" = "6.0.0"
-    "ModuleId"      = "azure-subnet"
-  }
 }
 ```
