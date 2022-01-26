@@ -40,8 +40,8 @@ resource "azurerm_app_service" "this" {
   }
 
   site_config {
-    linux_fx_version = "DOTNETCORE|5.0"
-    dotnet_framework_version = "v5.0"
+    linux_fx_version = var.linux_fx_version
+    dotnet_framework_version = var.dotnet_framework_version
     always_on = var.always_on
     cors {
       allowed_origins = ["*"]

@@ -17,8 +17,8 @@ variable name {
 }
 
 variable project_name {
-  type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  type        = string
+  description = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -66,6 +66,18 @@ variable connection_strings {
   type        = map(string)
   description = "(Optional) A map of key-value pairs for App Settings Connection Strings."
   default     = {}
+}
+
+variable linux_fx_version {
+  type        = string
+  description = "(Optional) Use this when running on a Linux plan to specify .NET Core runtime version."
+  default     = "DOTNETCORE|5.0"
+}
+
+variable dotnet_framework_version {
+  type        = string
+  description = "(Optional) Use this when running on a Windows plan to specify .NET Core runtime version."
+  default     = "v5.0"
 }
 
 variable always_on {
