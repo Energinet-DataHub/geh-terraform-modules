@@ -14,7 +14,7 @@
 locals {
   module_tags = {
     "ModuleVersion" = "5.4.0"
-    "ModuleId"      = "azure-mssql-database"
+    "ModuleId"      = "azure-mssql-server"
   }
 }
 
@@ -44,7 +44,7 @@ resource "azurerm_mssql_firewall_rule" "this" {
   count               = length(var.firewall_rules)
 
   name                = "${lower(try(var.firewall_rules[count.index].start_ip_address, null))}-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${var.environment_instance}"
-  server_id         = azurerm_mssql_server.this.id
+  server_id           = azurerm_mssql_server.this.id
   start_ip_address    = try(var.firewall_rules[count.index].start_ip_address, null)
   end_ip_address      = try(var.firewall_rules[count.index].end_ip_address, null)
 }

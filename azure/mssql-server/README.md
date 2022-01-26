@@ -16,17 +16,17 @@ This module creates the following resources:
 ## Prerequisites
 
 - Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- AzureRM provider version 2.71.0+
 
 ## Arguments and defaults
 
 | Name | Type | Default | Required | Description |
 |-|-|-|-|-|
-| `name` | `string` | | **Required** | The name of the Microsoft SQL Server. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `sql-{var.name}-${var.environment_short}` and be in lowercase. |
+| `name` | `string` | | **Required** | The name of the Microsoft SQL Server. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `mssql-{name}-{project_name}-{environment_short}-{environment_instance}` and be in lowercase. |
 | `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
+| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the MS SQL Server. |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `sql_version` | `string` | | **Required** | The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). |
 | `administrator_login` | `string` | | **Required** | The administrator login name for the new server. Changing this forces a new resource to be created. |
@@ -75,7 +75,7 @@ Two tags is added by default
 locals {
   module_tags = {
     "ModuleVersion" = "5.4.0"
-    "ModuleId"      = "azure-sql-server"
+    "ModuleId"      = "azure-mssql-server"
   }
 }
 ```
@@ -84,8 +84,8 @@ locals {
 
 | Name | Description |
 |-|-|
-| `id` | The ID of the Function App. |
-| `name` | The name of the Function App. |
+| `id` | The ID of the MS SQL Server. |
+| `name` | The name of the MS SQL Server. |
 | `fully_qualified_domain_name` | The fully qualified domain name of the Azure SQL Server (e.g. myServerName.database.windows.net) |
-| `identity_principal_id` | The Principal ID for the Service Principal associated with the Identity of this SQL Server. |
-| `identity_tenant_id` | The Tenant ID for the Service Principal associated with the Identity of this SQL Server. |
+| `identity_principal_id` | The Principal ID for the Service Principal associated with the Identity of this MS SQL Server. |
+| `identity_tenant_id` | The Tenant ID for the Service Principal associated with the Identity of this MS SQL Server. |

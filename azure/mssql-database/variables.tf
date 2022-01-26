@@ -18,7 +18,7 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -33,19 +33,19 @@ variable environment_instance {
 
 variable server_id {
   type        = string
-  description = "(Required) The id of the Ms SQL Server on which to create the database. Changing this forces a new resource to be created."
+  description = "(Required) The id of the MS SQL Server on which to create the database. Changing this forces a new resource to be created."
 }
 
 variable sku_name {
   type        = string
   default     = "GP_S_Gen5_1"
-  description = "(Optional) Specifies the name of the SKU used by the database. For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0, P2 ,DW100c, DS100. Changing this from the HyperScale service tier to another service tier will force a new resource to be created."
+  description = "(Optional) Specifies the name of the SKU used by the database. For example, GP_S_Gen5_2, HS_Gen4_1, BC_Gen5_2, ElasticPool, Basic,S0, P2 ,DW100c, DS100. Changing this from the HyperScale service tier to another service tier will force a new resource to be created."
 }
 
 variable min_capacity {
   type        = number
   default     = 1
-  description = "(Optional) Minimal capacity that database will always have allocated, if not paused. This property is only settable for General Purpose Serverless databases."
+  description = "(Optional) Minimal capacity of vCores that database will always have allocated, if not paused. This property is only settable for General Purpose Serverless databases."
 }
 
 variable auto_pause_delay_in_minutes {
@@ -58,10 +58,4 @@ variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
   default     = {}
-}
-
-variable dependencies {
-  type        = list
-  description = "A mapping of dependencies which this module depends on."
-  default     = []
 }

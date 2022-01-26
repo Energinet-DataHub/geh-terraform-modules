@@ -18,7 +18,7 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -70,10 +70,4 @@ variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
   default     = {}
-}
-
-variable dependencies {
-  type        = list
-  description = "A mapping of dependencies which this module depends on."
-  default     = []
 }
