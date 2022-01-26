@@ -45,6 +45,7 @@ module "private_endpoint_example" {
   environment_short             = "p"
   environment_instance          = "001"
   resource_group_name           = "example-resource-group-name"
+  vnet_resource_group_name      = "example-vnet-resource-group-name"
   location                      = "westeurope"
   private_endpoint_subnet_id    = "pe-subnet"
   resource_id                   = azurerm_mssql_server.this.id
