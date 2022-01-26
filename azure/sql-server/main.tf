@@ -39,6 +39,10 @@ resource "azurerm_mssql_server" "this" {
       tags,
     ]
   }
+
+  depends_on                    = [
+    var.private_endpoint_subnet_id
+  ]
 }
 
 resource "azurerm_private_endpoint" "this" {
