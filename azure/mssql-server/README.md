@@ -57,13 +57,6 @@ module "sql_server_example" {
   sql_version                   = "12.0"
   administrator_login           = "example-administrator-login"
   administrator_login_password  = "example-administrator-login-password"
-  firewall_rules = [
-    {
-      name              = "example-rule-name"
-      start_ip_address  = "0.0.0.0"
-      end_ip_address    = "255.255.255.255"
-    }
-  ]
 
   tags                          = {}
 }
