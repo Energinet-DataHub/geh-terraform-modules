@@ -58,42 +58,38 @@ resource "azurerm_storage_account_network_rules" "this" {
   resource_group_name  = var.resource_group_name
   storage_account_name = azurerm_storage_account.this.name
 
-  default_action             = "Deny"
-  ip_rules                   = [
+  default_action       = "Deny"
+  ip_rules             = [
     "127.0.0.1"
   ]
 
-  bypass                     = [
+  bypass               = [
     "Logging",
     "Metrics",
-  ]
-  depends_on = [
-    azurerm_private_endpoint.this,
   ]
 }
 
 resource "azurerm_private_endpoint" "this" {
-   name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-   location            = var.location
-   resource_group_name = var.resource_group_name
-   subnet_id           = var.private_endpoint_subnet_id
-   private_service_connection {
-     name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-     private_connection_resource_id = azurerm_storage_account.this.id
-     is_manual_connection           = false
-     subresource_names              = ["blob"]
+  name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+  
+  private_service_connection {
+    name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    private_connection_resource_id = azurerm_storage_account.this.id
+    is_manual_connection           = false
+    subresource_names              = ["blob"]
   }
-    depends_on = [
-    azurerm_storage_container.this,
-  ]
 }
 
 # Create an A record pointing to the Storage Account private endpoint
 resource "azurerm_private_dns_a_record" "this" {
   name                = azurerm_storage_account.this.name
   zone_name           = "privatelink.blob.core.windows.net"
-  resource_group_name = var.vnet_resource_group_name
+  resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
-  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
+  records             = [
+    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+  ]
 }
-

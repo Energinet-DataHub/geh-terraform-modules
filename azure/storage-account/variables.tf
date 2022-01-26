@@ -42,9 +42,14 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the storage account. Changing this forces a new resource to be created."
 }
 
-variable vnet_resource_group_name {
+variable private_dns_resource_group_name {
   type        = string
-  description = "(Required) The name of the vnet resource group. This will be used to link the private endpoint to the private dns zone"
+  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
+}
+
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created."
 }
 
 variable location {
@@ -60,11 +65,6 @@ variable account_tier {
 variable account_replication_type {
   type        = string
   description = "(Required) Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS."
-}
-
-variable private_endpoint_subnet_id {
-  type        = string
-  description = "(Required) The id of the private endpoint subnet where this function will reside."
 }
 
 variable access_tier {
