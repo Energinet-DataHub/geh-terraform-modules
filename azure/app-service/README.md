@@ -17,6 +17,7 @@ This module is based on the knowledge derived from these resources
 This module creates the following resources.
 
 - [Azure App Service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service)
+- [App Service Virtual Network Association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_virtual_network_swift_connection)
 
 ## Prerequisites
 
