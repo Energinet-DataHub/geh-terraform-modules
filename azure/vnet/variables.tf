@@ -54,8 +54,9 @@ variable address_space {
 
 variable peerings {
   type        = list(object({
-    name                      = string
-    remote_virtual_network_id = string
+    name                        = string
+    remote_virtual_network_id   = string
+    remote_resource_group_name  = string
   }))
   description = "Manages the virtual network peerings which allows resources to access other resources in the linked virtual networks."
   default     = []
