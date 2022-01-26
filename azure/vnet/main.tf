@@ -53,7 +53,8 @@ resource "azurerm_virtual_network_peering" "local" {
 resource "azurerm_virtual_network_peering" "remote" {
   count                         = length(var.peerings)
 
-  name                          = "${lower(try(var.peerings[count.index].name, null))}-to-${local.NAME}"
+  name                          = "${azurerm_virtual_network.this.id}---${try(var.peerings[count.index].remote_resource_group_name, null)}"
+  #"${lower(try(var.peerings[count.index].name, null))}-to-${local.NAME}"
   resource_group_name           = try(var.peerings[count.index].remote_resource_group_name, null)
   virtual_network_name          = try(var.peerings[count.index].remote_virtual_network_id, null)
   remote_virtual_network_id     = azurerm_virtual_network.this.id
