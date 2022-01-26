@@ -14,14 +14,38 @@
 output "id" {
   value       = azurerm_servicebus_namespace.this.id
   description = "The Service Bus Namespace ID."
+
+  depends_on = [
+    azurerm_servicebus_namespace_network_rule_set.this,
+    azurerm_servicebus_namespace.this,
+    azurerm_servicebus_namespace_authorization_rule.this,
+    azurerm_private_dns_a_record.this,
+    azurerm_private_endpoint.this,
+  ]
 }
 
 output "name" {
   value       = azurerm_servicebus_namespace.this.name
   description = "The Service Bus Namespace name."
+
+  depends_on = [
+    azurerm_servicebus_namespace_network_rule_set.this,
+    azurerm_servicebus_namespace.this,
+    azurerm_servicebus_namespace_authorization_rule.this,
+    azurerm_private_dns_a_record.this,
+    azurerm_private_endpoint.this,
+  ]
 }
 
 output "primary_connection_strings" {
   value       = { for instance in azurerm_servicebus_namespace_authorization_rule.this: instance.name => instance.primary_connection_string }
   description = "A list of Auth Rule connection strings"
+
+  depends_on = [
+    azurerm_servicebus_namespace_network_rule_set.this,
+    azurerm_servicebus_namespace.this,
+    azurerm_servicebus_namespace_authorization_rule.this,
+    azurerm_private_dns_a_record.this,
+    azurerm_private_endpoint.this,
+  ]
 }
