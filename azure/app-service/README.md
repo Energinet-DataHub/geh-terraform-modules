@@ -21,7 +21,7 @@ This module creates the following resources.
 ## Prerequisites
 
 - Terraform version 1.1.2+
-- AzureRM provider version 2.71.0+
+- AzureRM provider version 2.91.0+
 
 ## Arguments and defaults
 
@@ -38,7 +38,7 @@ This module creates the following resources.
 | `vnet_integration_subnet_id` | `string` | | **Required** | The id of the vnet integration subnet where this App Service will reside. |
 | `app_settings` | `string` | `{}` | | A map of key-value pairs for App Settings and custom values. |
 | `connection_strings` | `map(string)` | `{}` | | A map of key-value pairs for App Settings Connection Strings. |
-| `always_on` | `map(string)` | `{}` | | Should the App Service be loaded at all times? Defaults to false. |
+| `always_on` | `bool` | `true` | | Should the App Service be loaded at all times? Defaults to false. |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
 ## Usage
