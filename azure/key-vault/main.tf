@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 locals {
   module_tags = {
     "ModuleVersion" = "6.0.0"
@@ -42,6 +41,10 @@ resource "azurerm_key_vault" "this" {
     default_action = "Deny"
     bypass = "AzureServices"
   }
+
+  depends_on                      = [
+    var.private_endpoint_subnet_id
+  ]
 }
 
 resource "azurerm_private_endpoint" "this" {
