@@ -11,13 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "null_resource" "dependency_setter" {
-  depends_on = [
-    azurerm_storage_account.this,
-    azurerm_storage_container.this,
-  ]
-}
-
 locals {
   module_tags = {
     "ModuleVersion" = "6.0.0"
@@ -43,6 +36,10 @@ resource "azurerm_storage_account" "this" {
       tags,
     ]
   }
+
+  depends_on                = [
+    var.private_endpoint_subnet_id,
+  ]
 }
 
 #please note that this https://github.com/hashicorp/terraform-provider-azurerm/pull/14220 might be an issue until it is fixed
@@ -52,6 +49,10 @@ resource "azurerm_storage_container" "this" {
   name                  = try(var.containers[count.index].name, null)
   storage_account_name  = azurerm_storage_account.this.name
   container_access_type = try(var.containers[count.index].access_type, "private")
+
+  depends_on = [
+    azurerm_storage_account_network_rules.this
+  ]
 }
 
 resource "azurerm_storage_account_network_rules" "this" {

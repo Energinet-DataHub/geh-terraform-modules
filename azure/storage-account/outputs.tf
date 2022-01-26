@@ -18,6 +18,9 @@ output id {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_account_network_rules.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -28,6 +31,9 @@ output name {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_account_network_rules.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -39,6 +45,9 @@ output primary_connection_string {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_account_network_rules.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -50,6 +59,9 @@ output primary_access_key {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_account_network_rules.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -60,5 +72,8 @@ output primary_blob_endpoint {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_account_network_rules.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
