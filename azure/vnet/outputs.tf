@@ -16,7 +16,8 @@ output id {
   description = "The virtual NetworkConfiguration ID."
   depends_on = [
     azurerm_virtual_network.this,
-    azurerm_virtual_network_peering.this,
+    azurerm_virtual_network_peering.a_to_b,
+    azurerm_virtual_network_peering.b_to_a,
   ]
 }
 
