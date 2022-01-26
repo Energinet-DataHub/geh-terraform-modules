@@ -36,9 +36,9 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the Microsoft SQL Server."
 }
 
-variable vnet_resource_group_name {
+variable private_dns_resource_group_name {
   type        = string
-  description = "(Required) The name of the vnet resource group. This will be used to link the private endpoint to the private dns zone"
+  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
 }
 
 variable location {
