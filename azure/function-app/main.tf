@@ -76,7 +76,7 @@ resource "azurerm_private_endpoint" "this" {
 resource "azurerm_private_dns_a_record" "this" {
   name                = azurerm_storage_account.this.name
   zone_name           = "privatelink.blob.core.windows.net"
-  resource_group_name = var.vnet_resource_group_name
+  resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
   records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
 }

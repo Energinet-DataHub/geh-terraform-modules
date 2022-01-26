@@ -26,7 +26,7 @@ This module creates the following resources.
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
-| `vnet_resource_group_name` | `string` | | **Required** | The name of the vnet resource group. This will be used to link the private endpoint to the private dns zone |
+| `private_dns_resource_group_name` | `string` | | **Required** | Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created. |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `sql_version` | `string` | | **Required** | The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). |
 | `administrator_login` | `string` | | **Required** | The administrator login name for the new server. Changing this forces a new resource to be created. |
