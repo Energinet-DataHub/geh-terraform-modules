@@ -13,6 +13,7 @@
   - [Azure Service Bus Queue](./azure/service-bus-queue)
   - [Azure Service Bus Topic](./azure/service-bus-topic)
 - [Azure Application Insights](./azure/application-insights)
+- [Azure App Service](./azure/app-service)
 - [Azure Function App](./azure/function-app)
 - [Azure App Service Plan](./azure/app-service-plan)
 - [Azure Event Hub](./azure/eventhub-namespace)
