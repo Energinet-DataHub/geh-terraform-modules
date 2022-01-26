@@ -18,8 +18,12 @@ locals {
   }
 }
 
+locals {
+  NAME = "vnet-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+}
+
 resource "azurerm_virtual_network" "this" {
-  name                = "vnet-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  name                = local.NAME
   location            = var.location
   resource_group_name = var.resource_group_name
 
@@ -36,11 +40,22 @@ resource "azurerm_virtual_network" "this" {
   }
 }
 
-resource "azurerm_virtual_network_peering" "this" {
-  count                     = length(var.peerings)
+resource "azurerm_virtual_network_peering" "a_to_b" {
+  count                         = length(var.peerings)
 
-  name                      = "${lower(try(var.peerings[count.index].name, null))}"
-  resource_group_name       = var.resource_group_name
-  virtual_network_name      = azurerm_virtual_network.this.name
-  remote_virtual_network_id = try(var.peerings[count.index].remote_virtual_network_id, null)
+  name                          = "${local.NAME}-${lower(try(var.peerings[count.index].name, null))}"
+  resource_group_name           = var.resource_group_name
+  virtual_network_name          = azurerm_virtual_network.this.name
+  remote_virtual_network_id     = try(var.peerings[count.index].remote_virtual_network_id, null)
+  allow_virtual_network_access  = true
+}
+
+resource "azurerm_virtual_network_peering" "b_to_a" {
+  count                         = length(var.peerings)
+
+  name                          = "${lower(try(var.peerings[count.index].name, null))}-${local.NAME}"
+  resource_group_name           = var.resource_group_name
+  virtual_network_name          = try(var.peerings[count.index].remote_virtual_network_id, null)
+  remote_virtual_network_id     = azurerm_virtual_network.this.name
+  allow_virtual_network_access  = true
 }
