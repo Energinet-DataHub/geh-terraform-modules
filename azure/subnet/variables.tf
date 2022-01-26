@@ -23,8 +23,8 @@ variable name {
 }
 
 variable project_name {
-  type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  type        = string
+  description = "Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -59,8 +59,8 @@ variable enforce_private_link_service_network_policies {
   default     = false
 }
 
-variable enforce_private_link_endpoint_network_policies{
-     type        = string
+variable enforce_private_link_endpoint_network_policies {
+  type        = string
   description = "(Optional) Enable or Disable network policies for the private link endpoint on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false."
   default     = false
 }

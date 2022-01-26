@@ -25,13 +25,13 @@ This module creates the following resources.
 | `name` | `string` | | **Required** | Specifies the name of the Key Vault. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `kv{var.name}{var.environment_short}{var.environment_instance}` and be in lowercase. |
 | `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `number` | | **Required** |  The instance number of your environment. |
+| `environment_instance` | `number` | | **Required** | The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Key Vault. Changing this forces a new resource to be created. |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `sku_name` | `string` | | **Required** | The Name of the SKU used for this Key Vault. Possible values are `standard` and `premium`. |
-| `private_endpoint_subnet_id` | `string` |  **Required** |  The ID of the private endpoint subnet
-| `private_dns_zone_name` | `string` |  **Required** |  The name of the private dns zone
-| `access_policies` | `list` | `[]` | |  A list of objects describing the Key Vault access policies. See [Access Policy](#access-policy). |
+| `private_endpoint_subnet_id` | `string` | **Required** | The ID of the private endpoint subnet
+| `private_dns_zone_name` | `string` | **Required** | The name of the private dns zone
+| `access_policies` | `list` | `[]` | | A list of objects describing the Key Vault access policies. See [Access Policy](#access-policy). |
 | `enabled_for_template_deployment` | `bool` | `false` | | Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false. |
 | `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
 
