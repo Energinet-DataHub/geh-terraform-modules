@@ -39,6 +39,7 @@ An `peering` item consists of the following:
 |-|-|-|-|-|
 | `name` | `string` | | **Required** | The name of the virtual network peering. Changing this forces a new resource to be created. The final name will be in lowercase |
 | `remote_virtual_network_id` | `string` | | **Required** | The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created. |
+| `remote_resource_group_name` | `string` | | **Required** | The Azure resource resource group name of the remote virtual networks location. Changing this forces a new resource to be created. |
 
 ## Usage
 
