@@ -35,24 +35,26 @@ resource "azurerm_storage_account" "this" {
       tags,
     ]
   }
+
+  depends_on                = [
+    var.vnet_integration_subnet_id
+  ]
 }
 
 resource "azurerm_storage_account_network_rules" "this" {
-  resource_group_name  = var.resource_group_name
-  storage_account_name = azurerm_storage_account.this.name
+  resource_group_name         = var.resource_group_name
+  storage_account_name        = azurerm_storage_account.this.name
 
-  default_action             = "Deny"
-  virtual_network_subnet_ids = [var.vnet_integration_subnet_id]
-  ip_rules                   = [
+  default_action              = "Deny"
+  virtual_network_subnet_ids  = [
+    var.vnet_integration_subnet_id
+  ]
+  ip_rules                    = [
     "127.0.0.1"
   ]
-
-  bypass                     = [
+  bypass                      = [
     "Logging",
     "Metrics",
-  ]
-  depends_on = [
-    azurerm_private_endpoint.this,
   ]
 }
 
@@ -65,11 +67,10 @@ resource "azurerm_private_endpoint" "this" {
     name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
     private_connection_resource_id = azurerm_storage_account.this.id
     is_manual_connection           = false
-    subresource_names              = ["blob"]
+    subresource_names              = [
+      "blob"
+    ]
   }
-    depends_on = [
-    azurerm_storage_account.this,
-  ]
 }
 
 # Create an A record pointing to the Storage Account private endpoint
@@ -78,7 +79,9 @@ resource "azurerm_private_dns_a_record" "this" {
   zone_name           = "privatelink.blob.core.windows.net"
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
-  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
+  records             = [
+    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+  ]
 }
 
 resource "random_string" "this" {
@@ -125,10 +128,6 @@ resource "azurerm_function_app" "this" {
   }
 
   tags                        = merge(var.tags, local.module_tags)
-
-  depends_on                  = [
-    azurerm_storage_account.this,
-  ]
 
   lifecycle {
     ignore_changes = [
