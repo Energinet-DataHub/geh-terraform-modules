@@ -81,5 +81,7 @@ resource "azurerm_private_dns_a_record" "this" {
   zone_name           = "privatelink.servicebus.windows.net"
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
-  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
+  records             = [
+    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+  ]
 }

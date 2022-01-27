@@ -51,10 +51,12 @@ resource "azurerm_private_endpoint" "this" {
    resource_group_name = var.resource_group_name
    subnet_id           = var.private_endpoint_subnet_id
    private_service_connection {
-     name                           = "psc-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-     private_connection_resource_id = azurerm_mssql_server.this.id
-     is_manual_connection           = false
-     subresource_names              = ["sqlServer"]
+    name                            = "psc-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    private_connection_resource_id  = azurerm_mssql_server.this.id
+    is_manual_connection            = false
+    subresource_names               = [
+       "sqlServer"
+    ]
   }
 }
 
@@ -64,5 +66,7 @@ resource "azurerm_private_dns_a_record" "this" {
   zone_name           = "privatelink.database.windows.net"
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
-  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
+  records             = [
+    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+  ]
 }

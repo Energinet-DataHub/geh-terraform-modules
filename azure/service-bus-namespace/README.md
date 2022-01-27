@@ -68,6 +68,8 @@ module "service_bus_namespace_example" {
       manage  = true
     }
   ]
+
+  tags                          = {}
 }
 ```
 
