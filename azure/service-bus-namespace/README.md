@@ -20,6 +20,8 @@ This module creates the following resources.
 
 ## Arguments and defaults
 
+**Notice:** This module always creates a Service Bus with SKU = Premium (to support VNet).
+
 | Name | Type | Default | Required | Description |
 |-|-|-|-|-|
 | `name` | `string` | | **Required** | The name of the Microsoft SQL Server. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `sb-{var.name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
@@ -28,7 +30,6 @@ This module creates the following resources.
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `sku` | `string` | | **Required** | Defines which tier to use. Options are `basic`, `standard` or `premium`. Changing this forces a new resource to be created. |
 | `auth_rules` | `list` | | **Required** | A list of objects describing the auth rules of the Service Bus Namespace. See [Auth Rule](#auth-rule). |
 | `private_endpoint_subnet_id` | `string` | | **Required**  | The ID of the private endpoint subnet
 | `private_dns_resource_group_name` | `string` | | **Required**  | Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
@@ -56,7 +57,6 @@ module "service_bus_namespace_example" {
   environment_instance  = "001"
   resource_group_name   = "example-resource-group-name"
   location              = "westeurope"
-  sku                   = "basic"
   auth_rules            = [
     {
       name    = "example-auth-rule-1"
