@@ -22,14 +22,15 @@ variable name {
   description = "(Required) Specifies the name of the Service Bus Topic resource. Changing this forces a new resource to be created."
 }
 
-variable resource_group_name {
+variable namespace_id {
   type        = string
-  description = "(Required) The name of the resource group in which to create the topic. Changing this forces a new resource to be created."
+  description = "(Required) The ID of the ServiceBus Namespace to create this topic in. Changing this forces a new resource to be created."
 }
 
-variable namespace_name {
-  type        = string
-  description = "(Required) The name of the Service Bus Namespace to create this topic in. Changing this forces a new resource to be created."
+variable requires_duplicate_detection {
+  type        = bool
+  description = "(Optional) Should the topic require duplicate detection? Defaults to false."
+  default     = false
 }
 
 variable subscriptions {
@@ -38,18 +39,6 @@ variable subscriptions {
     max_delivery_count  = number
     forward_to          = optional(string)
   }))
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A list of objects describing the subscriptions of the Service Bus Topic."
   default = []
-}
-
-variable tags {
-  type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
-  default     = {}
-}
-
-variable dependencies {
-  type        = list
-  description = "A mapping of dependencies which this module depends on."
-  default     = []
 }
