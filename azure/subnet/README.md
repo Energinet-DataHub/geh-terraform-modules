@@ -59,3 +59,9 @@ module "snet_example" {
   ]
 }
 ```
+
+## Outputs
+
+| Name | Description | Sensitive |
+|-|-|-|
+| `id` | The subnet ID. | |

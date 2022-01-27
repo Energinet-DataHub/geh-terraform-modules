@@ -47,7 +47,7 @@ A `policies` item consists of the following:
 
 ```ruby
 module "apima_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.3.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.1.0"
 
   name                      = "example-name"
   project_name              = "example-project-name"

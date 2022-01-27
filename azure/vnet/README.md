@@ -77,3 +77,10 @@ locals {
   }
 }
 ```
+
+## Outputs
+
+| Name | Description | Sensitive |
+|-|-|-|
+| `id` | The virtual NetworkConfiguration ID. | |
+| `name` | The name of the virtual network. | |
