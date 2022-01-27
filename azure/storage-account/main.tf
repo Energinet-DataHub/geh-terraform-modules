@@ -72,45 +72,28 @@ resource "azurerm_storage_account_network_rules" "this" {
   ]
 }
 
-module "sa_pe" {
-  source = "./private-endpoint/azure-private-endpoint"
-
-  name = azurerm_storage_container.name
-  project_name = var.project_name
-  environment_short = var.environment_short
-  environment_instance = var.environment_instance
-  resource_group_name = var.resource_group_name
-  vnet_resource_group_name = var.vnet_resource_group_name
-  location = var.location
-  private_endpoint_subnet_id = var.private_endpoint_subnet_id
-  resource_id = azurerm_storage_account.this.id
-  resource_name = azurerm_storage_account.this.name
-  resource_type = "blob"
-  zone_name = "privatelink.blob.core.windows.net"
+resource "azurerm_private_endpoint" "this" {
+   name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+   location            = var.location
+   resource_group_name = var.resource_group_name
+   subnet_id           = var.private_endpoint_subnet_id
+   private_service_connection {
+     name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+     private_connection_resource_id = azurerm_storage_account.this.id
+     is_manual_connection           = false
+     subresource_names              = ["blob"]
+  }
+    depends_on = [
+    azurerm_storage_container.this,
+  ]
 }
 
-# resource "azurerm_private_endpoint" "this" {
-#    name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-#    location            = var.location
-#    resource_group_name = var.resource_group_name
-#    subnet_id           = var.private_endpoint_subnet_id
-#    private_service_connection {
-#      name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-#      private_connection_resource_id = azurerm_storage_account.this.id
-#      is_manual_connection           = false
-#      subresource_names              = ["blob"]
-#   }
-#     depends_on = [
-#     azurerm_storage_container.this,
-#   ]
-# }
-
-# # Create an A record pointing to the Storage Account private endpoint
-# resource "azurerm_private_dns_a_record" "this" {
-#   name                = azurerm_storage_account.this.name
-#   zone_name           = "privatelink.blob.core.windows.net"
-#   resource_group_name = var.vnet_resource_group_name
-#   ttl                 = 3600
-#   records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
-# }
+# Create an A record pointing to the Storage Account private endpoint
+resource "azurerm_private_dns_a_record" "this" {
+  name                = azurerm_storage_account.this.name
+  zone_name           = "privatelink.blob.core.windows.net"
+  resource_group_name = var.vnet_resource_group_name
+  ttl                 = 3600
+  records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
+}
 
