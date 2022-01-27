@@ -53,13 +53,17 @@ module "vnet_example" {
   environment_short     = "p"
   environment_instance  = "001"
   resource_group_name   = "example-resource-group-name"
-  address_space         = ["10.0.0.0/16"]
+  address_space         = [
+    "10.0.0.0/16"
+  ]
   peerings              = [
     {
       name                      = "example-peering"
       remote_virtual_network_id = "example-remote-virtual-network-id"
     }
   ]
+
+  tags                          = {}
 }
 ```
 
@@ -73,3 +77,10 @@ locals {
   }
 }
 ```
+
+## Outputs
+
+| Name | Description | Sensitive |
+|-|-|-|
+| `id` | The virtual NetworkConfiguration ID. | |
+| `name` | The name of the virtual network. | |

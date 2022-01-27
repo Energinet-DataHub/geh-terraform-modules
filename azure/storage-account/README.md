@@ -48,7 +48,7 @@ This module creates the following resources.
 
 ```ruby
 module "storage_account_example" { 
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
   name                            = "example-name"
   project_name                    = "example-project-name"

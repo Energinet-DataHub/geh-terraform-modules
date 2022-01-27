@@ -25,7 +25,7 @@ This module creates the following resources.
 | `project_name` | `string` | | **Required** | | Name of the project this infrastructure is a part of. |
 | `environment_short` | `string` | | **Required** | | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** | |  The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | (Required) The name of the resource group in which to create the Function App. |
+| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 

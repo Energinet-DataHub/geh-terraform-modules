@@ -13,5 +13,5 @@
 # limitations under the License.
 output id {
   value       = azurerm_subnet.this.id
-  description = "The subnet  ID."
+  description = "The subnet ID."
 }

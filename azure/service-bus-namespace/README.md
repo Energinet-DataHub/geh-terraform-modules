@@ -27,7 +27,7 @@ This module creates the following resources:
 | `name` | `string` | | **Required** | The name of the Microsoft SQL Server. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `sb-{var.name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
 | `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
+| `environment_instance` | `string` | | **Required** | The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `auth_rules` | `list` | | **Required** | A list of objects describing the auth rules of the Service Bus Namespace. See [Auth Rule](#auth-rule). |
@@ -69,6 +69,8 @@ module "service_bus_namespace_example" {
       manage  = true
     }
   ]
+
+  tags                          = {}
 }
 ```
 
