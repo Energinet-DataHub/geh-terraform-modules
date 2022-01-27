@@ -55,6 +55,7 @@ variable address_space {
 variable peerings {
   type        = list(object({
     name                        = string
+    remote_virtual_network_name                 = string
     remote_virtual_network_id                   = string
     remote_virtual_network_resource_group_name  = string
     remote_virtual_network_subscription_id      = string
