@@ -24,6 +24,7 @@ resource "azurerm_servicebus_namespace" "this" {
   resource_group_name = var.resource_group_name
   sku                 = var.sku
   capacity            = var.capacity
+
   tags                = merge(var.tags, local.module_tags)
 
   lifecycle {
