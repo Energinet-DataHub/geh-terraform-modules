@@ -40,22 +40,22 @@ resource "azurerm_virtual_network" "this" {
   }
 }
 
-resource "azurerm_virtual_network_peering" "local" {
-  count                         = length(var.peerings)
+# resource "azurerm_virtual_network_peering" "local" {
+#   count                         = length(var.peerings)
 
-  name                          = "${local.NAME}-to-${lower(try(var.peerings[count.index].name, null))}"
-  resource_group_name           = var.resource_group_name
-  virtual_network_name          = azurerm_virtual_network.this.name
-  remote_virtual_network_id     = try(var.peerings[count.index].remote_virtual_network_id, null)
-  allow_virtual_network_access  = true
-}
+#   name                          = "${local.NAME}-to-${lower(try(var.peerings[count.index].name, null))}"
+#   resource_group_name           = var.resource_group_name
+#   virtual_network_name          = azurerm_virtual_network.this.name
+#   remote_virtual_network_id     = try(var.peerings[count.index].remote_virtual_network_id, null)
+#   allow_virtual_network_access  = true
+# }
 
-resource "azurerm_virtual_network_peering" "remote" {
-  count                         = length(var.peerings)
+# resource "azurerm_virtual_network_peering" "remote" {
+#   count                         = length(var.peerings)
 
-  name                          = "${lower(try(var.peerings[count.index].name, null))}-to-${local.NAME}"
-  resource_group_name           = try(var.peerings[count.index].remote_virtual_network_resource_group_name, null)
-  virtual_network_name          = try(var.peerings[count.index].remote_virtual_network_id, null)
-  remote_virtual_network_id     = "/subscriptions/${try(var.peerings[count.index].remote_virtual_network_subscription_id, null)}/resourceGroups/${try(var.peerings[count.index].remote_virtual_network_resource_group_name, null)}/providers/Microsoft.Network/virtualNetworks/${azurerm_virtual_network.this.name}"
-  allow_virtual_network_access  = true
-}
+#   name                          = "${lower(try(var.peerings[count.index].name, null))}-to-${local.NAME}"
+#   resource_group_name           = try(var.peerings[count.index].remote_virtual_network_resource_group_name, null)
+#   virtual_network_name          = try(var.peerings[count.index].remote_virtual_network_id, null)
+#   remote_virtual_network_id     = "/subscriptions/${try(var.peerings[count.index].remote_virtual_network_subscription_id, null)}/resourceGroups/${try(var.peerings[count.index].remote_virtual_network_resource_group_name, null)}/providers/Microsoft.Network/virtualNetworks/${azurerm_virtual_network.this.name}"
+#   allow_virtual_network_access  = true
+# }
