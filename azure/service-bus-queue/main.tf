@@ -16,5 +16,4 @@ resource "azurerm_servicebus_queue" "this" {
   namespace_id                 = var.namespace_id
   requires_session             = var.requires_session
   requires_duplicate_detection = var.requires_duplicate_detection
-  enable_partitioning          = true
 }

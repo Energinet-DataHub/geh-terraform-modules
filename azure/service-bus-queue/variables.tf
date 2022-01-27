@@ -23,12 +23,12 @@ variable namespace_id {
 
 variable requires_session {
   type        = bool
-  description = "(Optional) Should the queue require sessions? Defaults to false"
+  description = "(Optional) Should the queue require sessions? Defaults to false."
   default     = false
 }
 
 variable requires_duplicate_detection {
   type        = bool
-  description = "(Optional) Should the queue require duplicate detection? Defaults to false"
+  description = "(Optional) Should the queue require duplicate detection? Defaults to false."
   default     = false
 }

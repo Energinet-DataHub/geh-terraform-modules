@@ -8,14 +8,16 @@
 
 ## Resources Created
 
-This module creates the following resources.
+**Notice**: [Partitioning is not support when using Premium Messaging](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-premium-messaging#partitioned-queues-and-topics)
+
+This module creates the following resources:
 
 - [Azure Service Bus Queue](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_queue)
 
 ## Prerequisites
 
 - Terraform version 1.0.6+
-- AzureRM provider version 2.71.0+
+- AzureRM provider version 2.91.0+
 
 ## Arguments and defaults
 
@@ -30,7 +32,7 @@ This module creates the following resources.
 
 ```ruby
 module "service_bus_queue_example" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-queue?ref=5.1.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-queue?ref=6.0.0"
   name                = "example-name"
   namespace_id        = "/subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.ServiceBus/namespaces/example-namespace-name"
 }

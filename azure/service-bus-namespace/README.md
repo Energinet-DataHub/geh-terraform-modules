@@ -49,7 +49,7 @@ This module creates the following resources:
 
 ```ruby
 module "service_bus_namespace_example" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=5.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=6.0.0"
 
   name                  = "example-name"
   project_name          = "example-project-name"
