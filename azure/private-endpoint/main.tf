@@ -31,7 +31,7 @@ resource "azurerm_private_endpoint" "this" {
   }
 }
 
-# Create an A record pointing to the Storage Account private endpoint
+# Create an A record pointing to the private endpoint
 resource "azurerm_private_dns_a_record" "this" {
   name                = var.resource_name
   zone_name           = var.zone_name
@@ -39,3 +39,4 @@ resource "azurerm_private_dns_a_record" "this" {
   ttl                 = 3600
   records             = [azurerm_private_endpoint.this.private_service_connection[0].private_ip_address]
 }
+
