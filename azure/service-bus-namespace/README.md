@@ -10,7 +10,7 @@
 
 This module creates the following resources.
 
-- [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_namespace)
+- [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace)
 - [Azure Service Bus Namespace Authorization Rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_authorization_rule)
 
 ## Prerequisites
@@ -32,6 +32,7 @@ This module creates the following resources.
 | `auth_rules` | `list` | | **Required** | A list of objects describing the auth rules of the Service Bus Namespace. See [Auth Rule](#auth-rule). |
 | `private_endpoint_subnet_id` | `string` | | **Required**  | The ID of the private endpoint subnet
 | `private_dns_resource_group_name` | `string` | | **Required**  | Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
+| `capacity` | `number` | `1` | | The capcity when using premium sku. |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
 ### Auth Rule
@@ -46,7 +47,7 @@ This module creates the following resources.
 ## Usage
 
 ```ruby
-module "service_bus_namespace_example" { 
+module "service_bus_namespace_example" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=5.1.0"
 
   name                  = "example-name"
@@ -76,7 +77,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }
