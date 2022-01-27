@@ -8,7 +8,9 @@
 
 ## Resources Created
 
-This module creates the following resources.
+**Notice:** This module always creates a Service Bus with SKU = Premium (to support VNet).
+
+This module creates the following resources:
 
 - [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace)
 - [Azure Service Bus Namespace Authorization Rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_authorization_rule)
@@ -19,8 +21,6 @@ This module creates the following resources.
 - AzureRM provider version 2.91.0+
 
 ## Arguments and defaults
-
-**Notice:** This module always creates a Service Bus with SKU = Premium (to support VNet).
 
 | Name | Type | Default | Required | Description |
 |-|-|-|-|-|
