@@ -10,7 +10,7 @@
 
 This module creates the following resources.
 
-- [Azure Service Bus Queue](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_queue)
+- [Azure Service Bus Queue](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_queue)
 
 ## Prerequisites
 
