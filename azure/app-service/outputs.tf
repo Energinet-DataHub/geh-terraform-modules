@@ -31,7 +31,7 @@ output "name" {
   ]
 }
 
-output "default_site_hostname " {
+output "default_site_hostname" {
   value       = azurerm_app_service.this.default_site_hostname
   description = "The default hostname associated with the App Service - such as mysite.azurewebsites.net"
 
