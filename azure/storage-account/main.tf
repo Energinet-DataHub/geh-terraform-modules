@@ -70,27 +70,60 @@ resource "azurerm_storage_account_network_rules" "this" {
   ]
 }
 
-resource "azurerm_private_endpoint" "this" {
-  name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+resource "azurerm_private_endpoint" "blob" {
+  count               = var.use_blob ? 1 : 0
+
+  name                = "pe-blob-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoint_subnet_id
-  
+
   private_service_connection {
-    name                           = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    name                           = "pscblob${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
     private_connection_resource_id = azurerm_storage_account.this.id
     is_manual_connection           = false
     subresource_names              = ["blob"]
   }
 }
 
-# Create an A record pointing to the Storage Account private endpoint
-resource "azurerm_private_dns_a_record" "this" {
+# Create an A record pointing to the Storage Account (blob) private endpoint
+resource "azurerm_private_dns_a_record" "blob" {
+  count               = var.use_blob ? 1 : 0
+
   name                = azurerm_storage_account.this.name
   zone_name           = "privatelink.blob.core.windows.net"
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
   records             = [
-    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+    azurerm_private_endpoint.blob[0].private_service_connection[0].private_ip_address
+  ]
+}
+
+resource "azurerm_private_endpoint" "file" {
+  count               = var.use_file ? 1 : 0
+
+  name                = "pe-file-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+
+  private_service_connection {
+    name                           = "pscfile${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    private_connection_resource_id = azurerm_storage_account.this.id
+    is_manual_connection           = false
+    subresource_names              = ["file"]
+  }
+}
+
+# Create an A record pointing to the Storage Account (file) private endpoint
+resource "azurerm_private_dns_a_record" "file" {
+  count               = var.use_file ? 1 : 0
+
+  name                = azurerm_storage_account.this.name
+  zone_name           = "privatelink.file.core.windows.net"
+  resource_group_name = var.private_dns_resource_group_name
+  ttl                 = 3600
+  records             = [
+    azurerm_private_endpoint.file[0].private_service_connection[0].private_ip_address
   ]
 }

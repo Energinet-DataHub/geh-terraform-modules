@@ -26,8 +26,10 @@ This module creates the following resources.
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** | The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the storage account. Changing this forces a new resource to be created. |
-| `private_dns_resource_group_name` | `string` | | **Required** | Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created. |
-| `private_endpoint_subnet_id` | `string` | | **Required** | The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created.
+| `private_dns_resource_group_name` | `string` | | **Required** | Specifies the resource group where the Private DNS Zones exists. Changing this forces a new resource to be created. |
+| `private_endpoint_subnet_id` | `string` | | **Required** | The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created.
+| `use_blob` | `bool` | `true` | | Determine if the blob subresource of the storage account should be configured for usage. Defaults to 'true'.
+| `use_file` | `bool` | `false` | | Determine if the file subresource of the storage account should be configured for usage. Defaults to 'true'.
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `account_tier` | `string` | | **Required** | Defines the Tier to use for this storage account. Valid options are `Standard` and `Premium`. For BlockBlobStorage and FileStorage accounts only `Premium` is valid. Changing this forces a new resource to be created. |
 | `account_replication_type` | `string` | | **Required** | Defines the type of replication to use for this storage account. Valid options are `LRS`, `GRS`, `RAGRS`, `ZRS`, `GZRS` and `RAGZRS`. |
@@ -47,7 +49,7 @@ This module creates the following resources.
 ## Usage
 
 ```ruby
-module "storage_account_example" { 
+module "storage_account_example" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
   name                            = "example-name"

@@ -19,8 +19,10 @@ output id {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_dns_a_record.blob,
+    azurerm_private_endpoint.file,
+    azurerm_private_dns_a_record.file,
   ]
 }
 
@@ -32,8 +34,10 @@ output name {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_dns_a_record.blob,
+    azurerm_private_endpoint.file,
+    azurerm_private_dns_a_record.file,
   ]
 }
 
@@ -46,8 +50,10 @@ output primary_connection_string {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_dns_a_record.blob,
+    azurerm_private_endpoint.file,
+    azurerm_private_dns_a_record.file,
   ]
 }
 
@@ -60,20 +66,39 @@ output primary_access_key {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_dns_a_record.blob,
+    azurerm_private_endpoint.file,
+    azurerm_private_dns_a_record.file,
   ]
 }
 
 output primary_blob_endpoint {
-  value       = azurerm_storage_account.this.primary_blob_endpoint 
+  value       = azurerm_storage_account.this.primary_blob_endpoint
   description = "The endpoint URL for blob storage in the primary location."
 
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_dns_a_record.blob,
+    azurerm_private_endpoint.file,
+    azurerm_private_dns_a_record.file,
+  ]
+}
+
+output primary_file_endpoint {
+  value       = azurerm_storage_account.this.primary_file_endpoint
+  description = "The endpoint URL for file storage in the primary location."
+
+  depends_on  = [
+    azurerm_storage_account.this,
+    azurerm_storage_container.this,
+    azurerm_storage_account_network_rules.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_dns_a_record.blob,
+    azurerm_private_endpoint.file,
+    azurerm_private_dns_a_record.file,
   ]
 }
