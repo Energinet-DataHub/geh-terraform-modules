@@ -81,7 +81,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-storage-account"
   }
 }
@@ -93,6 +93,7 @@ locals {
 |-|-|-|
 | `id` | The ID of the Storage Account. | |
 | `name` | The name of the Storage Account. | |
-| `primary_blob_endpoint` | The endpoint URL for blob storage in the primary location. | |
 | `primary_connection_string` | The connection string associated with the primary location. | `true` |
 | `primary_access_key` | The primary access key for the storage account. | `true` |
+| `primary_blob_endpoint` | The endpoint URL for blob storage in the primary location. | |
+| `primary_file_endpoint` | The endpoint URL for file storage in the primary location. | |
