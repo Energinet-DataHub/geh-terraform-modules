@@ -38,7 +38,7 @@ This module creates the following resources.
 | `application_insights_instrumentation_key` | `string` | | **Required** | The application insights instrumentation key for which data is to be logged into. |
 | `vnet_integration_subnet_id` | `string` | | **Required** | The id of the vnet integration subnet where this App Service will reside. |
 | `app_settings` | `string` | `{}` | | A map of key-value pairs for App Settings and custom values. |
-| `connection_strings` | `map(string)` | `{}` | | A map of key-value pairs for App Settings Connection Strings. |
+| `connection_strings` | `map(object)` | `{}` | | A map of objects for App Settings Connection Strings. |
 | `linux_fx_version` | `string` | `DOTNETCORE\|5.0` | | Use this when running on a Linux plan to specify .NET Core runtime version. |
 | `dotnet_framework_version` | `string` | `v5.0` | | Use this when running on a Windows plan to specify .NET Core runtime version. |
 | `always_on` | `bool` | `true` | | Should the App Service be loaded at all times? Defaults to false. |
