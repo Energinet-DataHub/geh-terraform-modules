@@ -58,7 +58,7 @@ variable vnet_integration_subnet_id {
 
 variable private_endpoint_subnet_id {
   type        = string
-  description = "(Required) The id of the private endpoint subnet where this function will reside."
+  description = "(Required) The id of the private endpoint subnet where Storage Account resources will reside."
 }
 
 variable private_dns_resource_group_name {
