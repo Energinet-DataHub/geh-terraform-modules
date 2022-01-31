@@ -51,9 +51,9 @@ resource "azurerm_app_service" "this" {
   dynamic "connection_string" {
     for_each  = var.connection_strings
     content {
-      name = each.value.name
-      type = each.value.type
-      value = each.value.value
+      name = each.name
+      type = each.type
+      value = each.value
     }
   }
 
