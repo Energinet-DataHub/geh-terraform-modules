@@ -63,13 +63,13 @@ variable app_settings {
 }
 
 variable connection_strings {
-  type = map(object({
+  type = list(object({
     name  = string
     type  = string
     value = string
   }))
-  description = "(Optional) A map of objects for App Settings Connection Strings."
-  default     = {}
+  description = "(Optional) A list of objects for App Settings Connection Strings."
+  default     = []
 }
 
 variable linux_fx_version {
