@@ -128,21 +128,25 @@ resource "azurerm_function_app" "this" {
     WEBSITE_VNET_ROUTE_ALL                = "1"
     WEBSITE_CONTENTOVERVNET               = "1"
   },var.app_settings)
+
   identity {
     type = "SystemAssigned"
   }
+
   site_config {
     always_on = var.always_on
     cors {
       allowed_origins = ["*"]
     }
   }
+
   dynamic "connection_string" {
     for_each  = var.connection_strings
+
     content {
-      name  = connection_strings.key
-      value = connection_strings.value
-      type  = "Custom"
+      name = connection_string.value.name
+      type = connection_string.value.type
+      value = connection_string.value.value
     }
   }
 
