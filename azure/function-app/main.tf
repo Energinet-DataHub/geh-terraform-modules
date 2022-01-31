@@ -42,8 +42,7 @@ resource "azurerm_storage_account" "this" {
 }
 
 resource "azurerm_storage_account_network_rules" "this" {
-  resource_group_name         = var.resource_group_name
-  storage_account_name        = azurerm_storage_account.this.name
+  storage_account_id          = azurerm_storage_account.this.id
 
   default_action              = "Deny"
   virtual_network_subnet_ids  = [
