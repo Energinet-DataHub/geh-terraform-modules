@@ -83,6 +83,16 @@ resource "azurerm_private_endpoint" "blob" {
     is_manual_connection           = false
     subresource_names              = ["blob"]
   }
+
+  tags                             = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
 }
 
 # Create an A record pointing to the Storage Account (blob) private endpoint
@@ -111,6 +121,16 @@ resource "azurerm_private_endpoint" "file" {
     private_connection_resource_id = azurerm_storage_account.this.id
     is_manual_connection           = false
     subresource_names              = ["file"]
+  }
+
+  tags                             = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
   }
 }
 

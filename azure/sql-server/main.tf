@@ -27,7 +27,7 @@ resource "azurerm_mssql_server" "this" {
   administrator_login_password  = var.administrator_login_password
   public_network_access_enabled = false
   identity {
-    type  = "SystemAssigned" 
+    type  = "SystemAssigned"
   }
 
   tags                          = merge(var.tags, local.module_tags)
@@ -46,16 +46,27 @@ resource "azurerm_mssql_server" "this" {
 }
 
 resource "azurerm_private_endpoint" "this" {
-   name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
-   location            = var.location
-   resource_group_name = var.resource_group_name
-   subnet_id           = var.private_endpoint_subnet_id
-   private_service_connection {
+  name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+
+  private_service_connection {
     name                            = "psc-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
     private_connection_resource_id  = azurerm_mssql_server.this.id
     is_manual_connection            = false
     subresource_names               = [
        "sqlServer"
+    ]
+  }
+
+  tags                              = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
     ]
   }
 }
