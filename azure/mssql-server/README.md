@@ -11,7 +11,6 @@
 This module creates the following resources:
 
 - [Azure Microsoft SQL Server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/mssql_server)
-- [Azure Microsoft SQL firewall rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule)
 
 ## Prerequisites
 
@@ -32,14 +31,6 @@ This module creates the following resources:
 | `administrator_login` | `string` | | **Required** | The administrator login name for the new server. Changing this forces a new resource to be created. |
 | `administrator_login_password` | `string` | | **Required** | The password associated with the administrator_login user. Needs to comply with Azure's [Password Policy](https://msdn.microsoft.com/library/ms161959.aspx) |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
-
-### Firewall Rule
-
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| name | `string` | | **Required** | The name of the firewall rule. |
-| start_ip_address | `string` | | **Required** | The starting IP address to allow through the firewall for this rule. |
-| end_ip_address | `string` | | **Required** | The ending IP address to allow through the firewall for this rule. |
 
 ## Usage
 
