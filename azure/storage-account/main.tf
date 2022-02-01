@@ -69,16 +69,26 @@ resource "azurerm_storage_account_network_rules" "this" {
   ]
 }
 
+#
+# Private Endpoint for Blob subresource
+#
+
+resource "random_string" "blob" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
 resource "azurerm_private_endpoint" "blob" {
   count               = var.use_blob ? 1 : 0
 
-  name                = "pe-blob-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  name                = "pe-${lower(var.name)}${random_string.blob.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoint_subnet_id
 
   private_service_connection {
-    name                           = "pscblob${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    name                           = "psc-01"
     private_connection_resource_id = azurerm_storage_account.this.id
     is_manual_connection           = false
     subresource_names              = ["blob"]
@@ -108,16 +118,26 @@ resource "azurerm_private_dns_a_record" "blob" {
   ]
 }
 
+#
+# Private Endpoint for file subresource
+#
+
+resource "random_string" "file" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
 resource "azurerm_private_endpoint" "file" {
   count               = var.use_file ? 1 : 0
 
-  name                = "pe-file-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  name                = "pe-${lower(var.name)}${random_string.file.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoint_subnet_id
 
   private_service_connection {
-    name                           = "pscfile${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    name                           = "psc-01"
     private_connection_resource_id = azurerm_storage_account.this.id
     is_manual_connection           = false
     subresource_names              = ["file"]
