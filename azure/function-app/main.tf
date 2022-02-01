@@ -18,11 +18,17 @@ locals {
   }
 }
 
+resource "random_string" "st" {
+  length  = 10
+  special = false
+  upper   = false
+}
+
 # If using private endpoint connections, the storage account will need a private endpoint for the
 # 'file' and 'blob' sub-resources. If using certain capabilities like Durable Functions, you will also
 # need 'queue' and 'table' accessible through a private endpoint connection.
 resource "azurerm_storage_account" "this" {
-  name                      = "st${random_string.this.result}"
+  name                      = "st${random_string.st.result}"
   resource_group_name       = var.resource_group_name
   location                  = var.location
   account_tier              = "Standard"
@@ -53,14 +59,24 @@ resource "azurerm_storage_account_network_rules" "this" {
   ]
 }
 
+#
+# Private Endpoint for Blob subresource
+#
+
+resource "random_string" "blob" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
 resource "azurerm_private_endpoint" "blob" {
-  name                = "pe-blob-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  name                = "pe-${lower(var.name)}${random_string.blob.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoint_subnet_id
 
   private_service_connection {
-    name                           = "pscblob${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    name                           = "pcs-01"
     private_connection_resource_id = azurerm_storage_account.this.id
     is_manual_connection           = false
     subresource_names              = ["blob"]
@@ -88,14 +104,24 @@ resource "azurerm_private_dns_a_record" "blob" {
   ]
 }
 
+#
+# Private Endpoint for file subresource
+#
+
+resource "random_string" "file" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
 resource "azurerm_private_endpoint" "file" {
-  name                = "pe-file-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  name                = "pe-${lower(var.name)}${random_string.file.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoint_subnet_id
 
   private_service_connection {
-    name                           = "pscfile${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    name                           = "pcs-01"
     private_connection_resource_id = azurerm_storage_account.this.id
     is_manual_connection           = false
     subresource_names              = ["file"]
@@ -123,11 +149,9 @@ resource "azurerm_private_dns_a_record" "file" {
   ]
 }
 
-resource "random_string" "this" {
-  length  = 10
-  special = false
-  upper   = false
-}
+#
+# Function App integrated into VNet
+#
 
 resource "azurerm_app_service_virtual_network_swift_connection" "this" {
   app_service_id = azurerm_function_app.this.id
