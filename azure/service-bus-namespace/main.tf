@@ -44,10 +44,6 @@ resource "azurerm_servicebus_namespace_network_rule_set" "this" {
   namespace_id = azurerm_servicebus_namespace.this.id
 
   public_network_access_enabled = false
-  # default_action = "Deny"
-  # ip_rules       = [
-  #   "127.0.0.1"
-  # ]
 }
 
 resource "azurerm_servicebus_namespace_authorization_rule" "this" {
