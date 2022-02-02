@@ -35,7 +35,7 @@ This module creates the following resource:
 
 ```ruby
 module "sqldb_example" { 
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=6.0.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-database?ref=6.0.0"
 
   name                          = "example-name"
   project_name                  = "example-project-name"
