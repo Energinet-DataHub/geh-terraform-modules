@@ -18,6 +18,54 @@ locals {
   }
 }
 
+resource "azurerm_function_app" "this" {
+  name                        = "func-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location                    = var.location
+  resource_group_name         = var.resource_group_name
+  app_service_plan_id         = var.app_service_plan_id
+  storage_account_name        = azurerm_storage_account.this.name
+  storage_account_access_key  = azurerm_storage_account.this.primary_access_key
+  version                     = "~3"
+  https_only                  = true
+  app_settings                = merge({
+    APPINSIGHTS_INSTRUMENTATIONKEY = var.application_insights_instrumentation_key
+    WEBSITE_VNET_ROUTE_ALL                = "1"
+    WEBSITE_CONTENTOVERVNET               = "1"
+  },var.app_settings)
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  site_config {
+    always_on = var.always_on
+    cors {
+      allowed_origins = ["*"]
+    }
+  }
+
+  dynamic "connection_string" {
+    for_each  = var.connection_strings
+
+    content {
+      name = connection_string.value.name
+      type = connection_string.value.type
+      value = connection_string.value.value
+    }
+  }
+
+  tags                        = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      source_control,
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+}
+
 resource "random_string" "st" {
   length  = 10
   special = false
@@ -91,6 +139,10 @@ resource "azurerm_private_endpoint" "blob" {
       tags,
     ]
   }
+
+  depends_on = [
+    azurerm_private_endpoint.file
+  ]
 }
 
 # Create an A record pointing to the Storage Account (blob) private endpoint
@@ -156,52 +208,4 @@ resource "azurerm_private_dns_a_record" "file" {
 resource "azurerm_app_service_virtual_network_swift_connection" "this" {
   app_service_id = azurerm_function_app.this.id
   subnet_id      = var.vnet_integration_subnet_id
-}
-
-resource "azurerm_function_app" "this" {
-  name                        = "func-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  location                    = var.location
-  resource_group_name         = var.resource_group_name
-  app_service_plan_id         = var.app_service_plan_id
-  storage_account_name        = azurerm_storage_account.this.name
-  storage_account_access_key  = azurerm_storage_account.this.primary_access_key
-  version                     = "~3"
-  https_only                  = true
-  app_settings                = merge({
-    APPINSIGHTS_INSTRUMENTATIONKEY = var.application_insights_instrumentation_key
-    WEBSITE_VNET_ROUTE_ALL                = "1"
-    WEBSITE_CONTENTOVERVNET               = "1"
-  },var.app_settings)
-
-  identity {
-    type = "SystemAssigned"
-  }
-
-  site_config {
-    always_on = var.always_on
-    cors {
-      allowed_origins = ["*"]
-    }
-  }
-
-  dynamic "connection_string" {
-    for_each  = var.connection_strings
-
-    content {
-      name = connection_string.value.name
-      type = connection_string.value.type
-      value = connection_string.value.value
-    }
-  }
-
-  tags                        = merge(var.tags, local.module_tags)
-
-  lifecycle {
-    ignore_changes = [
-      source_control,
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
-  }
 }
