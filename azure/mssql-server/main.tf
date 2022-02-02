@@ -66,7 +66,7 @@ resource "random_string" "this" {
   upper   = false
 }
 
-# Create an A record pointing to the Storage Account private endpoint
+# Create an A record pointing to the Azure SQL database private endpoint
 resource "azurerm_private_dns_a_record" "this" {
   name                = azurerm_mssql_server.this.name
   zone_name           = "privatelink.database.windows.net"
