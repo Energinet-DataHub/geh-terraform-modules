@@ -103,6 +103,10 @@ resource "azurerm_private_endpoint" "blob" {
       tags,
     ]
   }
+
+  depends_on = [
+    azurerm_private_endpoint.file
+  ]
 }
 
 # Create an A record pointing to the Storage Account (blob) private endpoint
