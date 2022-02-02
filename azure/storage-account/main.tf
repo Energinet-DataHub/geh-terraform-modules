@@ -73,9 +73,16 @@ resource "azurerm_storage_account_network_rules" "this" {
 # Private Endpoint for Blob subresource
 #
 
-resource "azurerm_private_endpoint" "this" {
+resource "random_string" "blob" {
+  length  = 5
+  special = false
+  upper   = false
+}
 
-  name                = "pe-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+resource "azurerm_private_endpoint" "blob" {
+  count               = var.use_blob ? 1 : 0
+
+  name                = "pe-${lower(var.name)}${random_string.blob.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoint_subnet_id
@@ -84,10 +91,7 @@ resource "azurerm_private_endpoint" "this" {
     name                           = "psc-01"
     private_connection_resource_id = azurerm_storage_account.this.id
     is_manual_connection           = false
-    subresource_names              = [
-      "blob",
-      "file"
-    ]
+    subresource_names              = ["blob"]
   }
 
   tags                             = merge(var.tags, local.module_tags)
@@ -110,8 +114,44 @@ resource "azurerm_private_dns_a_record" "blob" {
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
   records             = [
-    azurerm_private_endpoint.this[0].private_service_connection[0].private_ip_address
+    azurerm_private_endpoint.blob[0].private_service_connection[0].private_ip_address
   ]
+}
+
+#
+# Private Endpoint for file subresource
+#
+
+resource "random_string" "file" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+resource "azurerm_private_endpoint" "file" {
+  count               = var.use_file ? 1 : 0
+
+  name                = "pe-${lower(var.name)}${random_string.file.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+
+  private_service_connection {
+    name                           = "psc-01"
+    private_connection_resource_id = azurerm_storage_account.this.id
+    is_manual_connection           = false
+    subresource_names              = ["file"]
+  }
+
+  tags                             = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
 }
 
 # Create an A record pointing to the Storage Account (file) private endpoint
@@ -123,6 +163,6 @@ resource "azurerm_private_dns_a_record" "file" {
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
   records             = [
-    azurerm_private_endpoint.private_endpoints[0].private_service_connection[0].private_ip_address
+    azurerm_private_endpoint.file[0].private_service_connection[0].private_ip_address
   ]
 }
