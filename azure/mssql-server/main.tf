@@ -46,18 +46,24 @@ resource "azurerm_mssql_server" "this" {
 }
 
 resource "azurerm_private_endpoint" "this" {
-   name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+   name                = "pe-${lower(var.name)}${random_string.this.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
    location            = var.location
    resource_group_name = var.resource_group_name
    subnet_id           = var.private_endpoint_subnet_id
    private_service_connection {
-    name                            = "psc-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    name                            = "psc-01"
     private_connection_resource_id  = azurerm_mssql_server.this.id
     is_manual_connection            = false
     subresource_names               = [
        "sqlServer"
     ]
   }
+}
+
+resource "random_string" "this" {
+  length  = 5
+  special = false
+  upper   = false
 }
 
 # Create an A record pointing to the Storage Account private endpoint
