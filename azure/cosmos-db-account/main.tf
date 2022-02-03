@@ -103,6 +103,7 @@ resource "azurerm_private_dns_a_record" "cosmosdb_sql" {
 
   depends_on = [
     var.private_endpoint_subnet_id,
+    azurerm_cosmosdb_account.this,
     azurerm_private_endpoint.cosmos_sql
   ]
 }
