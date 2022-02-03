@@ -27,6 +27,7 @@ This module creates the following resources.
 | `environment_instance` | `string` | | **Required** | |  The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | (Required) The name of the resource group in which to create the Function App. |
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
+| `retention_in_days` | `string` | | **Required** | How long are logs retained. |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
 ## Usage
