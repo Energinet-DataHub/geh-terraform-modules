@@ -102,6 +102,7 @@ resource "azurerm_private_dns_a_record" "cosmosdb_sql" {
   records             = azurerm_private_endpoint.cosmos_sql.custom_dns_configs[count.index].ip_addresses
 
   depends_on = [
+    var.private_endpoint_subnet_id,
     azurerm_private_endpoint.cosmos_sql
   ]
 }
