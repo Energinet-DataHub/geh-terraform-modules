@@ -47,17 +47,32 @@ resource "azurerm_key_vault" "this" {
   ]
 }
 
+resource "random_string" "this" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
 resource "azurerm_private_endpoint" "this" {
-  name                = "pe-${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+  name                = "pe-${lower(var.name)}${random_string.this.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.private_endpoint_subnet_id
+
   private_service_connection {
-    name                            = "psc${lower(var.name)}${lower(var.project_name)}${lower(var.environment_short)}${lower(var.environment_instance)}"
+    name                            = "psc-01"
     private_connection_resource_id  = azurerm_key_vault.this.id
     is_manual_connection            = false
-    subresource_names               = [
-       "vault"
+    subresource_names               = ["vault"]
+  }
+
+  tags                              = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
     ]
   }
 }
@@ -78,10 +93,10 @@ resource "azurerm_key_vault_access_policy" "selfpermissions" {
   tenant_id               = data.azurerm_client_config.this.tenant_id
   object_id               = data.azurerm_client_config.this.object_id
   secret_permissions      = [
-    "delete", 
-    "list", 
-    "get", 
-    "set", 
+    "delete",
+    "list",
+    "get",
+    "set",
     "purge"
   ]
   key_permissions         = [

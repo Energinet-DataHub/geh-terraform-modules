@@ -14,18 +14,23 @@
 locals {
   module_tags = {
     "ModuleVersion" = "6.0.0"
-    "ModuleId"      = "azure-service-bus-namespace"
+    "ModuleId"      = "azure-sql-server"
   }
 }
 
-resource "azurerm_servicebus_namespace" "this" {
-  name                = "sb-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  sku                 = "Premium"
-  capacity            = var.capacity
+resource "azurerm_mssql_server" "this" {
+  name                          = "sql-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name           = var.resource_group_name
+  location                      = var.location
+  version                       = var.sql_version
+  administrator_login           = var.administrator_login
+  administrator_login_password  = var.administrator_login_password
+  public_network_access_enabled = false
+  identity {
+    type  = "SystemAssigned"
+  }
 
-  tags                = merge(var.tags, local.module_tags)
+  tags                          = merge(var.tags, local.module_tags)
 
   lifecycle {
     ignore_changes = [
@@ -35,25 +40,9 @@ resource "azurerm_servicebus_namespace" "this" {
     ]
   }
 
-  depends_on          = [
+  depends_on                    = [
     var.private_endpoint_subnet_id
   ]
-}
-
-resource "azurerm_servicebus_namespace_network_rule_set" "this" {
-  namespace_id = azurerm_servicebus_namespace.this.id
-
-  public_network_access_enabled = false
-}
-
-resource "azurerm_servicebus_namespace_authorization_rule" "this" {
-  count               = length(var.auth_rules)
-
-  name                = try(var.auth_rules[count.index].name, null)
-  namespace_id        = azurerm_servicebus_namespace.this.id
-  listen              = try(var.auth_rules[count.index].listen, false)
-  send                = try(var.auth_rules[count.index].send, false)
-  manage              = try(var.auth_rules[count.index].manage, false)
 }
 
 resource "random_string" "this" {
@@ -70,9 +59,9 @@ resource "azurerm_private_endpoint" "this" {
 
   private_service_connection {
     name                            = "psc-01"
-    private_connection_resource_id  = azurerm_servicebus_namespace.this.id
+    private_connection_resource_id  = azurerm_mssql_server.this.id
     is_manual_connection            = false
-    subresource_names               = ["namespace"]
+    subresource_names               = ["sqlServer"]
   }
 
   tags                              = merge(var.tags, local.module_tags)
@@ -86,10 +75,10 @@ resource "azurerm_private_endpoint" "this" {
   }
 }
 
-# Create an A record pointing to the namespace private endpoint
+# Create an A record pointing to the Storage Account private endpoint
 resource "azurerm_private_dns_a_record" "this" {
-  name                = azurerm_servicebus_namespace.this.name
-  zone_name           = "privatelink.servicebus.windows.net"
+  name                = azurerm_mssql_server.this.name
+  zone_name           = "privatelink.database.windows.net"
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
   records             = [

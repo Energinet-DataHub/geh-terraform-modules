@@ -38,14 +38,14 @@ This module creates the following resources.
 | `application_insights_instrumentation_key` | `string` | | **Required** | The application insights instrumentation key for which data is to be logged into. |
 | `vnet_integration_subnet_id` | `string` | | **Required** | The id of the vnet integration subnet where this function will reside. |
 | `app_settings` | `string` | `{}` | | The application insights instrumentation id for which data is to be logged into. |
-| `connection_strings` | `map(string)` | `{}` | | A map of key-value pairs for App Settings and custom values. |
+| `connection_strings` | `list(object)` | `[]` | | A list of objects for App Settings Connection Strings. |
 | `always_on` | `map(string)` | `{}` | | Should the Function App be loaded at all times? Defaults to false. |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
 ## Usage
 
 ```ruby
-module "func_example" { 
+module "func_example" {
   source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=6.0.0"
 
   name                                      = "example-name"
@@ -61,10 +61,13 @@ module "func_example" {
     "example-key1" = "example-value1"
     "example-key2" = "example-value2"
   }
-  connection_strings                        = {
-    "example-key1" = "example-value1"
-    "example-key1" = "example-value1"
-  }
+  connection_strings                        = [
+    {
+      name  = "example-name"
+      type  = "SQLAzure"
+      value = "example-value"
+    }
+  ]
 
   tags                                      = {}
 }
@@ -75,7 +78,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"   
+    "ModuleVersion" = "5.1.0"
     "ModuleId"      = "azure-function-app"
   }
 }
