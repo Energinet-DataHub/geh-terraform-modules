@@ -89,15 +89,43 @@ resource "azurerm_private_endpoint" "cosmos_sql" {
   }
 }
 
+# # Create A records pointing to the Cosmos SQL private endpoint.
+# # Multiple DNS records will be created as Cosmos must have a global FQDN and a local per region.
+# resource "azurerm_private_dns_a_record" "cosmosdb_sql" {
+#   count               = length(azurerm_private_endpoint.cosmos_sql.custom_dns_configs)
+
+#   name                = split(".", azurerm_private_endpoint.cosmos_sql.custom_dns_configs[count.index].fqdn)[0]
+#   zone_name           = "privatelink.documents.azure.com"
+#   resource_group_name = var.private_dns_resource_group_name
+#   ttl                 = 3600
+
+#   records             = azurerm_private_endpoint.cosmos_sql.custom_dns_configs[count.index].ip_addresses
+# }
+
 # Create A records pointing to the Cosmos SQL private endpoint.
 # Multiple DNS records will be created as Cosmos must have a global FQDN and a local per region.
-resource "azurerm_private_dns_a_record" "cosmosdb_sql" {
-  count               = length(azurerm_private_endpoint.cosmos_sql.custom_dns_configs)
-
-  name                = split(".", azurerm_private_endpoint.cosmos_sql.custom_dns_configs[count.index].fqdn)[0]
+resource "azurerm_private_dns_a_record" "cosmosdb_sql_global" {
+  name                = split(".", azurerm_private_endpoint.cosmos_sql.custom_dns_configs[0].fqdn)[0]
   zone_name           = "privatelink.documents.azure.com"
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
 
-  records             = azurerm_private_endpoint.cosmos_sql.custom_dns_configs[count.index].ip_addresses
+  records             = azurerm_private_endpoint.cosmos_sql.custom_dns_configs[0].ip_addresses
+
+  depends_on = [
+    azurerm_private_endpoint.cosmos_sql
+  ]
+}
+
+resource "azurerm_private_dns_a_record" "cosmosdb_sql_region" {
+  name                = split(".", azurerm_private_endpoint.cosmos_sql.custom_dns_configs[1].fqdn)[0]
+  zone_name           = "privatelink.documents.azure.com"
+  resource_group_name = var.private_dns_resource_group_name
+  ttl                 = 3600
+
+  records             = azurerm_private_endpoint.cosmos_sql.custom_dns_configs[1].ip_addresses
+
+  depends_on = [
+    azurerm_private_endpoint.cosmos_sql
+  ]
 }
