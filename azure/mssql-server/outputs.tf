@@ -14,24 +14,54 @@
 output id {
   value       = azurerm_mssql_server.this.id
   description = "The Microsoft SQL Server ID."
+
+  depends_on  = [
+    azurerm_mssql_server.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
+  ]
 }
 
 output name {
   value       = azurerm_mssql_server.this.name
   description = "The Microsoft SQL Server name."
+
+  depends_on  = [
+    azurerm_mssql_server.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
+  ]
 }
 
 output fully_qualified_domain_name {
   value       = azurerm_mssql_server.this.fully_qualified_domain_name
   description = "The fully qualified domain name of the Azure SQL Server (e.g. myServerName.database.windows.net)"
+
+  depends_on  = [
+    azurerm_mssql_server.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
+  ]
 }
 
 output identity_principal_id {
   value       = azurerm_mssql_server.this.identity.0.principal_id
   description = "The Principal ID for the Service Principal associated with the Identity of this SQL Server."
+
+  depends_on  = [
+    azurerm_mssql_server.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
+  ]
 }
 
 output identity_tenant_id {
   value       = azurerm_mssql_server.this.identity.0.tenant_id
   description = "The Tenant ID for the Service Principal associated with the Identity of this SQL Server."
+
+  depends_on  = [
+    azurerm_mssql_server.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
+  ]
 }

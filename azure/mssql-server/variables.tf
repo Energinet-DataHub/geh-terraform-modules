@@ -36,6 +36,11 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the Microsoft SQL Server."
 }
 
+variable private_dns_resource_group_name {
+  type        = string
+  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
+}
+
 variable location {
   type        = string
   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
@@ -56,14 +61,9 @@ variable administrator_login_password {
   description = "(Required) The password associated with the administrator_login user. Needs to comply with Azure's Password Policy"
 }
 
-variable firewall_rules {
-  type        = list(object({
-    name              = string
-    start_ip_address  = string
-    end_ip_address    = string
-  }))
-  description = "(Optional) List of firewall rules for the Microsoft SQL Server."
-  default     = []
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The id of the private endpoint subnet where this function will reside."
 }
 
 variable tags {
