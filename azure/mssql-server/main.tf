@@ -50,12 +50,23 @@ resource "azurerm_private_endpoint" "this" {
    location            = var.location
    resource_group_name = var.resource_group_name
    subnet_id           = var.private_endpoint_subnet_id
+   
    private_service_connection {
     name                            = "psc-01"
     private_connection_resource_id  = azurerm_mssql_server.this.id
     is_manual_connection            = false
     subresource_names               = [
        "sqlServer"
+    ]
+  }
+  
+  tags                 = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
     ]
   }
 }
