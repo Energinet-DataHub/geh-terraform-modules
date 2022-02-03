@@ -100,11 +100,4 @@ resource "azurerm_private_dns_a_record" "cosmosdb_sql" {
   ttl                 = 3600
 
   records             = azurerm_private_endpoint.cosmos_sql.custom_dns_configs[count.index].ip_addresses
-
-  depends_on = [
-    var.private_dns_resource_group_name,
-    var.private_endpoint_subnet_id,
-    azurerm_cosmosdb_account.this,
-    azurerm_private_endpoint.cosmos_sql
-  ]
 }
