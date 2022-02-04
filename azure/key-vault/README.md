@@ -12,6 +12,8 @@ This module creates the following resources:
 
 - [Azure Key Vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault)
 - [Azure Key Vault Access Policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy)
+- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
+- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 
 ## Prerequisites
 
@@ -41,13 +43,16 @@ An `access_policy` item consists of the following:
 module "key_vault_example" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=6.0.0"
 
-  name                  = "example-name"
-  project_name          = "example-project-name"
-  environment_short     = "u"
-  environment_instance  = "001"
-  resource_group_name   = "example-resource-group-name"
-  location              = "westeurope"
-  sku_name              = "standard"
+  name                            = "example-name"
+  project_name                    = "example-project-name"
+  environment_short               = "u"
+  environment_instance            = "001"
+  resource_group_name             = "example-resource-group-name"
+  location                        = "westeurope"
+  sku_name                        = "standard"
+  private_endpoint_subnet_id      = "private-endpoint-subnet-id"
+  private_dns_resource_group_name = "private-dns-resource-group-name"
+
   access_policies       = [
     {
       object_id               = "example-object-id"
