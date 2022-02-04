@@ -52,6 +52,16 @@ variable sku {
   description = "(Required) Defines which tier to use. Valid options are Basic, Standard, and Premium. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true."
 }
 
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The id of the private endpoint subnet where this function will reside."
+}
+
+variable private_dns_resource_group_name {
+  type        = string
+  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
+}
+
 variable capacity {
   type        = number
   description = "(Optional) Specifies the Capacity / Throughput Units for a Standard SKU namespace. Default capacity has a maximum of 20, but can be increased in blocks of 20 on a committed purchase basis."
