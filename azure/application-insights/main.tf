@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0",
+    "ModuleVersion" = "5.5.0",
     "ModuleId"      = "azure-application-insights"
   }
 }
@@ -23,6 +23,7 @@ resource "azurerm_application_insights" "this" {
   resource_group_name = var.resource_group_name
   location            = var.location
   application_type    = "web"
+  workspace_id        = azurerm_log_analytics_workspace.this.id
 
   tags                = merge(var.tags, local.module_tags)
 
@@ -34,3 +35,21 @@ resource "azurerm_application_insights" "this" {
     ]
   }
 }
+
+resource "azurerm_log_analytics_workspace" "this" {
+  name                = "log-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  sku                 = "PerGB2018"
+  retention_in_days   = var.retention_in_days
+
+  tags                = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+} 
