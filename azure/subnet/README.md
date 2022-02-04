@@ -39,7 +39,7 @@ module "snet_example" {
 
   name                  = "example-name"
   project_name          = "example-project-name"
-  environment_short     = "p"
+  environment_short     = "u"
   environment_instance  = "001"
   resource_group_name   = "example-resource-group-name"
   delegations           = [
