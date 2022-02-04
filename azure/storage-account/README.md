@@ -11,6 +11,10 @@
 This module creates the following resources:
 
 - [Azure Storage Account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account)
+- [Azure Storage Account Network Rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules)
+- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
+- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
+- [Azure Storage Account Container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container)
 
 ## Prerequisites
 
@@ -39,12 +43,13 @@ module "storage_account_example" {
   environment_short               = "u"
   environment_instance            = "001"
   resource_group_name             = "example-resource-group-name"
+  location                        = "westeurope"
   private_dns_resource_group_name = "example-private-dns-resource-group-name"
   private_endpoint_subnet_id      = "example-private-endpoint-subnet-id"
-  location                        = "westeurope"
   account_tier                    = "Standard"
   account_replication_type        = "LRS"
   account_replication_type        = "LRS"
+
   containers                      = [
     {
       name = "example-container-name-1",
