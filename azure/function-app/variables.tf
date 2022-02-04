@@ -38,7 +38,7 @@ variable resource_group_name {
 
 variable location {
   type        = string
-  description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
+  description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
 variable app_service_plan_id {
@@ -58,7 +58,7 @@ variable vnet_integration_subnet_id {
 
 variable private_endpoint_subnet_id {
   type        = string
-  description = "(Required) The id of the private endpoint subnet where Storage Account resources will reside."
+  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
 }
 
 variable private_dns_resource_group_name {
@@ -90,6 +90,6 @@ variable always_on {
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }

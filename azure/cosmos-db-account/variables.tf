@@ -14,7 +14,7 @@
 
 variable name {
   type        = string
-  description = "(Required) Specifies the name of the Cosmos DB Account resource . Changing this forces a new resource to be created."
+  description = "(Required) Specifies the name of the Cosmos DB Account resource. Changing this forces a new resource to be created."
 }
 
 variable project_name {
@@ -34,17 +34,17 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the Cosmos DB Account."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
   type        = string
-  description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
+  description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
 variable private_endpoint_subnet_id {
   type        = string
-  description = "(Required) The id of the private endpoint subnet where this resource will reside."
+  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
 }
 
 variable private_dns_resource_group_name {
@@ -54,6 +54,6 @@ variable private_dns_resource_group_name {
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }
