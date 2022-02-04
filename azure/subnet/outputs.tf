@@ -15,3 +15,8 @@ output id {
   value       = azurerm_subnet.this.id
   description = "The subnet ID."
 }
+
+output name {
+  value       = azurerm_subnet.this.name
+  description = "The subnet name."
+}
