@@ -11,6 +11,7 @@
 This module creates the following resources:
 
 - [Azure Virtual Network](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network)
+- [Azure VNet Peering](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering)
 
 ## Prerequisites
 
@@ -40,13 +41,15 @@ module "vnet_example" {
 
   name                  = "example-name"
   project_name          = "example-project-name"
-  location              = "example-location"
   environment_short     = "u"
   environment_instance  = "001"
   resource_group_name   = "example-resource-group-name"
+  location              = "example-location"
+
   address_space         = [
     "10.0.0.0/16"
   ]
+
   peerings              = [
     {
       name                      = "example-peering"

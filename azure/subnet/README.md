@@ -42,6 +42,8 @@ module "snet_example" {
   environment_short     = "u"
   environment_instance  = "001"
   resource_group_name   = "example-resource-group-name"
+  virtual_network_name  = "example-vnet-name"
+
   delegations           = [
     {
       name                        = "example-delegation"
