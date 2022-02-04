@@ -33,17 +33,17 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The Name of the Resource Group where the API Management API exists. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group where the API Management API exists. Changing this forces a new resource to be created."
 }
 
 variable api_management_name {
   type        = string
-  description = "(Required) The Name of the API Management Service where this API should be created. Changing this forces a new resource to be created."
+  description = "(Required) The name of the API Management Service where this API should be created. Changing this forces a new resource to be created."
 }
 
 variable revision {
   type        = string
-  description = "(Required) The Revision used for this API."
+  description = "(Required) The revision used for this API."
   default     = "1"
 }
 
@@ -74,6 +74,6 @@ variable policies {
   type        = list(object({
     xml_content = string
   }))
-  description = "(Optional) A list of objects describing the policies for the API policies. An XML file can be used with 'xml_content' by using Terraform's file function (https://www.terraform.io/language/functions/file) that is similar to Microsoft's `PolicyFilePath` option. "
+  description = "(Optional) A list of objects describing the policies for the API policies. An XML file can be used with 'xml_content' by using Terraform's file function (https://www.terraform.io/language/functions/file) that is similar to Microsoft's `PolicyFilePath` option."
   default     = []
 }
