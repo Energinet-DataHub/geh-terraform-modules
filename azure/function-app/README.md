@@ -18,6 +18,11 @@ This module is based on the knowledge derived from these resources
 This module creates the following resources:
 
 - [Azure Function App](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app)
+- [Azure App Service VNet Integration](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_virtual_network_swift_connection)
+- [Azure Storage Account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account)
+- [Azure Storage Account Network Rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules)
+- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
+- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 
 ## Prerequisites
 
@@ -36,17 +41,21 @@ module "func_example" {
 
   name                                      = "example-name"
   project_name                              = "example-project-name"
-  environment_short                         = "p"
+  environment_short                         = "u"
   environment_instance                      = "001"
   resource_group_name                       = "example-resource-group-name"
   location                                  = "westeurope"
   app_service_plan_id                       = "id-example"
   application_insights_instrumentation_key  = "app-insights-instrumentation-key-example"
   vnet_integration_subnet_id                = "vnet-integration-subnet-id"
+  private_endpoint_subnet_id                = "private-endpoint-subnet-id"
+  private_dns_resource_group_name           = "private-dns-resource-group-name"
+
   app_settings                              = {
     "example-key1" = "example-value1"
     "example-key2" = "example-value2"
   }
+
   connection_strings                        = [
     {
       name  = "example-name"

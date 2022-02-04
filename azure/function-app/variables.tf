@@ -33,7 +33,7 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the Function App."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
@@ -53,7 +53,7 @@ variable application_insights_instrumentation_key {
 
 variable vnet_integration_subnet_id {
   type        = string
-  description = "(Required) The id of the vnet integration subnet where this function will reside."
+  description = "(Required) The id of the vnet integration subnet where this Function App will reside."
 }
 
 variable private_endpoint_subnet_id {
