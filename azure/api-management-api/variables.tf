@@ -18,17 +18,17 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "(Required) The name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable resource_group_name {
@@ -43,8 +43,13 @@ variable api_management_name {
 
 variable revision {
   type        = string
-  description = "(Required) The Revision which used for this API."
+  description = "(Required) The Revision used for this API."
   default     = "1"
+}
+
+variable authorization_server_name {
+  type        = string
+  description = "(Required) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
 }
 
 variable display_name {
@@ -55,13 +60,13 @@ variable display_name {
 
 variable protocols {
   type        = list(string)
-  description = "(Optional) A list of protocols the operations in this API can be invoked. Possible values are http and https."
+  description = "(Optional) A list of protocols the operations in this API can be invoked using. Possible values are http and https."
   default     = ["https"]
 }
 
 variable subscription_required  {
   type        = bool
-  description = "(Optional) Should this API require a subscription key"
+  description = "(Optional) Should this API require a subscription key."
   default     = false
 }
 
@@ -69,11 +74,6 @@ variable policies {
   type        = list(object({
     xml_content = string
   }))
-  description = "(Optional) A list of objects describing the policies for the API policies."
+  description = "(Optional) A list of objects describing the policies for the API policies. An XML file can be used with 'xml_content' by using Terraform's file function (https://www.terraform.io/language/functions/file) that is similar to Microsoft's `PolicyFilePath` option. "
   default     = []
-}
-
-variable authorization_server_name {
-  type        = string
-  description = "(Required) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
 }

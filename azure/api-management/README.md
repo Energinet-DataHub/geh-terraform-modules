@@ -24,7 +24,7 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "appi_example" {
+module "apim_example" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=6.0.0"
 
   name                  = "example-name"
@@ -41,7 +41,7 @@ module "appi_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {
