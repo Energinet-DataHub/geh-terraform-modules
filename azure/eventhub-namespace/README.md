@@ -11,8 +11,8 @@
 This module creates the following resources.
 
 - [Azure Eventhub Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace)
-- [Private Endpoint] (https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
-- [Private DNS A Record] (https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
+- [Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
+- [Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 
 ## Prerequisites
 
