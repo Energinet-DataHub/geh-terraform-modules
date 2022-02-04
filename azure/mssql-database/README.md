@@ -29,7 +29,7 @@ module "sqldb_example" {
 
   name                          = "example-name"
   project_name                  = "example-project-name"
-  environment_short             = "p"
+  environment_short             = "u"
   environment_instance          = "001"
   server_id                     = "some-mssql-server-id"
   sku_name                      = "GP_S_Gen5_2"
