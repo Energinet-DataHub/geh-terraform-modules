@@ -19,17 +19,7 @@ This module creates the following resources:
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | The name of the Cosmos DB Account. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `cosmos-{var.name}--${var.project_name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
-| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** | The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Cosmos DB Account. |
-| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `private_endpoint_subnet_id` | `string` | | **Required**  | The id of the private endpoint subnet where this resource will reside |
-| `private_dns_resource_group_name` | `string` | | **Required**  | Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created. |
-| `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
+See [variables.tf](./variables.tf)
 
 ## Usage
 
@@ -50,7 +40,7 @@ module "cosmos_db_example" {
 }
 ```
 
-Two tags are added by default
+Two tags are added by default:
 
 ```ruby
 locals {
@@ -63,9 +53,4 @@ locals {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The Cosmos DB Account ID. |
-| `name` | The Cosmos DB Account name. |
-| `endpoint` | The Cosmos DB Account endpoint. |
-| `primary_key` | The Cosmos DB Account primary key. |
+See [outputs.tf](./outputs.tf)

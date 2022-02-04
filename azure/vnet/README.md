@@ -8,7 +8,7 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure Virtual Network](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network)
 
@@ -19,17 +19,7 @@ This module creates the following resources.
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | The name of the virtual network. Changing this forces a new resource to be created. `vnet-${var.name}-${var.project_name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
-| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the Resource Group in which the Subnet should be exist. Changing this forces a new resource to be created. |
-| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `address_space` | `list(string)` | | **Required** | The address space that is used the virtual network. You can supply more than one address space. |
-| `peerings` | `list()` | `[]` | |  A list of objects describing the virtual network peerings. See [Peering](#peering). |
-| `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
+See [variables.tf](./variables.tf)
 
 ### Peering
 
@@ -68,7 +58,7 @@ module "vnet_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {
@@ -81,7 +71,4 @@ locals {
 
 ## Outputs
 
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The virtual NetworkConfiguration ID. | |
-| `name` | The name of the virtual network. | |
+See [outputs.tf](./outputs.tf)

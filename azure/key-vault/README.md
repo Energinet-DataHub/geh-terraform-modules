@@ -8,7 +8,7 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure Key Vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault)
 - [Azure Key Vault Access Policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy)
@@ -20,20 +20,7 @@ This module creates the following resources.
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Key Vault. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `kv{var.name}{var.environment_short}{var.environment_instance}` and be in lowercase. |
-| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `number` | | **Required** | The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Key Vault. Changing this forces a new resource to be created. |
-| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `sku_name` | `string` | | **Required** | The Name of the SKU used for this Key Vault. Possible values are `standard` and `premium`. |
-| `private_endpoint_subnet_id` | `string` | **Required** | The ID of the private endpoint subnet
-| `private_dns_zone_name` | `string` | **Required** | The name of the private dns zone
-| `access_policies` | `list` | `[]` | | A list of objects describing the Key Vault access policies. See [Access Policy](#access-policy). |
-| `enabled_for_template_deployment` | `bool` | `false` | | Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false. |
-| `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
+See [variables.tf](./variables.tf)
 
 ### Access Policy
 
@@ -51,8 +38,8 @@ An `access_policy` item consists of the following:
 ## Usage
 
 ```ruby
-module "key_vault_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=5.1.0"
+module "key_vault_example" {
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=6.0.0"
 
   name                  = "example-name"
   project_name          = "example-project-name"
@@ -80,12 +67,12 @@ module "key_vault_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-key-vault"
   }
 }
@@ -93,8 +80,4 @@ locals {
 
 ## Outputs
 
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The ID of the Key Vault. | |
-| `name` | The name of the Key Vault. | |
-| `vault_uri` | The URI of the Key Vault, used for performing operations on keys and secrets. | |
+See [outputs.tf](./outputs.tf)

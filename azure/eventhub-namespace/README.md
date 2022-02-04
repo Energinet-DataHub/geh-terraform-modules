@@ -8,7 +8,7 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure Eventhub Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace)
 - [Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
@@ -16,8 +16,8 @@ This module creates the following resources.
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- Terraform version 1.1.2+
+- AzureRM provider version 2.91.0+
 
 ## Arguments and defaults
 
@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "eventhub_namespace_example" { 
+module "eventhub_namespace_example" {
   source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/eventhub-namespace?ref=6.0.0"
 
   name                            = "example-name"
@@ -41,7 +41,7 @@ module "eventhub_namespace_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {

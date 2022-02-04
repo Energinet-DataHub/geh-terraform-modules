@@ -8,36 +8,18 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure Storage Account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account)
 
 ## Prerequisites
 
 - Terraform version 1.1.2+
-- AzureRM provider version 2.71.0+
+- AzureRM provider version 2.91.0+
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group. The final name of the resource will follow this syntax `st{var.name}{var.environment_short}` and be in lowercase. |
-| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** | The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the storage account. Changing this forces a new resource to be created. |
-| `private_dns_resource_group_name` | `string` | | **Required** | Specifies the resource group where the Private DNS Zones exists. Changing this forces a new resource to be created. |
-| `private_endpoint_subnet_id` | `string` | | **Required** | The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created.
-| `use_blob` | `bool` | `true` | | Determine if the blob subresource of the storage account should be configured for usage. Defaults to 'true'.
-| `use_file` | `bool` | `false` | | Determine if the file subresource of the storage account should be configured for usage. Defaults to 'false'.
-| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `account_tier` | `string` | | **Required** | Defines the Tier to use for this storage account. Valid options are `Standard` and `Premium`. For BlockBlobStorage and FileStorage accounts only `Premium` is valid. Changing this forces a new resource to be created. |
-| `account_replication_type` | `string` | | **Required** | Defines the type of replication to use for this storage account. Valid options are `LRS`, `GRS`, `RAGRS`, `ZRS`, `GZRS` and `RAGZRS`. |
-| `access_tier` | `string` | `"Hot"` | | Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are `Hot` and `Cool`, defaults to `Hot`. |
-| `is_hns_enabled` | `string` | `false` | | Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 ([see here for more information](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-quickstart-create-account/)). Changing this forces a new resource to be created. |
-| `account_kind` | `string` | `"StorageV2"` | | Defines the Kind of account. Valid options are `BlobStorage`, `BlockBlobStorage`, `FileStorage`, `Storage` and `StorageV2`. Changing this forces a new resource to be created. Defaults to `StorageV2`. |
-| `containers` | `list` | `[]` | | A list of objects describing the containers, to create in the Storage Account. [Container](#container). |
-| `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
+See [variables.tf](./variables.tf)
 
 ### Container
 
@@ -76,7 +58,7 @@ module "storage_account_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {
@@ -89,11 +71,4 @@ locals {
 
 ## Outputs
 
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The ID of the Storage Account. | |
-| `name` | The name of the Storage Account. | |
-| `primary_connection_string` | The connection string associated with the primary location. | `true` |
-| `primary_access_key` | The primary access key for the storage account. | `true` |
-| `primary_blob_endpoint` | The endpoint URL for blob storage in the primary location. | |
-| `primary_file_endpoint` | The endpoint URL for file storage in the primary location. | |
+See [outputs.tf](./outputs.tf)
