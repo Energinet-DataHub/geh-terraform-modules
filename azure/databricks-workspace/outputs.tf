@@ -11,12 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# output "id" {
-#   value       = azurerm_eventhub_namespace.this.id
-#   description = "The EventHub Namespace ID."
-# }
+output "id" {
+  value       = azurerm_eventhub_namespace.this.id
+  description = "The EventHub Namespace ID."
+}
 
-# output "name" {
-#   value       = azurerm_eventhub_namespace.this.name
-#   description = "The EventHub Namespace name."
-# }
+output "name" {
+  value       = azurerm_eventhub_namespace.this.name
+  description = "The EventHub Namespace name."
+}
