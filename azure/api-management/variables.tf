@@ -18,27 +18,27 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "(Required) The name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created."
+  description = "(Required) The name of the Resource Group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
   type        = string
-  description = "(Required) The Azure location where the API Management Service exists. Changing this forces a new resource to be created."
+  description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
 variable publisher_name {
@@ -53,17 +53,17 @@ variable publisher_email {
 
 variable sku_name {
   type        = string
-  description = "(Required) sku_name is a string consisting of two parts separated by an underscore(_). The first part is the name, valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1)."
+  description = "(Required) A string consisting of two parts separated by an underscore(_). The first part is the name; valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1)."
 }
 
 variable virtual_network_type {
   type        = string
-  description = "(Required) The type of virtual network you want to use, valid values include: Internal or External"
+  description = "(Required) The type of virtual network to use for the API Management. Valid values include: Internal or External"
 }
 
 variable subnet_id {
   type        = string
-  description = "(Required) The id of the subnet that will be used for the API Management."
+  description = "(Required) The id of the subnet to use for the API Management."
 }
 
 variable tags {
