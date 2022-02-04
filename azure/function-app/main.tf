@@ -27,6 +27,7 @@ resource "azurerm_function_app" "this" {
   storage_account_access_key  = azurerm_storage_account.this.primary_access_key
   version                     = "~3"
   https_only                  = true
+
   app_settings                = merge({
     APPINSIGHTS_INSTRUMENTATIONKEY = var.application_insights_instrumentation_key
     WEBSITE_VNET_ROUTE_ALL                = "1"

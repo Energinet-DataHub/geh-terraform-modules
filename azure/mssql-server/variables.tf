@@ -17,8 +17,8 @@ variable name {
 }
 
 variable project_name {
-  type          = string
-  description   = "(Required) Name of the project this infrastructure is a part of."
+  type        = string
+  description = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -33,12 +33,7 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the Microsoft SQL Server."
-}
-
-variable private_dns_resource_group_name {
-  type        = string
-  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group in which to create the resources."
 }
 
 variable location {
@@ -64,6 +59,11 @@ variable administrator_login_password {
 variable private_endpoint_subnet_id {
   type        = string
   description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
+}
+
+variable private_dns_resource_group_name {
+  type        = string
+  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
 }
 
 variable tags {

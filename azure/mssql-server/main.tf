@@ -26,8 +26,9 @@ resource "azurerm_mssql_server" "this" {
   administrator_login           = var.administrator_login
   administrator_login_password  = var.administrator_login_password
   public_network_access_enabled = false
+
   identity {
-    type  = "SystemAssigned" 
+    type  = "SystemAssigned"
   }
 
   tags                          = merge(var.tags, local.module_tags)
@@ -39,7 +40,7 @@ resource "azurerm_mssql_server" "this" {
       tags,
     ]
   }
-  
+
   depends_on                    = [
     var.private_endpoint_subnet_id
   ]
@@ -50,7 +51,7 @@ resource "azurerm_private_endpoint" "this" {
    location            = var.location
    resource_group_name = var.resource_group_name
    subnet_id           = var.private_endpoint_subnet_id
-   
+
    private_service_connection {
     name                            = "psc-01"
     private_connection_resource_id  = azurerm_mssql_server.this.id
@@ -59,7 +60,7 @@ resource "azurerm_private_endpoint" "this" {
        "sqlServer"
     ]
   }
-  
+
   tags                 = merge(var.tags, local.module_tags)
 
   lifecycle {

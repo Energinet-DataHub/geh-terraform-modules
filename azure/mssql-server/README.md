@@ -11,6 +11,8 @@
 This module creates the following resources:
 
 - [Azure Microsoft SQL Server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/mssql_server)
+- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
+- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 
 ## Prerequisites
 
@@ -27,15 +29,17 @@ See [variables.tf](./variables.tf)
 module "sql_server_example" {
   source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-server?ref=6.0.0"
 
-  name                          = "example-name"
-  project_name                  = "example-project-name"
-  environment_short             = "u"
-  environment_instance          = "001"
-  resource_group_name           = "example-resource-group-name"
-  location                      = "westeurope"
-  sql_version                   = "12.0"
-  administrator_login           = "example-administrator-login"
-  administrator_login_password  = "example-administrator-login-password"
+  name                            = "example-name"
+  project_name                    = "example-project-name"
+  environment_short               = "u"
+  environment_instance            = "001"
+  resource_group_name             = "example-resource-group-name"
+  location                        = "westeurope"
+  sql_version                     = "12.0"
+  administrator_login             = "example-administrator-login"
+  administrator_login_password    = "example-administrator-login-password"
+  private_endpoint_subnet_id      = "private-endpoint-subnet-id"
+  private_dns_resource_group_name = "private-dns-resource-group-name"
 
   tags                          = {}
 }
