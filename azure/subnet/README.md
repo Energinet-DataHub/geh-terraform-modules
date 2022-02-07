@@ -8,7 +8,7 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure Subnet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet)
 
@@ -19,16 +19,7 @@ This module creates the following resources.
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Subnet. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `snet-${var.name}-${var.project_name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
-| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the Resource Group in which the Subnet should be exist. Changing this forces a new resource to be created. |
-| `virtual_network_name` | `string` | | **Required** | The name of the virtual network where the subnet will reside. Changing this forces a new resource to be created. |
-| `enforce_private_link_service_network_policies` | `string` | | | (Optional) Enable or Disable network policies for the private link endpoint on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false. |
-| `delegations` | `list` | `[]` | |  A list of objects describing delegations. See [Delegation](#delegation). |
+See [variables.tf](./variables.tf)
 
 ### Delegation
 
@@ -43,14 +34,16 @@ An `delegation` item consists of the following:
 ## Usage
 
 ```ruby
-module "snet_example" { 
+module "snet_example" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
 
   name                  = "example-name"
   project_name          = "example-project-name"
-  environment_short     = "p"
+  environment_short     = "u"
   environment_instance  = "001"
   resource_group_name   = "example-resource-group-name"
+  virtual_network_name  = "example-vnet-name"
+
   delegations           = [
     {
       name                        = "example-delegation"
@@ -62,6 +55,4 @@ module "snet_example" {
 
 ## Outputs
 
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The subnet ID. | |
+See [outputs.tf](./outputs.tf)

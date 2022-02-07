@@ -24,22 +24,22 @@ variable name {
 
 variable project_name {
   type        = string
-  description = "Name of the project this infrastructure is a part of."
+  description = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the Function App."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable virtual_network_name {

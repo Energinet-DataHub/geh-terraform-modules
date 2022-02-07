@@ -14,32 +14,22 @@ This module creates the following resource:
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.71.0+
+- Terraform version 1.1.2+
+- AzureRM provider version 2.91.0+
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | The name of the Microsoft SQL Server. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `mssqldb-{name}-{project_name}-{environment_short}-{environment_instance}` and be in lowercase. |
-| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
-| `server_id` | `string` | | **Required** | The ID of the SQL Server on which to create the database. |
-| `sku_name` | `string` | `GP_S_Gen5_1` | | The SKU of the database to be created. |
-| `min_capacity` | `number` | `1` | | Minimal capacity of vCores that database will always have allocated, if not paused. |
-| `auto_pause_delay_in_minutes` | `number`| `-1` | | Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for General Purpose Serverless databases. |
-| `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
+See [variables.tf](./variables.tf)
 
 ## Usage
 
 ```ruby
-module "sqldb_example" { 
+module "sqldb_example" {
   source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-database?ref=6.0.0"
 
   name                          = "example-name"
   project_name                  = "example-project-name"
-  environment_short             = "p"
+  environment_short             = "u"
   environment_instance          = "001"
   server_id                     = "some-mssql-server-id"
   sku_name                      = "GP_S_Gen5_2"
@@ -48,7 +38,7 @@ module "sqldb_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {
@@ -61,7 +51,4 @@ locals {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The SQL Database ID. |
-| `name` | The SQL Database name. |
+See [outputs.tf](./outputs.tf)

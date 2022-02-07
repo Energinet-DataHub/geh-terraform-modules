@@ -29,6 +29,7 @@ resource "azurerm_app_service" "this" {
   resource_group_name         = var.resource_group_name
   app_service_plan_id         = var.app_service_plan_id
   https_only                  = true
+
   app_settings                = merge({
     APPINSIGHTS_INSTRUMENTATIONKEY = var.application_insights_instrumentation_key
     WEBSITE_VNET_ROUTE_ALL         = "1"

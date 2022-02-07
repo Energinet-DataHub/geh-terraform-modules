@@ -14,6 +14,7 @@
 output id {
   value       = azurerm_virtual_network.this.id
   description = "The virtual NetworkConfiguration ID."
+
   depends_on = [
     azurerm_virtual_network.this,
     azurerm_virtual_network_peering.local,
@@ -24,6 +25,7 @@ output id {
 output name {
   value       = azurerm_virtual_network.this.name
   description = "The name of the virtual network."
+
   depends_on = [
     azurerm_virtual_network.this,
     azurerm_virtual_network_peering.local,

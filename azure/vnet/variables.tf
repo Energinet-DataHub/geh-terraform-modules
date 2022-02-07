@@ -19,32 +19,32 @@ terraform {
 
 variable name {
   type        = string
-  description = "(Required) Specifies the name of the Subnet. Changing this forces a new resource to be created."
+  description = "(Required) Specifies the name of the VNet. Changing this forces a new resource to be created."
 }
 
 variable project_name {
-  type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  type        = string
+  description = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the Function App."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
   type        = string
-  description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
+  description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
 variable address_space {
@@ -60,12 +60,12 @@ variable peerings {
     remote_virtual_network_resource_group_name  = string
     remote_virtual_network_subscription_id      = string
   }))
-  description = "Manages the virtual network peerings which allows resources to access other resources in the linked virtual networks."
+  description = "(Optional) Manages the virtual network peerings which allows resources to access other resources in the linked virtual networks."
   default     = []
 }
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }

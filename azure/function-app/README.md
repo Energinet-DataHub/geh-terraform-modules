@@ -15,32 +15,23 @@ This module is based on the knowledge derived from these resources
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure Function App](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app)
+- [Azure App Service VNet Integration](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_virtual_network_swift_connection)
+- [Azure Storage Account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account)
+- [Azure Storage Account Network Rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules)
+- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
+- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 
 ## Prerequisites
 
 - Terraform version 1.1.2+
-- AzureRM provider version 2.71.0+
+- AzureRM provider version 2.91.0+
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Function App. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `func-{var.name}-{var.project}-{var.organisation}-${var.environment}` and be lowercased. |
-| `project_name` | `string` | | **Required** | | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** | |  The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
-| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `app_service_plan_id` | `string` | | **Required** | The ID of the App Service Plan within which to create this Function App. |
-| `application_insights_instrumentation_key` | `string` | | **Required** | The application insights instrumentation key for which data is to be logged into. |
-| `vnet_integration_subnet_id` | `string` | | **Required** | The id of the vnet integration subnet where this function will reside. |
-| `app_settings` | `string` | `{}` | | The application insights instrumentation id for which data is to be logged into. |
-| `connection_strings` | `list(object)` | `[]` | | A list of objects for App Settings Connection Strings. |
-| `always_on` | `map(string)` | `{}` | | Should the Function App be loaded at all times? Defaults to false. |
-| `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
+See [variables.tf](./variables.tf)
 
 ## Usage
 
@@ -50,17 +41,21 @@ module "func_example" {
 
   name                                      = "example-name"
   project_name                              = "example-project-name"
-  environment_short                         = "p"
+  environment_short                         = "u"
   environment_instance                      = "001"
   resource_group_name                       = "example-resource-group-name"
   location                                  = "westeurope"
   app_service_plan_id                       = "id-example"
   application_insights_instrumentation_key  = "app-insights-instrumentation-key-example"
   vnet_integration_subnet_id                = "vnet-integration-subnet-id"
+  private_endpoint_subnet_id                = "private-endpoint-subnet-id"
+  private_dns_resource_group_name           = "private-dns-resource-group-name"
+
   app_settings                              = {
     "example-key1" = "example-value1"
     "example-key2" = "example-value2"
   }
+
   connection_strings                        = [
     {
       name  = "example-name"
@@ -73,12 +68,12 @@ module "func_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-function-app"
   }
 }
@@ -86,13 +81,4 @@ locals {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The ID of the Function App. |
-| `name` | The name of the Function App. |
-| `default_hostname` | The default hostname associated with the Function App - such as mysite.azurewebsites.net |
-| `outbound_ip_addresses` | A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12 |
-| `possible_outbound_ip_addresses` | A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12,52.143.43.17 - not all of which are necessarily in use. Superset of outbound_ip_addresses. |
-| `identity` | An identity block as defined below, which contains the Managed Service Identity information for this App Service. |
-| `site_credential` | A site_credential block as defined below, which contains the site-level credentials used to publish to this App Service. |
-| `kind` | The Function App kind - such as functionapp,linux,container |
+See [outputs.tf](./outputs.tf)

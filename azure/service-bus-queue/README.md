@@ -16,17 +16,12 @@ This module creates the following resources:
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
+- Terraform version 1.1.2+
 - AzureRM provider version 2.91.0+
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Service Bus Queue resource. Changing this forces a new resource to be created. The final name will be lowercased. |
-| `namespace_id` | `string` | | **Required** | The ID of the Service Bus Namespace to create this queue in. Changing this forces a new resource to be created. |
-| `requires_session` | `false` | | | Boolean flag which controls whether the Queue requires sessions. This will allow ordered handling of unbounded sequences of related messages. With sessions enabled a queue can guarantee first-in-first-out delivery of messages. Changing this forces a new resource to be created. Defaults to false. |
-| `requires_duplicate_detection` | `false` | | | Boolean flag which controls whether the Queue checks for duplicate messages within a time frame of 10 minutes (default). Changing this forces a new resource to be created. Defaults to false. |
+See [variables.tf](./variables.tf)
 
 ## Usage
 
@@ -40,7 +35,4 @@ module "service_bus_queue_example" {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The Service Bus Queue ID. |
-| `name` | The Service Bus Queue ID. |
+See [outputs.tf](./outputs.tf)

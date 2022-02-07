@@ -14,6 +14,9 @@ This module creates the following resources:
 
 - [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace)
 - [Azure Service Bus Namespace Authorization Rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_authorization_rule)
+- [Azure Service Bus Namespace Network Rule Set](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_network_rule_set)
+- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
+- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 
 ## Prerequisites
 
@@ -22,19 +25,7 @@ This module creates the following resources:
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | The name of the Microsoft SQL Server. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `sb-{var.name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
-| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** | The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
-| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `auth_rules` | `list` | | **Required** | A list of objects describing the auth rules of the Service Bus Namespace. See [Auth Rule](#auth-rule). |
-| `private_endpoint_subnet_id` | `string` | | **Required**  | The ID of the private endpoint subnet
-| `private_dns_resource_group_name` | `string` | | **Required**  | Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
-| `capacity` | `number` | `1` | | The capcity when using premium sku. |
-| `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
+See [variables.tf](./variables.tf)
 
 ### Auth Rule
 
@@ -51,12 +42,15 @@ This module creates the following resources:
 module "service_bus_namespace_example" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=6.0.0"
 
-  name                  = "example-name"
-  project_name          = "example-project-name"
-  environment_short     = "p"
-  environment_instance  = "001"
-  resource_group_name   = "example-resource-group-name"
-  location              = "westeurope"
+  name                            = "example-name"
+  project_name                    = "example-project-name"
+  environment_short               = "u"
+  environment_instance            = "001"
+  resource_group_name             = "example-resource-group-name"
+  location                        = "westeurope"
+  private_endpoint_subnet_id      = "private-endpoint-subnet-id"
+  private_dns_resource_group_name = "private-dns-resource-group-name"
+
   auth_rules            = [
     {
       name    = "example-auth-rule-1"
@@ -74,7 +68,7 @@ module "service_bus_namespace_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {
@@ -87,8 +81,4 @@ locals {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The ServiceBus Namespace ID. |
-| `name` | The ServiceBus Namespace name. |
-| `primary_connection_strings` | A list of Auth Rule connection strings, can be accessed this way `var.primary_connection_strings["example-auth-rule-1"]` |
+See [outputs.tf](./outputs.tf)

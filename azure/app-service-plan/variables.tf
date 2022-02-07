@@ -17,28 +17,28 @@ variable name {
 }
 
 variable project_name {
-  type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  type        = string
+  description = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the App Service Plan component."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
   type        = string
-  description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
+  description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
 variable kind {
@@ -62,12 +62,6 @@ variable sku {
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
-}
-
-variable dependencies {
-  type        = list
-  description = "A mapping of dependencies which this module depends on."
-  default     = []
 }
