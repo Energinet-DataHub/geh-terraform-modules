@@ -16,6 +16,7 @@ locals {
     "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-databricks-workspace"
   }
+  NAME = "vnet-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
 }
 
 resource "azurerm_databricks_workspace" "this" {
@@ -25,11 +26,11 @@ resource "azurerm_databricks_workspace" "this" {
   sku                 = var.sku
 
   custom_parameters {
-    virtual_network_id  = module.vnet_this.id
-    no_public_ip        = true
-    public_subnet_name  = module.snet_databricks_public.name
-    public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.nsg_public_group_association.id
-    private_subnet_name = module.snet_databricks_private.name
+    virtual_network_id                                    = azurerm_virtual_network.this.id
+    no_public_ip                                          = true
+    public_subnet_name                                    = azurerm_subnet.public.name
+    public_subnet_network_security_group_association_id   = azurerm_subnet_network_security_group_association.nsg_public_group_association.id
+    private_subnet_name                                   = azurerm_subnet.private.name
     private_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.nsg_private_group_association.id
   }
 
@@ -42,76 +43,81 @@ resource "azurerm_databricks_workspace" "this" {
       tags,
     ]
   }
-
-  depends_on = [
-    module.vnet_this
-  ]
 }
 
-module "vnet_this" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/vnet?ref=6.0.0"
-  name                  = "databricks-${var.domain_name_short}"
-  project_name          = var.domain_name_short
-  environment_short     = var.environment_short
-  environment_instance  = var.environment_instance
-  resource_group_name   = var.resource_group_name
-  location              = var.location
-  address_space         = [var.vnet_address_space]
-  peerings              = [
-    {
-      name                                        = "peering-${var.main_virtual_network_name}"
-      remote_virtual_network_id                   = var.main_virtual_network_id
-      remote_virtual_network_name                 = var.main_virtual_network_name
-      remote_virtual_network_resource_group_name  = var.main_resource_group_name
-      remote_virtual_network_subscription_id      = var.subscription_id
+resource "azurerm_virtual_network" "this" {
+  name                = local.NAME
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  address_space       = var.databricks_virtual_network_address_space
+
+  tags                = var.tags
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+}
+
+resource "azurerm_virtual_network_peering" "local" {
+  name                          = "${local.NAME}-to-${var.main_virtual_network_name}"
+  remote_virtual_network_id     = var.main_virtual_network_id
+  virtual_network_name          = azurerm_virtual_network.this.name
+  resource_group_name           = azurerm_virtual_network.this.resource_group_name
+  allow_virtual_network_access  = true
+}
+
+resource "azurerm_virtual_network_peering" "remote" {
+  name                          = "${var.main_virtual_network_name}-to-${local.NAME}"
+  remote_virtual_network_id     = azurerm_virtual_network.this.id
+  virtual_network_name          = var.main_virtual_network_name
+  resource_group_name           = var.main_virtual_network_resource_group_name
+  allow_virtual_network_access  = true
+}
+
+resource "azurerm_subnet" "private" {
+  name                                            = "snet-private-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name                             = var.resource_group_name
+  virtual_network_name                            = azurerm_virtual_network.this.name
+  address_prefixes                                = var.private_subnet_address_prefix
+  enforce_private_link_service_network_policies   = 
+  enforce_private_link_endpoint_network_policies  = 
+  delegation {
+    name = "databricks-delegation"
+
+    service_delegation {
+      name = "Microsoft.Databricks/workspaces"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action",
+        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+      ]
     }
-  ]
+  }
 }
 
-module "snet_private" {
-  source                                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
-  name                                          = "private"
-  project_name                                  = var.domain_name_short
-  environment_short                             = var.environment_short
-  environment_instance                          = var.environment_instance
-  resource_group_name                           = var.resource_group_name
-  virtual_network_name                          = module.vnet_this.name
-  address_prefixes                              = [var.private_subnet_address_prefix]
-  enforce_private_link_service_network_policies = true
+resource "azurerm_subnet" "public" {
+  name                                            = "snet-public-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name                             = var.resource_group_name
+  virtual_network_name                            = azurerm_virtual_network.this.name
+  address_prefixes                                = var.public_subnet_address_prefix
+  enforce_private_link_service_network_policies   = 
+  enforce_private_link_endpoint_network_policies  = 
+  delegation {
+    name = "databricks-delegation"
 
-  # Delegate the subnet to "Microsoft.Databricks/workspaces"
-  delegations =  [{
-   name = "delegation"
-   service_delegation_name    = "Microsoft.Databricks/workspaces"
-   service_delegation_actions = [
+    service_delegation {
+      name = "Microsoft.Databricks/workspaces"
+      actions = [
         "Microsoft.Network/virtualNetworks/subnets/join/action",
         "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
         "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
-    ]
-  }]
-}
-
-module "snet_public" {
-  source                                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/subnet?ref=6.0.0"
-  name                                          = "public"
-  project_name                                  = var.domain_name_short
-  environment_short                             = var.environment_short
-  environment_instance                          = var.environment_instance
-  resource_group_name                           = var.resource_group_name
-  virtual_network_name                          = module.vnet_this.name
-  address_prefixes                              = [var.public_subnet_address_prefix]
-  enforce_private_link_service_network_policies = true
-
-  # Delegate the subnet to "Microsoft.Databricks/workspaces"
-  delegations =  [{
-   name = "delegation"
-   service_delegation_name    = "Microsoft.Databricks/workspaces"
-   service_delegation_actions = [
-        "Microsoft.Network/virtualNetworks/subnets/join/action",
-        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
-        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
-    ]
-  }]
+      ]
+    }
+  }
 }
 
 resource "azurerm_network_security_group" "dbw_nsg" {
@@ -121,11 +127,11 @@ resource "azurerm_network_security_group" "dbw_nsg" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg_public_group_association" {
-  subnet_id                 = module.snet_databricks_public.id
+  subnet_id                 = azurerm_subnet.public.id
   network_security_group_id = azurerm_network_security_group.dbw_nsg.id
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg_private_group_association" {
-  subnet_id                 = module.snet_databricks_private.id
+  subnet_id                 = azurerm_subnet.private.id
   network_security_group_id = azurerm_network_security_group.dbw_nsg.id
 }
