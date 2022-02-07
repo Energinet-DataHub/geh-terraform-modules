@@ -52,19 +52,34 @@ variable sku {
   description = "(Required) Defines which tier to use. Valid options are Basic, Standard, and Premium. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true."
 }
 
-variable private_endpoint_subnet_id {
+variable main_virtual_network_id {
   type        = string
-  description = "(Required) The id of the private endpoint subnet where this function will reside."
+  description = "(Required) "
 }
 
-variable private_dns_resource_group_name {
+variable main_virtual_network_name {
   type        = string
-  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
+  description = "(Required) "
 }
 
-variable capacity {
-  type        = number
-  description = "(Optional) Specifies the Capacity / Throughput Units for a Standard SKU namespace. Default capacity has a maximum of 20, but can be increased in blocks of 20 on a committed purchase basis."
+variable main_virtual_network_resource_group_name {
+  type        = string
+  description = "(Required) "
+}
+
+variable main_virtual_network_subscription_id {
+  type        = string
+  description = "(Required) "
+}
+
+variable private_subnet_address_prefix {
+  type        = string
+  description = "(Required) "
+}
+
+variable public_subnet_address_prefix {
+  type        = string
+  description = "(Required) "
 }
 
 variable tags {

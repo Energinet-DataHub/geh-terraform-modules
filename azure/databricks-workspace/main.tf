@@ -42,6 +42,10 @@ resource "azurerm_databricks_workspace" "this" {
       tags,
     ]
   }
+
+  depends_on = [
+    module.vnet_this
+  ]
 }
 
 module "vnet_this" {
