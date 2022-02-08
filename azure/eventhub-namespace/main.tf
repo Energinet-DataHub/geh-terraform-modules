@@ -25,9 +25,11 @@ resource "azurerm_eventhub_namespace" "this" {
   sku                 = var.sku
   capacity            = var.capacity
 
-  network_rulesets {
+  network_rulesets = [ {
     default_action = "Deny"
-  }
+    ip_rule = [ ]
+    virtual_network_rule = [ ]
+  } ]
 
   tags                = merge(var.tags, local.module_tags)
 
