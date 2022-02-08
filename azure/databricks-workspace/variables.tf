@@ -67,17 +67,17 @@ variable main_virtual_network_resource_group_name {
   description = "(Required) "
 }
 
+variable databricks_virtual_network_address_space {
+  type        = string
+  description = "(Required) "
+}
+
 variable private_subnet_address_prefix {
   type        = string
   description = "(Required) "
 }
 
 variable public_subnet_address_prefix {
-  type        = string
-  description = "(Required) "
-}
-
-variable databricks_virtual_network_address_space {
   type        = string
   description = "(Required) "
 }
