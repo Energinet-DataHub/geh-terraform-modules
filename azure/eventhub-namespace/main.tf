@@ -25,6 +25,13 @@ resource "azurerm_eventhub_namespace" "this" {
   sku                 = var.sku
   capacity            = var.capacity
 
+  network_rulesets {
+    default_action = "Deny"
+    ip_rule = [ {
+      ip_mask = "127.0.0.1"
+    } ]
+  }
+
   tags                = merge(var.tags, local.module_tags)
 
   lifecycle {
