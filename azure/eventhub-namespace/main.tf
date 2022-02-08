@@ -54,7 +54,7 @@ resource "azurerm_private_endpoint" "this" {
 
   private_service_connection {
     name                            = "psc-01"
-    private_connection_resource_id  = azurerm_servicebus_namespace.this.id
+    private_connection_resource_id  = azurerm_eventhub_namespace.this.id
     is_manual_connection            = false
     subresource_names               = ["namespace"]
   }

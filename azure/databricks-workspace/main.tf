@@ -66,7 +66,7 @@ resource "azurerm_subnet" "private" {
   name                                            = "snet-private-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                             = var.resource_group_name
   virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = var.private_subnet_address_prefix
+  address_prefixes                                = [var.private_subnet_address_prefix]
   enforce_private_link_service_network_policies   = true
   enforce_private_link_endpoint_network_policies  = true
   delegation {
@@ -87,7 +87,7 @@ resource "azurerm_subnet" "public" {
   name                                            = "snet-public-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                             = var.resource_group_name
   virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = var.public_subnet_address_prefix
+  address_prefixes                                = [var.public_subnet_address_prefix]
   enforce_private_link_service_network_policies   = true
   enforce_private_link_endpoint_network_policies  = true
   delegation {
