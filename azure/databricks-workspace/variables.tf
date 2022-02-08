@@ -11,15 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-terraform {
-  experiments = [
-    module_variable_optional_attrs,
-  ]
-}
-
 variable name {
   type        = string
-  description = "(Required) Specifies the name of the EventHub Namespace resource. Changing this forces a new resource to be created."
+  description = "(Required) Specifies the name of the Databricks workspace resource. Changing this forces a new resource to be created."
 }
 
 variable project_name {
@@ -39,7 +33,7 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the namespace. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group in which to create the resource. Changing this forces a new resource to be created."
 }
 
 variable location {
@@ -49,7 +43,7 @@ variable location {
 
 variable sku {
   type        = string
-  description = "(Required) Defines which tier to use. Valid options are Basic, Standard, and Premium. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true."
+  description = "(Required) The sku to use for the Databricks Workspace. Possible values are standard, premium, or trial. Changing this can force a new resource to be created in some circumstances."
 }
 
 variable main_virtual_network_id {
