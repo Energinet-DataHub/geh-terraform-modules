@@ -32,6 +32,7 @@ resource "azurerm_eventhub_namespace" "this" {
     virtual_network_rule = [
       {
         subnet_id = var.private_endpoint_subnet_id
+        ignore_missing_virtual_network_service_endpoint = false
       }
     ]
   } ]
