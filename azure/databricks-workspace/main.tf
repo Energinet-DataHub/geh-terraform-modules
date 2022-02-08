@@ -49,7 +49,7 @@ resource "azurerm_virtual_network" "this" {
   name                = local.NAME
   location            = var.location
   resource_group_name = var.resource_group_name
-  address_space       = var.databricks_virtual_network_address_space
+  address_space       = [var.databricks_virtual_network_address_space]
 
   tags                = var.tags
 
