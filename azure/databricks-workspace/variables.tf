@@ -48,32 +48,32 @@ variable sku {
 
 variable main_virtual_network_id {
   type        = string
-  description = "(Required) "
+  description = "(Required) The ID of the primary Virtual network, which the Databricks VNet must be peered to."
 }
 
 variable main_virtual_network_name {
   type        = string
-  description = "(Required) "
+  description = "(Required) The name of the primary Virtual network"
 }
 
 variable main_virtual_network_resource_group_name {
   type        = string
-  description = "(Required) "
+  description = "(Required) The name resource group in which the primary Virtual network is deployed."
 }
 
 variable databricks_virtual_network_address_space {
   type        = string
-  description = "(Required) "
+  description = "(Required) The IP address space of the Virtual network, in which the Databricks clusters connected in the workspace, will be deployed."
 }
 
 variable private_subnet_address_prefix {
   type        = string
-  description = "(Required) "
+  description = "(Required) The IP address prefix of the private subnet that is deployed in the Virtual network for the Databricks clusters."
 }
 
 variable public_subnet_address_prefix {
   type        = string
-  description = "(Required) "
+  description = "(Required) The IP address prefix of the public subnet that is deployed in the Virtual network for the Databricks clusters."
 }
 
 variable tags {
