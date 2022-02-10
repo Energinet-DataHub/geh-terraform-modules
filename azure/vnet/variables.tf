@@ -58,7 +58,6 @@ variable peerings {
     remote_virtual_network_name                 = string
     remote_virtual_network_id                   = string
     remote_virtual_network_resource_group_name  = string
-    remote_virtual_network_subscription_id      = string
   }))
   description = "(Optional) Manages the virtual network peerings which allows resources to access other resources in the linked virtual networks."
   default     = []

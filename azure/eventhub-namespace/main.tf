@@ -25,6 +25,18 @@ resource "azurerm_eventhub_namespace" "this" {
   sku                 = var.sku
   capacity            = var.capacity
 
+  network_rulesets = [ {
+    default_action = "Deny"
+    trusted_service_access_enabled = false
+    ip_rule = [ ]
+    virtual_network_rule = [
+      {
+        subnet_id = var.private_endpoint_subnet_id
+        ignore_missing_virtual_network_service_endpoint = true
+      }
+    ]
+  } ]
+
   tags                = merge(var.tags, local.module_tags)
 
   lifecycle {
@@ -54,7 +66,7 @@ resource "azurerm_private_endpoint" "this" {
 
   private_service_connection {
     name                            = "psc-01"
-    private_connection_resource_id  = azurerm_servicebus_namespace.this.id
+    private_connection_resource_id  = azurerm_eventhub_namespace.this.id
     is_manual_connection            = false
     subresource_names               = ["namespace"]
   }
