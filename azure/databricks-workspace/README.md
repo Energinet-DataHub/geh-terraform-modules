@@ -1,4 +1,4 @@
-# Azure Eventhub Namespace
+# Azure Databricks Workspace
 
 - [Resources Created](#resources-created)
 - [Prerequisites](#prerequisites)
@@ -12,8 +12,8 @@ This module creates the following resources.
 
 - [Databricks workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace)
 - [Azure Virtual Network](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network)
-- 2 * [Azure Subnet-Network Security Group Association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/)
-- [Azure Network Security Group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/azurerm_network_security_group)azurerm_subnet_network_security_group_association)
+- [Azure Subnet-Network Security Group Association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group)
+- [Azure Network Security Group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association)
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ module "dbw_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default
 
 ```ruby
 locals {
