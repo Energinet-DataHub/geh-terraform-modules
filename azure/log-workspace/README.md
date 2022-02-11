@@ -35,11 +35,10 @@ module "log_workspace_example" {
   project_name                    = "example-project-name"
   environment_short               = "u"
   environment_instance            = "001"
-  resource_group_name             = "example-resource-group-name"
+  resource_group_name             = "example-log-workspace-name"
   location                        = "westeurope"
-  sku_name                        = "standard"
-  private_endpoint_subnet_id      = "private-endpoint-subnet-id"
-  private_dns_resource_group_name = "private-dns-resource-group-name"
+  sku                             = "standard"
+  retention_in_days               = 60
 }
 ```
 
@@ -48,7 +47,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "?.?.?"
+    "ModuleVersion" = "?.?.?git"
     "ModuleId"      = "azure-log-workspace"
   }
 }

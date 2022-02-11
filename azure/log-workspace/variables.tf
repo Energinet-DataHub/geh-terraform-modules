@@ -46,6 +46,10 @@ variable "resource_group_name" {
   type        = string
   description = "(Required) The name of the resource group in which to create the resources."
 }
+variable "domain_name_short" {
+  type = string
+  description = "(Required) The short domain name"
+}
 
 variable "location" {
   type        = string
