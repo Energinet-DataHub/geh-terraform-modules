@@ -8,8 +8,6 @@ locals {
   }
 }
 
-data "azurerm_client_config" "this" {}
-
 resource "azurerm_log_analytics_workspace" "this" {
   name                = "log-${var.name}-${lower(var.domain_name_short)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
