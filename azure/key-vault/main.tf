@@ -77,6 +77,15 @@ resource "azurerm_private_endpoint" "this" {
   }
 }
 
+# Waiting for the private endpoint to come online
+resource "time_sleep" "this" {
+  depends_on = [
+    azurerm_private_endpoint.this
+  ]
+
+  create_duration = "300s" # 5min should give us enough time for the Private endpoint to come online
+}
+
 # Create an A record pointing to the key vault private endpoint
 resource "azurerm_private_dns_a_record" "this" {
   name                = azurerm_key_vault.this.name
@@ -85,6 +94,10 @@ resource "azurerm_private_dns_a_record" "this" {
   ttl                 = 3600
   records             = [
     azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+  ]
+  
+  depends_on          = [
+    time_sleep.this,
   ]
 }
 
@@ -128,11 +141,4 @@ resource "azurerm_key_vault_access_policy" "this" {
   key_permissions         = try(var.access_policies[count.index].key_permissions, [])
   certificate_permissions = try(var.access_policies[count.index].certificate_permissions, [])
   storage_permissions     = try(var.access_policies[count.index].storage_permissions, [])
-}
-
-# Waiting for the private endpoint to come online
-resource "time_sleep" "this" {
-  depends_on = [azurerm_private_endpoint.buildagent_keyvault]
-
-  create_duration = "300s" # 5min should give us enough time for the Private endpoint to come online
 }
