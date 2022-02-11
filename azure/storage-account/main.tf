@@ -170,3 +170,10 @@ resource "azurerm_private_dns_a_record" "file" {
     azurerm_private_endpoint.file[0].private_service_connection[0].private_ip_address
   ]
 }
+
+# Waiting for the private endpoint to come online
+resource "time_sleep" "this" {
+  depends_on = [azurerm_private_endpoint.buildagent_keyvault]
+
+  create_duration = "300s" # 5min should give us enough time for the Private endpoint to come online
+}

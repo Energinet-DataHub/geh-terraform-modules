@@ -129,3 +129,10 @@ resource "azurerm_key_vault_access_policy" "this" {
   certificate_permissions = try(var.access_policies[count.index].certificate_permissions, [])
   storage_permissions     = try(var.access_policies[count.index].storage_permissions, [])
 }
+
+# Waiting for the private endpoint to come online
+resource "time_sleep" "this" {
+  depends_on = [azurerm_private_endpoint.buildagent_keyvault]
+
+  create_duration = "300s" # 5min should give us enough time for the Private endpoint to come online
+}
