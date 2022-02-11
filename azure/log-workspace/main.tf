@@ -15,5 +15,13 @@ resource "azurerm_log_analytics_workspace" "this" {
   sku                 = var.sku
   retention_in_days   = var.retention_in_days  < 30  ? 30 : var.retention_in_days
   tags                = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
 }
 
