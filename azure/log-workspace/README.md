@@ -10,7 +10,7 @@
 
 This module creates the following resource:
 
-- [Azure Log Workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault)
+- [Azure Log Workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace)
 
 
 ## Prerequisites
@@ -32,12 +32,11 @@ module "log_workspace_example" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=feature/log-workspace"
 
   name                            = "example-name"
-  project_name                    = "example-project-name"
   environment_short               = "u"
   environment_instance            = "001"
   resource_group_name             = "example-log-workspace-name"
   location                        = "westeurope"
-  sku                             = "standard"
+  sku                             = "Br4711"
   retention_in_days               = 60
 }
 ```
@@ -47,7 +46,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "?.?.?git"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-log-workspace"
   }
 }
