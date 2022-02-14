@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 output "name" {
   value = azurerm_log_analytics_workspace.this.name
   description = "Name of log analytics workspace "
@@ -22,4 +21,3 @@ output "id" {
   value = azurerm_log_analytics_workspace.this.id
   description = "Id of log analytics workspace "
 }
-
