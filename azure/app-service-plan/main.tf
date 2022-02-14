@@ -25,8 +25,9 @@ resource "azurerm_app_service_plan" "this" {
   kind                = var.kind
   reserved            = var.reserved
   sku {
-    size = var.sku.size
-    tier = var.sku.tier
+    size     = var.sku.size
+    tier     = var.sku.tier
+    capacity = var.capacity
   }
 
   tags                = merge(var.tags, local.module_tags)

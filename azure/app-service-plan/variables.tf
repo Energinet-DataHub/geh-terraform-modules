@@ -52,6 +52,12 @@ variable reserved {
   default     = false
 }
 
+variable capacity {
+  type        = number
+  description = "(Optional) Specifies the number of workers associated with this App Service Plan."
+  default     = 1
+}
+
 variable sku {
   type        = object({
     size  = string
