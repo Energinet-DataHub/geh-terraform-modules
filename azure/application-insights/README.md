@@ -19,7 +19,7 @@ This module creates the following resources.
 
 ## Arguments and defaults
 
-|See [variables.tf](./variables.tf)
+See [variables.tf](./variables.tf)
 
 
 ## Usage
