@@ -27,7 +27,10 @@ variable "sku" {
   description = "(Optional) Log workspace sku"
   default     = "PerGB2018"
 }
-
+variable project_name {
+  type        = string
+  description = "(Required) The name of your project."
+}
 variable "environment_short" {
   type        = string
   description = "(Required) The short value name of the environment."
@@ -42,10 +45,7 @@ variable "resource_group_name" {
   type        = string
   description = "(Required) The name of the resource group in which to create the resources."
 }
-variable "domain_name_short" {
-  type = string
-  description = "(Required) The short domain name"
-}
+
 
 variable "location" {
   type        = string
