@@ -38,6 +38,7 @@ module "log_workspace_example" {
   location                        = "westeurope"
   sku                             = "Br4711"
   retention_in_days               = 60
+  project_name                    = "example-project"
 }
 ```
 
