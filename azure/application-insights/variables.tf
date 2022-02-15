@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 variable name {
   type        = string
   description = "(Required) Specifies the name of the Application Insights component. Changing this forces a new resource to be created."
@@ -41,9 +42,9 @@ variable location {
   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
 }
 
-variable retention_in_days{
+variable log_analytics_workspace_name {
   type        = string
-  description = "(Required) How long are logs retained."
+  description = "(Mandatory) Log workspace name"
 }
 
 variable tags {
