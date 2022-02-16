@@ -12,47 +12,49 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-variable "name" {
+variable name {
   type        = string
   description = "(Mandatory) Log workspace name"
 }
-variable "retention_in_days" {
+
+variable retention_in_days {
   type        = number
   description = "(Optional) Log workspace rentention in days"
   default     = 30
 }
 
-variable "sku" {
+variable sku {
   type        = string
   description = "(Optional) Log workspace sku"
   default     = "PerGB2018"
 }
 
-variable "environment_short" {
+variable environment_short {
   type        = string
   description = "(Required) The short value name of the environment."
 }
 
-variable "environment_instance" {
+variable environment_instance {
   type        = string
   description = "(Required) The instance value of the environment."
 }
 
-variable "resource_group_name" {
+variable resource_group_name {
   type        = string
   description = "(Required) The name of the resource group in which to create the resources."
 }
-variable "domain_name_short" {
+
+variable domain_name_short {
   type = string
   description = "(Required) The short domain name"
 }
 
-variable "location" {
+variable location {
   type        = string
   description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
-variable "tags" {
+variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
