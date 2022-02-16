@@ -58,7 +58,12 @@ variable vnet_integration_subnet_id {
 
 variable private_endpoint_subnet_id {
   type        = string
-  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
+  description = "(Required) The ID of the Subnet to contain the Azure Function App's storage account from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
+}
+
+variable external_private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The ID of the Subnet to contain the Azure Function App from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
 }
 
 variable private_dns_resource_group_name {
