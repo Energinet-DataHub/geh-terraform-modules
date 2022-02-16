@@ -18,11 +18,6 @@ locals {
   }
 }
 
-resource "azurerm_app_service_virtual_network_swift_connection" "this" {
-  app_service_id = azurerm_app_service.this.id
-  subnet_id      = var.vnet_integration_subnet_id
-}
-
 resource "azurerm_app_service" "this" {
   name                        = "app-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location                    = var.location
@@ -68,4 +63,62 @@ resource "azurerm_app_service" "this" {
       tags,
     ]
   }
+}
+
+#
+# App Service integrated into VNet
+#
+
+resource "azurerm_app_service_virtual_network_swift_connection" "this" {
+  app_service_id = azurerm_app_service.this.id
+  subnet_id      = var.vnet_integration_subnet_id
+}
+
+#
+# Private Endpoint for App Service
+#
+
+resource "random_string" "this" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+resource "azurerm_private_endpoint" "this" {
+  name                = "pe-${lower(var.name)}${random_string.this.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.external_private_endpoint_subnet_id
+
+  private_service_connection {
+    name                           = "pcs-01"
+    private_connection_resource_id = azurerm_app_service.this.id
+    is_manual_connection           = false
+    subresource_names              = ["sites"]
+  }
+
+  tags                             = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+
+  depends_on = [
+    azurerm_function_app.this
+  ]
+}
+
+# Create an A record pointing to the App service private endpoint
+resource "azurerm_private_dns_a_record" "this" {
+  name                = azurerm_app_service.this.name
+  zone_name           = "privatelink.azurewebsites.net"
+  resource_group_name = var.private_dns_resource_group_name
+  ttl                 = 3600
+  records             = [
+    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+  ]
 }
