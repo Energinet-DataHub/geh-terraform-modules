@@ -18,12 +18,13 @@ locals {
   }
 }
 
+
 resource "azurerm_application_insights" "this" {
   name                = "appi-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name = var.resource_group_name
   location            = var.location
   application_type    = "web"
-  workspace_id        = azurerm_log_analytics_workspace.this.id
+  workspace_id        = var.log_analytics_workspace_id
 
   tags                = merge(var.tags, local.module_tags)
 
@@ -35,21 +36,3 @@ resource "azurerm_application_insights" "this" {
     ]
   }
 }
-
-resource "azurerm_log_analytics_workspace" "this" {
-  name                = "log-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  sku                 = "PerGB2018"
-  retention_in_days   = var.retention_in_days
-
-  tags                = merge(var.tags, local.module_tags)
-
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
-  }
-} 
