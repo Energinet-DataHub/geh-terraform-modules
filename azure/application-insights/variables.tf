@@ -42,9 +42,9 @@ variable location {
   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
 }
 
-variable log_analytics_workspace_name {
+variable log_analytics_workspace_id {
   type        = string
-  description = "(Mandatory) Log workspace name"
+  description = "(Required) Log workspace id"
 }
 
 variable tags {

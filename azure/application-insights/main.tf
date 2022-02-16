@@ -19,17 +19,12 @@ locals {
 }
 
 
-data "azurerm_log_analytics_workspace" "log_analytics_workspace" {
-  name                = var.log_analytics_workspace_name
-  resource_group_name = var.resource_group_name
-}
-
 resource "azurerm_application_insights" "this" {
   name                = "appi-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name = var.resource_group_name
   location            = var.location
   application_type    = "web"
-  workspace_id        = data.azurerm_log_analytics_workspace.log_analytics_workspace.id
+  workspace_id        = var.log_analytics_workspace_id
   tags                = merge(var.tags, local.module_tags)
 
   lifecycle {

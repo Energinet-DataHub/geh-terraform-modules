@@ -34,7 +34,7 @@ module "appi_example" {
   environment_instance         = "001"
   resource_group_name          = "example-resource-group-name"
   location                     = "westeurope"
-  log_analytics_workspace_name = "example-log-workspace"
+  log_analytics_workspace_id   = "example-log-workspace-id"
   tags                  = {}
 }
 ```
