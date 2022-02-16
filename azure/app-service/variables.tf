@@ -56,12 +56,6 @@ variable vnet_integration_subnet_id {
   description = "(Required) The id of the vnet integration subnet where this App Service will reside."
 }
 
-variable use_external_private_endpoint {
-  type        = bool
-  description = "(Optional) Determine if a Private endpoint should be added for the App service. Defaults to 'false'."
-  default     = false
-}
-
 variable external_private_endpoint_subnet_id {
   type        = string
   description = "(Optional) The ID of the Subnet to contain the App Service from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created. Defaults to an empty string"

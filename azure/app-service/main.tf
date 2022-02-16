@@ -85,7 +85,7 @@ resource "random_string" "this" {
 }
 
 resource "azurerm_private_endpoint" "this" {
-  count               = var.use_external_private_endpoint ? 1 : 0
+  count               = length(var.external_private_endpoint_subnet_id) > 0 ? 1 : 0
 
   name                = "pe-${lower(var.name)}${random_string.this.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
@@ -116,7 +116,7 @@ resource "azurerm_private_endpoint" "this" {
 
 # Create an A record pointing to the App service private endpoint
 resource "azurerm_private_dns_a_record" "this" {
-  count               = var.use_external_private_endpoint ? 1 : 0
+  count               = azurerm_private_endpoint.this.id != null ? 1 : 0
 
   name                = azurerm_app_service.this.name
   zone_name           = "privatelink.azurewebsites.net"
@@ -133,6 +133,8 @@ resource "azurerm_private_dns_a_record" "this" {
 
 # Waiting for the private endpoint to come online
 resource "time_sleep" "this" {
+  count      = azurerm_private_endpoint.this.id != null ? 1 : 0
+  
   depends_on = [
     azurerm_private_endpoint.this
   ]
