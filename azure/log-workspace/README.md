@@ -32,6 +32,7 @@ module "log_workspace_example" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=5.6.0"
 
   name                  = "example-name"
+  project_name          = "example-project"
   environment_short     = "u"
   environment_instance  = "001"
   resource_group_name   = "example-log-workspace-name"

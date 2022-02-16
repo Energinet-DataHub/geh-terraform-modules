@@ -29,6 +29,11 @@ variable sku {
   default     = "PerGB2018"
 }
 
+variable project_name {
+  type        = string
+  description = "(Required) The name of your project."
+}
+
 variable environment_short {
   type        = string
   description = "(Required) The short value name of the environment."
@@ -59,5 +64,3 @@ variable tags {
   description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }
-
-
