@@ -123,10 +123,6 @@ resource "azurerm_private_dns_a_record" "this" {
   records             = [
     azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
   ]
-  
-  depends_on          = [
-    time_sleep.this,
-  ]
 }
 
 resource "random_string" "st" {
@@ -217,10 +213,6 @@ resource "azurerm_private_dns_a_record" "blob" {
   records             = [
     azurerm_private_endpoint.blob.private_service_connection[0].private_ip_address
   ]
-    
-  depends_on          = [
-    time_sleep.this,
-  ]
 }
 
 #
@@ -266,17 +258,4 @@ resource "azurerm_private_dns_a_record" "file" {
   records             = [
     azurerm_private_endpoint.file.private_service_connection[0].private_ip_address
   ]
-    
-  depends_on          = [
-    time_sleep.this,
-  ]
-}
-
-# Waiting for the private endpoint to come online
-resource "time_sleep" "this" {
-  depends_on = [
-    azurerm_private_endpoint.this
-  ]
-
-  create_duration = "60s"
 }
