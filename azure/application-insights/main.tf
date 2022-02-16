@@ -25,6 +25,7 @@ resource "azurerm_application_insights" "this" {
   location            = var.location
   application_type    = "web"
   workspace_id        = var.log_analytics_workspace_id
+
   tags                = merge(var.tags, local.module_tags)
 
   lifecycle {
