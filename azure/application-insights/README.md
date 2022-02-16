@@ -26,16 +26,16 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "appi_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/application-insights?ref=5.6.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/application-insights?ref=5.6.0"
 
-  name                         = "example-name"
-  project_name                 = "example-project-name"
-  environment_short            = "p"
-  environment_instance         = "001"
-  resource_group_name          = "example-resource-group-name"
-  location                     = "westeurope"
-  log_analytics_workspace_id   = "example-log-workspace-id"
-  tags                  = {}
+  name                        = "example-name"
+  project_name                = "example-project-name"
+  environment_short           = "p"
+  environment_instance        = "001"
+  resource_group_name         = "example-resource-group-name"
+  location                    = "westeurope"
+  log_analytics_workspace_id  = "example-log-workspace-id"
+  tags                        = {}
 }
 ```
 
