@@ -116,7 +116,7 @@ resource "azurerm_private_endpoint" "this" {
 
 # Create an A record pointing to the App service private endpoint
 resource "azurerm_private_dns_a_record" "this" {
-  count               = azurerm_private_endpoint.this.id[0] != null ? 1 : 0
+  count               = azurerm_private_endpoint.this.id[count.index] != null ? 1 : 0
 
   name                = azurerm_app_service.this.name
   zone_name           = "privatelink.azurewebsites.net"
@@ -133,7 +133,7 @@ resource "azurerm_private_dns_a_record" "this" {
 
 # Waiting for the private endpoint to come online
 resource "time_sleep" "this" {
-  count      = azurerm_private_endpoint.this.id[0] != null ? 1 : 0
+  count      = azurerm_private_endpoint.this.id[count.index] != null ? 1 : 0
   
   depends_on = [
     azurerm_private_endpoint.this
