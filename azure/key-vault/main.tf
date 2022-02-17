@@ -68,3 +68,26 @@ resource "azurerm_key_vault_access_policy" "this" {
   certificate_permissions = try(var.access_policies[count.index].certificate_permissions, [])
   storage_permissions     = try(var.access_policies[count.index].storage_permissions, [])
 }
+
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  name               = "vault-log-analytics-diagnostic-setting"
+  target_resource_id         = azurerm_key_vault.this.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  log {
+    category = "AuditEvent"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+    }
+  }
+
+  metric {
+    category = "AllMetrics"
+
+    retention_policy {
+      enabled = false
+    }
+  }
+}

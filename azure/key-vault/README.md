@@ -12,10 +12,11 @@ This module creates the following resources.
 
 - [Azure Key Vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault)
 - [Azure Key Vault Access Policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources//monitor_diagnostic_setting)
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
+- Terraform version 1.1.5+
 - AzureRM provider version 2.70.0+
 
 ## Arguments and defaults
@@ -31,7 +32,9 @@ This module creates the following resources.
 | `sku_name` | `string` | | **Required** | The Name of the SKU used for this Key Vault. Possible values are `standard` and `premium`. |
 | `access_policies` | `list` | `[]` | |  A list of objects describing the Key Vault access policies. See [Access Policy](#access-policy). |
 | `enabled_for_template_deployment` | `bool` | `false` | | Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false. |
+| `log_analytics_workspace_id` | `string` | | **Required** | | Id of Log analytics workspace associated with the vault  |
 | `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
+
 
 ### Access Policy
 
@@ -83,7 +86,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "5.6.0"
     "ModuleId"      = "azure-key-vault"
   }
 }
@@ -96,3 +99,4 @@ locals {
 | `id` | The ID of the Key Vault. | |
 | `name` | The name of the Key Vault. | |
 | `vault_uri` | The URI of the Key Vault, used for performing operations on keys and secrets. | |
+| `log_analytics_workspace` | The name of the log ananlytics workspace used for logging vault interaction | |
