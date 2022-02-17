@@ -110,7 +110,7 @@ resource "azurerm_private_endpoint" "this" {
   }
 
   depends_on = [
-    azurerm_function_app.this
+    azurerm_app_service.this
   ]
 }
 
