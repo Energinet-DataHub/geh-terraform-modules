@@ -121,7 +121,7 @@ resource "azurerm_private_dns_a_record" "this" {
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
   records             = [
-    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+    azurerm_private_endpoint.this[0].private_service_connection[0].private_ip_address
   ]
   
   depends_on          = [
