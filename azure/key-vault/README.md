@@ -99,4 +99,3 @@ locals {
 | `id` | The ID of the Key Vault. | |
 | `name` | The name of the Key Vault. | |
 | `vault_uri` | The URI of the Key Vault, used for performing operations on keys and secrets. | |
-| `log_analytics_workspace` | The name of the log ananlytics workspace used for logging vault interaction | |
