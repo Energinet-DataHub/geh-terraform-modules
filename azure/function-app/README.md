@@ -49,6 +49,7 @@ module "func_example" {
   application_insights_instrumentation_key  = "app-insights-instrumentation-key-example"
   vnet_integration_subnet_id                = "vnet-integration-subnet-id"
   private_endpoint_subnet_id                = "private-endpoint-subnet-id"
+  external_private_endpoint_subnet_id       = "external-private-endpoint-subnet-id"
   private_dns_resource_group_name           = "private-dns-resource-group-name"
 
   app_settings                              = {
@@ -73,7 +74,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0"
+    "ModuleVersion" = "7.0.0"
     "ModuleId"      = "azure-function-app"
   }
 }
