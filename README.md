@@ -16,3 +16,4 @@
 - [Azure Function App](./azure/function-app)
 - [Azure App Service Plan](./azure/app-service-plan)
 - [Azure Event Hub](./azure/eventhub-namespace)
+- [Azure Log Analytics Workspace](./azure/log-workspace)

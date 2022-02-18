@@ -49,11 +49,6 @@ variable resource_group_name {
   description = "(Required) The name of the resource group in which to create the resources."
 }
 
-variable domain_name_short {
-  type = string
-  description = "(Required) The short domain name"
-}
-
 variable location {
   type        = string
   description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."

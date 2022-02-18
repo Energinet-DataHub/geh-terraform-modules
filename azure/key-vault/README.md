@@ -12,10 +12,11 @@ This module creates the following resources.
 
 - [Azure Key Vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault)
 - [Azure Key Vault Access Policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources//monitor_diagnostic_setting)
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
+- Terraform version 1.1.5+
 - AzureRM provider version 2.70.0+
 
 ## Arguments and defaults
@@ -31,7 +32,9 @@ This module creates the following resources.
 | `sku_name` | `string` | | **Required** | The Name of the SKU used for this Key Vault. Possible values are `standard` and `premium`. |
 | `access_policies` | `list` | `[]` | |  A list of objects describing the Key Vault access policies. See [Access Policy](#access-policy). |
 | `enabled_for_template_deployment` | `bool` | `false` | | Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false. |
+| `log_analytics_workspace_id` | `string` | | **Required** | | ID of Log Analytics Workspace associated with the Key Vault  |
 | `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
+
 
 ### Access Policy
 
@@ -52,14 +55,15 @@ An `access_policy` item consists of the following:
 module "key_vault_example" { 
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=5.1.0"
 
-  name                  = "example-name"
-  project_name          = "example-project-name"
-  environment_short     = "p"
-  environment_instance  = "001"
-  resource_group_name   = "example-resource-group-name"
-  location              = "westeurope"
-  sku_name              = "standard"
-  access_policies       = [
+  name                       = "example-name"
+  project_name               = "example-project-name"
+  environment_short          = "p"
+  environment_instance       = "001"
+  resource_group_name        = "example-resource-group-name"
+  location                   = "westeurope"
+  sku_name                   = "standard"
+  log_analytics_workspace_id = "example-log-analytics-workspace"
+  access_policies            = [
     {
       object_id               = "example-object-id"
       secret_permissions      = ["backup", "delete", "get"]
@@ -83,7 +87,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "5.6.0"
     "ModuleId"      = "azure-key-vault"
   }
 }
