@@ -55,14 +55,15 @@ An `access_policy` item consists of the following:
 module "key_vault_example" { 
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=5.1.0"
 
-  name                  = "example-name"
-  project_name          = "example-project-name"
-  environment_short     = "p"
-  environment_instance  = "001"
-  resource_group_name   = "example-resource-group-name"
-  location              = "westeurope"
-  sku_name              = "standard"
-  access_policies       = [
+  name                       = "example-name"
+  project_name               = "example-project-name"
+  environment_short          = "p"
+  environment_instance       = "001"
+  resource_group_name        = "example-resource-group-name"
+  location                   = "westeurope"
+  sku_name                   = "standard"
+  log_analytics_workspace_id = "example-log-analytics-workspace"
+  access_policies            = [
     {
       object_id               = "example-object-id"
       secret_permissions      = ["backup", "delete", "get"]
