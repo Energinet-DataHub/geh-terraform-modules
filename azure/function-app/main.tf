@@ -129,6 +129,21 @@ resource "azurerm_private_dns_a_record" "this" {
   ]
 }
 
+# Create an A record pointing to the Azure Function App private endpoint
+resource "azurerm_private_dns_a_record" "scm" {
+  name                = "${azurerm_function_app.this.name}.scm"
+  zone_name           = "privatelink.azurewebsites.net"
+  resource_group_name = var.private_dns_resource_group_name
+  ttl                 = 3600
+  records             = [
+    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+  ]
+  
+  depends_on          = [
+    time_sleep.this,
+  ]
+}
+
 resource "random_string" "st" {
   length  = 10
   special = false
