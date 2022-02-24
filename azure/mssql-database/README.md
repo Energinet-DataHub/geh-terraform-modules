@@ -11,6 +11,7 @@
 This module creates the following resource:
 
 - [Azure Microsoft MS SQL Database](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources//monitor_diagnostic_setting)
 
 ## Prerequisites
 
@@ -26,6 +27,7 @@ This module creates the following resource:
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `server_id` | `string` | | **Required** | The ID of the SQL Server on which to create the database. |
+| `log_analytics_workspace_id` | `sting`| |**Required** | Name of associated Log Analytics Workspace. |
 | `sku_name` | `string` | `GP_S_Gen5_1` | | The SKU of the database to be created. |
 | `min_capacity` | `number` | `1` | | Minimal capacity of vCores that database will always have allocated, if not paused. |
 | `auto_pause_delay_in_minutes` | `number`| `-1` | | Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for General Purpose Serverless databases. |
@@ -35,7 +37,7 @@ This module creates the following resource:
 
 ```ruby
 module "sqldb_example" { 
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=5.4.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=5.6.0"
 
   name                          = "example-name"
   project_name                  = "example-project-name"
@@ -43,6 +45,7 @@ module "sqldb_example" {
   environment_instance          = "001"
   server_id                     = "some-mssql-server-id"
   sku_name                      = "GP_S_Gen5_2"
+  log_analytics_workspace_id    = "example-log-analytics-workspace-id'
 
   tags                = {}
 }
@@ -53,7 +56,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.4.0"
+    "ModuleVersion" = "5.6.0"
     "ModuleId"      = "azure-mssql-database"
   }
 }

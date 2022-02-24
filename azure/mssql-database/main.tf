@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.4.0"
+    "ModuleVersion" = "5.6.0"
     "ModuleId"      = "azure-mssql-database"
   }
 }
@@ -33,5 +33,25 @@ resource "azurerm_mssql_database" "this" {
       # updates these based on some ruleset managed elsewhere.
       tags,
     ]
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  name                       = "vault-log-analytics-diagnostic-setting"
+  target_resource_id         = azurerm_mssql_database.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+  log {
+    category = "AuditEvent"
+    enabled  = true
+    retention_policy {
+      enabled = true
+    }
+  }
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+    retention_policy {
+      enabled = true
+    }
   }
 }
