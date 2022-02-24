@@ -11,11 +11,12 @@
 This module creates the following resources.
 
 - [Azure Microsoft SQL Server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- Terraform version 1.1.5+
+- AzureRM provider version 2.94.0+
 
 ## Arguments and defaults
 
@@ -30,6 +31,7 @@ This module creates the following resources.
 | `sql_version` | `string` | | **Required** | The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). |
 | `administrator_login` | `string` | | **Required** | The administrator login name for the new server. Changing this forces a new resource to be created. |
 | `administrator_login_password` | `string` | | **Required** | The password associated with the administrator_login user. Needs to comply with Azure's [Password Policy](https://msdn.microsoft.com/library/ms161959.aspx) |
+| `log_analytics_workspace_id` | `string`| |**Required** | Name of associated Log Analytics Workspace. |
 | `firewall_rules` | `any` | `[]` | | A list of objects describing the firewall rules of the Microsoft SQL Server. See [Firewall Rule](#firewall-rule). |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
@@ -39,13 +41,13 @@ This module creates the following resources.
 |-|-|-|-|-|
 | name | `string` | | **Required** | The name of the firewall rule. |
 | start_ip_address | `string` | | **Required** | The starting IP address to allow through the firewall for this rule. |
-| end_ip_address | `string` | | **Required** | The ending IP address to allow through the firewall for this rule. |
+| end_ip_address | `string` | | **Required** | The ending IP address to allow access through the firewall for this rule. |
 
 ## Usage
 
 ```ruby
 module "sql_server_example" { 
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=5.1.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-server?ref=5.6.0"
 
   name                          = "example-name"
   project_name                  = "example-project-name"
@@ -56,6 +58,7 @@ module "sql_server_example" {
   sql_version                   = "12.0"
   administrator_login           = "example-administrator-login"
   administrator_login_password  = "example-administrator-login-password"
+  log_analytics_workspace_id    = "example-log-analytics-workspace-id"
   firewall_rules = [
     {
       name              = "example-rule-name"
@@ -73,7 +76,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "5.6.0"
     "ModuleId"      = "azure-sql-server"
   }
 }

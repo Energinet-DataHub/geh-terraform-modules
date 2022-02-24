@@ -38,7 +38,7 @@ resource "azurerm_mssql_database" "this" {
 
 resource "azurerm_monitor_diagnostic_setting" "this" {
   name                       = "vault-log-analytics-diagnostic-setting"
-  target_resource_id         = azurerm_mssql_database.id
+  target_resource_id         = azurerm_mssql_database.this.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
   log {
     category = "AuditEvent"

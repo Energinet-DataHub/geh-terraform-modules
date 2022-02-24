@@ -46,6 +46,12 @@ variable server_name {
   description = "(Required) The name of the SQL Server on which to create the database."
 }
 
+
+variable log_analytics_workspace_id {
+  type = string
+  description = "(Required) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
+}
+
 variable edition {
   type        = string
   default     = "GeneralPurpose"

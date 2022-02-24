@@ -56,6 +56,12 @@ variable administrator_login_password {
   description = "(Required) The password associated with the administrator_login user. Needs to comply with Azure's Password Policy"
 }
 
+
+variable log_analytics_workspace_id {
+  type = string
+  description = "(Required) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
+}
+
 variable firewall_rules {
   type        = list(object({
     name              = string
