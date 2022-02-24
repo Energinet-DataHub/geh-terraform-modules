@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.4.0"
+    "ModuleVersion" = "5.6.0"
     "ModuleId"      = "azure-mssql-server"
   }
 }
@@ -47,4 +47,24 @@ resource "azurerm_mssql_firewall_rule" "this" {
   server_id           = azurerm_mssql_server.this.id
   start_ip_address    = try(var.firewall_rules[count.index].start_ip_address, null)
   end_ip_address      = try(var.firewall_rules[count.index].end_ip_address, null)
+}
+
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  name                       = "vault-log-analytics-diagnostic-setting"
+  target_resource_id         = azurerm_mssql_database.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+  log {
+    category = "AuditEvent"
+    enabled  = true
+    retention_policy {
+      enabled = true
+    }
+  }
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+    retention_policy {
+      enabled = true
+    }
+  }
 }

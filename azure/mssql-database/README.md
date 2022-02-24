@@ -15,8 +15,8 @@ This module creates the following resource:
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.71.0+
+- Terraform version 1.1.5+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 
@@ -27,7 +27,7 @@ This module creates the following resource:
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `server_id` | `string` | | **Required** | The ID of the SQL Server on which to create the database. |
-| `log_analytics_workspace_id` | `sting`| |**Required** | Name of associated Log Analytics Workspace. |
+| `log_analytics_workspace_id` | `string`| |**Required** | Name of associated Log Analytics Workspace. |
 | `sku_name` | `string` | `GP_S_Gen5_1` | | The SKU of the database to be created. |
 | `min_capacity` | `number` | `1` | | Minimal capacity of vCores that database will always have allocated, if not paused. |
 | `auto_pause_delay_in_minutes` | `number`| `-1` | | Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for General Purpose Serverless databases. |
@@ -45,7 +45,7 @@ module "sqldb_example" {
   environment_instance          = "001"
   server_id                     = "some-mssql-server-id"
   sku_name                      = "GP_S_Gen5_2"
-  log_analytics_workspace_id    = "example-log-analytics-workspace-id'
+  log_analytics_workspace_id    = "example-log-analytics-workspace-id"
 
   tags                = {}
 }
