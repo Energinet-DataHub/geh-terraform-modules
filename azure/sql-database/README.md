@@ -11,7 +11,7 @@
 This module creates the following resources.
 
 - [Azure Microsoft SQL Database](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_database)
-- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources//monitor_diagnostic_setting)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
 
