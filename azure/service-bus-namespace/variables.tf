@@ -70,6 +70,6 @@ variable tags {
 
 variable log_analytics_workspace_id {
   type = string
-  description = "(Required) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
+  description = "(Optional) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
   default = null
 }
