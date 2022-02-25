@@ -90,7 +90,7 @@ resource "azurerm_private_endpoint" "this" {
   name                = "pe-${lower(var.name)}${random_string.this.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
-  subnet_id           = var.external_private_endpoint_subnet_id
+  subnet_id           = var.private_endpoint_subnet_id
 
   private_service_connection {
     name                           = "pcs-01"
