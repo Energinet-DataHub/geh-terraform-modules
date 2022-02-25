@@ -67,3 +67,9 @@ variable tags {
   description = "(Optional) A mapping of tags to assign to the resource."
   default     = {}
 }
+
+variable log_analytics_workspace_id {
+  type = string
+  description = "(Required) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
+  default = null
+}

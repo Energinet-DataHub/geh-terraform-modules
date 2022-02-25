@@ -70,7 +70,7 @@ resource "azurerm_key_vault_access_policy" "this" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "this" {
-  name                       = "vault-log-analytics-diagnostic-setting"
+  name                       = "diag-kv-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   target_resource_id         = azurerm_key_vault.this.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
   log {

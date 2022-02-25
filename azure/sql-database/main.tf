@@ -39,7 +39,7 @@ resource "azurerm_sql_database" "this" {
 
 
 resource "azurerm_monitor_diagnostic_setting" "this" {
-  name                       = "vault-log-analytics-diagnostic-setting"
+  name                       = "diag-sqldb-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   target_resource_id         = azurerm_sql_database.this.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
   log {

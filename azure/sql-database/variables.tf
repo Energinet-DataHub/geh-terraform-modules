@@ -47,10 +47,6 @@ variable server_name {
 }
 
 
-variable log_analytics_workspace_id {
-  type = string
-  description = "(Required) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
-}
 
 variable edition {
   type        = string
@@ -63,6 +59,13 @@ variable requested_service_objective_name {
   default     = "GP_S_Gen5_1"
   description = "The service objective name for the database. Valid values depend on edition and location and may include `S0`, `S1`, `S2`, `S3`, `P1`, `P2`, `P4`, `P6`, `P11` and `ElasticPool`."
 }
+
+variable log_analytics_workspace_id {
+  type = string
+  description = "(Required) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
+  default = null
+}
+
 
 variable tags {
   type        = any

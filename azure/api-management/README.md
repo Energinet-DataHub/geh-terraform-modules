@@ -11,11 +11,13 @@
 This module creates the following resources.
 
 - [Azure Api Management](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources//monitor_diagnostic_setting)
+
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- Terraform version 1.1-5+
+- AzureRM provider version 2.94.0+
 
 ## Arguments and defaults
 
@@ -30,23 +32,25 @@ This module creates the following resources.
 | `publisher_name` | `string` | | **Required** | The name of publisher/company. |
 | `publisher_email` | `string` | | **Required** | The email of publisher/company. |
 | `sku_name` | `string` | | **Required** | sku_name is a string consisting of two parts separated by an underscore(_). The first part is the name, valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1). |
+| `log_analytics_workspace_id` | `string` | | **Required** | ID of Log Analytics Workspace associated with the API Manager |
 | `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
 
 ## Usage
 
 ```ruby
 module "appi_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.1.0"
+  source                     = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.6.0"
 
-  name                  = "example-name"
-  project_name          = "example-project-name"
-  environment_short     = "p"
-  environment_instance  = "001"
-  resource_group_name   = "example-resource-group-name"
-  location              = "westeurope"
-  publisher_name        = "John Doe"
-  publisher_email       = "johndoe@example.com"
-  sku_name              = "Developer_1"
+  name                       = "example-name"
+  project_name               = "example-project-name"
+  environment_short          = "p"
+  environment_instance       = "001"
+  resource_group_name        = "example-resource-group-name"
+  location                   = "westeurope"
+  publisher_name             = "John Doe"
+  publisher_email            = "johndoe@example.com"
+  sku_name                   = "Developer_1"
+  log_analytics_workspace_id = "example-log-analytics-workspace-id"
 }
 ```
 
@@ -55,7 +59,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "5.6.0"
     "ModuleId"      = "azure-api-management"
   }
 }
