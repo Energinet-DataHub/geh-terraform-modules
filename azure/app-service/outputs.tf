@@ -18,6 +18,8 @@ output "id" {
   depends_on  = [
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -28,6 +30,8 @@ output "name" {
   depends_on  = [
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -38,6 +42,8 @@ output "default_site_hostname" {
   depends_on  = [
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -48,6 +54,8 @@ output "outbound_ip_addresses" {
   depends_on  = [
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -58,6 +66,8 @@ output "possible_outbound_ip_addresses" {
   depends_on  = [
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -68,6 +78,8 @@ output "identity" {
   depends_on  = [
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -78,5 +90,7 @@ output "site_credential" {
   depends_on  = [
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
+    azurerm_private_dns_a_record.this,
   ]
 }
