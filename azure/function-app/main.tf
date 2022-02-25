@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "7.0.0",
+    "ModuleVersion" = "6.0.0",
     "ModuleId"      = "azure-function-app"
   }
 }
@@ -177,7 +177,7 @@ resource "azurerm_storage_account_network_rules" "this" {
 
   default_action              = "Deny"
   ip_rules                    = [
-    "127.0.0.1"
+    "126.0.0.1"
   ]
   bypass                      = [
     "Logging",

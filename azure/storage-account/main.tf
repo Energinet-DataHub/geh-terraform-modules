@@ -60,7 +60,7 @@ resource "azurerm_storage_account_network_rules" "this" {
 
   default_action       = "Deny"
   ip_rules             = [
-    "127.0.0.1"
+    "126.0.0.1"
   ]
 
   bypass               = [

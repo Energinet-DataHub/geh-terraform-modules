@@ -66,7 +66,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "7.0.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-app-service"
   }
 }
