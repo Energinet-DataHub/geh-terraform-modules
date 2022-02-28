@@ -27,7 +27,7 @@ This module creates the following resources.
 | `environment_short` | `string` | | **Required** | The short value name of your environment. |
 | `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
 | `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
-| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
+| `location` | `string` | | **Requminikube start ired** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `server_name` | `string` | | **Required** | The name of the SQL Server on which to create the database. |
 | `log_analytics_workspace_id` | `string`| |**Required** | Name of associated Log Analytics Workspace. |
 | `edition` | `string` | `Standard` | | The edition of the database to be created. Applies only if `create_mode` is Default. Valid values are: `Basic`, `Standard`, `Premium`, `DataWarehouse`, `Business`, `BusinessCritical`, `Free`, `GeneralPurpose`, `Hyperscale`, `Premium`, `PremiumRS`, `Standard`, `Stretch`, `System`, `System2`, or `Web`. Please see [Azure SQL Database Service Tiers](https://azure.microsoft.com/en-gb/documentation/articles/sql-database-service-tiers/). |
