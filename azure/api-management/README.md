@@ -13,11 +13,10 @@ This module creates the following resources.
 - [Azure Api Management](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management)
 - [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
-
 ## Prerequisites
 
-- Terraform version 1.1.5+
-- AzureRM provider version 2.94.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 
