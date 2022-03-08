@@ -53,16 +53,11 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
   name                       = "diag-mssql-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   target_resource_id         = azurerm_mssql_server.this.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
-  log {
-    category = "AuditEvent"
-    enabled  = true
-    retention_policy {
-      enabled = true
-    }
-  }
+
   metric {
     category = "AllMetrics"
     enabled  = true
+
     retention_policy {
       enabled = true
     }
