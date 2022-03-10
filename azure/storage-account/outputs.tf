@@ -23,6 +23,8 @@ output id {
     azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
     azurerm_private_dns_a_record.file,
+    azurerm_private_endpoint.dfs,
+    azurerm_private_dns_a_record.dfs,
   ]
 }
 
@@ -38,6 +40,8 @@ output name {
     azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
     azurerm_private_dns_a_record.file,
+    azurerm_private_endpoint.dfs,
+    azurerm_private_dns_a_record.dfs,
   ]
 }
 
@@ -54,6 +58,8 @@ output primary_connection_string {
     azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
     azurerm_private_dns_a_record.file,
+    azurerm_private_endpoint.dfs,
+    azurerm_private_dns_a_record.dfs,
   ]
 }
 
@@ -70,6 +76,8 @@ output primary_access_key {
     azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
     azurerm_private_dns_a_record.file,
+    azurerm_private_endpoint.dfs,
+    azurerm_private_dns_a_record.dfs,
   ]
 }
 
@@ -85,6 +93,8 @@ output primary_blob_endpoint {
     azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
     azurerm_private_dns_a_record.file,
+    azurerm_private_endpoint.dfs,
+    azurerm_private_dns_a_record.dfs,
   ]
 }
 
@@ -100,5 +110,7 @@ output primary_file_endpoint {
     azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
     azurerm_private_dns_a_record.file,
+    azurerm_private_endpoint.dfs,
+    azurerm_private_dns_a_record.dfs,
   ]
 }
