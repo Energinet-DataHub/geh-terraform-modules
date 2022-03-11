@@ -53,7 +53,7 @@ variable private_endpoint_subnet_id {
 }
 
 variable private_dns_resource_group_name {
-  type        = set(string)
+  type        = list(string)
   description = "(Required) Specifies the resource groups where the Private DNS Zones exists. Changing this forces a new resource to be created."
 }
 
