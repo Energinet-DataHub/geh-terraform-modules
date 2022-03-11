@@ -107,7 +107,7 @@ resource "azurerm_private_endpoint" "blob" {
 
 # Create an A record pointing to the Storage Account (blob) private endpoint
 resource "azurerm_private_dns_a_record" "blob" {
-  count               = var.use_blob ? count(var.private_dns_resource_group_names) : 0
+  count               = var.use_blob ? length(var.private_dns_resource_group_names) : 0
 
   name                = azurerm_storage_account.this.name
   zone_name           = "privatelink.blob.core.windows.net"
@@ -160,7 +160,7 @@ resource "azurerm_private_endpoint" "file" {
 
 # Create an A record pointing to the Storage Account (file) private endpoint
 resource "azurerm_private_dns_a_record" "file" {
-  count               = var.use_file ? count(var.private_dns_resource_group_names) : 0
+  count               = var.use_file ? length(var.private_dns_resource_group_names) : 0
 
   name                = azurerm_storage_account.this.name
   zone_name           = "privatelink.file.core.windows.net"
@@ -213,7 +213,7 @@ resource "azurerm_private_endpoint" "dfs" {
 
 # Create an A record pointing to the Data Lake File System Gen2 private endpoint
 resource "azurerm_private_dns_a_record" "dfs" {
-  count               = var.use_dfs ? count(var.private_dns_resource_group_names) : 0
+  count               = var.use_dfs ? length(var.private_dns_resource_group_names) : 0
 
   name                = azurerm_storage_account.this.name
   zone_name           = "privatelink.dfs.core.windows.net"
