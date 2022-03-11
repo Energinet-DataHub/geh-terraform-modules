@@ -107,7 +107,7 @@ resource "azurerm_private_endpoint" "blob" {
 
 # Create an A record pointing to the Storage Account (blob) private endpoint
 resource "azurerm_private_dns_a_record" "blob" {
-  count               = var.use_blob ? 1 : 0
+  for_each            = var.use_dfs ? var.private_dns_resource_group_name : []
 
   name                = azurerm_storage_account.this.name
   zone_name           = "privatelink.blob.core.windows.net"
