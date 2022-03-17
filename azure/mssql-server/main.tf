@@ -60,6 +60,7 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
 
     retention_policy {
       enabled = true
+      days    = var.log_retention_in_days
     }
   }
 }
