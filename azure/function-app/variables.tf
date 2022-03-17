@@ -43,7 +43,7 @@ variable location {
 
 variable app_service_plan_id {
   type        = string
-  description = "(Required) The ID of the App Service Plan within which to create this Function App." 
+  description = "(Required) The ID of the App Service Plan within which to create this Function App."
 }
 
 variable application_insights_instrumentation_key {
@@ -53,7 +53,7 @@ variable application_insights_instrumentation_key {
 
 variable app_settings {
   type        = map(string)
-  description = "(Optional) A map of key-value pairs for App Settings and custom values." 
+  description = "(Optional) A map of key-value pairs for App Settings and custom values."
   default     = {}
 }
 
@@ -67,6 +67,12 @@ variable always_on {
   type        = bool
   description = "(Optional) Should the Function App be loaded at all times? Defaults to false."
   default     = false
+}
+
+variable health_check_path {
+  type        = string
+  description = "(Optional) Path to the health check endpoint, which will be used to automatically monitor the health of the function app."
+  default     = null
 }
 
 variable tags {

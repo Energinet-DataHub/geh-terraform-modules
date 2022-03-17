@@ -14,8 +14,8 @@ This module creates the following resources.
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 
@@ -32,13 +32,14 @@ This module creates the following resources.
 | `app_settings` | `string` | `{}` | | The application insights instrumentation id for which data is to be logged into. |
 | `connection_strings` | `map(string)` | `{}` | | A map of key-value pairs for App Settings and custom values. |
 | `always_on` | `map(string)` | `{}` | | Should the Function App be loaded at all times? Defaults to false. |
+| `health_check_path` | `string` | `null` | Path to the health check endpoint, which will be used to automatically monitor the health of the function app. |
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
 ## Usage
 
 ```ruby
-module "func_example" { 
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=5.1.0"
+module "func_example" {
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=5.8.0"
 
   name                                      = "example-name"
   project_name                              = "example-project-name"
@@ -66,7 +67,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"   
+    "ModuleVersion" = "5.8.0"
     "ModuleId"      = "azure-function-app"
   }
 }

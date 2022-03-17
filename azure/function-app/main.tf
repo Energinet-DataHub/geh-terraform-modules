@@ -13,15 +13,15 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0",
+    "ModuleVersion" = "5.8.0",
     "ModuleId"      = "azure-function-app"
   }
 }
 
 resource "azurerm_storage_account" "this" {
   name                      = "st${random_string.this.result}"
-  resource_group_name       = var.resource_group_name 
-  location                  = var.location 
+  resource_group_name       = var.resource_group_name
+  location                  = var.location
   account_tier              = "Standard"
   account_replication_type  = "LRS"
   min_tls_version           = "TLS1_2"
@@ -60,6 +60,7 @@ resource "azurerm_function_app" "this" {
   }
   site_config {
     always_on = var.always_on
+    health_check_path = var.health_check_path
     cors {
       allowed_origins = ["*"]
     }
@@ -74,7 +75,7 @@ resource "azurerm_function_app" "this" {
   }
 
   tags                        = merge(var.tags, local.module_tags)
-  
+
   depends_on                  = [
     azurerm_storage_account.this,
   ]
