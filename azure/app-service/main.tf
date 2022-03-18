@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 locals {
   module_tags = {
     "ModuleVersion" = "5.8.0",
@@ -46,13 +47,50 @@ resource "azurerm_app_service" "this" {
     for_each  = var.connection_strings
 
     content {
-      name = connection_string.value.name
-      type = connection_string.value.type
+      name  = connection_string.value.name
+      type  = connection_string.value.type
       value = connection_string.value.value
     }
   }
 
-  tags                        = merge(var.tags, local.module_tags)
+  tags      = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+}
+
+resource "azurerm_monitor_metric_alert" "health_check_alert" {
+  count               = var.health_check_alert_action_group_id == null ? 0 : 1
+
+  name                = "hca-${azurerm_app_service.this.name}"
+  resource_group_name = var.resource_group_name
+
+  enabled             = var.health_check_alert_enabled
+  severity            = 1
+  scopes              = [azurerm_app_service.this.id]
+  description         = "Action will be triggered when health check fails."
+
+  criteria {
+    metric_namespace = "Microsoft.Web/Sites"
+    metric_name      = "HealthCheckStatus"
+    aggregation      = "LessThan"
+    operator         = "Average"
+    threshold        = 100
+  }
+
+  action {
+    action_group_id = var.health_check_alert_action_group_id
+  }
+
+  frequency = "PT1M"
+  window_size = "PT5M"
+
+  tags      = merge(var.tags, local.module_tags)
 
   lifecycle {
     ignore_changes = [
