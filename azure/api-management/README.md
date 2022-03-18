@@ -38,7 +38,7 @@ This module creates the following resources.
 
 ```ruby
 module "appi_example" { 
-  source                     = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.6.0"
+  source                     = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management?ref=5.7.0"
 
   name                       = "example-name"
   project_name               = "example-project-name"

@@ -37,7 +37,7 @@ This module creates the following resource:
 
 ```ruby
 module "sqldb_example" { 
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=5.6.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=5.7.0"
 
   name                          = "example-name"
   project_name                  = "example-project-name"
@@ -56,7 +56,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.6.0"
+    "ModuleVersion" = "5.7.0"
     "ModuleId"      = "azure-mssql-database"
   }
 }

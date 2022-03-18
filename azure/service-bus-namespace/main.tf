@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.6.0"
+    "ModuleVersion" = "5.7.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }
