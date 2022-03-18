@@ -11,34 +11,35 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 variable name {
   type        = string
-  description = "(Required) Specifies the name of the storage account. Changing this forces a new resource to be created. This must be unique across the entire Azure service, not just within the resource group."
-}
-
-variable resource_group_name {
-  type        = string
-  description = "(Required) The name of the resource group in which to create the storage account. Changing this forces a new resource to be created."
-}
-
-variable organisation_name {
-  type        = string
-  description = "(Required) The name of your organisation."
+  description = "(Required) The name of the Action Group. Changing this forces a new resource to be created."
 }
 
 variable project_name {
-  type        = string
-  description = "(Required) The name of your project."
+  type          = string
+  description   = "(Required) The name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) Specifies the environment short, of the environment."
+  description = "(Required) The short value name of your environment."
+}
+
+variable environment_instance {
+  type        = string
+  description = "(Required) The instance value of your environment."
+}
+
+variable resource_group_name {
+  type        = string
+  description = "(Required) The name of the resource group in which to create the resource."
 }
 
 variable short_name {
   type        = string
-  description = "(Required) Species the name used if the email is relayed to SMS. Must be between 1 and 12 characters."
+  description = "(Required) The name used if the email is relayed to SMS. Must be between 1 and 12 characters."
 }
 
 variable enabled {
@@ -47,20 +48,18 @@ variable enabled {
   default     = true
 }
 
-variable email_receiver {
-  type        = any
-  description = "(Optional) One or more email_receiver blocks as for monitor action groups."
-  default     = {}
+variable email_receiver_name {
+  type        = string
+  description = "(Required) The name of the email receiver."
+}
+
+variable email_receiver_address {
+  type        = string
+  description = "(Required) The email address of the email receiver."
 }
 
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
   default     = {}
-}
-
-variable dependencies {
-  type        = list
-  description = "A mapping of dependencies which this module depends on."
-  default     = []
 }
