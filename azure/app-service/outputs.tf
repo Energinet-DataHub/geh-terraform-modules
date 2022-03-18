@@ -16,7 +16,8 @@ output "id" {
   description = "The ID of the App Service."
 
   depends_on  = [
-    azurerm_app_service.this
+    azurerm_app_service.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
@@ -25,7 +26,8 @@ output "name" {
   description = "The name of the App Service."
 
   depends_on  = [
-    azurerm_app_service.this
+    azurerm_app_service.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
@@ -34,7 +36,8 @@ output "default_site_hostname" {
   description = "The default hostname associated with the App Service - such as mysite.azurewebsites.net"
 
   depends_on  = [
-    azurerm_app_service.this
+    azurerm_app_service.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
@@ -43,7 +46,8 @@ output "identity" {
   description = "An identity block as defined below, which contains the Managed Service Identity information for this App Service."
 
   depends_on  = [
-    azurerm_app_service.this
+    azurerm_app_service.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
@@ -52,6 +56,7 @@ output "site_credential" {
   description = "A site_credential block as defined below, which contains the site-level credentials used to publish to this App Service."
 
   depends_on  = [
-    azurerm_app_service.this
+    azurerm_app_service.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
