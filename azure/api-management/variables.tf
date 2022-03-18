@@ -56,6 +56,17 @@ variable sku_name {
   description = "(Required) sku_name is a string consisting of two parts separated by an underscore(_). The first part is the name, valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1)."
 }
 
+variable log_analytics_workspace_id {
+  type = string
+  description = "(Required) The id of the Log Analytics Workspace where the API manager will log events (e.g. audit events) and metrics"
+}
+
+variable log_retention_in_days {
+  type        = number
+  description = "(Optional) The number of days for which this Retention Policy should apply."
+  default     = 183
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."

@@ -54,6 +54,17 @@ variable auto_pause_delay_in_minutes {
   description = "(Optional) Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for General Purpose Serverless databases."
 }
 
+variable log_analytics_workspace_id {
+  type = string
+  description = "(Required) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
+}
+
+variable log_retention_in_days {
+  type        = number
+  description = "(Optional) The number of days for which this Retention Policy should apply."
+  default     = 183
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."

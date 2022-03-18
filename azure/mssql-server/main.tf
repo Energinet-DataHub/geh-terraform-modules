@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.4.0"
+    "ModuleVersion" = "5.7.0"
     "ModuleId"      = "azure-mssql-server"
   }
 }
@@ -47,4 +47,20 @@ resource "azurerm_mssql_firewall_rule" "this" {
   server_id           = azurerm_mssql_server.this.id
   start_ip_address    = try(var.firewall_rules[count.index].start_ip_address, null)
   end_ip_address      = try(var.firewall_rules[count.index].end_ip_address, null)
+}
+
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  name                       = "diag-mssql-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  target_resource_id         = azurerm_mssql_server.this.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = var.log_retention_in_days
+    }
+  }
 }

@@ -12,11 +12,12 @@ This module creates the following resources.
 
 - [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_namespace)
 - [Azure Service Bus Namespace Authorization Rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_authorization_rule)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 
@@ -30,6 +31,8 @@ This module creates the following resources.
 | `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
 | `sku` | `string` | | **Required** |  Defines which tier to use. Options are `basic`, `standard` or `premium`. Changing this forces a new resource to be created. |
 | `auth_rules` | `list` | | **Required** | A list of objects describing the auth rules of the Service Bus Namespace. See [Auth Rule](#auth-rule). |
+| `log_analytics_workspace_id` | `string` | | | ID of Log Analytics Workspace associated with the Key Vault  |
+
 | `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
 ### Auth Rule
@@ -45,7 +48,7 @@ This module creates the following resources.
 
 ```ruby
 module "service_bus_namespace_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=5.1.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=5.7.0"
 
   name                  = "example-name"
   project_name          = "example-project-name"
@@ -74,7 +77,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "5.7.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }
