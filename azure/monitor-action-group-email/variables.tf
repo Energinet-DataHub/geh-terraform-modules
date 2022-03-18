@@ -39,7 +39,7 @@ variable resource_group_name {
 
 variable short_name {
   type        = string
-  description = "(Required) The name used if the email is relayed to SMS. Must be between 1 and 12 characters."
+  description = "(Required) The short name of the action group. This will be used if the email is relayed to SMS. Must be between 1 and 12 characters."
 }
 
 variable enabled {
