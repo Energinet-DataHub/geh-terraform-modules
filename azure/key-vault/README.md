@@ -32,7 +32,7 @@ This module creates the following resources.
 | `sku_name` | `string` | | **Required** | The Name of the SKU used for this Key Vault. Possible values are `standard` and `premium`. |
 | `access_policies` | `list` | `[]` | |  A list of objects describing the Key Vault access policies. See [Access Policy](#access-policy). |
 | `enabled_for_template_deployment` | `bool` | `false` | | Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false. |
-| `log_analytics_workspace_id` | `string` | | **Required** | | ID of Log Analytics Workspace associated with the Key Vault  |
+| `log_analytics_workspace_id` | `string` | **Required** | | ID of Log Analytics Workspace associated with the Key Vault  |
 | `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
 
 
