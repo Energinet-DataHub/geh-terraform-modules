@@ -58,7 +58,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.6.0"
+    "ModuleVersion" = "5.7.0"
     "ModuleId"      = "azure-api-management"
   }
 }
