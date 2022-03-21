@@ -23,11 +23,12 @@ This module creates the following resources:
 - [Azure Storage Account Network Rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules)
 - [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
 - [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
+- [Azure Monitor Metric Alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert)
 
 ## Prerequisites
 
-- Terraform version 1.1.2+
-- AzureRM provider version 2.91.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 

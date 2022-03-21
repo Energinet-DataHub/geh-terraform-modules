@@ -88,6 +88,24 @@ variable always_on {
   default     = false
 }
 
+variable health_check_path {
+  type        = string
+  description = "(Optional) Path to the health check endpoint, which will be used to automatically monitor the health of the function app."
+  default     = null
+}
+
+variable health_check_alert_action_group_id {
+  type        = string
+  description = "(Optional) If this is specified, a health check alert will be configured to send alerts to this action group."
+  default     = null
+}
+
+variable health_check_alert_enabled {
+  type        = bool
+  description = "(Optional) Specify if health check metric alert is enabled or not. This is only relevant if 'health_check_alert_action_group_id' is specified."
+  default     = true
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resources."

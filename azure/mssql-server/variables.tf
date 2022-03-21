@@ -66,6 +66,17 @@ variable private_dns_resource_group_name {
   description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
 }
 
+variable log_analytics_workspace_id {
+  type = string
+  description = "(Required) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
+}
+
+variable log_retention_in_days {
+  type        = number
+  description = "(Optional) The number of days for which this Retention Policy should apply."
+  default     = 183
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resources."

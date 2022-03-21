@@ -17,15 +17,30 @@ This module creates the following resources:
 - [Azure Service Bus Namespace Network Rule Set](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_network_rule_set)
 - [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
 - [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
 
-- Terraform version 1.1.2+
-- AzureRM provider version 2.91.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 
 See [variables.tf](./variables.tf)
+
+| Name | Type | Default | Required | Description |
+|-|-|-|-|-|
+| `name` | `string` | | **Required** | The name of the Microsoft SQL Server. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `sb-{var.name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
+| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
+| `environment_short` | `string` | | **Required** | The short value name of your environment. |
+| `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
+| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
+| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
+| `sku` | `string` | | **Required** |  Defines which tier to use. Options are `basic`, `standard` or `premium`. Changing this forces a new resource to be created. |
+| `auth_rules` | `list` | | **Required** | A list of objects describing the auth rules of the Service Bus Namespace. See [Auth Rule](#auth-rule). |
+| `log_analytics_workspace_id` | `string` | | | ID of Log Analytics Workspace associated with the Key Vault  |
+
+| `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
 
 ### Auth Rule
 
@@ -40,7 +55,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "service_bus_namespace_example" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=6.0.0"
 
   name                            = "example-name"
   project_name                    = "example-project-name"
@@ -50,6 +65,7 @@ module "service_bus_namespace_example" {
   location                        = "westeurope"
   private_endpoint_subnet_id      = "private-endpoint-subnet-id"
   private_dns_resource_group_name = "private-dns-resource-group-name"
+  sku                             = "basic"
 
   auth_rules            = [
     {

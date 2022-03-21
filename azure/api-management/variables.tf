@@ -66,6 +66,17 @@ variable subnet_id {
   description = "(Required) The id of the subnet to use for the API Management."
 }
 
+variable log_analytics_workspace_id {
+  type = string
+  description = "(Required) The id of the Log Analytics Workspace where the API manager will log events (e.g. audit events) and metrics"
+}
+
+variable log_retention_in_days {
+  type        = number
+  description = "(Optional) The number of days for which this Retention Policy should apply."
+  default     = 183
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resources."

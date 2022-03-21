@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-output "id" {
+output id {
   value       = azurerm_app_service.this.id
   description = "The ID of the App Service."
 
@@ -20,10 +20,11 @@ output "id" {
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
     azurerm_private_dns_a_record.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
-output "name" {
+output name {
   value       = azurerm_app_service.this.name
   description = "The name of the App Service."
 
@@ -32,10 +33,11 @@ output "name" {
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
     azurerm_private_dns_a_record.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
-output "default_site_hostname" {
+output default_site_hostname {
   value       = azurerm_app_service.this.default_site_hostname
   description = "The default hostname associated with the App Service - such as mysite.azurewebsites.net"
 
@@ -44,10 +46,11 @@ output "default_site_hostname" {
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
     azurerm_private_dns_a_record.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
-output "outbound_ip_addresses" {
+output outbound_ip_addresses {
   value       = azurerm_app_service.this.outbound_ip_addresses
   description = "A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12"
 
@@ -56,10 +59,11 @@ output "outbound_ip_addresses" {
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
     azurerm_private_dns_a_record.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
-output "possible_outbound_ip_addresses" {
+output possible_outbound_ip_addresses {
   value       = azurerm_app_service.this.possible_outbound_ip_addresses
   description = "A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12,52.143.43.17 - not all of which are necessarily in use. Superset of outbound_ip_addresses"
 
@@ -68,10 +72,11 @@ output "possible_outbound_ip_addresses" {
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
     azurerm_private_dns_a_record.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
-output "identity" {
+output identity {
   value       = azurerm_app_service.this.identity
   description = "An identity block as defined below, which contains the Managed Service Identity information for this App Service."
 
@@ -80,10 +85,11 @@ output "identity" {
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
     azurerm_private_dns_a_record.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }
 
-output "site_credential" {
+output site_credential {
   value       = azurerm_app_service.this.site_credential
   description = "A site_credential block as defined below, which contains the site-level credentials used to publish to this App Service."
 
@@ -92,5 +98,6 @@ output "site_credential" {
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
     azurerm_private_dns_a_record.this,
+    azurerm_monitor_metric_alert.health_check_alert
   ]
 }

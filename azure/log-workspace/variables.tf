@@ -14,12 +14,24 @@
 
 variable name {
   type        = string
-  description = "(Required) Specifies the name of the Application Insights component. Changing this forces a new resource to be created."
+  description = "(Mandatory) Log workspace name"
+}
+
+variable retention_in_days {
+  type        = number
+  description = "(Optional) Log workspace rentention in days"
+  default     = 30
+}
+
+variable sku {
+  type        = string
+  description = "(Optional) Log workspace sku"
+  default     = "PerGB2018"
 }
 
 variable project_name {
   type        = string
-  description = "(Required) Name of the project this infrastructure is a part of."
+  description = "(Required) The name of your project."
 }
 
 variable environment_short {
@@ -34,17 +46,12 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group in which to create the resources."
 }
 
 variable location {
   type        = string
   description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
-}
-
-variable log_analytics_workspace_id {
-  type        = string
-  description = "(Required) Log workspace id"
 }
 
 variable tags {

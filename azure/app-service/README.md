@@ -18,11 +18,12 @@ This module creates the following resources:
 
 - [Azure App Service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service)
 - [App Service Virtual Network Association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_virtual_network_swift_connection)
+- [Azure Monitor Metric Alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert)
 
 ## Prerequisites
 
-- Terraform version 1.1.2+
-- AzureRM provider version 2.91.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 

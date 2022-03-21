@@ -14,15 +14,30 @@ This module creates the following resources:
 - [Azure Key Vault Access Policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy)
 - [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
 - [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
 
-- Terraform version 1.1.2+
-- AzureRM provider version 2.91.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 
 See [variables.tf](./variables.tf)
+
+| Name | Type | Default | Required | Description |
+|-|-|-|-|-|
+| `name` | `string` | | **Required** | Specifies the name of the Key Vault. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `kv{var.name}{var.environment_short}{var.environment_instance}` and be in lowercase. |
+| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
+| `environment_short` | `string` | | **Required** | The short value name of your environment. |
+| `environment_instance` | `number` | | **Required** |  The instance number of your environment. |
+| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Key Vault. Changing this forces a new resource to be created. |
+| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
+| `sku_name` | `string` | | **Required** | The Name of the SKU used for this Key Vault. Possible values are `standard` and `premium`. |
+| `access_policies` | `list` | `[]` | |  A list of objects describing the Key Vault access policies. See [Access Policy](#access-policy). |
+| `enabled_for_template_deployment` | `bool` | `false` | | Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false. |
+| `log_analytics_workspace_id` | `string` |  |**Required** | ID of Log Analytics Workspace associated with the Key Vault  |
+| `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
 
 ### Access Policy
 
@@ -52,6 +67,7 @@ module "key_vault_example" {
   sku_name                        = "standard"
   private_endpoint_subnet_id      = "private-endpoint-subnet-id"
   private_dns_resource_group_name = "private-dns-resource-group-name"
+  log_analytics_workspace_id      = "example-log-analytics-workspace"
 
   access_policies       = [
     {

@@ -295,3 +295,40 @@ resource "time_sleep" "this" {
 
   create_duration = "60s"
 }
+
+resource "azurerm_monitor_metric_alert" "health_check_alert" {
+  count               = var.health_check_alert_action_group_id == null ? 0 : 1
+
+  name                = "hca-${azurerm_function_app.this.name}"
+  resource_group_name = var.resource_group_name
+
+  enabled             = var.health_check_alert_enabled
+  severity            = 1
+  scopes              = [azurerm_function_app.this.id]
+  description         = "Action will be triggered when health check fails."
+
+  frequency           = "PT1M"
+  window_size         = "PT5M"
+
+  criteria {
+    metric_namespace  = "Microsoft.Web/Sites"
+    metric_name       = "HealthCheckStatus"
+    operator          = "LessThan"
+    aggregation       = "Average"
+    threshold         = 100
+  }
+
+  action {
+    action_group_id   = var.health_check_alert_action_group_id
+  }
+
+  tags                = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+}

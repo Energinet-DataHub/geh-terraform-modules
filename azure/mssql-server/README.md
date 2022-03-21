@@ -13,15 +13,40 @@ This module creates the following resources:
 - [Azure Microsoft SQL Server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/mssql_server)
 - [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
 - [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
+- [Azure Microsoft SQL firewall rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
 
-- Terraform version 1.1.2+
-- AzureRM provider version 2.91.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 
 See [variables.tf](./variables.tf)
+
+| Name | Type | Default | Required | Description |
+|-|-|-|-|-|
+| `name` | `string` | | **Required** | The name of the Microsoft SQL Server. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `mssql-{name}-{project_name}-{environment_short}-{environment_instance}` and be in lowercase. |
+| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
+| `environment_short` | `string` | | **Required** | The short value name of your environment. |
+| `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
+| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the MS SQL Server. |
+| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
+| `sql_version` | `string` | | **Required** | The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). |
+| `administrator_login` | `string` | | **Required** | The administrator login name for the new server. Changing this forces a new resource to be created. |
+| `administrator_login_password` | `string` | | **Required** | The password associated with the administrator_login user. Needs to comply with Azure's [Password Policy](https://msdn.microsoft.com/library/ms161959.aspx) |
+| `log_analytics_workspace_id` | `string`| |**Required** | Name of associated Log Analytics Workspace. |
+| `firewall_rules` | `any` | `[]` | | A list of objects describing the firewall rules of the Microsoft SQL Server. See [Firewall Rule](#firewall-rule). |
+| `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
+
+### Firewall Rule
+
+| Name | Type | Default | Required | Description |
+|-|-|-|-|-|
+| name | `string` | | **Required** | The name of the firewall rule. |
+| start_ip_address | `string` | | **Required** | The starting IP address to allow through the firewall for this rule. |
+| end_ip_address | `string` | | **Required** | The ending IP address to allow through the firewall for this rule. |
 
 ## Usage
 
@@ -40,6 +65,7 @@ module "sql_server_example" {
   administrator_login_password    = "example-administrator-login-password"
   private_endpoint_subnet_id      = "private-endpoint-subnet-id"
   private_dns_resource_group_name = "private-dns-resource-group-name"
+  log_analytics_workspace_id      = "example-log-analytics-workspace-id"
 
   tags                          = {}
 }

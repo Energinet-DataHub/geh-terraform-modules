@@ -40,3 +40,19 @@ resource "azurerm_api_management" "this" {
     ]
   }
 }
+
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  name                       = "diag-apim-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  target_resource_id         = azurerm_api_management.this.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = var.log_retention_in_days
+    }
+  }
+}

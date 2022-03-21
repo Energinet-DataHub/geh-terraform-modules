@@ -14,41 +14,46 @@
 
 variable name {
   type        = string
-  description = "(Required) Specifies the name of the Application Insights component. Changing this forces a new resource to be created."
+  description = "(Required) The name of the Action Group. Changing this forces a new resource to be created."
 }
 
 variable project_name {
-  type        = string
-  description = "(Required) Name of the project this infrastructure is a part of."
+  type          = string
+  description   = "(Required) The name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of the environment."
+  description = "(Required) The short value name of your environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of the environment."
+  description = "(Required) The instance value of your environment."
 }
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group in which to create the resource."
 }
 
-variable location {
+variable short_name {
   type        = string
-  description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
+  description = "(Required) The short name of the action group. This will be used if the email is relayed to SMS. Must be between 1 and 12 characters."
 }
 
-variable log_analytics_workspace_id {
+variable email_receiver_name {
   type        = string
-  description = "(Required) Log workspace id"
+  description = "(Required) The name of the email receiver."
+}
+
+variable email_receiver_address {
+  type        = string
+  description = "(Required) The email address of the email receiver."
 }
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resources."
+  description = "(Optional) A mapping of tags to assign to the resource."
   default     = {}
 }

@@ -11,17 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-output "id" {
-  value       = azurerm_monitor_action_group.main.id
-  description = "The id of the resource created."
+output id {
+  value       = azurerm_monitor_action_group.this.id
+  description = "The Action Group ID."
 }
 
-output "name" {
-  value       = azurerm_monitor_action_group.main.name
-  description = "The name of the resource created."
-}
-
-output "dependent_on" {
-  value       = null_resource.dependency_setter.id
-  description = "The dependencies of the resource created."
+output name {
+  value       = azurerm_monitor_action_group.this.name
+  description = "The Action Group name."
 }

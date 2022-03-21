@@ -142,3 +142,19 @@ resource "azurerm_key_vault_access_policy" "this" {
   certificate_permissions = try(var.access_policies[count.index].certificate_permissions, [])
   storage_permissions     = try(var.access_policies[count.index].storage_permissions, [])
 }
+
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  name                       = "diag-kv-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  target_resource_id         = azurerm_key_vault.this.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = var.log_retention_in_days
+    }
+  }
+}

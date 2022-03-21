@@ -31,3 +31,7 @@
 
 - [Azure Virtual Network (VNet)](./azure/vnet)
   - [Azure Subnet](./azure/subnet)
+
+- [Azure Event Hub](./azure/eventhub-namespace)
+
+- [Azure Log Analytics Workspace](./azure/log-workspace)

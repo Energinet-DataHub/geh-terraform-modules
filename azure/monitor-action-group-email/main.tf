@@ -11,22 +11,26 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0",
-    "ModuleId"      = "azure-application-insights"
+    "ModuleVersion" = "5.8.0"
+    "ModuleId"      = "monitor-action-group-email"
   }
 }
 
+resource "azurerm_monitor_action_group" "this" {
+  name                      = "ag-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name       = var.resource_group_name
+  short_name                = var.short_name
 
-resource "azurerm_application_insights" "this" {
-  name                = "appi-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  application_type    = "web"
-  workspace_id        = var.log_analytics_workspace_id
+  email_receiver {
+    name                    = var.email_receiver_name
+    email_address           = var.email_receiver_address
+    use_common_alert_schema = true
+  }
 
-  tags                = merge(var.tags, local.module_tags)
+  tags                      = merge(var.tags, local.module_tags)
 
   lifecycle {
     ignore_changes = [
