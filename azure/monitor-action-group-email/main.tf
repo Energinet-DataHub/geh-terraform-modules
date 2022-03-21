@@ -23,7 +23,6 @@ resource "azurerm_monitor_action_group" "this" {
   name                      = "ag-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name       = var.resource_group_name
   short_name                = var.short_name
-  enabled                   = var.enabled
 
   email_receiver {
     name                    = var.email_receiver_name

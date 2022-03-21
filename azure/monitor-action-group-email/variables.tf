@@ -42,12 +42,6 @@ variable short_name {
   description = "(Required) The short name of the action group. This will be used if the email is relayed to SMS. Must be between 1 and 12 characters."
 }
 
-variable enabled {
-  type        = bool
-  description = "(Optional) Whether this action group is enabled. If an action group is not enabled, then none of its receivers will receive communications. Defaults to true."
-  default     = true
-}
-
 variable email_receiver_name {
   type        = string
   description = "(Required) The name of the email receiver."
