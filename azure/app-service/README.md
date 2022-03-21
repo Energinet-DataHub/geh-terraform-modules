@@ -1,4 +1,4 @@
-# Azure Function App
+# Azure App Service
 
 - [Resources Created](#resources-created)
 - [Prerequisites](#prerequisites)
@@ -8,9 +8,9 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
-- [Azure Function App](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app)
+- [Azure App Service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service)
 - [Azure Monitor Metric Alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert)
 
 ## Prerequisites
@@ -25,12 +25,12 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "func_example" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=5.8.0"
+module "app_example" {
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service?ref=6.0.0"
 
   name                                      = "example-name"
   project_name                              = "example-project-name"
-  environment_short                         = "p"
+  environment_short                         = "u"
   environment_instance                      = "001"
   resource_group_name                       = "example-resource-group-name"
   location                                  = "westeurope"
@@ -40,22 +40,25 @@ module "func_example" {
     "example-key1" = "example-value1"
     "example-key2" = "example-value2"
   }
-  connection_strings                        = {
-    "example-key1" = "example-value1"
-    "example-key1" = "example-value1"
-  }
+  connection_strings                        = [
+    {
+      name  = "example-name"
+      type  = "SQLAzure"
+      value = "example-value"
+    }
+  ]
 
   tags                                      = {}
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {
   module_tags = {
     "ModuleVersion" = "5.8.0"
-    "ModuleId"      = "azure-function-app"
+    "ModuleId"      = "azure-app-service"
   }
 }
 ```

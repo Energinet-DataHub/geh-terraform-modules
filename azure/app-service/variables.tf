@@ -13,37 +13,37 @@
 # limitations under the License.
 variable name {
   type        = string
-  description = "(Required) Specifies the name of the Function App. Changing this forces a new resource to be created."
+  description = "(Required) Specifies the name of the App Service. Changing this forces a new resource to be created."
 }
 
 variable project_name {
-  type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  type        = string
+  description = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the Function App."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
   type        = string
-  description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
+  description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
 variable app_service_plan_id {
   type        = string
-  description = "(Required) The ID of the App Service Plan within which to create this Function App."
+  description = "(Required) The ID of the App Service Plan within which to create this App Service."
 }
 
 variable application_insights_instrumentation_key {
@@ -58,20 +58,30 @@ variable app_settings {
 }
 
 variable connection_strings {
-  type        = map(string)
-  description = "(Optional) A map of key-value pairs for App Settings and custom values."
-  default     = {}
+  type = list(object({
+    name  = string
+    type  = string
+    value = string
+  }))
+  description = "(Optional) A list of objects for App Settings Connection Strings."
+  default     = []
+}
+
+variable dotnet_framework_version {
+  type        = string
+  description = "(Optional) Use this when running on a Windows plan to specify .NET Core runtime version."
+  default     = "v5.0"
 }
 
 variable always_on {
   type        = bool
-  description = "(Optional) Should the Function App be loaded at all times? Defaults to false."
+  description = "(Optional) Should the App Service be loaded at all times? Defaults to false."
   default     = false
 }
 
 variable health_check_path {
   type        = string
-  description = "(Optional) Path to the health check endpoint, which will be used to automatically monitor the health of the function app."
+  description = "(Optional) Path to the health check endpoint, which will be used to automatically monitor the health of the app service."
   default     = null
 }
 
@@ -89,6 +99,6 @@ variable health_check_alert_enabled {
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }
