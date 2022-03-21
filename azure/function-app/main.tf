@@ -101,22 +101,22 @@ resource "azurerm_monitor_metric_alert" "health_check_alert" {
   scopes              = [azurerm_function_app.this.id]
   description         = "Action will be triggered when health check fails."
 
+  frequency           = "PT1M"
+  window_size         = "PT5M"
+
   criteria {
-    metric_namespace = "Microsoft.Web/Sites"
-    metric_name      = "HealthCheckStatus"
-    operator         = "LessThan"
-    aggregation      = "Average"
-    threshold        = 100
+    metric_namespace  = "Microsoft.Web/Sites"
+    metric_name       = "HealthCheckStatus"
+    operator          = "LessThan"
+    aggregation       = "Average"
+    threshold         = 100
   }
 
   action {
-    action_group_id = var.health_check_alert_action_group_id
+    action_group_id   = var.health_check_alert_action_group_id
   }
 
-  frequency = "PT1M"
-  window_size = "PT5M"
-
-  tags      = merge(var.tags, local.module_tags)
+  tags                = merge(var.tags, local.module_tags)
 
   lifecycle {
     ignore_changes = [
