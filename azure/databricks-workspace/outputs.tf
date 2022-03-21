@@ -11,9 +11,26 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-output "workspace_id" {
-  value       = azurerm_databricks_workspace.this.workspace_id
-  description = "The Databricks workspace ID."
+output "id" {
+  value       = azurerm_databricks_workspace.this.id
+  description = "The Databricks ID."
+  
+  depends_on = [
+    azurerm_databricks_workspace.this,
+    azurerm_virtual_network.this,
+    azurerm_subnet.private,
+    azurerm_subnet.public,
+    azurerm_subnet_network_security_group_association.nsg_public_group_association,
+    azurerm_subnet_network_security_group_association.nsg_private_group_association,
+    azurerm_network_security_group.dbw_nsg,
+    azurerm_virtual_network_peering.local,
+    azurerm_virtual_network_peering.remote
+  ]
+}
+
+output "location" {
+  value       = azurerm_databricks_workspace.this.location
+  description = "The location of the Databricks workspace."
   
   depends_on = [
     azurerm_databricks_workspace.this,

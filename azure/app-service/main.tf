@@ -164,7 +164,9 @@ resource "azurerm_monitor_metric_alert" "health_check_alert" {
 
   enabled             = var.health_check_alert_enabled
   severity            = 1
-  scopes              = [azurerm_app_service.this.id]
+  scopes              = [
+    azurerm_app_service.this.id
+  ]
   description         = "Action will be triggered when health check fails."
 
   frequency           = "PT1M"
