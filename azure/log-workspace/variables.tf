@@ -31,7 +31,7 @@ variable sku {
 
 variable project_name {
   type        = string
-  description = "(Required) The name of your project."
+  description = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {

@@ -18,27 +18,27 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "The name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
   type        = string
-  description = "(Required) The Azure location where the API Management Service exists. Changing this forces a new resource to be created."
+  description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
 variable publisher_name {
@@ -69,6 +69,6 @@ variable log_retention_in_days {
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }

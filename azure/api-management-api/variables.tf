@@ -18,22 +18,22 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "The name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The Name of the Resource Group where the API Management API exists. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group where the API Management API exists. Changing this forces a new resource to be created."
 }
 
 variable api_management_name {
@@ -43,7 +43,7 @@ variable api_management_name {
 
 variable revision {
   type        = string
-  description = "(Required) The Revision which used for this API."
+  description = "(Required) The revision which used for this API."
   default     = "1"
 }
 

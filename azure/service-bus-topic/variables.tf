@@ -38,13 +38,13 @@ variable subscriptions {
     max_delivery_count  = number
     forward_to          = optional(string)
   }))
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default = []
 }
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }
 

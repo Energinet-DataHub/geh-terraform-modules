@@ -44,7 +44,7 @@ module "sql_server_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {

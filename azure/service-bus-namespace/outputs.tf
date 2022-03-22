@@ -11,17 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-output "id" {
+output id {
   value       = azurerm_servicebus_namespace.this.id
   description = "The Service Bus Namespace ID."
 }
 
-output "name" {
+output name {
   value       = azurerm_servicebus_namespace.this.name
   description = "The Service Bus Namespace name."
 }
 
-output "primary_connection_strings" {
+output primary_connection_strings {
   value       = { for instance in azurerm_servicebus_namespace_authorization_rule.this: instance.name => instance.primary_connection_string }
   description = "A list of Auth Rule connection strings"
 }
