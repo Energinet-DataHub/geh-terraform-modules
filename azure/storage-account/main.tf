@@ -20,7 +20,7 @@ resource "null_resource" "dependency_setter" {
 
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "5.9.0"
     "ModuleId"      = "azure-storage-account"
   }
 }
@@ -51,4 +51,20 @@ resource "azurerm_storage_container" "this" {
   name                  = try(var.containers[count.index].name, null)
   storage_account_name  = azurerm_storage_account.this.name
   container_access_type = try(var.containers[count.index].access_type, "private")
+}
+
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  name                       = "diag-stor-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  target_resource_id         = azurerm_storage_account.this.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = var.log_retention_in_days
+    }
+  }
 }

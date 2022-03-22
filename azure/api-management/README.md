@@ -20,19 +20,7 @@ This module creates the following resources.
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Function App. Changing this forces a new resource to be created. The final name of the resource will follow this syntax `appi-{var.name}-${var.project_name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
-| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.|
-| `location` | `string` | | **Required** | The Azure location where the API Management Service exists. Changing this forces a new resource to be created. |
-| `publisher_name` | `string` | | **Required** | The name of publisher/company. |
-| `publisher_email` | `string` | | **Required** | The email of publisher/company. |
-| `sku_name` | `string` | | **Required** | sku_name is a string consisting of two parts separated by an underscore(_). The first part is the name, valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1). |
-| `log_analytics_workspace_id` | `string` | | **Required** | ID of Log Analytics Workspace associated with the API Manager |
-| `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
+See [variables.tf](./variables.tf)
 
 ## Usage
 

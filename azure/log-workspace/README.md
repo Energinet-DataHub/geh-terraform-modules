@@ -12,7 +12,6 @@ This module creates the following resource:
 
 - [Azure Log Workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/)
 
-
 ## Prerequisites
 
 - Terraform version 1.1.2+
@@ -21,9 +20,6 @@ This module creates the following resource:
 ## Arguments and defaults
 
 See [variables.tf](./variables.tf)
-
-
-
 
 ## Usage
 

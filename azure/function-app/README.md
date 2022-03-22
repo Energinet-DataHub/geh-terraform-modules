@@ -36,6 +36,7 @@ module "func_example" {
   location                                  = "westeurope"
   app_service_plan_id                       = "id-example"
   application_insights_instrumentation_key  = "app-insights-instrumentation-key-example"
+  log_analytics_workspace_id                = "example-log-analytics-workspace-id"
   app_settings                              = {
     "example-key1" = "example-value1"
     "example-key2" = "example-value2"
@@ -54,7 +55,7 @@ Two tags is added by default
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.8.0"
+    "ModuleVersion" = "5.9.0"
     "ModuleId"      = "azure-function-app"
   }
 }
