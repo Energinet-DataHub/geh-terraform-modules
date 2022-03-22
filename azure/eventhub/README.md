@@ -20,23 +20,7 @@ This module creates the following resources.
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Eventhub resource. Changing this forces a new resource to be created. The final name will be lowercased. |
-| `namespace_name` | `string` | | **Required** | The name of the Eventhub Namespace to create this Eventhub in. Changing this forces a new resource to be created. |
-| `resource_group_name` | `string` | | **Required** | The name of the resource group in which the Eventhub's parent Namespace exists. Changing this forces a new resource to be created. |
-| `partition_count` | `number` | | **Required** | Specifies the current number of shards on the Eventhub. |
-| `message_retention` | `number` | | **Required** | Specifies the number of days to retain the messages for this Eventhub. |
-| `auth_rules` | `list` | `[]` | | **Required** | A list of objects describing the auth rules of the Eventhub. See [Auth Rule](#auth-rule). |
-
-### Auth Rule
-
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the ServiceBus Namespace Authorization Rule resource. Changing this forces a new resource to be created. The final name of the resource will be in lowercase. |
-| `listen` | `bool` | `false` | | Grants listen access to this this Authorization Rule. Defaults to `false`. |
-| `send` | `list(string)` | `false` | | Grants send access to this this Authorization Rule. Defaults to `false`. |
-| `manage` | `list(string)` | `false` | | Grants manage access to this this Authorization Rule. When this property is `true` - both `listen` and `send` must be too. Defaults to `false`. |
+See [variables.tf](./variables.tf)
 
 ## Usage
 

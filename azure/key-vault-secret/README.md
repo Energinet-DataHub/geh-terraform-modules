@@ -19,12 +19,7 @@ This module creates the following resources.
 
 ## Arguments and defaults
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the Key Vault Secret. Changing this forces a new resource to be created. |
-| `value` | `string` | | **Required** | Specifies the value of the Key Vault Secret. |
-| `key_vault_id` | `string` | | **Required** | The ID of the Key Vault where the Secret should be created. |
-| `tags` | `any` | `{}` | | A mapping of tags to assign to the resource. |
+See [variables.tf](./variables.tf)
 
 ## Usage
 
