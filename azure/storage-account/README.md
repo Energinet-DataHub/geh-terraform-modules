@@ -15,22 +15,16 @@ This module creates the following resources:
 - [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
 - [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 - [Azure Storage Account Container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container)
+- [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
 
-- Terraform version 1.1.2+
-- AzureRM provider version 2.91.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 
 See [variables.tf](./variables.tf)
-
-### Container
-
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | The name of the Container which should be created within the Storage Account. The final name of the resource will be in lowercase. |
-| `access_type` | `string` | `private` | | The Access Level configured for this Container. Possible values are `blob`, `container` or `private`. Defaults to `private`. |
 
 ## Usage
 

@@ -24,14 +24,6 @@ This module creates the following resources:
 
 See [variables.tf](./variables.tf)
 
-### Subscription
-
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the ServiceBus Subscription resource. Changing this forces a new resource to be created. The final name will be lowercased. |
-| `forward_to` | `string` | | | The name of a Queue or Topic to automatically forward messages to. |
-| `max_delivery_count` | `string` | `1` | | The maximum number of deliveries. |
-
 ## Usage
 
 ```ruby

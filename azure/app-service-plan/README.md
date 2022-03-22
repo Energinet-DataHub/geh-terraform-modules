@@ -21,15 +21,6 @@ This module creates the following resources:
 
 See [variables.tf](./variables.tf)
 
-### Sku
-
-A `sku` item consists of the following:
-
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `tier` | `string` | | **Required** | Specifies the plan's pricing tier. |
-| `size` | `string` | | **Required** | Specifies the plan's instance size. |
-
 ## Usage
 
 ```ruby

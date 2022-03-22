@@ -22,15 +22,6 @@ This module creates the following resources:
 
 See [variables.tf](./variables.tf)
 
-### Auth Rule
-
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the ServiceBus Namespace Authorization Rule resource. Changing this forces a new resource to be created. The final name of the resource will be in lowercase. |
-| `listen` | `bool` | `false` | | Grants listen access to this this Authorization Rule. Defaults to `false`. |
-| `send` | `list(string)` | `false` | | Grants send access to this this Authorization Rule. Defaults to `false`. |
-| `manage` | `list(string)` | `false` | | Grants manage access to this this Authorization Rule. When this property is `true` - both `listen` and `send` must be too. Defaults to `false`. |
-
 ## Usage
 
 ```ruby

@@ -188,3 +188,19 @@ resource "time_sleep" "this" {
 
   create_duration = "300s" # 5min should give us enough time for the Private endpoint to come online
 }
+
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  name                       = "diag-stor-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  target_resource_id         = azurerm_storage_account.this.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = var.log_retention_in_days
+    }
+  }
+}

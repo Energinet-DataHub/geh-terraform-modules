@@ -332,3 +332,35 @@ resource "azurerm_monitor_metric_alert" "health_check_alert" {
     ]
   }
 }
+
+resource "azurerm_monitor_diagnostic_setting" "func" {
+  name                       = "diag-func-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  target_resource_id         = azurerm_function_app.this.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = var.log_retention_in_days
+    }
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "stor" {
+  name                       = "diag-stor-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  target_resource_id         = azurerm_storage_account.this.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = var.log_retention_in_days
+    }
+  }
+}

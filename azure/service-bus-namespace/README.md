@@ -28,29 +28,6 @@ This module creates the following resources:
 
 See [variables.tf](./variables.tf)
 
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | The name of the Microsoft SQL Server. This needs to be globally unique within Azure. The final name of the resource will follow this syntax `sb-{var.name}-${var.environment_short}-${var.environment_instance}` and be in lowercase. |
-| `project_name` | `string` | | **Required** | Name of the project this infrastructure is a part of. |
-| `environment_short` | `string` | | **Required** | The short value name of your environment. |
-| `environment_instance` | `string` | | **Required** |  The instance number of your environment. |
-| `resource_group_name` | `string` | | **Required** | The name of the resource group in which to create the Function App. |
-| `location` | `string` | | **Required** | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. |
-| `sku` | `string` | | **Required** |  Defines which tier to use. Options are `basic`, `standard` or `premium`. Changing this forces a new resource to be created. |
-| `auth_rules` | `list` | | **Required** | A list of objects describing the auth rules of the Service Bus Namespace. See [Auth Rule](#auth-rule). |
-| `log_analytics_workspace_id` | `string` | | | ID of Log Analytics Workspace associated with the Key Vault  |
-
-| `tags` | `string` | `{}` | | A mapping of tags to assign to the resource. |
-
-### Auth Rule
-
-| Name | Type | Default | Required | Description |
-|-|-|-|-|-|
-| `name` | `string` | | **Required** | Specifies the name of the ServiceBus Namespace Authorization Rule resource. Changing this forces a new resource to be created. The final name of the resource will be in lowercase. |
-| `listen` | `bool` | `false` | | Grants listen access to this this Authorization Rule. Defaults to `false`. |
-| `send` | `list(string)` | `false` | | Grants send access to this this Authorization Rule. Defaults to `false`. |
-| `manage` | `list(string)` | `false` | | Grants manage access to this this Authorization Rule. When this property is `true` - both `listen` and `send` must be too. Defaults to `false`. |
-
 ## Usage
 
 ```ruby
