@@ -13,7 +13,7 @@
 # limitations under the License.
 variable resource_group_name {
   type        = string
-  description = "(Required) The Name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group in which the API Management Service exists. Changing this forces a new resource to be created."
 }
 
 variable operation_id {
@@ -28,12 +28,12 @@ variable api_management_api_name {
 
 variable api_management_name {
   type        = string
-  description = "(Required) The Name of the API Management Service where the API exists. Changing this forces a new resource to be created."
+  description = "(Required) The name of the API Management Service where the API exists. Changing this forces a new resource to be created."
 }
 
 variable display_name {
   type        = string
-  description = "(Required) The Display Name for this API Management Operation."
+  description = "(Required) The display name for this API Management Operation."
 }
 
 variable method {
@@ -66,6 +66,6 @@ variable policies {
   type        = list(object({
     xml_content = string
   }))
-  description = "(Optional) A list of objects describing the policies for the API operation policies."
+  description = "(Optional) (Optional) A list of objects describing the policies for the API operation policies. An XML file can be used with 'xml_content' by using Terraform's file function (https://www.terraform.io/language/functions/file) that is similar to Microsoft's `PolicyFilePath` option."
   default     = []
 }

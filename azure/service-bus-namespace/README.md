@@ -8,7 +8,7 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_namespace)
 - [Azure Service Bus Namespace Authorization Rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_authorization_rule)
@@ -51,7 +51,7 @@ module "service_bus_namespace_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {

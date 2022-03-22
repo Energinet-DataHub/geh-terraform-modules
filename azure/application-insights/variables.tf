@@ -24,22 +24,22 @@ variable resource_group_name {
 
 variable project_name {
   type        = string
-  description = "(Required) The name of your project."
+  description = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable location {
   type        = string
-  description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
+  description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
 variable log_analytics_workspace_id {
@@ -49,6 +49,6 @@ variable log_analytics_workspace_id {
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }

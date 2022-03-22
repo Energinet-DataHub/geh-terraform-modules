@@ -11,12 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-output "id" {
+output id {
   value       = azurerm_servicebus_topic.this.id
   description = "The Service Bus topic ID."
 }
 
-output "name" {
+output name {
   value       = azurerm_servicebus_topic.this.name
   description = "The Service Bus topic ID."
 }

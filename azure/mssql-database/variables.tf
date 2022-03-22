@@ -23,12 +23,12 @@ variable project_name {
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable server_id {
@@ -67,6 +67,6 @@ variable log_retention_in_days {
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }

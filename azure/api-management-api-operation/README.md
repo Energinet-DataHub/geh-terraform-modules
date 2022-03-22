@@ -8,15 +8,15 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure API Management API Operation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_operation)
 - [Azure API Management API Operation Policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_operation_policy)
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 
@@ -51,7 +51,7 @@ module "api_management_api_operation_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {

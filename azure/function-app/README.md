@@ -8,7 +8,7 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure Function App](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app)
 - [Azure Monitor Metric Alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert)
@@ -50,7 +50,7 @@ module "func_example" {
 }
 ```
 
-Two tags is added by default
+Two tags are added by default:
 
 ```ruby
 locals {

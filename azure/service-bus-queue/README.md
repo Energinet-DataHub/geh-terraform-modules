@@ -8,14 +8,14 @@
 
 ## Resources Created
 
-This module creates the following resources.
+This module creates the following resources:
 
 - [Azure Service Bus Queue](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_queue)
 
 ## Prerequisites
 
-- Terraform version 1.0.6+
-- AzureRM provider version 2.70.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 

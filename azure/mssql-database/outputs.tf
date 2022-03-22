@@ -11,12 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-output "id" {
+output id {
   value       = azurerm_mssql_database.this.id
   description = "The SQL Database ID."
 }
 
-output "name" {
+output name {
   value       = azurerm_mssql_database.this.name
   description = "The SQL Database name."
 }
