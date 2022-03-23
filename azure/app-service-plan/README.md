@@ -11,6 +11,7 @@
 This module creates the following resources:
 
 - [Azure App Service Plan](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_plan)
+- [Azure Monitor Metric Alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert)
 
 ## Prerequisites
 
@@ -24,21 +25,23 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "plan_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=5.1.0"
+module "plan_example" {
+  source                         = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=5.10.0"
 
-  name                  = "example-name"
-  project_name          = "example-project-name"
-  environment_short     = "p"
-  environment_instance  = "001"
-  resource_group_name   = "example-resource-group-name"
-  location              = "westeurope"
-  sku                   = {
+  name                           = "example-name"
+  project_name                   = "example-project-name"
+  environment_short              = "p"
+  environment_instance           = "001"
+  resource_group_name            = "example-resource-group-name"
+  location                       = "westeurope"
+  monitor_alerts_action_group_id = "example-action-group-id"
+
+  sku                            = {
     tier = "Free"
     size = "F1"
   }
 
-  tags                  = {}
+  tags                           = {}
 }
 ```
 
@@ -47,7 +50,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0",
+    "ModuleVersion" = "5.10.0",
     "ModuleId"      = "azure-app-service-plan"
   }
 }
@@ -55,8 +58,4 @@ locals {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The ID of the Function App. |
-| `name` | The name of the Function App. |
-| `instrumentation_key` | The Instrumentation Key for this Application Insights component. |
+See [outputs.tf](./outputs.tf)
