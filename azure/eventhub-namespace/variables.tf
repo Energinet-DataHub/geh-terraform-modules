@@ -59,7 +59,7 @@ variable capacity {
 
 variable log_analytics_workspace_id {
   type = string
-  description = "(Required) The id of the Log Analytics Workspace where the API manager will log events (e.g. audit events) and metrics"
+  description = "(Required) The id of the Log Analytics Workspace where the Event Hub will log events (e.g. audit events) and metrics"
 }
 
 variable log_retention_in_days {

@@ -86,7 +86,7 @@ variable containers {
 
 variable log_analytics_workspace_id {
   type = string
-  description = "(Required) The id of the Log Analytics Workspace where the SQL DB will log events (e.g. audit events)"
+  description = "(Required) The id of the Log Analytics Workspace where the Storage Account will log events (e.g. audit events)"
 }
 
 variable log_retention_in_days {
