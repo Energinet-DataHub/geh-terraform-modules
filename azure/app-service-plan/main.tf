@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.10.0",
+    "ModuleVersion" = "5.11.0",
     "ModuleId"      = "azure-app-service-plan"
   }
 }
@@ -51,7 +51,7 @@ resource "azurerm_monitor_metric_alert" "metric_alert_cpu" {
   description         = "Action will be triggered when average CPU usage is too high."
 
   frequency           = "PT1M"
-  window_size         = "PT1M"
+  window_size         = "PT5M"
 
   criteria {
     metric_namespace  = "Microsoft.Web/ServerFarms"
@@ -86,7 +86,7 @@ resource "azurerm_monitor_metric_alert" "metric_alert_memory" {
   description         = "Action will be triggered when average memory usage is too high."
 
   frequency           = "PT1M"
-  window_size         = "PT1M"
+  window_size         = "PT5M"
 
   criteria {
     metric_namespace  = "Microsoft.Web/ServerFarms"

@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "plan_example" {
-  source                         = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=5.10.0"
+  source                         = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=5.11.0"
 
   name                           = "example-name"
   project_name                   = "example-project-name"
@@ -50,7 +50,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.10.0",
+    "ModuleVersion" = "5.11.0",
     "ModuleId"      = "azure-app-service-plan"
   }
 }
