@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.9.0",
+    "ModuleVersion" = "5.12.0",
     "ModuleId"      = "azure-function-app"
   }
 }
@@ -50,7 +50,8 @@ resource "azurerm_function_app" "this" {
   app_service_plan_id         = var.app_service_plan_id
   storage_account_name        = azurerm_storage_account.this.name
   storage_account_access_key  = azurerm_storage_account.this.primary_access_key
-  version                     = "~3"
+  version                     = "~4"
+  enable_builtin_logging      = false # Disabled to avoid having the setting "AzureWebJobsDashboard" when using Application Insights
   https_only                  = true
   app_settings                = merge({
     APPINSIGHTS_INSTRUMENTATIONKEY = var.application_insights_instrumentation_key

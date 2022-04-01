@@ -67,7 +67,7 @@ variable enabled_for_template_deployment {
 
 variable log_analytics_workspace_id {
   type        = string
-  description = "(Required) The id of the Log Analytics Workspace where the keyvault will log events (e.g. audit events)"
+  description = "(Required) The id of the Log Analytics Workspace where the Key Vault will log events (e.g. audit events)"
 }
 
 variable log_retention_in_days {

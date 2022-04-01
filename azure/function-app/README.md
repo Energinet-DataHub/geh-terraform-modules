@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "func_example" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=5.8.0"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=5.12.0"
 
   name                                      = "example-name"
   project_name                              = "example-project-name"
@@ -55,7 +55,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.9.0"
+    "ModuleVersion" = "5.12.0"
     "ModuleId"      = "azure-function-app"
   }
 }
