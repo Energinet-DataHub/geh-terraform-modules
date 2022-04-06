@@ -84,6 +84,6 @@ variable apim_logger_id {
 }
 
 variable logger_sampling_percentage {
-  type        = string
+  type        = number
   description = "(Required) Sampling frequency (valid values are between 0.0 and 100.0) for how often to log request received by API Management. Regardless of the sampling frequency erroneous conditions are always logged."
 }
