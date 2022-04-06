@@ -77,3 +77,13 @@ variable authorization_server_name {
   type        = string
   description = "(Required) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
 }
+
+variable apim_logger_id {
+  type        = string
+  description = "(Required) The ID of the Logger connected to API Management."
+}
+
+variable logger_sampling_percentage {
+  type        = string
+  description = "(Required) Sampling frequency (valid values are between 0.0 and 100.0) for how often to log request received by API Management. Regardless of the sampling frequency erroneous conditions are always logged."
+}
