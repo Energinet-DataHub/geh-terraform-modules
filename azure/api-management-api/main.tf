@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "5.13.0"
     "ModuleId"      = "azure-api-management-api"
   }
 }
@@ -42,7 +42,7 @@ resource "azurerm_api_management_api_policy" "this" {
 
 
 resource "azurerm_api_management_api_diagnostic" "this" {
-  api_management_logger_id = var.apim_logger_id # azurerm_api_management_logger.apim_logger.id
+  api_management_logger_id = var.apim_logger_id
   api_management_name      = var.api_management_name
   api_name                 = azurerm_api_management_api.this.name
   identifier               = "applicationinsights"
