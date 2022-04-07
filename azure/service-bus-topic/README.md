@@ -8,17 +8,17 @@
 
 ## Resources Created
 
-**Notice**: [Partitioning is not support when using Premium Messaging](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-premium-messaging#partitioned-queues-and-topics)
-
 This module creates the following resources:
+
+**Notice**: [Partitioning is not support when using Premium Messaging](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-premium-messaging#partitioned-queues-and-topics)
 
 - [Azure Service Bus Topic](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_topic)
 - [Azure Service Bus Subscription](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_subscription)
 
 ## Prerequisites
 
-- Terraform version 1.1.2+
-- AzureRM provider version 2.91.0+
+- Terraform version 1.1.7+
+- AzureRM provider version 2.97.0+
 
 ## Arguments and defaults
 

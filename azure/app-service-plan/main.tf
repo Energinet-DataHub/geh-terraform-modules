@@ -24,9 +24,80 @@ resource "azurerm_app_service_plan" "this" {
   location            = var.location
   kind                = var.kind
   reserved            = var.reserved
+
   sku {
     size = var.sku.size
     tier = var.sku.tier
+  }
+
+  tags                = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+}
+
+resource "azurerm_monitor_metric_alert" "metric_alert_cpu" {
+  name                = "ma-${azurerm_app_service_plan.this.name}-cpu"
+  resource_group_name = var.resource_group_name
+
+  enabled             = var.monitor_alerts_enabled
+  severity            = 2
+  scopes              = [azurerm_app_service_plan.this.id]
+  description         = "Action will be triggered when average CPU usage is too high."
+
+  frequency           = "PT1M"
+  window_size         = "PT5M"
+
+  criteria {
+    metric_namespace  = "Microsoft.Web/ServerFarms"
+    metric_name       = "CpuPercentage"
+    operator          = "GreaterThan"
+    aggregation       = "Average"
+    threshold         = 80
+  }
+
+  action {
+    action_group_id   = var.monitor_alerts_action_group_id
+  }
+
+  tags                = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+}
+
+resource "azurerm_monitor_metric_alert" "metric_alert_memory" {
+  name                = "ma-${azurerm_app_service_plan.this.name}-mry"
+  resource_group_name = var.resource_group_name
+
+  enabled             = var.monitor_alerts_enabled
+  severity            = 2
+  scopes              = [azurerm_app_service_plan.this.id]
+  description         = "Action will be triggered when average memory usage is too high."
+
+  frequency           = "PT1M"
+  window_size         = "PT5M"
+
+  criteria {
+    metric_namespace  = "Microsoft.Web/ServerFarms"
+    metric_name       = "MemoryPercentage"
+    operator          = "GreaterThan"
+    aggregation       = "Average"
+    threshold         = 80
+  }
+
+  action {
+    action_group_id   = var.monitor_alerts_action_group_id
   }
 
   tags                = merge(var.tags, local.module_tags)

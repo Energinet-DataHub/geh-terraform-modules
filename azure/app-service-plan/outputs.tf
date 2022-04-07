@@ -11,12 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-output "id" {
+output id {
   value       = azurerm_app_service_plan.this.id
   description = "The ID of the App Service Plan component."
 }
 
-output "name" {
+output name {
   value       = azurerm_app_service_plan.this.name
   description = "The name of the App Service Plan component."
 }

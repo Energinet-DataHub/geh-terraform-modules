@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-output "id" {
+output id {
   value       = azurerm_key_vault.this.id
   description = "The ID of the Key Vault."
 
@@ -24,7 +24,7 @@ output "id" {
   ]
 }
 
-output "name" {
+output name {
   value       = azurerm_key_vault.this.name
   description = "The name of the Key Vault."
 
@@ -38,7 +38,7 @@ output "name" {
   ]
 }
 
-output "vault_uri" {
+output vault_uri {
   value       = azurerm_key_vault.this.vault_uri
   description = "The URI of the Key Vault, used for performing operations on keys and secrets."
 

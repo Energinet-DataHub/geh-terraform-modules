@@ -47,6 +47,11 @@ variable location {
   description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
+variable sku {
+  type        = string
+  description = "(Required) Defines which tier to use. Options are basic, standard or premium. Changing this forces a new resource to be created."
+}
+
 variable auth_rules {
   type        = list(object({
     name    = string
@@ -79,7 +84,7 @@ variable capacity {
   
 variable log_analytics_workspace_id {
   type = string
-  description = "(Optional) The id of the Log Analytics Workspace where theService Bus will log events (e.g. audit events)"
+  description = "(Optional) The id of the Log Analytics Workspace where the Service Bus will log events (e.g. audit events)"
   default = null
 }
 

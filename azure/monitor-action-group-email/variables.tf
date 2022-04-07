@@ -24,12 +24,12 @@ variable project_name {
 
 variable environment_short {
   type        = string
-  description = "(Required) The short value name of your environment."
+  description = "(Required) The short value name of the environment."
 }
 
 variable environment_instance {
   type        = string
-  description = "(Required) The instance value of your environment."
+  description = "(Required) The instance value of the environment."
 }
 
 variable resource_group_name {
@@ -54,6 +54,6 @@ variable email_receiver_address {
 
 variable tags {
   type        = any
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }

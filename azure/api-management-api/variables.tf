@@ -18,7 +18,11 @@ variable name {
 
 variable project_name {
   type          = string
+<<<<<<< HEAD
   description   = "(Required) The name of the project this infrastructure is a part of."
+=======
+  description   = "The name of the project this infrastructure is a part of."
+>>>>>>> a47859ad862856e0be46cb59862f6ccdd06514c7
 }
 
 variable environment_short {

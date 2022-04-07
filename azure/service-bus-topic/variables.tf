@@ -42,3 +42,15 @@ variable subscriptions {
   description = "(Optional) A list of objects describing the subscriptions of the Service Bus Topic."
   default = []
 }
+
+variable tags {
+  type        = any
+  description = "(Optional) A mapping of tags to assign to the resources."
+  default     = {}
+}
+
+variable dependencies {
+  type        = list
+  description = "A mapping of dependencies which this module depends on."
+  default     = []
+}

@@ -60,6 +60,17 @@ variable sku {
   description = "An object describing the sku for the App Service Plan."
 }
 
+variable monitor_alerts_action_group_id {
+  type        = string
+  description = "(Required) CPU and memory metric alert rules will be configured to send alerts to this action group."
+}
+
+variable monitor_alerts_enabled {
+  type        = bool
+  description = "(Optional) Specify if metric alerts are enabled or not."
+  default     = true
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resources."
