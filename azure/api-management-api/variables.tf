@@ -87,3 +87,15 @@ variable logger_sampling_percentage {
   type        = number
   description = "(Required) Sampling frequency (valid values are between 0.0 and 100.0) for how often to log request received by API Management. Regardless of the sampling frequency erroneous conditions are always logged."
 }
+
+variable path {
+  type        = string
+  description = "(Optional) The Path for this API Management API, which is a relative URL which uniquely identifies this API and all of its resource paths within the API Management Service."
+  default     = null
+}
+
+variable service_url {
+  type        = number
+  description = "(Optional) Absolute URL of the backend service implementing this API."
+  default     = null
+}

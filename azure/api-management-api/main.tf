@@ -26,6 +26,8 @@ resource "azurerm_api_management_api" "this" {
   display_name          = var.display_name
   protocols             = var.protocols
   subscription_required = var.subscription_required
+  path                  = var.path
+  service_url           = var.service_url
   oauth2_authorization {
     authorization_server_name = var.authorization_server_name
   }
