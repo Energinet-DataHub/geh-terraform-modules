@@ -75,7 +75,8 @@ variable policies {
 
 variable authorization_server_name {
   type        = string
-  description = "(Required) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
+  description = "(Optional) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
+  default     = null
 }
 
 variable apim_logger_id {
@@ -94,8 +95,16 @@ variable path {
   default     = null
 }
 
-variable service_url {
+variable backend_service_url {
   type        = number
   description = "(Optional) Absolute URL of the backend service implementing this API."
   default     = null
+}
+
+variable api_content_import {
+  type        = object({
+    content_format  = string
+    content_value   = string
+  })
+  description = ""
 }
