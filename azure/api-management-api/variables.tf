@@ -79,7 +79,7 @@ variable oauth2_authorization {
     scope                       = string
   })
   description = "(Optional) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
-  default     = []
+  default     = null
 }
 
 variable apim_logger_id {
