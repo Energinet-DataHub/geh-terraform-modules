@@ -37,8 +37,8 @@ resource "azurerm_api_management_api" "this" {
   dynamic "import" {
     for_each = var.api_content_import != null ? [var.api_content_import] : []
       content {
-        content_format  = api_content_import.value.content_format
-        content_value   = api_content_import.value.content_value
+        content_format  = api_content_import.content_format
+        content_value   = api_content_import.content_value
       }
   }
 }
