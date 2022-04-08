@@ -103,7 +103,7 @@ variable backend_service_url {
   default     = null
 }
 
-variable api_content_imports {
+variable imports {
   type        = list(object({
     content_format  = string
     content_value   = string

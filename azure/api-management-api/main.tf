@@ -35,11 +35,11 @@ resource "azurerm_api_management_api" "this" {
       }
   }
   dynamic "import" {
-    for_each = var.api_content_imports
-      content {
-        content_format  = api_content_import.value.content_format
-        content_value   = api_content_import.value.content_value
-      }
+    for_each = var.imports
+    content {
+      content_format  = import.value.content_format
+      content_value   = import.value.content_value
+    }
   }
 }
 
