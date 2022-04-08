@@ -103,11 +103,11 @@ variable backend_service_url {
   default     = null
 }
 
-variable api_content_import {
-  type        = object({
+variable api_content_imports {
+  type        = list(object({
     content_format  = string
     content_value   = string
-  })
+  }))
   description = ""
-  default     = null
+  default     = []
 }
