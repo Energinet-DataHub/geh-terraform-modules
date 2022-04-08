@@ -104,10 +104,10 @@ variable backend_service_url {
 }
 
 variable imports {
-  type        = list(object({
+  type        = object({
     content_format  = string
     content_value   = string
-  }))
+  })
   description = ""
-  default     = []
+  default     = null
 }
