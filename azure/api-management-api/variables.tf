@@ -108,6 +108,6 @@ variable import {
     content_format  = string
     content_value   = string
   })
-  description = ""
+  description = "(Optional) Reference to a link or a file with an API definition. Possible formats are: openapi, openapi+json, openapi+json-link, openapi-link, swagger-json, and swagger-link-json. The Content from which the API Definition should be imported. When a content_format of *-link-* is specified this must be a URL, otherwise this must be defined inline."
   default     = null
 }
