@@ -109,4 +109,5 @@ variable api_content_import {
     content_value   = string
   })
   description = ""
+  default     = null
 }
