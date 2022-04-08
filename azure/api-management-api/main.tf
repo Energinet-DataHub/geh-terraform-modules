@@ -31,14 +31,14 @@ resource "azurerm_api_management_api" "this" {
   dynamic "oauth2_authorization" {
     for_each = var.oauth2_authorization != null ? [var.oauth2_authorization] : []
       content {
-        authorization_server_name = oauth2_authorization.value["authorization_server_name"]
+        authorization_server_name = oauth2_authorization["authorization_server_name"]
       }
   }
   dynamic "import" {
     for_each = var.api_content_import != null ? [var.api_content_import] : []
       content {
-        content_format  = api_content_import["content_format"]
-        content_value   = api_content_import["content_value"]
+        content_format  = api_content_import.value.content_format
+        content_value   = api_content_import.value.content_value
       }
   }
 }
