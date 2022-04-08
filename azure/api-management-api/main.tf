@@ -29,7 +29,7 @@ resource "azurerm_api_management_api" "this" {
   path                  = var.path
   service_url           = var.backend_service_url
   dynamic "oauth2_authorization" {
-    for_each = var.oauth2_authorization ? [var.oauth2_authorization] : []
+    for_each = var.oauth2_authorization != null ? [var.oauth2_authorization] : []
       content {
         authorization_server_name = oauth2_authorization.value["authorization_server_name"]
       }
