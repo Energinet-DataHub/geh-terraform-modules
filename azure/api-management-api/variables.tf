@@ -96,7 +96,7 @@ variable path {
 }
 
 variable backend_service_url {
-  type        = number
+  type        = string
   description = "(Optional) Absolute URL of the backend service implementing this API."
   default     = null
 }
