@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.13.0"
+    "ModuleVersion" = "5.15.0"
     "ModuleId"      = "azure-api-management-api"
   }
 }
@@ -29,7 +29,7 @@ resource "azurerm_api_management_api" "this" {
   path                  = var.path
   service_url           = var.backend_service_url
   oauth2_authorization {
-    authorization_server_name = var.authorization_server_name
+    authorization_server_name = var.oauth2_authorization.authorization_server_name
   }
   import {
     content_format  = var.api_content_import.content_format
