@@ -29,6 +29,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   kubernetes_version              = var.kubernetes_version
   api_server_authorized_ip_ranges = []
   private_cluster_enabled         = false
+  azure_policy_enabled            = var.azure_policy_enabled
 
   identity {
     type                      = var.identity_type
