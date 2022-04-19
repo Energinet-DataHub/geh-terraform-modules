@@ -98,3 +98,9 @@ variable "tags" {
   description = "(Optional) A mapping of tags to assign to the resource."
   default     = {}
 }
+
+variable "azure_policy_enabled" {
+  type        = bool
+  description = "(Optional) Should the Azure Policy Add-On be enabled?"
+  default     = false
+}
