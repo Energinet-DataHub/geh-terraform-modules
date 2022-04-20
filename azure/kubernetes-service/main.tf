@@ -45,6 +45,12 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
 
+  addon_profile {
+      azure_policy {
+      enabled = var.azure_policy_enabled
+    }
+  }
+
   network_profile {
     network_plugin    = "kubenet"
     outbound_type     = "loadBalancer"
