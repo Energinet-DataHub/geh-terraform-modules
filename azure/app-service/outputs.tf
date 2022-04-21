@@ -60,13 +60,3 @@ output site_credential {
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
-
-output gateway_url {
-  value       = azurerm_app_service.this.gateway_url
-  description = "The URL of the Gateway for the API Management Service."
-
-  depends_on  = [
-    azurerm_app_service.this,
-    azurerm_monitor_metric_alert.health_check_alert
-  ]
-}
