@@ -20,3 +20,8 @@ output name {
   value       = azurerm_api_management.this.name
   description = "The name of the API Management Service."
 }
+
+output gateway_url {
+  value       = azurerm_api_management.this.gateway_url
+  description = "The URL of the Gateway for the API Management Service."
+}
