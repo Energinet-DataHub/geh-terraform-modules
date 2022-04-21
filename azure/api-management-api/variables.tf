@@ -78,14 +78,6 @@ variable authorization_server_name {
   description = "(Required) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
 }
 
-# variable oauth2_authorization {
-#   type        = object({
-#     authorization_server_name   = string
-#   })
-#   description = "(Optional) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
-#   default     = null
-# }
-
 variable apim_logger_id {
   type        = string
   description = "(Required) The ID of the Logger connected to API Management."

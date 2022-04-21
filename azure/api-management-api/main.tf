@@ -31,12 +31,6 @@ resource "azurerm_api_management_api" "this" {
   oauth2_authorization {
     authorization_server_name = var.authorization_server_name
   }
-  # dynamic "oauth2_authorization" {
-  #   for_each = var.oauth2_authorization != null ? [var.oauth2_authorization] : []
-  #   content {
-  #     authorization_server_name = oauth2_authorization.value.authorization_server_name
-  #   }
-  # }
   dynamic "import" {
     for_each = var.import != null ? [var.import] : []
     content {

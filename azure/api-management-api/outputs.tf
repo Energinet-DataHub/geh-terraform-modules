@@ -20,3 +20,8 @@ output name {
   value       = azurerm_api_management_api.this.name
   description = "The name of the API Management API."
 }
+
+output path {
+  value       = azurerm_api_management_api.this.path
+  description = "The path of the API Management API."
+}
