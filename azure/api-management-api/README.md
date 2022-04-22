@@ -41,7 +41,7 @@ module "apima_example" {
   path                        = "example-url-path"
   backend_service_url         = "https://some-back-service.azurewebsites.net"
   import                      =  {
-  content_format       = "openapi+json"
+  content_format       = "example-content-format"
   content_value        = "example-file-content"
     }
   policies                    = [
