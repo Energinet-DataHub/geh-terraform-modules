@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "apima_example" { 
-  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.13.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.15.0"
 
   name                        = "example-name"
   project_name                = "example-project-name"
@@ -38,6 +38,12 @@ module "apima_example" {
   authorization_server_name   = "example-oauth-server-name"
   apim_logger_id              = "example-logger-id"
   logger_sampling_percentage  = "10.0"
+  path                        = "example-url-path"
+  backend_service_url         = "https://some-back-service.azurewebsites.net"
+  import                      =  {
+  content_format       = "example-content-format"
+  content_value        = "example-file-content"
+    }
   policies                    = [
     {
       xml_content = <<XML
@@ -57,7 +63,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.13.0"
+    "ModuleVersion" = "5.15.0"
     "ModuleId"      = "azure-api-management-api"
   }
 }
@@ -65,7 +71,4 @@ locals {
 
 ## Outputs
 
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The ID of the API Management API. | |
-| `name` | The name of the API Management API. | |
+See [outputs.tf](./outputs.tf)
