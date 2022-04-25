@@ -64,3 +64,23 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
     }
   }
 }
+
+resource "azurerm_mssql_elasticpool" "this" {
+  name                = "mssqlpool-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  server_name         = azurerm_mssql_server.this.name
+  license_type        = "LicenseIncluded"
+  max_size_gb         = 756
+
+  sku {
+    name     = "BasicPool"
+    tier     = "Basic"
+    capacity = 4
+  }
+
+  per_database_settings {
+    min_capacity = 0.25
+    max_capacity = 4
+  }
+}
