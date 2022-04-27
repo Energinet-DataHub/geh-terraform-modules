@@ -89,7 +89,7 @@ variable logger_sampling_percentage {
 }
 
 variable logger_verbosity {
-  type        = number
+  type        = string
   description = "(Required) Logging verbosity of policy trace statements. Valid values are 'verbose', 'information' and 'error'. When seen in Application Insights then 'verbose' is logged as 'information' and 'information' becomes 'warning'."
 }
 
