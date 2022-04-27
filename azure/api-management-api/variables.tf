@@ -88,6 +88,11 @@ variable logger_sampling_percentage {
   description = "(Required) Sampling frequency (valid values are between 0.0 and 100.0) for how often to log request received by API Management. Regardless of the sampling frequency erroneous conditions are always logged."
 }
 
+variable logger_verbosity {
+  type        = number
+  description = "(Required) Logging verbosity of policy trace statements. Valid values are 'verbose', 'information' and 'error'. When seen in Application Insights then 'verbose' is logged as 'information' and 'information' becomes 'warning'."
+}
+
 variable path {
   type        = string
   description = "(Optional) The Path for this API Management API, which is a relative URL which uniquely identifies this API and all of its resource paths within the API Management Service."

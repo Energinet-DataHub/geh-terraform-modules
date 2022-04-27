@@ -38,6 +38,7 @@ module "apima_example" {
   authorization_server_name   = "example-oauth-server-name"
   apim_logger_id              = "example-logger-id"
   logger_sampling_percentage  = "10.0"
+  logger_verbosity            = "verbose"
   path                        = "example-url-path"
   backend_service_url         = "https://some-back-service.azurewebsites.net"
   import                      =  {
