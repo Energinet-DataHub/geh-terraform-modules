@@ -71,12 +71,13 @@ resource "azurerm_mssql_elasticpool" "this" {
   location            = var.location
   server_name         = azurerm_mssql_server.this.name
   license_type        = "LicenseIncluded"
-  max_size_gb         = 756
+  max_size_gb         = var.elastic_pool_max_size_gb
 
   sku {
-    name     = "BasicPool"
-    tier     = "Basic"
-    capacity = 4
+    name      = var.elastic_pool_sku.name
+    tier      = var.elastic_pool_sku.tier
+    family    = var.elastic_pool_sku.family
+    capacity  = var.elastic_pool_sku.capacity
   }
 
   per_database_settings {

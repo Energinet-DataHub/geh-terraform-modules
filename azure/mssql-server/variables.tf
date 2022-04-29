@@ -77,6 +77,22 @@ variable log_retention_in_days {
   default     = 183
 }
 
+variable elastic_pool_sku {
+  type        = object({
+    name      = string
+    tier      = string
+    family    = string
+    capacity  = number
+  })
+  description = "A sku block for the elastic pooling."
+}
+
+variable elastic_pool_max_size_gb {
+  type        = number
+  description = "(Optional) The max data size of the elastic pool in gigabytes. Conflicts with max_size_bytes"
+  default     = 756
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resources."
