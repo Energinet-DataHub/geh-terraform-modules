@@ -26,8 +26,17 @@ resource "azurerm_api_management_api" "this" {
   display_name          = var.display_name
   protocols             = var.protocols
   subscription_required = var.subscription_required
+  path                  = var.path
+  service_url           = var.backend_service_url
   oauth2_authorization {
     authorization_server_name = var.authorization_server_name
+  }
+  dynamic "import" {
+    for_each = var.import != null ? [var.import] : []
+    content {
+      content_format  = import.value.content_format
+      content_value   = import.value.content_value
+    }
   }
 }
 
@@ -38,4 +47,17 @@ resource "azurerm_api_management_api_policy" "this" {
   resource_group_name = var.resource_group_name
   api_management_name = var.api_management_name
   xml_content         = try(var.policies[count.index].xml_content, null)
+}
+
+resource "azurerm_api_management_api_diagnostic" "this" {
+  api_management_logger_id  = var.apim_logger_id
+  api_management_name       = var.api_management_name
+  api_name                  = azurerm_api_management_api.this.name
+  identifier                = "applicationinsights"
+  resource_group_name       = var.resource_group_name
+
+  sampling_percentage       = var.logger_sampling_percentage
+  always_log_errors         = true
+  verbosity                 = var.logger_verbosity
+  http_correlation_protocol = "W3C"
 }

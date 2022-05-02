@@ -18,11 +18,7 @@ variable name {
 
 variable project_name {
   type          = string
-<<<<<<< HEAD
   description   = "(Required) The name of the project this infrastructure is a part of."
-=======
-  description   = "The name of the project this infrastructure is a part of."
->>>>>>> a47859ad862856e0be46cb59862f6ccdd06514c7
 }
 
 variable environment_short {
@@ -80,4 +76,45 @@ variable policies {
   }))
   description = "(Optional) A list of objects describing the policies for the API policies. An XML file can be used with 'xml_content' by using Terraform's file function (https://www.terraform.io/language/functions/file) that is similar to Microsoft's `PolicyFilePath` option."
   default     = []
+}
+
+variable authorization_server_name {
+  type        = string
+  description = "(Required) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
+}
+
+variable apim_logger_id {
+  type        = string
+  description = "(Required) The ID of the Logger connected to API Management."
+}
+
+variable logger_sampling_percentage {
+  type        = number
+  description = "(Required) Sampling frequency (valid values are between 0.0 and 100.0) for how often to log request received by API Management. Regardless of the sampling frequency erroneous conditions are always logged."
+}
+
+variable logger_verbosity {
+  type        = string
+  description = "(Required) Logging verbosity of policy trace statements. Valid values are 'verbose', 'information' and 'error'. When seen in Application Insights then 'verbose' is logged as 'information' and 'information' becomes 'warning'."
+}
+
+variable path {
+  type        = string
+  description = "(Optional) The Path for this API Management API, which is a relative URL which uniquely identifies this API and all of its resource paths within the API Management Service."
+  default     = null
+}
+
+variable backend_service_url {
+  type        = string
+  description = "(Optional) Absolute URL of the backend service implementing this API."
+  default     = null
+}
+
+variable import {
+  type        = object({
+    content_format  = string
+    content_value   = string
+  })
+  description = "(Optional) Reference to a link or a file with an API definition. Possible formats are: openapi, openapi+json, openapi+json-link, openapi-link, swagger-json, and swagger-link-json. The Content from which the API Definition should be imported. When a content_format of *-link-* is specified this must be a URL, otherwise this must be defined inline."
+  default     = null
 }

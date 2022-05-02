@@ -26,17 +26,26 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "apima_example" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=6.0.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=6.0.0"
 
-  name                      = "example-name"
-  project_name              = "example-project-name"
-  environment_short         = "u"
-  environment_instance      = "001"
-  resource_group_name       = "example-resource-group-name"
-  api_management_name       = "example-api-management-name"
-  revision                  = "1"
-  authorization_server_name = "example-oauth-server-name"
-  policies                  = [
+  name                        = "example-name"
+  project_name                = "example-project-name"
+  environment_short           = "p"
+  environment_instance        = "001"
+  resource_group_name         = "example-resource-group-name"
+  api_management_name         = "example-api-management-name"
+  revision                    = "1"
+  authorization_server_name   = "example-oauth-server-name"
+  apim_logger_id              = "example-logger-id"
+  logger_sampling_percentage  = "10.0"
+  logger_verbosity            = "verbose"
+  path                        = "example-url-path"
+  backend_service_url         = "https://some-back-service.azurewebsites.net"
+  import                      = {
+    content_format  = "example-content-format"
+    content_value   = "example-file-content"
+  }
+  policies                    = [
     {
       xml_content = <<XML
         <policies>
