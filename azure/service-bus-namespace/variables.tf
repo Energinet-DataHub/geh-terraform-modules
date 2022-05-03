@@ -65,6 +65,7 @@ variable auth_rules {
 variable log_analytics_workspace_id {
   type = string
   description = "(Optional) The id of the Log Analytics Workspace where the Service Bus will log events (e.g. audit events)"
+  default = null
 }
 
 variable log_retention_in_days {
