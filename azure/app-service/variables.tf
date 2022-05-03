@@ -62,12 +62,6 @@ variable private_endpoint_subnet_id {
   default     = ""
 }
 
-variable private_dns_resource_group_name {
-  type        = string
-  description = "(Optional) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created. Defaults to an empty string"
-  default     = ""
-}
-
 variable app_settings {
   type        = map(string)
   description = "(Optional) A map of key-value pairs for App Settings and custom values."

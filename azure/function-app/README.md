@@ -22,7 +22,6 @@ This module creates the following resources:
 - [Azure Storage Account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account)
 - [Azure Storage Account Network Rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules)
 - [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
-- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 - [Azure Monitor Metric Alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert)
 - [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
@@ -52,7 +51,6 @@ module "func_example" {
   vnet_integration_subnet_id                = "vnet-integration-subnet-id"
   private_endpoint_subnet_id                = "private-endpoint-subnet-id"
   external_private_endpoint_subnet_id       = "external-private-endpoint-subnet-id"
-  private_dns_resource_group_name           = "private-dns-resource-group-name"
   log_analytics_workspace_id                = "example-log-analytics-workspace-id"
 
   app_settings                              = {

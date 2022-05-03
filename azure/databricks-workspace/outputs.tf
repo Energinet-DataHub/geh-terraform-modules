@@ -61,20 +61,3 @@ output "workspace_url" {
     azurerm_virtual_network_peering.remote
   ]
 }
-
-output "private_dns_zone_resource_group_name" {
-  value       = var.resource_group_name
-  description = "Name of the resource group where the Private DNS zones for resources used by Databricks clusters is located."
-  
-  depends_on = [
-    azurerm_databricks_workspace.this,
-    azurerm_virtual_network.this,
-    azurerm_subnet.private,
-    azurerm_subnet.public,
-    azurerm_subnet_network_security_group_association.nsg_public_group_association,
-    azurerm_subnet_network_security_group_association.nsg_private_group_association,
-    azurerm_network_security_group.dbw_nsg,
-    azurerm_virtual_network_peering.local,
-    azurerm_virtual_network_peering.remote
-  ]
-}

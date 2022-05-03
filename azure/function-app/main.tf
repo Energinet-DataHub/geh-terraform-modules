@@ -115,42 +115,6 @@ resource "azurerm_private_endpoint" "this" {
   ]
 }
 
-# Create an A record pointing to the Azure Function App private endpoint
-resource "azurerm_private_dns_a_record" "this" {
-  name                = azurerm_function_app.this.name
-  zone_name           = "privatelink.azurewebsites.net"
-  resource_group_name = var.private_dns_resource_group_name
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
-  ]
-  
-  depends_on          = [
-    time_sleep.this,
-  ]
-}
-
-# Create an A record pointing to the Azure Function App private endpoint
-resource "azurerm_private_dns_a_record" "scm" {
-  name                = "${azurerm_function_app.this.name}.scm"
-  zone_name           = "privatelink.azurewebsites.net"
-  resource_group_name = var.private_dns_resource_group_name
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
-  ]
-  
-  depends_on          = [
-    time_sleep.this,
-  ]
-}
-
-resource "random_string" "st" {
-  length  = 10
-  special = false
-  upper   = false
-}
-
 # If using private endpoint connections, the storage account will need a private endpoint for the
 # 'file' and 'blob' sub-resources. If using certain capabilities like Durable Functions, you will also
 # need 'queue' and 'table' accessible through a private endpoint connection.
@@ -224,25 +188,9 @@ resource "azurerm_private_endpoint" "blob" {
   ]
 }
 
-# Create an A record pointing to the Storage Account (blob) private endpoint
-resource "azurerm_private_dns_a_record" "blob" {
-  name                = azurerm_storage_account.this.name
-  zone_name           = "privatelink.blob.core.windows.net"
-  resource_group_name = var.private_dns_resource_group_name
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.blob.private_service_connection[0].private_ip_address
-  ]
-    
-  depends_on          = [
-    time_sleep.this,
-  ]
-}
-
 #
 # Private Endpoint for file subresource
 #
-
 resource "random_string" "file" {
   length  = 5
   special = false
@@ -271,30 +219,6 @@ resource "azurerm_private_endpoint" "file" {
       tags,
     ]
   }
-}
-
-# Create an A record pointing to the Storage Account (file) private endpoint
-resource "azurerm_private_dns_a_record" "file" {
-  name                = azurerm_storage_account.this.name
-  zone_name           = "privatelink.file.core.windows.net"
-  resource_group_name = var.private_dns_resource_group_name
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.file.private_service_connection[0].private_ip_address
-  ]
-    
-  depends_on          = [
-    time_sleep.this,
-  ]
-}
-
-# Waiting for the private endpoint to come online
-resource "time_sleep" "this" {
-  depends_on = [
-    azurerm_private_endpoint.this
-  ]
-
-  create_duration = "60s"
 }
 
 resource "azurerm_monitor_metric_alert" "health_check_alert" {

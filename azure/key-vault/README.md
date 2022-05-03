@@ -13,7 +13,6 @@ This module creates the following resources:
 - [Azure Key Vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault)
 - [Azure Key Vault Access Policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy)
 - [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
-- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 - [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
@@ -39,7 +38,6 @@ module "key_vault_example" {
   location                        = "westeurope"
   sku_name                        = "standard"
   private_endpoint_subnet_id      = "private-endpoint-subnet-id"
-  private_dns_resource_group_name = "private-dns-resource-group-name"
   log_analytics_workspace_id      = "example-log-analytics-workspace"
 
   access_policies       = [
