@@ -27,16 +27,17 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "service_bus_namespace_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=5.7.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=5.17.0"
 
-  name                  = "example-name"
-  project_name          = "example-project-name"
-  environment_short     = "p"
-  environment_instance  = "001"
-  resource_group_name   = "example-resource-group-name"
-  location              = "westeurope"
-  sku                   = "basic"
-  auth_rules            = [
+  name                        = "example-name"
+  project_name                = "example-project-name"
+  environment_short           = "p"
+  environment_instance        = "001"
+  resource_group_name         = "example-resource-group-name"
+  location                    = "westeurope"
+  sku                         = "basic"
+  log_analytics_workspace_id  = "example-log-analytics-workspace"
+  auth_rules                  = [
     {
       name    = "example-auth-rule-1"
       listen  = true
@@ -56,7 +57,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.7.0"
+    "ModuleVersion" = "5.17.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }
