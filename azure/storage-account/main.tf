@@ -103,19 +103,15 @@ resource "azurerm_private_endpoint" "blob" {
       tags,
     ]
   }
-
-  depends_on = [
-    azurerm_private_endpoint.file
-  ]
 }
 
 # Create an A record pointing to the Storage Account (blob) private endpoint
 resource "azurerm_private_dns_a_record" "blob" {
-  count               = var.use_blob ? 1 : 0
+  count               = var.use_blob ? length(var.private_dns_resource_group_names) : 0
 
   name                = azurerm_storage_account.this.name
   zone_name           = "privatelink.blob.core.windows.net"
-  resource_group_name = var.private_dns_resource_group_name
+  resource_group_name = var.private_dns_resource_group_names[count.index]
   ttl                 = 3600
   records             = [
     azurerm_private_endpoint.blob[0].private_service_connection[0].private_ip_address
@@ -164,14 +160,67 @@ resource "azurerm_private_endpoint" "file" {
 
 # Create an A record pointing to the Storage Account (file) private endpoint
 resource "azurerm_private_dns_a_record" "file" {
-  count               = var.use_file ? 1 : 0
+  count               = var.use_file ? length(var.private_dns_resource_group_names) : 0
 
   name                = azurerm_storage_account.this.name
   zone_name           = "privatelink.file.core.windows.net"
-  resource_group_name = var.private_dns_resource_group_name
+  resource_group_name = var.private_dns_resource_group_names[count.index]
   ttl                 = 3600
   records             = [
     azurerm_private_endpoint.file[0].private_service_connection[0].private_ip_address
+  ]
+  
+  depends_on          = [
+    time_sleep.this,
+  ]
+}
+
+#
+# Private Endpoint for DFS (Data Lake File System Gen2) subresource
+#
+
+resource "random_string" "dfs" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+resource "azurerm_private_endpoint" "dfs" {
+  count               = var.use_dfs ? 1 : 0
+
+  name                = "pe-${lower(var.name)}${random_string.dfs.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+
+  private_service_connection {
+    name                           = "psc-01"
+    private_connection_resource_id = azurerm_storage_account.this.id
+    is_manual_connection           = false
+    subresource_names              = ["dfs"]
+  }
+
+  tags                             = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+}
+
+# Create an A record pointing to the Data Lake File System Gen2 private endpoint
+resource "azurerm_private_dns_a_record" "dfs" {
+  count               = var.use_dfs ? length(var.private_dns_resource_group_names) : 0
+
+  name                = azurerm_storage_account.this.name
+  zone_name           = "privatelink.dfs.core.windows.net"
+  resource_group_name = var.private_dns_resource_group_names[count.index]
+  ttl                 = 3600
+  records             = [
+    azurerm_private_endpoint.dfs[0].private_service_connection[0].private_ip_address
   ]
   
   depends_on          = [
@@ -186,7 +235,7 @@ resource "time_sleep" "this" {
     azurerm_private_endpoint.blob
   ]
 
-  create_duration = "300s" # 5min should give us enough time for the Private endpoint to come online
+  create_duration = "120s" # 2 min should give us enough time for the Private endpoint to come online
 }
 
 resource "azurerm_monitor_diagnostic_setting" "this" {
