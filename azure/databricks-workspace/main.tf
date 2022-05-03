@@ -27,7 +27,6 @@ resource "azurerm_databricks_workspace" "this" {
 
   custom_parameters {
     virtual_network_id                                    = azurerm_virtual_network.this.id
-    no_public_ip                                          = true
     public_subnet_name                                    = azurerm_subnet.public.name
     public_subnet_network_security_group_association_id   = azurerm_subnet_network_security_group_association.nsg_public_group_association.id
     private_subnet_name                                   = azurerm_subnet.private.name
@@ -134,4 +133,40 @@ resource "azurerm_virtual_network_peering" "remote" {
   virtual_network_name          = var.main_virtual_network_name
   resource_group_name           = var.main_virtual_network_resource_group_name
   allow_virtual_network_access  = true
+}
+
+# Create a Private DNS Zone for Data Lake File System Gen2 (DFS) resources
+resource "azurerm_private_dns_zone" "dfs" {
+  name                = "privatelink.dfs.core.windows.net"
+  resource_group_name = var.resource_group_name
+
+  tags                = var.tags
+}
+
+# The Private DNS Zone for DFS must be linked with the Databricks dedicated virtual network
+resource "azurerm_private_dns_zone_virtual_network_link" "dfs" {
+  name                  = "pdnsz-dfs-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.resource_group_name
+  private_dns_zone_name = azurerm_private_dns_zone.dfs.name
+  virtual_network_id    = azurerm_virtual_network.this.id
+
+  tags                  = var.tags
+}
+
+# Create a Private DNS Zone for Blob resources
+resource "azurerm_private_dns_zone" "blob" {
+  name                = "privatelink.blob.core.windows.net"
+  resource_group_name = var.resource_group_name
+
+  tags                = var.tags
+}
+
+# The Private DNS Zone for Blob must be linked with the Databricks dedicated virtual network
+resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
+  name                  = "pdnsz-blob-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.resource_group_name
+  private_dns_zone_name = azurerm_private_dns_zone.blob.name
+  virtual_network_id    = azurerm_virtual_network.this.id
+
+  tags                  = var.tags
 }
