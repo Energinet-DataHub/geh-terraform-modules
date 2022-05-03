@@ -105,23 +105,6 @@ resource "azurerm_private_endpoint" "blob" {
   }
 }
 
-# Create an A record pointing to the Storage Account (blob) private endpoint
-resource "azurerm_private_dns_a_record" "blob" {
-  count               = var.use_blob ? length(var.private_dns_resource_group_names) : 0
-
-  name                = azurerm_storage_account.this.name
-  zone_name           = "privatelink.blob.core.windows.net"
-  resource_group_name = var.private_dns_resource_group_names[count.index]
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.blob[0].private_service_connection[0].private_ip_address
-  ]
-  
-  depends_on          = [
-    time_sleep.this,
-  ]
-}
-
 #
 # Private Endpoint for file subresource
 #
@@ -158,23 +141,6 @@ resource "azurerm_private_endpoint" "file" {
   }
 }
 
-# Create an A record pointing to the Storage Account (file) private endpoint
-resource "azurerm_private_dns_a_record" "file" {
-  count               = var.use_file ? length(var.private_dns_resource_group_names) : 0
-
-  name                = azurerm_storage_account.this.name
-  zone_name           = "privatelink.file.core.windows.net"
-  resource_group_name = var.private_dns_resource_group_names[count.index]
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.file[0].private_service_connection[0].private_ip_address
-  ]
-  
-  depends_on          = [
-    time_sleep.this,
-  ]
-}
-
 #
 # Private Endpoint for DFS (Data Lake File System Gen2) subresource
 #
@@ -209,23 +175,6 @@ resource "azurerm_private_endpoint" "dfs" {
       tags,
     ]
   }
-}
-
-# Create an A record pointing to the Data Lake File System Gen2 private endpoint
-resource "azurerm_private_dns_a_record" "dfs" {
-  count               = var.use_dfs ? length(var.private_dns_resource_group_names) : 0
-
-  name                = azurerm_storage_account.this.name
-  zone_name           = "privatelink.dfs.core.windows.net"
-  resource_group_name = var.private_dns_resource_group_names[count.index]
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.dfs[0].private_service_connection[0].private_ip_address
-  ]
-  
-  depends_on          = [
-    time_sleep.this,
-  ]
 }
 
 # Waiting for the private endpoint to come online

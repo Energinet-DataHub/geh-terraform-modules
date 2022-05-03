@@ -115,47 +115,6 @@ resource "azurerm_private_endpoint" "this" {
   ]
 }
 
-# Create an A record pointing to the App service private endpoint
-resource "azurerm_private_dns_a_record" "this" {
-  name                = azurerm_app_service.this.name
-  zone_name           = "privatelink.azurewebsites.net"
-  resource_group_name = var.private_dns_resource_group_name
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.this[0].private_service_connection[0].private_ip_address
-  ]
-  
-  depends_on          = [
-    time_sleep.this,
-    azurerm_private_endpoint.this
-  ]
-}
-
-# Create an A record pointing to the App service SCM private endpoint
-resource "azurerm_private_dns_a_record" "scm" {
-  name                = "${azurerm_app_service.this.name}.scm"
-  zone_name           = "privatelink.azurewebsites.net"
-  resource_group_name = var.private_dns_resource_group_name
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.this[0].private_service_connection[0].private_ip_address
-  ]
-  
-  depends_on          = [
-    time_sleep.this,
-    azurerm_private_endpoint.this
-  ]
-}
-
-# Waiting for the private endpoint to come online
-resource "time_sleep" "this" {
-  create_duration = "60s"
-
-  depends_on = [
-    azurerm_private_endpoint.this
-  ]
-}
-
 resource "azurerm_monitor_metric_alert" "health_check_alert" {
   count               = var.health_check_alert_action_group_id == null ? 0 : 1
 

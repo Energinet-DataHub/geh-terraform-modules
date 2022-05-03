@@ -19,7 +19,6 @@ output id {
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -32,7 +31,6 @@ output name {
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -45,7 +43,6 @@ output default_site_hostname {
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -58,7 +55,6 @@ output outbound_ip_addresses {
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -71,7 +67,6 @@ output possible_outbound_ip_addresses {
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -84,7 +79,6 @@ output identity {
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -97,7 +91,6 @@ output site_credential {
     azurerm_app_service.this,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
