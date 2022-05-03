@@ -115,6 +115,12 @@ resource "azurerm_private_endpoint" "this" {
   ]
 }
 
+resource "random_string" "st" {
+  length  = 10
+  special = false
+  upper   = false
+}
+
 # If using private endpoint connections, the storage account will need a private endpoint for the
 # 'file' and 'blob' sub-resources. If using certain capabilities like Durable Functions, you will also
 # need 'queue' and 'table' accessible through a private endpoint connection.
