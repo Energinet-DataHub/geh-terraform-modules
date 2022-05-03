@@ -19,10 +19,6 @@ output id {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
-    azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
   ]
 }
 
@@ -34,10 +30,6 @@ output name {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
-    azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
   ]
 }
 
@@ -50,10 +42,6 @@ output primary_connection_string {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
-    azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
   ]
 }
 
@@ -66,10 +54,6 @@ output primary_access_key {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
-    azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
   ]
 }
 
@@ -81,10 +65,6 @@ output primary_blob_endpoint {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
-    azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
   ]
 }
 
@@ -96,9 +76,5 @@ output primary_file_endpoint {
     azurerm_storage_account.this,
     azurerm_storage_container.this,
     azurerm_storage_account_network_rules.this,
-    azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
-    azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
   ]
 }

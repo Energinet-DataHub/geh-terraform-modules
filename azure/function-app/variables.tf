@@ -56,16 +56,6 @@ variable vnet_integration_subnet_id {
   description = "(Required) The id of the vnet integration subnet where this Function App will reside."
 }
 
-variable private_endpoint_subnet_id {
-  type        = string
-  description = "(Required) The ID of the Subnet to contain the Azure Function App's storage account from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
-}
-
-variable private_dns_resource_group_name {
-  type        = string
-  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
-}
-
 variable app_settings {
   type        = map(string)
   description = "(Optional) A map of key-value pairs for App Settings and custom values."

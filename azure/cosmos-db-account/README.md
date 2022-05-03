@@ -11,8 +11,6 @@
 This module creates the following resources:
 
 - [Azure Cosmos DB Account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account)
-- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
-- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 
 ## Prerequisites
 
@@ -35,8 +33,6 @@ module "cosmos_db_example" {
   environment_instance            = "001"
   resource_group_name             = "example-resource-group-name"
   location                        = "westeurope"
-  private_endpoint_subnet_id      = "private-endpoint-subnet-id"
-  private_dns_resource_group_name = "private-dns-resource-group-name"
 
   tags                            = {}
 }

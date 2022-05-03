@@ -19,8 +19,6 @@ output id {
     azurerm_servicebus_namespace_network_rule_set.this,
     azurerm_servicebus_namespace.this,
     azurerm_servicebus_namespace_authorization_rule.this,
-    azurerm_private_dns_a_record.this,
-    azurerm_private_endpoint.this,
   ]
 }
 
@@ -32,8 +30,6 @@ output name {
     azurerm_servicebus_namespace_network_rule_set.this,
     azurerm_servicebus_namespace.this,
     azurerm_servicebus_namespace_authorization_rule.this,
-    azurerm_private_dns_a_record.this,
-    azurerm_private_endpoint.this,
   ]
 }
 
@@ -45,7 +41,5 @@ output primary_connection_strings {
     azurerm_servicebus_namespace_network_rule_set.this,
     azurerm_servicebus_namespace.this,
     azurerm_servicebus_namespace_authorization_rule.this,
-    azurerm_private_dns_a_record.this,
-    azurerm_private_endpoint.this,
   ]
 }

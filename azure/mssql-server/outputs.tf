@@ -17,8 +17,6 @@ output id {
 
   depends_on  = [
     azurerm_mssql_server.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -28,8 +26,6 @@ output name {
 
   depends_on  = [
     azurerm_mssql_server.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -39,8 +35,6 @@ output fully_qualified_domain_name {
 
   depends_on  = [
     azurerm_mssql_server.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -50,8 +44,6 @@ output identity_principal_id {
 
   depends_on  = [
     azurerm_mssql_server.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -61,7 +53,5 @@ output identity_tenant_id {
 
   depends_on  = [
     azurerm_mssql_server.this,
-    azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }

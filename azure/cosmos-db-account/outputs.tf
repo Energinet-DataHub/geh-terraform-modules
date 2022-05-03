@@ -18,9 +18,6 @@ output "id" {
 
   depends_on = [
     azurerm_cosmosdb_account.this,
-    azurerm_private_endpoint.cosmos_sql,
-    azurerm_private_dns_a_record.cosmosdb_sql_global,
-    azurerm_private_dns_a_record.cosmosdb_sql_region,
   ]
 }
 
@@ -30,9 +27,6 @@ output "name" {
 
   depends_on = [
     azurerm_cosmosdb_account.this,
-    azurerm_private_endpoint.cosmos_sql,
-    azurerm_private_dns_a_record.cosmosdb_sql_global,
-    azurerm_private_dns_a_record.cosmosdb_sql_region,
   ]
 }
 
@@ -42,9 +36,6 @@ output "endpoint" {
 
   depends_on = [
     azurerm_cosmosdb_account.this,
-    azurerm_private_endpoint.cosmos_sql,
-    azurerm_private_dns_a_record.cosmosdb_sql_global,
-    azurerm_private_dns_a_record.cosmosdb_sql_region,
   ]
 }
 
@@ -54,8 +45,5 @@ output "primary_key" {
 
   depends_on = [
     azurerm_cosmosdb_account.this,
-    azurerm_private_endpoint.cosmos_sql,
-    azurerm_private_dns_a_record.cosmosdb_sql_global,
-    azurerm_private_dns_a_record.cosmosdb_sql_region,
   ]
 }

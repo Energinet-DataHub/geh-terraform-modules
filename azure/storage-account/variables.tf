@@ -47,16 +47,6 @@ variable location {
   description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
-variable private_endpoint_subnet_id {
-  type        = string
-  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
-}
-
-variable private_dns_resource_group_name {
-  type        = string
-  description = "(Required) Specifies the resource group where the Private DNS Zones exists. Changing this forces a new resource to be created."
-}
-
 variable use_blob {
   type        = bool
   description = "(Optional) Determine if the blob subresource of the storage account should be configured for usage. Defaults to 'true'."

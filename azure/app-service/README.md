@@ -44,8 +44,6 @@ module "app_example" {
   app_service_plan_id                       = "id-example"
   application_insights_instrumentation_key  = "app-insights-instrumentation-key-example"
   vnet_integration_subnet_id                = "vnet-integration-subnet-id"
-  external_private_endpoint_subnet_id       = "external-private-endpoint-subnet-id"
-  private_dns_resource_group_name           = "private-dns-resource-group-name"
   app_settings                              = {
     "example-key1" = "example-value1"
     "example-key2" = "example-value2"
