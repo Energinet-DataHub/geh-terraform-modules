@@ -36,7 +36,6 @@ resource "azurerm_app_service" "this" {
   }
 
   site_config {
-    linux_fx_version          = var.linux_fx_version
     dotnet_framework_version  = var.dotnet_framework_version
     always_on                 = var.always_on
     health_check_path         = var.health_check_path
