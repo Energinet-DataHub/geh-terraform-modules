@@ -49,7 +49,8 @@ variable location {
 
 variable sku {
   type        = string
-  description = "(Required) Defines which tier to use. Options are basic, standard or premium. Changing this forces a new resource to be created."
+  description = "(Optional) Defines which tier to use. Options are basic, standard or premium. Changing this forces a new resource to be created."
+  default     = "Premium"
 }
 
 variable auth_rules {

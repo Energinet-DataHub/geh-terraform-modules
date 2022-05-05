@@ -22,7 +22,7 @@ resource "azurerm_servicebus_namespace" "this" {
   name                = "sb-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location            = var.location
   resource_group_name = var.resource_group_name
-  sku                 = "Premium"
+  sku                 = var.sku
   capacity            = var.capacity
 
   tags                = merge(var.tags, local.module_tags)

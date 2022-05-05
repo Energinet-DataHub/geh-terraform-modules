@@ -49,7 +49,8 @@ variable location {
 
 variable sku {
   type        = string
-  description = "(Required) Defines which tier to use. Valid options are Basic, Standard, and Premium. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true."
+  description = "(Optional) Defines which tier to use. Valid options are Basic, Standard, and Premium. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true."
+  default     = "Premium"
 }
 
 variable private_endpoint_subnet_id {
