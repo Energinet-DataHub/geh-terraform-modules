@@ -32,7 +32,6 @@ output name {
     azurerm_key_vault_access_policy.selfpermissions,
     azurerm_key_vault_access_policy.this,
     azurerm_private_endpoint.this,
-    time_sleep.this,
   ]
 }
 
