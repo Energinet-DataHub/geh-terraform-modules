@@ -177,16 +177,6 @@ resource "azurerm_private_endpoint" "dfs" {
   }
 }
 
-# Waiting for the private endpoint to come online
-resource "time_sleep" "this" {
-  depends_on = [
-    azurerm_private_endpoint.file,
-    azurerm_private_endpoint.blob
-  ]
-
-  create_duration = "120s" # 2 min should give us enough time for the Private endpoint to come online
-}
-
 resource "azurerm_monitor_diagnostic_setting" "this" {
   name                       = "diag-stor-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   target_resource_id         = azurerm_storage_account.this.id
