@@ -77,15 +77,6 @@ resource "azurerm_private_endpoint" "this" {
   }
 }
 
-# Waiting for the private endpoint to come online
-resource "time_sleep" "this" {
-  depends_on = [
-    azurerm_private_endpoint.this
-  ]
-
-  create_duration = "300s" # 5min should give us enough time for the Private endpoint to come online
-}
-
 resource "azurerm_key_vault_access_policy" "selfpermissions" {
   key_vault_id            = azurerm_key_vault.this.id
   tenant_id               = data.azurerm_client_config.this.tenant_id
