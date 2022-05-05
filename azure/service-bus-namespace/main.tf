@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.7.0"
+    "ModuleVersion" = "5.17.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }
@@ -47,7 +47,6 @@ resource "azurerm_servicebus_namespace_authorization_rule" "this" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "this" {
-  count                      = (var.log_analytics_workspace_id == null ? 0 : 1)
   name                       = "diag-sb-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   target_resource_id         = azurerm_servicebus_namespace.this.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
