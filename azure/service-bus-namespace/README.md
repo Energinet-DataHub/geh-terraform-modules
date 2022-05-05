@@ -40,8 +40,8 @@ module "service_bus_namespace_example" {
   resource_group_name             = "example-resource-group-name"
   location                        = "westeurope"
   private_endpoint_subnet_id      = "private-endpoint-subnet-id"
-  sku                             = "basic"
-
+  log_analytics_workspace_id      = "example-log-analytics-workspace"
+  
   auth_rules            = [
     {
       name    = "example-auth-rule-1"
