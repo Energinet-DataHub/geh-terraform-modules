@@ -123,3 +123,9 @@ variable tags {
   description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
 }
+
+variable private_dns_resource_group_name {
+  type        = string
+  description = "(Optional) Specifies the resource groups where the Private DNS Zones exists. Changing this forces a new resource to be created."
+  default     = ""
+}
