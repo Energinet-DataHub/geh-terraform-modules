@@ -48,7 +48,9 @@ resource "azurerm_virtual_network" "this" {
   name                = local.NAME
   location            = var.location
   resource_group_name = var.resource_group_name
-  address_space       = [var.databricks_virtual_network_address_space]
+  address_space       = [
+    var.databricks_virtual_network_address_space
+  ]
 
   tags                = var.tags
 
@@ -65,7 +67,9 @@ resource "azurerm_subnet" "private" {
   name                                            = "snet-private-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                             = var.resource_group_name
   virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = [var.private_subnet_address_prefix]
+  address_prefixes                                = [
+    var.private_subnet_address_prefix
+  ]
   enforce_private_link_service_network_policies   = true
   enforce_private_link_endpoint_network_policies  = true
   delegation {
@@ -82,11 +86,18 @@ resource "azurerm_subnet" "private" {
   }
 }
 
+resource "azurerm_subnet_network_security_group_association" "nsg_private_group_association" {
+  subnet_id                 = azurerm_subnet.private.id
+  network_security_group_id = azurerm_network_security_group.dbw_nsg.id
+}
+
 resource "azurerm_subnet" "public" {
   name                                            = "snet-public-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name                             = var.resource_group_name
   virtual_network_name                            = azurerm_virtual_network.this.name
-  address_prefixes                                = [var.public_subnet_address_prefix]
+  address_prefixes                                = [
+    var.public_subnet_address_prefix
+  ]
   enforce_private_link_service_network_policies   = true
   enforce_private_link_endpoint_network_policies  = true
   delegation {
@@ -105,11 +116,6 @@ resource "azurerm_subnet" "public" {
 
 resource "azurerm_subnet_network_security_group_association" "nsg_public_group_association" {
   subnet_id                 = azurerm_subnet.public.id
-  network_security_group_id = azurerm_network_security_group.dbw_nsg.id
-}
-
-resource "azurerm_subnet_network_security_group_association" "nsg_private_group_association" {
-  subnet_id                 = azurerm_subnet.private.id
   network_security_group_id = azurerm_network_security_group.dbw_nsg.id
 }
 
