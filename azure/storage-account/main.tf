@@ -53,6 +53,10 @@ resource "azurerm_storage_container" "this" {
   depends_on = [
     azurerm_storage_account_network_rules.this
   ]
+
+  timeouts {
+    create = "15m"
+  }
 }
 
 resource "azurerm_storage_account_network_rules" "this" {
