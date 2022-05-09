@@ -27,6 +27,10 @@ resource "azurerm_storage_account" "this" {
   is_hns_enabled            = var.is_hns_enabled
   min_tls_version           = "TLS1_2"
 
+  network_rules {
+    default_action             = "Deny"
+  }
+
   tags                      = merge(var.tags, local.module_tags)
 
   lifecycle {
