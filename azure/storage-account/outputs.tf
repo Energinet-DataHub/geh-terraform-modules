@@ -18,7 +18,6 @@ output id {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
-    azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_private_endpoint.dfs,
@@ -32,7 +31,6 @@ output name {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
-    azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_private_endpoint.dfs,
@@ -47,7 +45,6 @@ output primary_connection_string {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
-    azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_private_endpoint.dfs,
@@ -62,7 +59,6 @@ output primary_access_key {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
-    azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_private_endpoint.dfs,
@@ -76,7 +72,6 @@ output primary_blob_endpoint {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
-    azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_private_endpoint.dfs,
@@ -90,7 +85,6 @@ output primary_file_endpoint {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
-    azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_private_endpoint.dfs,
