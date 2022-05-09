@@ -29,12 +29,6 @@ resource "azurerm_eventhub_namespace" "this" {
     default_action = "Deny"
     trusted_service_access_enabled = false
     ip_rule = [ ]
-    virtual_network_rule = [
-      {
-        subnet_id = var.private_endpoint_subnet_id
-        ignore_missing_virtual_network_service_endpoint = true
-      }
-    ]
   } ]
 
   tags                = merge(var.tags, local.module_tags)
