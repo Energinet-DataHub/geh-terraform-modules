@@ -48,7 +48,7 @@ variable sku_name {
 
 variable vnet_integration_subnet_id {
   type        = string
-  description = "(Required) The id of the vnet integration subnet where this Key Vault will reside."
+  description = "(Required) The id of the subnet to allow host to call the Keyvault from."
 }
 
 variable private_endpoint_subnet_id {

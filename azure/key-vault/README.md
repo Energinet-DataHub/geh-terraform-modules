@@ -39,7 +39,7 @@ module "key_vault_example" {
   sku_name                        = "standard"
   private_endpoint_subnet_id      = "private-endpoint-subnet-id"
   vnet_integration_subnet_id      = "vnet-integration-subnet-id"
-  private_dns_resource_group_name = "private-dns-resource-group-name"
+  allowed_subnet_id               = "example-subnet-id-2"
   log_analytics_workspace_id      = "example-log-analytics-workspace"
 
   access_policies       = [

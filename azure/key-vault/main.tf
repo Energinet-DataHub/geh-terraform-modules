@@ -41,7 +41,7 @@ resource "azurerm_key_vault" "this" {
     default_action              = "Deny"
     bypass                      = "AzureServices"
     virtual_network_subnet_ids  = [
-      var.vnet_integration_subnet_id
+      var.allowed_subnet_id
     ]
   }
 

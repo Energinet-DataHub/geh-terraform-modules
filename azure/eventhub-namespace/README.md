@@ -37,6 +37,7 @@ module "eventhub_namespace_example" {
   location                        = "westeurope"
   sku                             = "basic"
   private_endpoint_subnet_id      = "example-subnet-id"
+  approved_sender_subnet_id       = "example-subnet-id-2"
   log_analytics_workspace_id      = "example-log-analytics-workspace-id"
 }
 ```
