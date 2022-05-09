@@ -46,6 +46,11 @@ variable sku_name {
   description = "(Required) The Name of the SKU used for this Key Vault. Possible values are standard and premium."
 }
 
+variable vnet_integration_subnet_id {
+  type        = string
+  description = "(Required) The id of the vnet integration subnet where this Key Vault will reside."
+}
+
 variable private_endpoint_subnet_id {
   type        = string
   description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."

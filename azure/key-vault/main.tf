@@ -38,8 +38,11 @@ resource "azurerm_key_vault" "this" {
     ]
   }
   network_acls {
-    default_action = "Deny"
-    bypass = "AzureServices"
+    default_action              = "Deny"
+    bypass                      = "AzureServices"
+    vnet_integration_subnet_id  = [
+      var.vnet_integration_subnet_id
+    ]
   }
 
   depends_on                      = [
