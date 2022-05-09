@@ -20,7 +20,6 @@ output id {
     azurerm_key_vault_access_policy.selfpermissions,
     azurerm_key_vault_access_policy.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -33,8 +32,6 @@ output name {
     azurerm_key_vault_access_policy.selfpermissions,
     azurerm_key_vault_access_policy.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
-    time_sleep.this,
   ]
 }
 
@@ -47,6 +44,5 @@ output vault_uri {
     azurerm_key_vault_access_policy.selfpermissions,
     azurerm_key_vault_access_policy.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }

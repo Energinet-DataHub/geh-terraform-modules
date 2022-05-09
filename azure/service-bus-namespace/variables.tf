@@ -49,7 +49,8 @@ variable location {
 
 variable sku {
   type        = string
-  description = "(Required) Defines which tier to use. Options are basic, standard or premium. Changing this forces a new resource to be created."
+  description = "(Optional) Defines which tier to use. Options are basic, standard or premium. Changing this forces a new resource to be created."
+  default     = "Premium"
 }
 
 variable auth_rules {
@@ -67,11 +68,6 @@ variable private_endpoint_subnet_id {
   description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
 }
 
-variable private_dns_resource_group_name {
-  type        = string
-  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
-}
-
 variable capacity {
   type        = number
   description = "(Optional) The capcity when using premium sku."
@@ -84,8 +80,7 @@ variable capacity {
   
 variable log_analytics_workspace_id {
   type = string
-  description = "(Optional) The id of the Log Analytics Workspace where the Service Bus will log events (e.g. audit events)"
-  default = null
+  description = "(Required) The id of the Log Analytics Workspace where the Service Bus will log events (e.g. audit events)"
 }
 
 variable log_retention_in_days {

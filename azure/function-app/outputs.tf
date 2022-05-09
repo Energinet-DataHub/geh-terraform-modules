@@ -19,13 +19,10 @@ output id {
     azurerm_storage_account.this,
     azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_function_app.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -37,9 +34,7 @@ output name {
     azurerm_storage_account.this,
     azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_function_app.this,
   ]
@@ -53,13 +48,10 @@ output default_hostname {
     azurerm_storage_account.this,
     azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_function_app.this,    
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -71,13 +63,10 @@ output outbound_ip_addresses {
     azurerm_storage_account.this,
     azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_function_app.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -89,13 +78,10 @@ output possible_outbound_ip_addresses {
     azurerm_storage_account.this,
     azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_function_app.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -107,13 +93,10 @@ output identity {
     azurerm_storage_account.this,
     azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_function_app.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -125,13 +108,10 @@ output site_credential {
     azurerm_storage_account.this,
     azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_function_app.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }
 
@@ -143,12 +123,9 @@ output kind {
     azurerm_storage_account.this,
     azurerm_storage_account_network_rules.this,
     azurerm_private_endpoint.blob,
-    azurerm_private_dns_a_record.blob,
     azurerm_private_endpoint.file,
-    azurerm_private_dns_a_record.file,
     azurerm_app_service_virtual_network_swift_connection.this,
     azurerm_function_app.this,
     azurerm_private_endpoint.this,
-    azurerm_private_dns_a_record.this,
   ]
 }

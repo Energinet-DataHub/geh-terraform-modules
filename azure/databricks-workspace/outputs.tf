@@ -65,7 +65,7 @@ output "workspace_url" {
 output "private_dns_zone_resource_group_name" {
   value       = var.resource_group_name
   description = "Name of the resource group where the Private DNS zones for resources used by Databricks clusters is located."
-  
+
   depends_on = [
     azurerm_databricks_workspace.this,
     azurerm_virtual_network.this,

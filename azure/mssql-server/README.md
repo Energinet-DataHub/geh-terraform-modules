@@ -12,7 +12,6 @@ This module creates the following resources:
 
 - [Azure Microsoft SQL Server](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/mssql_server)
 - [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
-- [Azure Private DNS A Record](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record)
 - [Azure Microsoft SQL firewall rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule)
 - [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
@@ -41,7 +40,6 @@ module "sql_server_example" {
   administrator_login             = "example-administrator-login"
   administrator_login_password    = "example-administrator-login-password"
   private_endpoint_subnet_id      = "private-endpoint-subnet-id"
-  private_dns_resource_group_name = "private-dns-resource-group-name"
   log_analytics_workspace_id      = "example-log-analytics-workspace-id"
 
   tags                          = {}

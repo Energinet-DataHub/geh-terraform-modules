@@ -78,11 +78,6 @@ variable policies {
   default     = []
 }
 
-variable authorization_server_name {
-  type        = string
-  description = "(Required) OAuth authorization server identifier. The name of an OAuth2 Authorization Server."
-}
-
 variable apim_logger_id {
   type        = string
   description = "(Required) The ID of the Logger connected to API Management."

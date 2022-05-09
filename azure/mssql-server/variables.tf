@@ -61,11 +61,6 @@ variable private_endpoint_subnet_id {
   description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
 }
 
-variable private_dns_resource_group_name {
-  type        = string
-  description = "(Required) Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created."
-}
-
 variable log_analytics_workspace_id {
   type = string
   description = "(Required) The id of the Log Analytics Workspace where the SQL Server will log events (e.g. audit events)"

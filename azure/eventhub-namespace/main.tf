@@ -82,17 +82,6 @@ resource "azurerm_private_endpoint" "this" {
   }
 }
 
-# Create an A record pointing to the namespace private endpoint
-resource "azurerm_private_dns_a_record" "this" {
-  name                = azurerm_eventhub_namespace.this.name
-  zone_name           = "privatelink.servicebus.windows.net"
-  resource_group_name = var.private_dns_resource_group_name
-  ttl                 = 3600
-  records             = [
-    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
-  ]
-}
-
 resource "azurerm_monitor_diagnostic_setting" "this" {
   name                       = "diag-evhns-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   target_resource_id         = azurerm_eventhub_namespace.this.id
