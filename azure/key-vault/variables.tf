@@ -46,7 +46,7 @@ variable sku_name {
   description = "(Required) The Name of the SKU used for this Key Vault. Possible values are standard and premium."
 }
 
-variable vnet_integration_subnet_id {
+variable allowed_subnet_id {
   type        = string
   description = "(Required) The id of the subnet to allow host to call the Keyvault from."
 }
