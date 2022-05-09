@@ -50,27 +50,9 @@ resource "azurerm_storage_container" "this" {
   storage_account_name  = azurerm_storage_account.this.name
   container_access_type = try(var.containers[count.index].access_type, "private")
 
-  depends_on = [
-    azurerm_storage_account_network_rules.this
-  ]
-
   timeouts {
     create = "15m"
   }
-}
-
-resource "azurerm_storage_account_network_rules" "this" {
-  storage_account_id   = azurerm_storage_account.this.id
-
-  default_action       = "Deny"
-  ip_rules             = [
-    "126.0.0.1"
-  ]
-
-  bypass               = [
-    "Logging",
-    "Metrics",
-  ]
 }
 
 #
