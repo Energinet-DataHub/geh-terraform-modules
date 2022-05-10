@@ -25,14 +25,14 @@ resource "azurerm_eventhub_namespace" "this" {
   sku                 = var.sku
   capacity            = var.capacity
 
-  # network_rulesets {
-  #   default_action                  = "Deny"
-  #   trusted_service_access_enabled  = false
-  #   ip_rule                         = []
-  #   virtual_network_rule {
-  #     subnet_id = var.approved_sender_subnet_id
-  #   }
-  # }
+  network_rulesets {
+    default_action                  = "Deny"
+    trusted_service_access_enabled  = false
+    ip_rule                         = []
+    virtual_network_rule {
+      subnet_id = var.approved_sender_subnet_id
+    }
+  }
 
   tags                = merge(var.tags, local.module_tags)
 
@@ -47,21 +47,6 @@ resource "azurerm_eventhub_namespace" "this" {
   depends_on          = [
     var.private_endpoint_subnet_id
   ]
-}
-
-resource "azapi_update_resource" "test" {
-  type      = "Microsoft.EventHub/namespaces/networkRuleSets@2021-11-01"
-  resource_id = azurerm_eventhub_namespace.this.id
-
-
-  body = jsonencode({
-    properties = {
-      defaultAction       = "Deny"
-      publicNetworkAccess = "Disabled"
-      virtualNetworkRules = []
-      ipRules             = []
-    }
-  })
 }
 
 resource "random_string" "this" {
