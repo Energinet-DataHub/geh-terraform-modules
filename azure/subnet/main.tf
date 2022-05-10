@@ -18,6 +18,7 @@ resource "azurerm_subnet" "this" {
   address_prefixes                                = var.address_prefixes
   enforce_private_link_service_network_policies   = var.enforce_private_link_service_network_policies
   enforce_private_link_endpoint_network_policies  = var.enforce_private_link_endpoint_network_policies
+  service_endpoints                               = var.service_endpoints
 
   dynamic "delegation" {
     for_each  = var.delegations

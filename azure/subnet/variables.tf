@@ -65,6 +65,12 @@ variable enforce_private_link_endpoint_network_policies {
   default     = false
 }
 
+variable service_endpoints {
+  type        = list(string)
+  description = "(Optional) The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage and Microsoft.Web."
+  default     = []
+}
+
 variable delegations {
   type        = list(object({
     name                        = string
