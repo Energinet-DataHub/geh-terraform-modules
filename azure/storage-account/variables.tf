@@ -64,12 +64,6 @@ variable use_file {
   default     = false
 }
 
-variable use_dfs {
-  type        = bool
-  description = "(Optional) Determine if the Data Lake File System Gen2 subresource of the storage account should be configured for usage. Defaults to 'false'."
-  default     = false
-}
-
 variable account_tier {
   type        = string
   description = "(Required) Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created."
@@ -107,6 +101,15 @@ variable containers {
   default     = []
 }
 
+variable shares {
+  type        = list(object({
+    name        = string
+    quota       = optional(number)
+  }))
+  description = "(Optional) A list of objects describing the file shares, to create in the Storage Account."
+  default     = []
+}
+
 variable log_analytics_workspace_id {
   type = string
   description = "(Required) The id of the Log Analytics Workspace where the Storage Account will log events (e.g. audit events)"
@@ -122,10 +125,4 @@ variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
-}
-
-variable private_dns_resource_group_name {
-  type        = string
-  description = "(Optional) Specifies the resource groups where the Private DNS Zones exists. Changing this forces a new resource to be created."
-  default     = ""
 }

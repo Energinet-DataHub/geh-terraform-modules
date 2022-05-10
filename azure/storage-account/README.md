@@ -14,6 +14,7 @@ This module creates the following resources:
 - [Azure Storage Account Network Rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules)
 - [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
 - [Azure Storage Account Container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container)
+- [Azure Storage Account File Share](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_share)
 - [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
