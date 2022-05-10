@@ -82,7 +82,7 @@ variable access_tier {
 
 variable is_hns_enabled {
   type        = bool
-  description = "Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information - https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-quickstart-create-account/). Changing this forces a new resource to be created."
+  description = "(Optional) Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information - https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-quickstart-create-account/). Changing this forces a new resource to be created."
   default     = false
 }
 
