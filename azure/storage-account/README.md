@@ -41,7 +41,7 @@ module "storage_account_example" {
   private_endpoint_subnet_id      = "example-private-endpoint-subnet-id"
   account_tier                    = "Standard"
   account_replication_type        = "LRS"
-  account_replication_type        = "LRS"
+  log_analytics_workspace_id      = "example-log-analytics-workspace"
 
   containers                      = [
     {
