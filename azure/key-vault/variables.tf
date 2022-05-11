@@ -46,9 +46,9 @@ variable sku_name {
   description = "(Required) The Name of the SKU used for this Key Vault. Possible values are standard and premium."
 }
 
-variable allowed_subnet_id {
-  type        = string
-  description = "(Required) The id of the subnet to allow host to call the Keyvault from."
+variable allowed_subnet_ids {
+  type        = list(string)
+  description = "(Required) The ids of the subnets which should be able to access this Key Vault."
 }
 
 variable private_endpoint_subnet_id {
