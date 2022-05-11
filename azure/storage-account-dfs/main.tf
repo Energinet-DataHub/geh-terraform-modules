@@ -49,7 +49,6 @@ resource "azurerm_storage_account" "this" {
 #
 # Private Endpoint for DFS (Data Lake File System Gen2) subresource
 #
-
 resource "random_string" "dfs" {
   length  = 5
   special = false
@@ -101,6 +100,39 @@ resource "time_sleep" "this" {
     azurerm_private_endpoint.dfs
   ]
   create_duration = "120s" # 2 min should give us enough time for the Private endpoint to come online
+}
+
+#
+# Private Endpoint for Blob subresource
+#
+resource "random_string" "blob" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+resource "azurerm_private_endpoint" "blob" {
+  name                = "pe-${lower(var.name)}${random_string.blob.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+
+  private_service_connection {
+    name                           = "psc-01"
+    private_connection_resource_id = azurerm_storage_account.this.id
+    is_manual_connection           = false
+    subresource_names              = ["blob"]
+  }
+
+  tags                             = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "this" {
