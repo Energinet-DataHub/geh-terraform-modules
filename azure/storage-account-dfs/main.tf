@@ -75,6 +75,7 @@ resource "azurerm_private_endpoint" "dfs" {
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.
       tags,
+      private_dns_zone_group,
     ]
   }
 }
@@ -131,6 +132,7 @@ resource "azurerm_private_endpoint" "blob" {
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.
       tags,
+      private_dns_zone_group,
     ]
   }
 }
