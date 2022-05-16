@@ -74,7 +74,6 @@ resource "azurerm_private_endpoint" "this" {
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.
       tags,
-      private_dns_zone_group,
     ]
   }
 }
