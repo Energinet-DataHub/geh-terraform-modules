@@ -41,6 +41,13 @@ resource "azurerm_api_management" "this" {
   }
 }
 
+resource "azurerm_api_management_policy" "this" {
+  count               = length(var.policies)
+
+  api_management_id   = azurerm_api_management.this.id
+  xml_content         = try(var.policies[count.index].xml_content, null)
+}
+
 resource "azurerm_monitor_diagnostic_setting" "this" {
   name                       = "diag-apim-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   target_resource_id         = azurerm_api_management.this.id

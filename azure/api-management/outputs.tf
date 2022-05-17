@@ -14,14 +14,32 @@
 output id {
   value       = azurerm_api_management.this.id
   description = "The ID of the API Management Service."
+
+  depends_on  = [
+    azurerm_api_management.this,
+    azurerm_api_management_policy.this,
+    azurerm_monitor_diagnostic_setting.this,
+  ]
 }
 
 output name {
   value       = azurerm_api_management.this.name
   description = "The name of the API Management Service."
+
+  depends_on  = [
+    azurerm_api_management.this,
+    azurerm_api_management_policy.this,
+    azurerm_monitor_diagnostic_setting.this,
+  ]
 }
 
 output gateway_url {
   value       = azurerm_api_management.this.gateway_url
   description = "The URL of the Gateway for the API Management Service."
+
+  depends_on  = [
+    azurerm_api_management.this,
+    azurerm_api_management_policy.this,
+    azurerm_monitor_diagnostic_setting.this,
+  ]
 }

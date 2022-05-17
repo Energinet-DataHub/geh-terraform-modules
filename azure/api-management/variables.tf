@@ -77,6 +77,14 @@ variable log_retention_in_days {
   default     = 183
 }
 
+variable policies {
+  type        = list(object({
+    xml_content = string
+  }))
+  description = "(Optional) A list of objects describing the policies for the Global policies. An XML file can be used with 'xml_content' by using Terraform's file function (https://www.terraform.io/language/functions/file) that is similar to Microsoft's `PolicyFilePath` option."
+  default     = []
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resources."
