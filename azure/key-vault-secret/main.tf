@@ -25,6 +25,10 @@ resource "azurerm_key_vault_secret" "this" {
 
   tags          = merge(var.tags, local.module_tags)
 
+  timeouts {
+    read = "15m"
+  }
+
   lifecycle {
     ignore_changes = [
       # Ignore changes to tags, e.g. because a management agent
