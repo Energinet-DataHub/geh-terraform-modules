@@ -159,4 +159,12 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
       days    = var.log_retention_in_days
     }
   }
+  
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      metric,
+    ]
+  }
 }
