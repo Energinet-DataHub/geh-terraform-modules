@@ -107,6 +107,7 @@ resource "azurerm_private_endpoint" "this" {
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.
       tags,
+      private_dns_zone_group,
     ]
   }
 
@@ -186,6 +187,7 @@ resource "azurerm_private_endpoint" "blob" {
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.
       tags,
+      private_dns_zone_group,
     ]
   }
 
@@ -223,6 +225,7 @@ resource "azurerm_private_endpoint" "file" {
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.
       tags,
+      private_dns_zone_group,
     ]
   }
 }
@@ -278,6 +281,14 @@ resource "azurerm_monitor_diagnostic_setting" "func" {
       days    = var.log_retention_in_days
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      log,
+    ]
+  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "stor" {
@@ -293,5 +304,13 @@ resource "azurerm_monitor_diagnostic_setting" "stor" {
       enabled = true
       days    = var.log_retention_in_days
     }
+  }
+  
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      metric,
+    ]
   }
 }
