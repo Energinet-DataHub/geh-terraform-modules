@@ -140,8 +140,7 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
     ignore_changes = [
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.
-      log,
-      metric
+      log
     ]
   }
 }
