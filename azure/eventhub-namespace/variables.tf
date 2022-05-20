@@ -80,7 +80,7 @@ variable tags {
   default     = {}
 }
 
-variable virtual_network_rules {
+variable virtual_network_rule {
   type        = list(string)
-  description = "(Required) The id of the subnet to allow resources to interact with the EventHub namespace."
+  description = "(Required) The ids of the subnets that contain resources allowed to interact with the EventHub namespace."
 }
