@@ -80,7 +80,7 @@ variable tags {
   default     = {}
 }
 
-variable approved_sender_subnet_id {
-  type        = string
-  description = "(Required) The id of the subnet to allow host to call the EventHub namespace from."
-}
+# variable approved_sender_subnet_id {
+#   type        = string
+#   description = "(Required) The id of the subnet to allow host to call the EventHub namespace from."
+# }
