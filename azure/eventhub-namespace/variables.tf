@@ -80,9 +80,7 @@ variable tags {
   default     = {}
 }
 
-variable allowed_subnets {
-  type = map(object({
-    subnet_id = string
-  }))
-  description = "(Required) The ids of the subnets that contain resources allowed to interact with the EventHub namespace."
+variable approved_sender_subnet_id {
+  type        = string
+  description = "(Required) The id of the subnet to allow resources to interact with the EventHub namespace."
 }
