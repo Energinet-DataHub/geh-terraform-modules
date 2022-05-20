@@ -25,15 +25,16 @@ resource "azurerm_eventhub_namespace" "this" {
   sku                 = var.sku
   capacity            = var.capacity
 
-  network_rulesets {
-    default_action                  = "Deny"
-    trusted_service_access_enabled  = false
-    ip_rule                         = []
-    dynamic "virtual_network_rule" {
-      for_each = var.virtual_network_rule != null ? [var.virtual_network_rule] : []
-      content {
-        subnet_id  = virtual_network_rule.value.subnet_id
-      }
+  dynamic "network_rulesets" {
+    content {
+      default_action                  = "Deny"
+      trusted_service_access_enabled  = false
+      ip_rule                         = []
+      virtual_network_rule            = [
+        for subnet in var.allowed_subnets : {
+          subnet_id = subnet.subnet_id
+        }
+      ]
     }
   }
 
