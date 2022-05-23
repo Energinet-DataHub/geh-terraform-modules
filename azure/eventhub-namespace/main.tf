@@ -90,6 +90,31 @@ resource "azurerm_private_endpoint" "this" {
   }
 }
 
+# Create an A record pointing to the EventHub namespace private endpoint
+resource "azurerm_private_dns_a_record" "this" {
+  count               = var.private_dns_resource_group_name == null ? 0 : 1
+  
+  name                = azurerm_storage_account.this.name
+  zone_name           = "privatelink.servicebus.windows.net"
+  resource_group_name = var.private_dns_resource_group_name
+  ttl                 = 3600
+  records             = [
+    azurerm_private_endpoint.this.private_service_connection[0].private_ip_address
+  ]
+
+  depends_on          = [
+    time_sleep.this,
+  ]
+}
+
+# Waiting for the private endpoint to come online
+resource "time_sleep" "this" {
+  depends_on = [
+    azurerm_private_endpoint.this
+  ]
+  create_duration = "120s" # 2 min should give us enough time for the Private endpoint to come online
+}
+
 resource "azurerm_monitor_diagnostic_setting" "this" {
   name                       = "diag-evhns-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   target_resource_id         = azurerm_eventhub_namespace.this.id

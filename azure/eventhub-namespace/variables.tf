@@ -81,6 +81,11 @@ variable network_ruleset {
   description = "(Required) The network ruleset of the EventHub namespace."
 }
 
+variable private_dns_resource_group_name {
+  type        = string
+  description = "(Optional) Specifies the resource groups where the Private DNS Zone exists."
+  default     = ""
+}
 
 variable tags {
   type        = any
