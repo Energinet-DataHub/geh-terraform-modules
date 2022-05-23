@@ -16,6 +16,9 @@ locals {
     "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-eventhub-namespace"
   }
+  allowed_virtual_networks = [for subnet_id in var.virtual_network_rules : {
+    subnet_id = subnet_id
+  }]
 }
 
 resource "azurerm_eventhub_namespace" "this" {
@@ -29,12 +32,13 @@ resource "azurerm_eventhub_namespace" "this" {
     default_action                  = "Deny"
     trusted_service_access_enabled  = false
     ip_rule                         = []
-    dynamic "virtual_network_rule" {
-      for_each = var.virtual_network_rules
-      content {
-        subnet_id = virtual_network_rule.value.subnet_id
-      }
-    }
+    virtual_network_rule            = local.allowed_virtual_networks
+    # dynamic "virtual_network_rule" {
+    #   for_each = var.virtual_network_rules
+    #   content {
+    #     subnet_id = virtual_network_rule.value.subnet_id
+    #   }
+    # }
   }
 
   tags                = merge(var.tags, local.module_tags)
