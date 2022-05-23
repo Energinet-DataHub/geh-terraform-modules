@@ -161,3 +161,21 @@ resource "azurerm_private_dns_zone_virtual_network_link" "dfs" {
 
   tags                  = var.tags
 }
+
+# Create a Private DNS Zone for Servicebus based resources (including EventHub)
+resource "azurerm_private_dns_zone" "servicebus" {
+  name                = "privatelink.servicebus.windows.net"
+  resource_group_name = var.resource_group_name
+
+  tags                = var.tags
+}
+
+# The Private DNS Zone for Servicebus (including EventHub) must be linked with the Databricks dedicated virtual network
+resource "azurerm_private_dns_zone_virtual_network_link" "servicebus" {
+  name                  = "pdnsz-servicebus-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  resource_group_name   = var.resource_group_name
+  private_dns_zone_name = azurerm_private_dns_zone.servicebus.name
+  virtual_network_id    = azurerm_virtual_network.this.id
+
+  tags                  = var.tags
+}
