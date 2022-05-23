@@ -34,7 +34,7 @@ resource "azurerm_eventhub_namespace" "this" {
       ip_rule                         = []
 
       dynamic "virtual_network_rule" {
-        for_each = network_rulesets.value.allowed_virtual_networks
+        for_each = network_rulesets.value.allowed_subnet_ids
 
         content {
           subnet_id                                       = virtual_network_rule.value
