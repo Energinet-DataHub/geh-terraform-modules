@@ -76,6 +76,12 @@ variable public_subnet_address_prefix {
   description = "(Required) The IP address prefix of the public subnet that is deployed in the Virtual network for the Databricks clusters."
 }
 
+variable public_network_service_endpoints {
+  type        = list(string)
+  description = "(Optional) The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage and Microsoft.Web."
+  default     = []
+}
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resource."
