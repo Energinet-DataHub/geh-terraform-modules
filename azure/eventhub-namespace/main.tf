@@ -16,9 +16,6 @@ locals {
     "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-eventhub-namespace"
   }
-  allowed_virtual_networks = [for allowed_subnet_id in var.allowed_subnet_ids : {
-    subnet_id = allowed_subnet_id
-  }]
 }
 
 resource "azurerm_eventhub_namespace" "this" {
