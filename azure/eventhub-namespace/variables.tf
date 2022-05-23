@@ -80,7 +80,7 @@ variable tags {
   default     = {}
 }
 
-variable approved_sender_subnet_id {
-  type        = string
-  description = "(Required) The id of the subnet to allow resources to interact with the EventHub namespace."
+variable virtual_network_rules {
+  type        = list(string)
+  description = "(Required) The ids of the subnets to allow resources to interact with the EventHub namespace."
 }
