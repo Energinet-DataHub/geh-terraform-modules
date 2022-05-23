@@ -94,7 +94,7 @@ resource "azurerm_private_endpoint" "this" {
 resource "azurerm_private_dns_a_record" "this" {
   count               = var.private_dns_resource_group_name == null ? 0 : 1
   
-  name                = azurerm_storage_account.this.name
+  name                = azurerm_eventhub_namespace.this.name
   zone_name           = "privatelink.servicebus.windows.net"
   resource_group_name = var.private_dns_resource_group_name
   ttl                 = 3600
