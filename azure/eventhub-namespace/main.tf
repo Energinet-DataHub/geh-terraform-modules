@@ -26,7 +26,7 @@ resource "azurerm_eventhub_namespace" "this" {
   capacity            = var.capacity
 
   dynamic "network_rulesets" {
-    for_each  = var.network_ruleset != null ? [network_ruleset] : []
+    for_each  = var.network_ruleset != null ? [var.network_ruleset] : []
 
     content {
       default_action                  = "Deny"
