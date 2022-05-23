@@ -28,11 +28,23 @@ resource "azurerm_eventhub_namespace" "this" {
   sku                 = var.sku
   capacity            = var.capacity
 
-  network_rulesets {
-    default_action                  = "Deny"
-    trusted_service_access_enabled  = false
-    ip_rule                         = []
-    virtual_network_rule            = local.allowed_virtual_networks
+  dynamic "network_rulesets" {
+    for_each  = var.network_ruleset != null ? [network_ruleset] : []
+
+    content {
+      default_action                  = "Deny"
+      trusted_service_access_enabled  = false
+      ip_rule                         = []
+
+      dynamic "virtual_network_rule" {
+        for_each = network_rulesets.value.allowed_virtual_networks
+
+        content {
+          subnet_id                                       = virtual_network_rule.value
+          ignore_missing_virtual_network_service_endpoint = false
+        }
+      }
+    }
   }
 
   tags                = merge(var.tags, local.module_tags)

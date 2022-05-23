@@ -74,13 +74,16 @@ variable log_retention_in_days {
   default     = 183
 }
 
+variable network_ruleset {
+  type        = object({
+    allowed_subnet_ids = list(string)
+  })
+  description = "(Required) The network ruleset of the EventHub namespace."
+}
+
+
 variable tags {
   type        = any
   description = "(Optional) A mapping of tags to assign to the resources."
   default     = {}
-}
-
-variable allowed_subnet_ids {
-  type        = list(string)
-  description = "(Required) The ids of the subnets to allow resources to interact with the EventHub namespace."
 }
