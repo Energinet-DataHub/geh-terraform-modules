@@ -78,3 +78,20 @@ output "private_dns_zone_resource_group_name" {
     azurerm_virtual_network_peering.remote
   ]
 }
+
+output "public_network_id" {
+  value       = azurerm_subnet.public.id
+  description = "The ID of the public network."
+
+  depends_on = [
+    azurerm_databricks_workspace.this,
+    azurerm_virtual_network.this,
+    azurerm_subnet.private,
+    azurerm_subnet.public,
+    azurerm_subnet_network_security_group_association.nsg_public_group_association,
+    azurerm_subnet_network_security_group_association.nsg_private_group_association,
+    azurerm_network_security_group.dbw_nsg,
+    azurerm_virtual_network_peering.local,
+    azurerm_virtual_network_peering.remote
+  ]
+}
