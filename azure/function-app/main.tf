@@ -41,6 +41,7 @@ resource "azurerm_function_app" "this" {
 
   site_config {
     always_on = var.always_on
+    health_check_path = var.health_check_path
     cors {
       allowed_origins = ["*"]
     }
@@ -305,7 +306,7 @@ resource "azurerm_monitor_diagnostic_setting" "stor" {
       days    = var.log_retention_in_days
     }
   }
-  
+
   lifecycle {
     ignore_changes = [
       # Ignore changes to tags, e.g. because a management agent
