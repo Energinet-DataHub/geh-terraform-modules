@@ -100,6 +100,9 @@ resource "azurerm_subnet" "public" {
   ]
   enforce_private_link_service_network_policies   = true
   enforce_private_link_endpoint_network_policies  = true
+
+  service_endpoints                               = var.public_network_service_endpoints
+
   delegation {
     name = "databricks-delegation"
 
