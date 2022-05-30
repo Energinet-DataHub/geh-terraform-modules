@@ -25,9 +25,9 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "key_vault_access_policy_example" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-access-policy?ref=6.1.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-access-policy?ref=6.1.0"
 
-  key_vault_id              = "example-key-vault-id"
+  key_vault_id  = "example-key-vault-id"
   app_identity {
     tenant_id     = "example-tenant-id"
     principal_id  = "example-principal-id"
