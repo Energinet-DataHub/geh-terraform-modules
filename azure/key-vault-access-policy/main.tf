@@ -20,8 +20,8 @@ locals {
 
 resource "azurerm_key_vault_access_policy" "this" {
   key_vault_id            = var.key_vault_id
-  tenant_id               = var.app_identity_tenant_id
-  object_id               = var.app_identity_principal_id
+  tenant_id               = var.app_identity.tenant_id
+  object_id               = var.app_identity.principal_id
   secret_permissions      = [
     "list",
     "get"

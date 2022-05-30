@@ -16,12 +16,10 @@ variable key_vault_id {
   description = "(Required) Specifies the ID of the Key Vault resource. Changing this forces a new resource to be created."
 }
 
-variable app_identity_tenant_id {
-  type          = string
-  description   = "(Required) The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Changing this forces a new resource to be created."
-}
-
-variable app_identity_principal_id {
-  type        = string
+variable app_identity {
+  type        = object({
+    principal_id  = string
+    tenant_id     = string
+  })
   description = "(Required) The object ID of the app in the Azure Active Directory tenant for the vault. The principal (object) ID must be unique for the list of access policies. Changing this forces a new resource to be created."
 }
