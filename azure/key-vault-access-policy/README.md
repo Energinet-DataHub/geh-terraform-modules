@@ -28,8 +28,10 @@ module "key_vault_access_policy_example" {
   source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-access-policy?ref=6.1.0"
 
   key_vault_id              = "example-key-vault-id"
-  app_identity_tenant_id    = "example-app-identity-tenant-id"
-  app_identity_principal_id = "example-app-identity-principal-id"
+  app_identity {
+    tenant_id     = "example-tenant-id"
+    principal_id  = "example-principal-id"
+  }
 }
 ```
 

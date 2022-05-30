@@ -21,5 +21,5 @@ variable app_identity {
     principal_id  = string
     tenant_id     = string
   })
-  description = "(Required) The object ID of the app in the Azure Active Directory tenant for the vault. The principal (object) ID must be unique for the list of access policies. Changing this forces a new resource to be created."
+  description = "(Required) The identity of the app in the Azure Active Directory. Changing this forces a new resource to be created."
 }
