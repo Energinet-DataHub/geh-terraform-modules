@@ -23,7 +23,10 @@ resource "azurerm_key_vault_access_policy" "this" {
   tenant_id               = var.app_identity.tenant_id
   object_id               = var.app_identity.principal_id
   secret_permissions      = [
-    "list",
-    "get"
+    "List",
+    "Get"
   ]
+  certificate_permissions = []
+  key_permissions         = []
+  storage_permissions     = []
 }
