@@ -21,21 +21,21 @@ This module creates the following resources:
 
 See [variables.tf](./variables.tf)
 
-
 ## Usage
 
 ```ruby
-module "appi_example" { 
-  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/application-insights?ref=5.6.0"
+module "appi_example" {
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/application-insights?ref=6.0.0"
 
-  name                        = "example-name"
-  project_name                = "example-project-name"
-  environment_short           = "p"
-  environment_instance        = "001"
-  resource_group_name         = "example-resource-group-name"
-  location                    = "westeurope"
+  name                  = "example-name"
+  project_name          = "example-project-name"
+  environment_short     = "u"
+  environment_instance  = "001"
+  resource_group_name   = "example-resource-group-name"
+  location              = "westeurope"
   log_analytics_workspace_id  = "example-log-workspace-id"
-  tags                        = {}
+
+  tags                  = {}
 }
 ```
 
@@ -44,8 +44,8 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.6.0" 
-    "ModuleId"      = "azure-application-insights"  
+    "ModuleVersion" = "6.0.0"
+    "ModuleId"      = "azure-application-insights"
   }
 }
 ```

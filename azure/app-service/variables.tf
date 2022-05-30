@@ -51,6 +51,17 @@ variable application_insights_instrumentation_key {
   description = "(Required) The application insights instrumentation key for which data is to be logged into."
 }
 
+variable vnet_integration_subnet_id {
+  type        = string
+  description = "(Required) The id of the vnet integration subnet where this App Service will reside."
+}
+
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The ID of the Subnet to contain the App Service from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
+  default     = ""
+}
+
 variable app_settings {
   type        = map(string)
   description = "(Optional) A map of key-value pairs for App Settings and custom values."

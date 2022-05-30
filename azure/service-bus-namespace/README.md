@@ -10,8 +10,12 @@
 
 This module creates the following resources:
 
-- [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_namespace)
+**Notice:** This module always creates a Service Bus with SKU = Premium (to support VNet).
+
+- [Azure Service Bus Namespace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace)
 - [Azure Service Bus Namespace Authorization Rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_authorization_rule)
+- [Azure Service Bus Namespace Network Rule Set](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/servicebus_namespace_network_rule_set)
+- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
 - [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
@@ -26,18 +30,19 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "service_bus_namespace_example" { 
-  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=5.17.0"
+module "service_bus_namespace_example" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=6.0.0"
 
-  name                        = "example-name"
-  project_name                = "example-project-name"
-  environment_short           = "p"
-  environment_instance        = "001"
-  resource_group_name         = "example-resource-group-name"
-  location                    = "westeurope"
-  sku                         = "basic"
-  log_analytics_workspace_id  = "example-log-analytics-workspace"
-  auth_rules                  = [
+  name                            = "example-name"
+  project_name                    = "example-project-name"
+  environment_short               = "u"
+  environment_instance            = "001"
+  resource_group_name             = "example-resource-group-name"
+  location                        = "westeurope"
+  private_endpoint_subnet_id      = "private-endpoint-subnet-id"
+  log_analytics_workspace_id      = "example-log-analytics-workspace"
+  
+  auth_rules            = [
     {
       name    = "example-auth-rule-1"
       listen  = true
@@ -49,6 +54,8 @@ module "service_bus_namespace_example" {
       manage  = true
     }
   ]
+
+  tags                          = {}
 }
 ```
 
@@ -57,7 +64,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.17.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }
@@ -65,8 +72,4 @@ locals {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The ServiceBus Namespace ID. |
-| `name` | The ServiceBus Namespace name. |
-| `primary_connection_strings` | A list of Auth Rule connection strings, can be accessed this way `var.primary_connection_strings["example-auth-rule-1"]` |
+See [outputs.tf](./outputs.tf)

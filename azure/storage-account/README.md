@@ -11,6 +11,10 @@
 This module creates the following resources:
 
 - [Azure Storage Account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account)
+- [Azure Storage Account Network Rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules)
+- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
+- [Azure Storage Account Container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container)
+- [Azure Storage Account File Share](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_share)
 - [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
@@ -25,18 +29,21 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "storage_account_example" { 
-  source                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+module "storage_account_example" {
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/storage-account?ref=6.0.0"
 
-  name                      = "example-name"
-  project_name              = "example-project-name"
-  environment_short         = "p"
-  environment_instance      = "001"
-  resource_group_name       = "example-resource-group-name"
-  location                  = "westeurope"
-  account_tier              = "Standard"
-  account_replication_type  = "LRS"
-  containers                = [
+  name                            = "example-name"
+  project_name                    = "example-project-name"
+  environment_short               = "u"
+  environment_instance            = "001"
+  resource_group_name             = "example-resource-group-name"
+  location                        = "westeurope"
+  private_endpoint_subnet_id      = "example-private-endpoint-subnet-id"
+  account_tier                    = "Standard"
+  account_replication_type        = "LRS"
+  log_analytics_workspace_id      = "example-log-analytics-workspace"
+
+  containers                      = [
     {
       name = "example-container-name-1",
     },
@@ -45,7 +52,7 @@ module "storage_account_example" {
     },
   ]
 
-  tags                      = {}
+  tags                            = {}
 }
 ```
 
@@ -54,7 +61,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.9.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-storage-account"
   }
 }
@@ -62,10 +69,4 @@ locals {
 
 ## Outputs
 
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The ID of the Storage Account. | |
-| `name` | The name of the Storage Account. | |
-| `primary_blob_endpoint` | The endpoint URL for blob storage in the primary location. | |
-| `primary_connection_string` | The connection string associated with the primary location. | `true` |
-| `primary_access_key` | The primary access key for the storage account. | `true` |
+See [outputs.tf](./outputs.tf)

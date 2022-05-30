@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.7.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-mssql-server"
   }
 }
@@ -25,8 +25,10 @@ resource "azurerm_mssql_server" "this" {
   version                       = var.sql_version
   administrator_login           = var.administrator_login
   administrator_login_password  = var.administrator_login_password
+  public_network_access_enabled = false
+
   identity {
-    type  = "SystemAssigned" 
+    type  = "SystemAssigned"
   }
 
   tags                          = merge(var.tags, local.module_tags)
@@ -38,15 +40,43 @@ resource "azurerm_mssql_server" "this" {
       tags,
     ]
   }
+
+  depends_on                    = [
+    var.private_endpoint_subnet_id
+  ]
 }
 
-resource "azurerm_mssql_firewall_rule" "this" {
-  count               = length(var.firewall_rules)
+resource "azurerm_private_endpoint" "this" {
+   name                = "pe-${lower(var.name)}${random_string.this.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+   location            = var.location
+   resource_group_name = var.resource_group_name
+   subnet_id           = var.private_endpoint_subnet_id
 
-  name                = "${lower(try(var.firewall_rules[count.index].start_ip_address, null))}-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${var.environment_instance}"
-  server_id           = azurerm_mssql_server.this.id
-  start_ip_address    = try(var.firewall_rules[count.index].start_ip_address, null)
-  end_ip_address      = try(var.firewall_rules[count.index].end_ip_address, null)
+   private_service_connection {
+    name                            = "psc-01"
+    private_connection_resource_id  = azurerm_mssql_server.this.id
+    is_manual_connection            = false
+    subresource_names               = [
+       "sqlServer"
+    ]
+  }
+
+  tags                 = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+      private_dns_zone_group,
+    ]
+  }
+}
+
+resource "random_string" "this" {
+  length  = 5
+  special = false
+  upper   = false
 }
 
 resource "azurerm_monitor_diagnostic_setting" "this" {

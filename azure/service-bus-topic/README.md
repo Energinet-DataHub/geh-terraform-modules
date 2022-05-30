@@ -10,6 +10,8 @@
 
 This module creates the following resources:
 
+**Notice**: [Partitioning is not support when using Premium Messaging](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-premium-messaging#partitioned-queues-and-topics)
+
 - [Azure Service Bus Topic](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_topic)
 - [Azure Service Bus Subscription](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_bus_subscription)
 
@@ -25,10 +27,11 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "service_bus_topic_example" { 
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-topic?ref=5.1.0"
+module "service_bus_topic_example" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-topic?ref=6.0.0"
   name                = "example-name"
-  namespace_name      = "example-namespace-name"
+  namespace_id        = "/subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.ServiceBus/namespaces/example-namespace-name"
+
   subscriptions       = [
     {
       name                = "example-subscription-1"
@@ -44,7 +47,4 @@ module "service_bus_topic_example" {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The Service Bus Topic ID. |
-| `name` | The Service Bus Topic ID. |
+See [outputs.tf](./outputs.tf)

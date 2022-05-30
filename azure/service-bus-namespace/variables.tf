@@ -24,7 +24,7 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -39,7 +39,7 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the namespace."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
@@ -49,7 +49,8 @@ variable location {
 
 variable sku {
   type        = string
-  description = "(Required) Defines which tier to use. Options are basic, standard or premium. Changing this forces a new resource to be created."
+  description = "(Optional) Defines which tier to use. Options are basic, standard or premium. Changing this forces a new resource to be created."
+  default     = "Premium"
 }
 
 variable auth_rules {
@@ -62,6 +63,21 @@ variable auth_rules {
   description = "(Required) A list of objects describing the Service Bus Namespace auth rules."
 }
 
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
+}
+
+variable capacity {
+  type        = number
+  description = "(Optional) The capcity when using premium sku."
+  default     = 1
+  validation {
+    condition     = contains([1,2,4,8,16], var.capacity)
+    error_message = "Valid values for var: capacity are (1,2,4,8,16)."
+  }
+}
+  
 variable log_analytics_workspace_id {
   type = string
   description = "(Required) The id of the Log Analytics Workspace where the Service Bus will log events (e.g. audit events)"

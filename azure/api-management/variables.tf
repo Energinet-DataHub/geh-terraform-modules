@@ -18,7 +18,7 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "The name of the project this infrastructure is a part of."
+  description   = "(Required) The name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -53,7 +53,17 @@ variable publisher_email {
 
 variable sku_name {
   type        = string
-  description = "(Required) sku_name is a string consisting of two parts separated by an underscore(_). The first part is the name, valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1)."
+  description = "(Required) A string consisting of two parts separated by an underscore(_). The first part is the name; valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1)."
+}
+
+variable virtual_network_type {
+  type        = string
+  description = "(Required) The type of virtual network to use for the API Management. Valid values include: Internal or External"
+}
+
+variable subnet_id {
+  type        = string
+  description = "(Required) The id of the subnet to use for the API Management."
 }
 
 variable log_analytics_workspace_id {
@@ -65,6 +75,14 @@ variable log_retention_in_days {
   type        = number
   description = "(Optional) The number of days for which this Retention Policy should apply."
   default     = 183
+}
+
+variable policies {
+  type        = list(object({
+    xml_content = string
+  }))
+  description = "(Optional) A list of objects describing the policies for the Global policies. An XML file can be used with 'xml_content' by using Terraform's file function (https://www.terraform.io/language/functions/file) that is similar to Microsoft's `PolicyFilePath` option."
+  default     = []
 }
 
 variable tags {

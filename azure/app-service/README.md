@@ -6,11 +6,18 @@
 - [Usage](#usage)
 - [Outputs](#outputs)
 
+## Module basis
+
+This module is based on the knowledge derived from these resources
+
+- [Integrate your app with an Azure virtual network](https://docs.microsoft.com/en-us/azure/app-service/overview-vnet-integration)
+
 ## Resources Created
 
 This module creates the following resources:
 
 - [Azure App Service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service)
+- [App Service Virtual Network Association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_virtual_network_swift_connection)
 - [Azure Monitor Metric Alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert)
 
 ## Prerequisites
@@ -36,6 +43,8 @@ module "app_example" {
   location                                  = "westeurope"
   app_service_plan_id                       = "id-example"
   application_insights_instrumentation_key  = "app-insights-instrumentation-key-example"
+  vnet_integration_subnet_id                = "vnet-integration-subnet-id"
+  external_private_endpoint_subnet_id       = "external-private-endpoint-subnet-id"
   app_settings                              = {
     "example-key1" = "example-value1"
     "example-key2" = "example-value2"
@@ -57,7 +66,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.8.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-app-service"
   }
 }

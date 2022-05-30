@@ -25,8 +25,8 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "eventhub_example" { 
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/eventhub?ref=5.1.0"
+module "eventhub_example" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/eventhub?ref=6.0.0"
   name                = "example-name"
   namespace_name      = "example-namespace-name"
   resource_group_name = "example-resource-group-name"
@@ -49,8 +49,4 @@ module "eventhub_example" {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The Eventhub ID. |
-| `name` | The name of the EventHub. |
-| `primary_connection_strings` | A list of Auth Rule connection strings |
+See [outputs.tf](./outputs.tf)

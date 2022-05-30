@@ -18,7 +18,7 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -44,6 +44,16 @@ variable location {
 variable sku_name {
   type        = string
   description = "(Required) The Name of the SKU used for this Key Vault. Possible values are standard and premium."
+}
+
+variable allowed_subnet_ids {
+  type        = list(string)
+  description = "(Required) The ids of the subnets which should be able to access this Key Vault."
+}
+
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
 }
 
 variable access_policies {

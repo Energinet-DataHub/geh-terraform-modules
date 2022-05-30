@@ -24,8 +24,8 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "key_vault_secret_example" { 
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=5.1.0"
+module "key_vault_secret_example" {
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
 
   name          = "EXAMPLE-NAME"
   value         = "example-value"
@@ -40,7 +40,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-key-vault-secret"
   }
 }
@@ -48,9 +48,4 @@ locals {
 
 ## Outputs
 
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The Key Vault Secret ID. | |
-| `name` | The Key Vault Secret name. | |
-| `version` | The current version of the Key Vault Secret. | |
-| `value` | The Key Vault Secret value. | `true` |
+See [outputs.tf](./outputs.tf)

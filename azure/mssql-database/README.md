@@ -25,12 +25,12 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "sqldb_example" { 
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/sql-database?ref=5.7.0"
+module "sqldb_example" {
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-database?ref=6.0.0"
 
   name                          = "example-name"
   project_name                  = "example-project-name"
-  environment_short             = "p"
+  environment_short             = "u"
   environment_instance          = "001"
   server_id                     = "some-mssql-server-id"
   sku_name                      = "GP_S_Gen5_2"
@@ -45,7 +45,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.7.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-mssql-database"
   }
 }
@@ -53,7 +53,4 @@ locals {
 
 ## Outputs
 
-| Name | Description |
-|-|-|
-| `id` | The SQL Database ID. |
-| `name` | The SQL Database name. |
+See [outputs.tf](./outputs.tf)

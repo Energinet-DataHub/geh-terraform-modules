@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "apima_example" {
-  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=5.16.0"
+  source                      = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api?ref=6.0.0"
 
   name                        = "example-name"
   project_name                = "example-project-name"
@@ -41,10 +41,10 @@ module "apima_example" {
   logger_verbosity            = "verbose"
   path                        = "example-url-path"
   backend_service_url         = "https://some-back-service.azurewebsites.net"
-  import                      =  {
-  content_format       = "example-content-format"
-  content_value        = "example-file-content"
-    }
+  import                      = {
+    content_format  = "example-content-format"
+    content_value   = "example-file-content"
+  }
   policies                    = [
     {
       xml_content = <<XML
@@ -64,7 +64,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.16.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-api-management-api"
   }
 }

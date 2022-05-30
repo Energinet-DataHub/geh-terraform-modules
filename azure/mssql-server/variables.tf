@@ -17,8 +17,8 @@ variable name {
 }
 
 variable project_name {
-  type          = string
-  description   = "(Required) Name of the project this infrastructure is a part of."
+  type        = string
+  description = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -33,7 +33,7 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the Microsoft SQL Server."
+  description = "(Required) The name of the resource group in which to create the resources."
 }
 
 variable location {
@@ -56,14 +56,9 @@ variable administrator_login_password {
   description = "(Required) The password associated with the administrator_login user. Needs to comply with Azure's Password Policy"
 }
 
-variable firewall_rules {
-  type        = list(object({
-    name              = string
-    start_ip_address  = string
-    end_ip_address    = string
-  }))
-  description = "(Optional) List of firewall rules for the Microsoft SQL Server."
-  default     = []
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
 }
 
 variable log_analytics_workspace_id {

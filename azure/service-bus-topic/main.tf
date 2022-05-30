@@ -12,19 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 resource "azurerm_servicebus_topic" "this" {
-  name                = lower(var.name)
-  resource_group_name = var.resource_group_name
-  namespace_name      = var.namespace_name 
-  enable_partitioning = true
+  name                         = lower(var.name)
+  namespace_id                 = var.namespace_id
+  requires_duplicate_detection = var.requires_duplicate_detection
 }
 
 resource "azurerm_servicebus_subscription" "this" {
   count               = length(var.subscriptions)
 
   name                = lower(try(var.subscriptions[count.index].name, null))
-  namespace_name      = var.namespace_name
-  topic_name          = azurerm_servicebus_topic.this.name
+  topic_id            = azurerm_servicebus_topic.this.id
+
   max_delivery_count  = try(var.subscriptions[count.index].max_delivery_count, null)
   forward_to          = try(var.subscriptions[count.index].forward_to, null)
-  resource_group_name = var.resource_group_name
 }

@@ -24,7 +24,7 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -39,7 +39,7 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the namespace. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
@@ -49,7 +49,13 @@ variable location {
 
 variable sku {
   type        = string
-  description = "(Required) Defines which tier to use. Valid options are Basic, Standard, and Premium. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true."
+  description = "(Optional) Defines which tier to use. Valid options are Basic, Standard, and Premium. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true."
+  default     = "Premium"
+}
+
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
 }
 
 variable capacity {
@@ -66,6 +72,19 @@ variable log_retention_in_days {
   type        = number
   description = "(Optional) The number of days for which this Retention Policy should apply."
   default     = 183
+}
+
+variable network_ruleset {
+  type        = object({
+    allowed_subnet_ids = list(string)
+  })
+  description = "(Required) The network ruleset of the EventHub namespace."
+}
+
+variable private_dns_resource_group_name {
+  type        = string
+  description = "(Optional) Specifies the resource groups where the Private DNS Zone exists."
+  default     = ""
 }
 
 variable tags {

@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0",
     "ModuleId"      = "azure-key-vault-secret"
   }
 }
@@ -24,6 +24,10 @@ resource "azurerm_key_vault_secret" "this" {
   key_vault_id  = var.key_vault_id
 
   tags          = merge(var.tags, local.module_tags)
+
+  timeouts {
+    read = "15m"
+  }
 
   lifecycle {
     ignore_changes = [

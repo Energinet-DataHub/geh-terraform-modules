@@ -13,34 +13,9 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.12.0",
+    "ModuleVersion" = "6.0.0",
     "ModuleId"      = "azure-function-app"
   }
-}
-
-resource "azurerm_storage_account" "this" {
-  name                      = "st${random_string.this.result}"
-  resource_group_name       = var.resource_group_name
-  location                  = var.location
-  account_tier              = "Standard"
-  account_replication_type  = "LRS"
-  min_tls_version           = "TLS1_2"
-
-  tags                      = merge(var.tags,local.module_tags)
-
-  lifecycle {
-    ignore_changes = [
-      # Ignore changes to tags, e.g. because a management agent
-      # updates these based on some ruleset managed elsewhere.
-      tags,
-    ]
-  }
-}
-
-resource "random_string" "this" {
-  length  = 10
-  special = false
-  upper   = false
 }
 
 resource "azurerm_function_app" "this" {
@@ -53,12 +28,17 @@ resource "azurerm_function_app" "this" {
   version                     = "~4"
   enable_builtin_logging      = false # Disabled to avoid having the setting "AzureWebJobsDashboard" when using Application Insights
   https_only                  = true
+
   app_settings                = merge({
     APPINSIGHTS_INSTRUMENTATIONKEY = var.application_insights_instrumentation_key
+    WEBSITE_VNET_ROUTE_ALL                = "1"
+    WEBSITE_CONTENTOVERVNET               = "1"
   },var.app_settings)
+
   identity {
     type = "SystemAssigned"
   }
+
   site_config {
     always_on = var.always_on
     health_check_path = var.health_check_path
@@ -66,20 +46,18 @@ resource "azurerm_function_app" "this" {
       allowed_origins = ["*"]
     }
   }
+
   dynamic "connection_string" {
     for_each  = var.connection_strings
+
     content {
-      name  = connection_strings.key
-      value = connection_strings.value
-      type  = "Custom"
+      name = connection_string.value.name
+      type = connection_string.value.type
+      value = connection_string.value.value
     }
   }
 
   tags                        = merge(var.tags, local.module_tags)
-
-  depends_on                  = [
-    azurerm_storage_account.this,
-  ]
 
   lifecycle {
     ignore_changes = [
@@ -87,6 +65,168 @@ resource "azurerm_function_app" "this" {
       # Ignore changes to tags, e.g. because a management agent
       # updates these based on some ruleset managed elsewhere.
       tags,
+    ]
+  }
+}
+
+#
+# Function App integrated into VNet
+#
+
+resource "azurerm_app_service_virtual_network_swift_connection" "this" {
+  app_service_id = azurerm_function_app.this.id
+  subnet_id      = var.vnet_integration_subnet_id
+}
+
+#
+# Private Endpoint for Azure Function
+#
+
+resource "random_string" "this" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+resource "azurerm_private_endpoint" "this" {
+  name                = "pe-${lower(var.name)}${random_string.this.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+
+  private_service_connection {
+    name                           = "pcs-01"
+    private_connection_resource_id = azurerm_function_app.this.id
+    is_manual_connection           = false
+    subresource_names              = ["sites"]
+  }
+
+  tags                             = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+      private_dns_zone_group,
+    ]
+  }
+
+  depends_on = [
+    azurerm_function_app.this
+  ]
+}
+
+resource "random_string" "st" {
+  length  = 10
+  special = false
+  upper   = false
+}
+
+# If using private endpoint connections, the storage account will need a private endpoint for the
+# 'file' and 'blob' sub-resources. If using certain capabilities like Durable Functions, you will also
+# need 'queue' and 'table' accessible through a private endpoint connection.
+resource "azurerm_storage_account" "this" {
+  name                      = "st${random_string.st.result}"
+  resource_group_name       = var.resource_group_name
+  location                  = var.location
+  account_tier              = "Standard"
+  account_replication_type  = "LRS"
+  min_tls_version           = "TLS1_2"
+
+  tags                      = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+}
+
+resource "azurerm_storage_account_network_rules" "this" {
+  storage_account_id          = azurerm_storage_account.this.id
+
+  default_action              = "Deny"
+  ip_rules                    = [
+    "126.0.0.1"
+  ]
+  bypass                      = [
+    "Logging",
+    "Metrics",
+  ]
+}
+
+#
+# Private Endpoint for Blob subresource
+#
+
+resource "random_string" "blob" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+resource "azurerm_private_endpoint" "blob" {
+  name                = "pe-${lower(var.name)}${random_string.blob.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+
+  private_service_connection {
+    name                           = "pcs-01"
+    private_connection_resource_id = azurerm_storage_account.this.id
+    is_manual_connection           = false
+    subresource_names              = ["blob"]
+  }
+
+  tags                             = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+      private_dns_zone_group,
+    ]
+  }
+
+  depends_on = [
+    azurerm_private_endpoint.file
+  ]
+}
+
+#
+# Private Endpoint for file subresource
+#
+resource "random_string" "file" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+resource "azurerm_private_endpoint" "file" {
+  name                = "pe-${lower(var.name)}${random_string.file.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+
+  private_service_connection {
+    name                           = "pcs-01"
+    private_connection_resource_id = azurerm_storage_account.this.id
+    is_manual_connection           = false
+    subresource_names              = ["file"]
+  }
+
+  tags                             = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+      private_dns_zone_group,
     ]
   }
 }
@@ -142,6 +282,14 @@ resource "azurerm_monitor_diagnostic_setting" "func" {
       days    = var.log_retention_in_days
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      log,
+    ]
+  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "stor" {
@@ -157,5 +305,13 @@ resource "azurerm_monitor_diagnostic_setting" "stor" {
       enabled = true
       days    = var.log_retention_in_days
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      metric,
+    ]
   }
 }

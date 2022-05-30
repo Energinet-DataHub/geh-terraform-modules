@@ -24,7 +24,7 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -39,12 +39,29 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the storage account. Changing this forces a new resource to be created."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
   type        = string
   description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
+}
+
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
+}
+
+variable use_blob {
+  type        = bool
+  description = "(Optional) Determine if the blob subresource of the storage account should be configured for usage. Defaults to 'true'."
+  default     = true
+}
+
+variable use_file {
+  type        = bool
+  description = "(Optional) Determine if the file subresource of the storage account should be configured for usage. Defaults to 'false'."
+  default     = false
 }
 
 variable account_tier {
@@ -65,7 +82,7 @@ variable access_tier {
 
 variable is_hns_enabled {
   type        = bool
-  description = "Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information - https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-quickstart-create-account/). Changing this forces a new resource to be created."
+  description = "(Optional) Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information - https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-quickstart-create-account/). Changing this forces a new resource to be created."
   default     = false
 }
 
@@ -81,6 +98,15 @@ variable containers {
     access_type = optional(string)
   }))
   description = "(Optional) A list of objects describing the containers, to create in the Storage Account."
+  default     = []
+}
+
+variable shares {
+  type        = list(object({
+    name        = string
+    quota       = optional(number)
+  }))
+  description = "(Optional) A list of objects describing the file shares, to create in the Storage Account."
   default     = []
 }
 

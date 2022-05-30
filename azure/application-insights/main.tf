@@ -13,7 +13,7 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "5.5.0",
+    "ModuleVersion" = "6.0.0",
     "ModuleId"      = "azure-application-insights"
   }
 }

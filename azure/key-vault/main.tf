@@ -11,17 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-resource "null_resource" "dependency_setter" {
-  depends_on = [
-    azurerm_key_vault.this,
-    azurerm_key_vault_access_policy.selfpermissions,
-    azurerm_key_vault_access_policy.this,
-  ]
-}
-
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-key-vault"
   }
 }
@@ -45,16 +37,76 @@ resource "azurerm_key_vault" "this" {
       tags,
     ]
   }
+  network_acls {
+    default_action              = "Deny"
+    bypass                      = "AzureServices"
+    virtual_network_subnet_ids  = var.allowed_subnet_ids
+  }
+
+  depends_on                      = [
+    var.private_endpoint_subnet_id
+  ]
+}
+
+resource "random_string" "this" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+resource "azurerm_private_endpoint" "this" {
+  name                = "pe-${lower(var.name)}${random_string.this.result}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint_subnet_id
+
+  private_service_connection {
+    name                            = "psc-01"
+    private_connection_resource_id  = azurerm_key_vault.this.id
+    is_manual_connection            = false
+    subresource_names               = ["vault"]
+  }
+
+  tags                              = merge(var.tags, local.module_tags)
+
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+      private_dns_zone_group,
+    ]
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "selfpermissions" {
   key_vault_id            = azurerm_key_vault.this.id
   tenant_id               = data.azurerm_client_config.this.tenant_id
   object_id               = data.azurerm_client_config.this.object_id
-  secret_permissions      = ["delete", "list", "get", "set", "purge"]
-  key_permissions         = ["create", "list", "delete", "get"]
-  certificate_permissions = ["create", "list", "delete", "get"]
-  storage_permissions     = ["delete", "get", "set"]
+  secret_permissions      = [
+    "delete",
+    "list",
+    "get",
+    "set",
+    "purge"
+  ]
+  key_permissions         = [
+    "create",
+    "list",
+    "delete",
+    "get"
+  ]
+  certificate_permissions = [
+    "create",
+    "list",
+    "delete",
+    "get"
+  ]
+  storage_permissions     = [
+    "delete",
+    "get",
+    "set"
+  ]
 }
 
 resource "azurerm_key_vault_access_policy" "this" {
@@ -82,5 +134,13 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
       enabled = true
       days    = var.log_retention_in_days
     }
+  }
+  
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      log
+    ]
   }
 }

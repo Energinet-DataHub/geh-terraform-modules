@@ -12,6 +12,7 @@ This module creates the following resources:
 
 - [Azure Key Vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault)
 - [Azure Key Vault Access Policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy)
+- [Azure Private Endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint)
 - [Azure Monitor Diagnostic Setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)
 
 ## Prerequisites
@@ -26,18 +27,22 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "key_vault_example" { 
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=5.1.0"
+module "key_vault_example" {
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault?ref=6.0.0"
 
-  name                       = "example-name"
-  project_name               = "example-project-name"
-  environment_short          = "p"
-  environment_instance       = "001"
-  resource_group_name        = "example-resource-group-name"
-  location                   = "westeurope"
-  sku_name                   = "standard"
-  log_analytics_workspace_id = "example-log-analytics-workspace"
-  access_policies            = [
+  name                            = "example-name"
+  project_name                    = "example-project-name"
+  environment_short               = "u"
+  environment_instance            = "001"
+  resource_group_name             = "example-resource-group-name"
+  location                        = "westeurope"
+  sku_name                        = "standard"
+  private_endpoint_subnet_id      = "private-endpoint-subnet-id"
+  vnet_integration_subnet_id      = "vnet-integration-subnet-id"
+  allowed_subnet_id               = "example-subnet-id-2"
+  log_analytics_workspace_id      = "example-log-analytics-workspace"
+
+  access_policies       = [
     {
       object_id               = "example-object-id"
       secret_permissions      = ["backup", "delete", "get"]
@@ -61,7 +66,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.6.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-key-vault"
   }
 }
@@ -69,8 +74,4 @@ locals {
 
 ## Outputs
 
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The ID of the Key Vault. | |
-| `name` | The name of the Key Vault. | |
-| `vault_uri` | The URI of the Key Vault, used for performing operations on keys and secrets. | |
+See [outputs.tf](./outputs.tf)

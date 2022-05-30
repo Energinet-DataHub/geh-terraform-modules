@@ -19,6 +19,7 @@ output id {
     azurerm_key_vault.this,
     azurerm_key_vault_access_policy.selfpermissions,
     azurerm_key_vault_access_policy.this,
+    azurerm_private_endpoint.this,
   ]
 }
 
@@ -30,6 +31,7 @@ output name {
     azurerm_key_vault.this,
     azurerm_key_vault_access_policy.selfpermissions,
     azurerm_key_vault_access_policy.this,
+    azurerm_private_endpoint.this,
   ]
 }
 
@@ -41,5 +43,6 @@ output vault_uri {
     azurerm_key_vault.this,
     azurerm_key_vault_access_policy.selfpermissions,
     azurerm_key_vault_access_policy.this,
+    azurerm_private_endpoint.this,
   ]
 }

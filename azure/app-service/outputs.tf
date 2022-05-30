@@ -17,6 +17,8 @@ output id {
 
   depends_on  = [
     azurerm_app_service.this,
+    azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -27,6 +29,8 @@ output name {
 
   depends_on  = [
     azurerm_app_service.this,
+    azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -37,6 +41,32 @@ output default_site_hostname {
 
   depends_on  = [
     azurerm_app_service.this,
+    azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
+    azurerm_monitor_metric_alert.health_check_alert
+  ]
+}
+
+output outbound_ip_addresses {
+  value       = azurerm_app_service.this.outbound_ip_addresses
+  description = "A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12"
+
+  depends_on  = [
+    azurerm_app_service.this,
+    azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
+    azurerm_monitor_metric_alert.health_check_alert
+  ]
+}
+
+output possible_outbound_ip_addresses {
+  value       = azurerm_app_service.this.possible_outbound_ip_addresses
+  description = "A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12,52.143.43.17 - not all of which are necessarily in use. Superset of outbound_ip_addresses"
+
+  depends_on  = [
+    azurerm_app_service.this,
+    azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -47,6 +77,8 @@ output identity {
 
   depends_on  = [
     azurerm_app_service.this,
+    azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }
@@ -57,6 +89,8 @@ output site_credential {
 
   depends_on  = [
     azurerm_app_service.this,
+    azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_private_endpoint.this,
     azurerm_monitor_metric_alert.health_check_alert
   ]
 }

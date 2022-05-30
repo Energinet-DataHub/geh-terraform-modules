@@ -18,7 +18,7 @@ variable name {
 
 variable project_name {
   type          = string
-  description   = "Name of the project this infrastructure is a part of."
+  description   = "(Required) Name of the project this infrastructure is a part of."
 }
 
 variable environment_short {
@@ -33,7 +33,7 @@ variable environment_instance {
 
 variable resource_group_name {
   type        = string
-  description = "(Required) The name of the resource group in which to create the Function App."
+  description = "(Required) The name of the resource group in which the resources are created. Changing this forces a new resource to be created."
 }
 
 variable location {
@@ -51,6 +51,16 @@ variable application_insights_instrumentation_key {
   description = "(Required) The application insights instrumentation key for which data is to be logged into."
 }
 
+variable vnet_integration_subnet_id {
+  type        = string
+  description = "(Required) The id of the vnet integration subnet where this Function App will reside."
+}
+
+variable private_endpoint_subnet_id {
+  type        = string
+  description = "(Required) The ID of the Subnet to contain the Azure Function App's storage account from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
+}
+
 variable app_settings {
   type        = map(string)
   description = "(Optional) A map of key-value pairs for App Settings and custom values."
@@ -58,9 +68,13 @@ variable app_settings {
 }
 
 variable connection_strings {
-  type        = map(string)
-  description = "(Optional) A map of key-value pairs for App Settings and custom values."
-  default     = {}
+  type = list(object({
+    name  = string
+    type  = string
+    value = string
+  }))
+  description = "(Optional) A list of objects for App Settings Connection Strings."
+  default     = []
 }
 
 variable always_on {

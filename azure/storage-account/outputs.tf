@@ -18,6 +18,10 @@ output id {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_share.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_endpoint.file,
+    azurerm_monitor_diagnostic_setting.this,
   ]
 }
 
@@ -28,6 +32,10 @@ output name {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_share.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_endpoint.file,
+    azurerm_monitor_diagnostic_setting.this,
   ]
 }
 
@@ -39,6 +47,10 @@ output primary_connection_string {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_share.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_endpoint.file,
+    azurerm_monitor_diagnostic_setting.this,
   ]
 }
 
@@ -50,15 +62,37 @@ output primary_access_key {
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_share.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_endpoint.file,
+    azurerm_monitor_diagnostic_setting.this,
   ]
 }
 
 output primary_blob_endpoint {
-  value       = azurerm_storage_account.this.primary_blob_endpoint 
+  value       = azurerm_storage_account.this.primary_blob_endpoint
   description = "The endpoint URL for blob storage in the primary location."
 
   depends_on  = [
     azurerm_storage_account.this,
     azurerm_storage_container.this,
+    azurerm_storage_share.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_endpoint.file,
+    azurerm_monitor_diagnostic_setting.this,
+  ]
+}
+
+output primary_file_endpoint {
+  value       = azurerm_storage_account.this.primary_file_endpoint
+  description = "The endpoint URL for file storage in the primary location."
+
+  depends_on  = [
+    azurerm_storage_account.this,
+    azurerm_storage_container.this,
+    azurerm_storage_share.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_endpoint.file,
+    azurerm_monitor_diagnostic_setting.this,
   ]
 }

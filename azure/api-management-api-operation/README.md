@@ -25,8 +25,8 @@ See [variables.tf](./variables.tf)
 ## Usage
 
 ```ruby
-module "api_management_api_operation_example" { 
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=5.1.0"
+module "api_management_api_operation_example" {
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=6.0.0"
 
   operation_id        = "example-operation-id"
   api_name            = "example-api-management-api-name"
@@ -56,7 +56,7 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.1.0"
+    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "api-management-api-operation"
   }
 }
@@ -64,7 +64,4 @@ locals {
 
 ## Outputs
 
-| Name | Description | Sensitive |
-|-|-|-|
-| `id` | The ID of the API Management API Operation. | |
-| `dependent_on` | The dependencies of the API Management API Operation component. | |
+See [outputs.tf](./outputs.tf)
