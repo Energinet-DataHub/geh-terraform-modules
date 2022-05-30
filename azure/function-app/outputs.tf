@@ -129,3 +129,33 @@ output kind {
     azurerm_private_endpoint.this,
   ]
 }
+
+output identity_principal_id {
+  value       = azurerm_function_app.this.identity.0.principal_id
+  description = "The Principal ID for the Service Principal associated with the Managed Service Identity of this Functionn App."
+
+  depends_on  = [
+    azurerm_storage_account.this,
+    azurerm_storage_account_network_rules.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_endpoint.file,
+    azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_function_app.this,
+    azurerm_private_endpoint.this,
+  ]
+}
+
+output identity_tenant_id {
+  value       = azurerm_function_app.this.identity.0.tenant_id
+  description = "The Tenant ID for the Service Principal associated with the Managed Service Identity of this Function App."
+
+  depends_on  = [
+    azurerm_storage_account.this,
+    azurerm_storage_account_network_rules.this,
+    azurerm_private_endpoint.blob,
+    azurerm_private_endpoint.file,
+    azurerm_app_service_virtual_network_swift_connection.this,
+    azurerm_function_app.this,
+    azurerm_private_endpoint.this,
+  ]
+}
