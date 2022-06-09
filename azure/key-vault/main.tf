@@ -103,7 +103,7 @@ resource "azurerm_key_vault_access_policy" "selfpermissions" {
     "Get"
   ]
   storage_permissions     = [
-    "delete",
+    "Delete",
     "Get",
     "Set"
   ]
