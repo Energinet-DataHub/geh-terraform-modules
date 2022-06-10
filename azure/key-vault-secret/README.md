@@ -25,7 +25,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "key_vault_secret_example" {
-  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=6.0.0"
+  source        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/key-vault-secret?ref=7.0.0"
 
   name          = "EXAMPLE-NAME"
   value         = "example-value"

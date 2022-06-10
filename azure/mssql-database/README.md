@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "sqldb_example" {
-  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-database?ref=6.0.0"
+  source                        = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/mssql-database?ref=7.0.0"
 
   name                          = "example-name"
   project_name                  = "example-project-name"

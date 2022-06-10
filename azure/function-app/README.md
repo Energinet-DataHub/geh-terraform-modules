@@ -38,7 +38,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "func_example" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=6.0.0"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/function-app?ref=7.0.0"
 
   name                                      = "example-name"
   project_name                              = "example-project-name"

@@ -25,7 +25,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "log_workspace_example" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=5.6.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=7.0.0"
 
   name                  = "example-name"
   project_name          = "example-project"

@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "api_management_api_operation_example" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=7.0.0"
 
   operation_id        = "example-operation-id"
   api_name            = "example-api-management-api-name"

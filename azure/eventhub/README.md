@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "eventhub_example" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/eventhub?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/eventhub?ref=7.0.0"
   name                = "example-name"
   namespace_name      = "example-namespace-name"
   resource_group_name = "example-resource-group-name"

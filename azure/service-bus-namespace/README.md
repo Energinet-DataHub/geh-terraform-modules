@@ -31,7 +31,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "service_bus_namespace_example" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=7.0.0"
 
   name                            = "example-name"
   project_name                    = "example-project-name"

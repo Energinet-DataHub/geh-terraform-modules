@@ -37,7 +37,7 @@ An `peering` item consists of the following:
 
 ```ruby
 module "vnet_example" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/vnet?ref=6.0.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/vnet?ref=7.0.0"
 
   name                  = "example-name"
   project_name          = "example-project-name"

@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "plan_example" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=7.0.0"
 
   name                            = "example-name"
   project_name                    = "example-project-name"

@@ -25,7 +25,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "monitor_action_group_email_example" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/monitor-action-group-email?ref=5.8.0"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/monitor-action-group-email?ref=7.0.0"
 
   name                                      = "example-name"
   project_name                              = "example-project-name"

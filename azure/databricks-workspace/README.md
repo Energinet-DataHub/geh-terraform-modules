@@ -28,7 +28,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "dbw_example" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/databricks-workspace?ref=6.0.0"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/databricks-workspace?ref=7.0.0"
 
   name                                      = "example-name"
   project_name                              = "example-project-name"
