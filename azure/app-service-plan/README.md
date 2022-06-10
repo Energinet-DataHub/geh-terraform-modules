@@ -35,10 +35,7 @@ module "plan_example" {
   resource_group_name             = "example-resource-group-name"
   location                        = "westeurope"
   monitor_alerts_action_group_id  = "example-action-group-id"
-  sku                             = {
-    tier = "Free"
-    size = "F1"
-  }
+  sku_name                        = "sku-name"
 
   tags                           = {}
 }

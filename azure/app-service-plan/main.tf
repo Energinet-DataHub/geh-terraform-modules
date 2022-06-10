@@ -22,12 +22,7 @@ resource "azurerm_service_plan" "this" {
   resource_group_name = var.resource_group_name
   location            = var.location
   os_type             = var.os_type
-  reserved            = var.reserved
-
-  sku {
-    size = var.sku.size
-    tier = var.sku.tier
-  }
+  sku_name            = var.sku_name
 
   tags                = merge(var.tags, local.module_tags)
 

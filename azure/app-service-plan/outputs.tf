@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 output id {
-  value       = azurerm_app_service_plan.this.id
+  value       = azurerm_service_plan.this.id
   description = "The ID of the App Service Plan component."
 }
 
 output name {
-  value       = azurerm_app_service_plan.this.name
+  value       = azurerm_service_plan.this.name
   description = "The name of the App Service Plan component."
 }
