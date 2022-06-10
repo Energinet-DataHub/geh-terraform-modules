@@ -41,9 +41,9 @@ variable location {
   description = "(Required) The Azure region where the resources are created. Changing this forces a new resource to be created."
 }
 
-variable kind {
+variable os_type {
   type        = string
-  description = "(Optional) The kind of the App Service Plan to create. Possible values are Windows (also available as App), Linux, elastic (for Premium Consumption) and FunctionApp (for a Consumption Plan). Defaults to Windows. Changing this forces a new resource to be created."
+  description = "(Required) The O/S type for the App Services to be hosted in this plan. Possible values include Windows, Linux, and WindowsContainer."
 }
 
 variable reserved {
@@ -52,12 +52,9 @@ variable reserved {
   default     = false
 }
 
-variable sku {
-  type        = object({
-    size  = string
-    tier  = string
-  })
-  description = "An object describing the sku for the App Service Plan."
+variable sku_name {
+  type        = string
+  description = "(Required) The SKU for the plan. Possible values include B1, B2, B3, D1, F1, FREE, I1, I2, I3, I1v2, I2v2, I3v2, P1v2, P2v2, P3v2, P1v3, P2v3, P3v3, S1, S2, S3, SHARED, EP1, EP2, EP3, WS1, WS2, and WS3"
 }
 
 variable monitor_alerts_action_group_id {

@@ -21,7 +21,7 @@ resource "azurerm_service_plan" "this" {
   name                = "plan-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name = var.resource_group_name
   location            = var.location
-  kind                = var.kind
+  os_type             = var.os_type
   reserved            = var.reserved
 
   sku {
