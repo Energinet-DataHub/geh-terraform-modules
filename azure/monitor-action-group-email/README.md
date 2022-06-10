@@ -46,7 +46,6 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.8.0"
     "ModuleId"      = "monitor-action-group-email"
   }
 }

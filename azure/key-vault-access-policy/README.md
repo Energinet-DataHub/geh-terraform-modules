@@ -40,7 +40,6 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "6.1.0"
     "ModuleId"      = "key-vault-access-policy"
   }
 }

@@ -13,7 +13,6 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-databricks-workspace"
   }
   NAME = "vnet-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"

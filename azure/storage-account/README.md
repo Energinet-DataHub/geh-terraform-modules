@@ -61,7 +61,6 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-storage-account"
   }
 }
