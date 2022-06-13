@@ -24,7 +24,7 @@ resource "azurerm_windows_function_app" "this" {
   service_plan_id             = var.app_service_plan_id
   storage_account_name        = azurerm_storage_account.this.name
   storage_account_access_key  = azurerm_storage_account.this.primary_access_key
-  functions_extension_version = "~4"
+  functions_extension_version = var.functions_extension_version
   builtin_logging_enabled     = false # Disabled to avoid having the setting "AzureWebJobsDashboard" when using Application Insights
   https_only                  = true
 
