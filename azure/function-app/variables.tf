@@ -77,6 +77,12 @@ variable connection_strings {
   default     = []
 }
 
+variable functions_extension_version {
+  type        = string
+  description = "(Optional) The runtime version associated with the Function App."
+  default     = "~4"
+}
+
 variable dotnet_framework_version {
   type        = string
   description = "(Optional) Use this to specify .NET runtime version."
