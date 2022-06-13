@@ -35,8 +35,8 @@ output name {
   ]
 }
 
-output default_site_hostname {
-  value       = azurerm_windows_web_app.this.default_site_hostname
+output default_hostname {
+  value       = azurerm_windows_web_app.this.default_hostname
   description = "The default hostname associated with the App Service - such as mysite.azurewebsites.net"
 
   depends_on  = [
