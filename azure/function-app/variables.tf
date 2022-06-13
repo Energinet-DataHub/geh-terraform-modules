@@ -77,6 +77,12 @@ variable connection_strings {
   default     = []
 }
 
+variable dotnet_framework_version {
+  type        = string
+  description = "(Optional) Use this to specify .NET runtime version."
+  default     = "6"
+}
+
 variable always_on {
   type        = bool
   description = "(Optional) Should the Function App be loaded at all times? Defaults to false."

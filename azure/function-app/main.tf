@@ -17,15 +17,15 @@ locals {
   }
 }
 
-resource "azurerm_function_app" "this" {
+resource "azurerm_windows_function_app" "this" {
   name                        = "func-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location                    = var.location
   resource_group_name         = var.resource_group_name
-  app_service_plan_id         = var.app_service_plan_id
+  service_plan_id             = var.app_service_plan_id
   storage_account_name        = azurerm_storage_account.this.name
   storage_account_access_key  = azurerm_storage_account.this.primary_access_key
-  version                     = "~4"
-  enable_builtin_logging      = false # Disabled to avoid having the setting "AzureWebJobsDashboard" when using Application Insights
+  functions_extension_version = "~4"
+  builtin_logging_enabled     = false # Disabled to avoid having the setting "AzureWebJobsDashboard" when using Application Insights
   https_only                  = true
 
   app_settings                = merge({
@@ -41,6 +41,11 @@ resource "azurerm_function_app" "this" {
   site_config {
     always_on = var.always_on
     health_check_path = var.health_check_path
+    application_stack {
+      current_stack = "dotnet"
+      dotnet_version = var.dotnet_framework_version
+      use_dotnet_isolated_runtime  = true
+    }
     cors {
       allowed_origins = ["*"]
     }
@@ -73,7 +78,7 @@ resource "azurerm_function_app" "this" {
 #
 
 resource "azurerm_app_service_virtual_network_swift_connection" "this" {
-  app_service_id = azurerm_function_app.this.id
+  app_service_id = azurerm_windows_function_app.this.id
   subnet_id      = var.vnet_integration_subnet_id
 }
 
@@ -95,7 +100,7 @@ resource "azurerm_private_endpoint" "this" {
 
   private_service_connection {
     name                           = "pcs-01"
-    private_connection_resource_id = azurerm_function_app.this.id
+    private_connection_resource_id = azurerm_windows_function_app.this.id
     is_manual_connection           = false
     subresource_names              = ["sites"]
   }
@@ -112,7 +117,7 @@ resource "azurerm_private_endpoint" "this" {
   }
 
   depends_on = [
-    azurerm_function_app.this
+    azurerm_windows_function_app.this
   ]
 }
 
@@ -233,12 +238,12 @@ resource "azurerm_private_endpoint" "file" {
 resource "azurerm_monitor_metric_alert" "health_check_alert" {
   count               = var.health_check_alert_action_group_id == null ? 0 : 1
 
-  name                = "hca-${azurerm_function_app.this.name}"
+  name                = "hca-${azurerm_windows_function_app.this.name}"
   resource_group_name = var.resource_group_name
 
   enabled             = var.health_check_alert_enabled
   severity            = 1
-  scopes              = [azurerm_function_app.this.id]
+  scopes              = [azurerm_windows_function_app.this.id]
   description         = "Action will be triggered when health check fails."
 
   frequency           = "PT1M"
@@ -269,7 +274,7 @@ resource "azurerm_monitor_metric_alert" "health_check_alert" {
 
 resource "azurerm_monitor_diagnostic_setting" "func" {
   name                       = "diag-func-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
-  target_resource_id         = azurerm_function_app.this.id
+  target_resource_id         = azurerm_windows_function_app.this.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
   metric {
