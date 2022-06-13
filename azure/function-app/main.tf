@@ -44,7 +44,7 @@ resource "azurerm_windows_function_app" "this" {
     application_stack {
       current_stack = "dotnet"
       dotnet_version = var.dotnet_framework_version
-      use_dotnet_isolated_runtime  = true
+      use_dotnet_isolated_runtime  = var.use_dotnet_isolated_runtime
     }
     cors {
       allowed_origins = ["*"]
