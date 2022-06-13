@@ -42,7 +42,6 @@ resource "azurerm_windows_function_app" "this" {
     always_on = var.always_on
     health_check_path = var.health_check_path
     application_stack {
-      current_stack = "dotnet"
       dotnet_version = var.dotnet_framework_version
       use_dotnet_isolated_runtime  = var.use_dotnet_isolated_runtime
     }
