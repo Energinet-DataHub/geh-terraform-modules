@@ -81,7 +81,7 @@ variable connection_strings {
 variable dotnet_framework_version {
   type        = string
   description = "(Optional) Use this when running on a Windows plan to specify .NET Core runtime version."
-  default     = "v5.0"
+  default     = "v6.0"
 }
 
 variable always_on {

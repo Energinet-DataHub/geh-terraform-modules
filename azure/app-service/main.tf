@@ -17,11 +17,11 @@ locals {
   }
 }
 
-resource "azurerm_app_service" "this" {
+resource "azurerm_windows_web_app" "this" {
   name                        = "app-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location                    = var.location
   resource_group_name         = var.resource_group_name
-  app_service_plan_id         = var.app_service_plan_id
+  service_plan_id             = var.app_service_plan_id
   https_only                  = true
 
   app_settings                = merge({
@@ -35,9 +35,12 @@ resource "azurerm_app_service" "this" {
   }
 
   site_config {
-    dotnet_framework_version  = var.dotnet_framework_version
     always_on                 = var.always_on
     health_check_path         = var.health_check_path
+    application_stack {
+      current_stack = "dotnet"
+      dotnet_version = var.dotnet_framework_version
+    }
     cors {
       allowed_origins = ["*"]
     }
