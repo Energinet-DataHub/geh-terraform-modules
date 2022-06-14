@@ -29,9 +29,12 @@ resource "azurerm_windows_function_app" "this" {
   https_only                  = true
 
   app_settings                = merge({
-    APPINSIGHTS_INSTRUMENTATIONKEY = var.application_insights_instrumentation_key
+    APPINSIGHTS_INSTRUMENTATIONKEY        = var.application_insights_instrumentation_key
     WEBSITE_VNET_ROUTE_ALL                = "1"
     WEBSITE_CONTENTOVERVNET               = "1"
+    WEBSITE_ENABLE_SYNC_UPDATE_SITE       = true
+    WEBSITE_RUN_FROM_PACKAGE              = 1
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE   = true
   },var.app_settings)
 
   identity {
