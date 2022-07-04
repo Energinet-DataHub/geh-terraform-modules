@@ -30,6 +30,13 @@ resource "azurerm_mssql_server" "this" {
     type  = "SystemAssigned"
   }
 
+  azuread_administrator {
+    azuread_authentication_only = var.ad_authentication_only
+
+    login_username              = var.ad_administrator_client_id
+    object_id                   = var.ad_administrator_object_id
+  }
+
   tags                          = merge(var.tags, local.module_tags)
 
   lifecycle {

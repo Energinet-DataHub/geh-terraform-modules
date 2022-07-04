@@ -56,6 +56,24 @@ variable administrator_login_password {
   description = "(Required) The password associated with the administrator_login user. Needs to comply with Azure's Password Policy"
 }
 
+variable ad_authentication_only {
+  type        = bool
+  description = "(Optional) Specifies whether only AD users and administrators can be used to login, meaning SQL authentication will be disabled."
+  default     = false
+}
+
+variable ad_administrator_client_id {
+  type        = string
+  description = "(Optional) The client ID of the Azure AD Administrator of this SQL Server."
+  default     = null
+}
+
+variable ad_administrator_object_id {
+  type        = string
+  description = "(Optional) The object ID of the Azure AD Administrator of this SQL Server."
+  default     = null
+}
+
 variable private_endpoint_subnet_id {
   type        = string
   description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."
