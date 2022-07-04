@@ -62,18 +62,6 @@ variable ad_authentication_only {
   default     = false
 }
 
-variable ad_administrator_client_id {
-  type        = string
-  description = "(Optional) The client ID of the Azure AD Administrator of this SQL Server."
-  default     = null
-}
-
-variable ad_administrator_object_id {
-  type        = string
-  description = "(Optional) The object ID of the Azure AD Administrator of this SQL Server."
-  default     = null
-}
-
 variable private_endpoint_subnet_id {
   type        = string
   description = "(Required) The ID of the Subnet from which Private IP Addresses will be allocated for Private Endpoints. Changing this forces a new resource to be created."

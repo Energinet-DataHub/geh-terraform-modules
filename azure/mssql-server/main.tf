@@ -17,6 +17,8 @@ locals {
   }
 }
 
+data "azurerm_client_config" "this" {}
+
 resource "azurerm_mssql_server" "this" {
   name                          = "mssql-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name           = var.resource_group_name
@@ -33,8 +35,8 @@ resource "azurerm_mssql_server" "this" {
   azuread_administrator {
     azuread_authentication_only = var.ad_authentication_only
 
-    login_username              = var.ad_administrator_client_id
-    object_id                   = var.ad_administrator_object_id
+    login_username              = data.azurerm_client_config.this.client_id # TODO: Can we use Client ID or do we need login name?
+    object_id                   = data.azurerm_client_config.this.object_id
   }
 
   tags                          = merge(var.tags, local.module_tags)
