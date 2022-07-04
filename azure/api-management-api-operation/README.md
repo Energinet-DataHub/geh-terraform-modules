@@ -15,8 +15,8 @@ This module creates the following resources:
 
 ## Prerequisites
 
-- Terraform version 1.1.7+
-- AzureRM provider version 2.97.0+
+- Terraform version 1.2.2+
+- AzureRM provider version 3.9.0+
 
 ## Arguments and defaults
 
@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "api_management_api_operation_example" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/api-management-api-operation?ref=7.0.0"
 
   operation_id        = "example-operation-id"
   api_name            = "example-api-management-api-name"
@@ -56,7 +56,6 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "api-management-api-operation"
   }
 }

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 output id {
-  value       = azurerm_function_app.this.id
+  value       = azurerm_windows_function_app.this.id
   description = "The ID of the Function App."
 
   depends_on  = [
@@ -21,13 +21,13 @@ output id {
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_app_service_virtual_network_swift_connection.this,
-    azurerm_function_app.this,
+    azurerm_windows_function_app.this,
     azurerm_private_endpoint.this,
   ]
 }
 
 output name {
-  value       = azurerm_function_app.this.name
+  value       = azurerm_windows_function_app.this.name
   description = "The name of the Function App."
 
   depends_on  = [
@@ -36,12 +36,12 @@ output name {
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_app_service_virtual_network_swift_connection.this,
-    azurerm_function_app.this,
+    azurerm_windows_function_app.this,
   ]
 }
 
 output default_hostname {
-  value       = azurerm_function_app.this.default_hostname
+  value       = azurerm_windows_function_app.this.default_hostname
   description = "The default hostname associated with the Function App - such as mysite.azurewebsites.net"
 
   depends_on  = [
@@ -50,13 +50,13 @@ output default_hostname {
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_app_service_virtual_network_swift_connection.this,
-    azurerm_function_app.this,    
+    azurerm_windows_function_app.this,
     azurerm_private_endpoint.this,
   ]
 }
 
 output outbound_ip_addresses {
-  value       = azurerm_function_app.this.outbound_ip_addresses
+  value       = azurerm_windows_function_app.this.outbound_ip_addresses
   description = "A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12"
 
   depends_on  = [
@@ -65,13 +65,13 @@ output outbound_ip_addresses {
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_app_service_virtual_network_swift_connection.this,
-    azurerm_function_app.this,
+    azurerm_windows_function_app.this,
     azurerm_private_endpoint.this,
   ]
 }
 
 output possible_outbound_ip_addresses {
-  value       = azurerm_function_app.this.possible_outbound_ip_addresses
+  value       = azurerm_windows_function_app.this.possible_outbound_ip_addresses
   description = "A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12,52.143.43.17 - not all of which are necessarily in use. Superset of outbound_ip_addresses"
 
   depends_on  = [
@@ -80,13 +80,13 @@ output possible_outbound_ip_addresses {
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_app_service_virtual_network_swift_connection.this,
-    azurerm_function_app.this,
+    azurerm_windows_function_app.this,
     azurerm_private_endpoint.this,
   ]
 }
 
 output identity {
-  value       = azurerm_function_app.this.identity
+  value       = azurerm_windows_function_app.this.identity
   description = "An identity block as defined below, which contains the Managed Service Identity information for this App Service."
 
   depends_on  = [
@@ -95,13 +95,13 @@ output identity {
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_app_service_virtual_network_swift_connection.this,
-    azurerm_function_app.this,
+    azurerm_windows_function_app.this,
     azurerm_private_endpoint.this,
   ]
 }
 
 output site_credential {
-  value       = azurerm_function_app.this.site_credential
+  value       = azurerm_windows_function_app.this.site_credential
   description = "A site_credential block as defined below, which contains the site-level credentials used to publish to this App Service."
 
   depends_on  = [
@@ -110,13 +110,13 @@ output site_credential {
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_app_service_virtual_network_swift_connection.this,
-    azurerm_function_app.this,
+    azurerm_windows_function_app.this,
     azurerm_private_endpoint.this,
   ]
 }
 
 output kind {
-  value       = azurerm_function_app.this.kind
+  value       = azurerm_windows_function_app.this.kind
   description = "The Function App kind - such as functionapp,linux,container"
 
   depends_on  = [
@@ -125,7 +125,7 @@ output kind {
     azurerm_private_endpoint.blob,
     azurerm_private_endpoint.file,
     azurerm_app_service_virtual_network_swift_connection.this,
-    azurerm_function_app.this,
+    azurerm_windows_function_app.this,
     azurerm_private_endpoint.this,
   ]
 }

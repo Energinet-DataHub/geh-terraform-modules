@@ -77,6 +77,24 @@ variable connection_strings {
   default     = []
 }
 
+variable functions_extension_version {
+  type        = string
+  description = "(Optional) The runtime version associated with the Function App."
+  default     = "~4"
+}
+
+variable dotnet_framework_version {
+  type        = string
+  description = "(Optional) Use this to specify .NET runtime version."
+  default     = "6"
+}
+
+variable use_dotnet_isolated_runtime {
+  type        = bool
+  description = "(Optional) Should the .NET process use an isolated runtime."
+  default     = true
+}
+
 variable always_on {
   type        = bool
   description = "(Optional) Should the Function App be loaded at all times? Defaults to false."

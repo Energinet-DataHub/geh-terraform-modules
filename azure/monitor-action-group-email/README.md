@@ -14,8 +14,8 @@ This module creates the following resources:
 
 ## Prerequisites
 
-- Terraform version 1.1.7+
-- AzureRM provider version 2.97.0+
+- Terraform version 1.2.2+
+- AzureRM provider version 3.9.0+
 
 ## Arguments and defaults
 
@@ -25,7 +25,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "monitor_action_group_email_example" {
-  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/monitor-action-group-email?ref=5.8.0"
+  source                                    = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/monitor-action-group-email?ref=7.0.0"
 
   name                                      = "example-name"
   project_name                              = "example-project-name"
@@ -46,7 +46,6 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.8.0"
     "ModuleId"      = "monitor-action-group-email"
   }
 }

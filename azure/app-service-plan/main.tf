@@ -13,22 +13,16 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0",
     "ModuleId"      = "azure-app-service-plan"
   }
 }
 
-resource "azurerm_app_service_plan" "this" {
+resource "azurerm_service_plan" "this" {
   name                = "plan-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   resource_group_name = var.resource_group_name
   location            = var.location
-  kind                = var.kind
-  reserved            = var.reserved
-
-  sku {
-    size = var.sku.size
-    tier = var.sku.tier
-  }
+  os_type             = var.os_type
+  sku_name            = var.sku_name
 
   tags                = merge(var.tags, local.module_tags)
 
@@ -42,12 +36,12 @@ resource "azurerm_app_service_plan" "this" {
 }
 
 resource "azurerm_monitor_metric_alert" "metric_alert_cpu" {
-  name                = "ma-${azurerm_app_service_plan.this.name}-cpu"
+  name                = "ma-${azurerm_service_plan.this.name}-cpu"
   resource_group_name = var.resource_group_name
 
   enabled             = var.monitor_alerts_enabled
   severity            = 2
-  scopes              = [azurerm_app_service_plan.this.id]
+  scopes              = [azurerm_service_plan.this.id]
   description         = "Action will be triggered when average CPU usage is too high."
 
   frequency           = "PT1M"
@@ -77,12 +71,12 @@ resource "azurerm_monitor_metric_alert" "metric_alert_cpu" {
 }
 
 resource "azurerm_monitor_metric_alert" "metric_alert_memory" {
-  name                = "ma-${azurerm_app_service_plan.this.name}-mry"
+  name                = "ma-${azurerm_service_plan.this.name}-mry"
   resource_group_name = var.resource_group_name
 
   enabled             = var.monitor_alerts_enabled
   severity            = 2
-  scopes              = [azurerm_app_service_plan.this.id]
+  scopes              = [azurerm_service_plan.this.id]
   description         = "Action will be triggered when average memory usage is too high."
 
   frequency           = "PT1M"

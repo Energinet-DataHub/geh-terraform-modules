@@ -15,8 +15,8 @@ This module creates the following resources:
 
 ## Prerequisites
 
-- Terraform version 1.1.2+
-- AzureRM provider version 2.91.0+
+- Terraform version 1.2.2+
+- AzureRM provider version 3.9.0+
 
 ## Arguments and defaults
 
@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "cosmos_db_example" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/cosmos-db-account?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/cosmos-db-account?ref=7.0.0"
 
   name                            = "example-name"
   project_name                    = "example-project-name"
@@ -45,7 +45,6 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-cosmos-db-account"
   }
 }

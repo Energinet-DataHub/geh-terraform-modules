@@ -13,7 +13,6 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-key-vault"
   }
 }
@@ -84,28 +83,28 @@ resource "azurerm_key_vault_access_policy" "selfpermissions" {
   tenant_id               = data.azurerm_client_config.this.tenant_id
   object_id               = data.azurerm_client_config.this.object_id
   secret_permissions      = [
-    "delete",
-    "list",
-    "get",
-    "set",
-    "purge"
+    "Delete",
+    "List",
+    "Get",
+    "Set",
+    "Purge"
   ]
   key_permissions         = [
-    "create",
-    "list",
-    "delete",
-    "get"
+    "Create",
+    "List",
+    "Delete",
+    "Get"
   ]
   certificate_permissions = [
-    "create",
-    "list",
-    "delete",
-    "get"
+    "Create",
+    "List",
+    "Delete",
+    "Get"
   ]
   storage_permissions     = [
-    "delete",
-    "get",
-    "set"
+    "Delete",
+    "Get",
+    "Set"
   ]
 }
 

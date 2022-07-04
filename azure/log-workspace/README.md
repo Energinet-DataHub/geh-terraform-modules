@@ -14,8 +14,8 @@ This module creates the following resource:
 
 ## Prerequisites
 
-- Terraform version 1.1.7+
-- AzureRM provider version 2.97.0+
+- Terraform version 1.2.2+
+- AzureRM provider version 3.9.0+
 
 ## Arguments and defaults
 
@@ -25,7 +25,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "log_workspace_example" {
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=5.6.0"
+  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/log-workspace?ref=7.0.0"
 
   name                  = "example-name"
   project_name          = "example-project"
@@ -43,7 +43,6 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "5.6.0"
     "ModuleId"      = "azure-log-workspace"
   }
 }

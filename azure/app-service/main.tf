@@ -13,16 +13,15 @@
 # limitations under the License.
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0",
     "ModuleId"      = "azure-app-service"
   }
 }
 
-resource "azurerm_app_service" "this" {
+resource "azurerm_windows_web_app" "this" {
   name                        = "app-${lower(var.name)}-${lower(var.project_name)}-${lower(var.environment_short)}-${lower(var.environment_instance)}"
   location                    = var.location
   resource_group_name         = var.resource_group_name
-  app_service_plan_id         = var.app_service_plan_id
+  service_plan_id             = var.app_service_plan_id
   https_only                  = true
 
   app_settings                = merge({
@@ -36,9 +35,12 @@ resource "azurerm_app_service" "this" {
   }
 
   site_config {
-    dotnet_framework_version  = var.dotnet_framework_version
     always_on                 = var.always_on
     health_check_path         = var.health_check_path
+    application_stack {
+      current_stack = "dotnet"
+      dotnet_version = var.dotnet_framework_version
+    }
     cors {
       allowed_origins = ["*"]
     }
@@ -70,7 +72,7 @@ resource "azurerm_app_service" "this" {
 #
 
 resource "azurerm_app_service_virtual_network_swift_connection" "this" {
-  app_service_id = azurerm_app_service.this.id
+  app_service_id = azurerm_windows_web_app.this.id
   subnet_id      = var.vnet_integration_subnet_id
 }
 
@@ -94,7 +96,7 @@ resource "azurerm_private_endpoint" "this" {
 
   private_service_connection {
     name                           = "pcs-01"
-    private_connection_resource_id = azurerm_app_service.this.id
+    private_connection_resource_id = azurerm_windows_web_app.this.id
     is_manual_connection           = false
     subresource_names              = ["sites"]
   }
@@ -111,20 +113,20 @@ resource "azurerm_private_endpoint" "this" {
   }
 
   depends_on = [
-    azurerm_app_service.this
+    azurerm_windows_web_app.this
   ]
 }
 
 resource "azurerm_monitor_metric_alert" "health_check_alert" {
   count               = var.health_check_alert_action_group_id == null ? 0 : 1
 
-  name                = "hca-${azurerm_app_service.this.name}"
+  name                = "hca-${azurerm_windows_web_app.this.name}"
   resource_group_name = var.resource_group_name
 
   enabled             = var.health_check_alert_enabled
   severity            = 1
   scopes              = [
-    azurerm_app_service.this.id
+    azurerm_windows_web_app.this.id
   ]
   description         = "Action will be triggered when health check fails."
 
@@ -154,6 +156,6 @@ resource "azurerm_monitor_metric_alert" "health_check_alert" {
   }
 
   depends_on = [
-    azurerm_app_service.this
+    azurerm_windows_web_app.this
   ]
 }

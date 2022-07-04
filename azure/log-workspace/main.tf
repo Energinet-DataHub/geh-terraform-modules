@@ -14,7 +14,6 @@
 
 locals {
   module_tags = {
-    "ModuleVersion" = "5.6.0"
     "ModuleId"      = "azure-log-workspace"
   }
 }

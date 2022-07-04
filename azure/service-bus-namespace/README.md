@@ -20,8 +20,8 @@ This module creates the following resources:
 
 ## Prerequisites
 
-- Terraform version 1.1.7+
-- AzureRM provider version 2.97.0+
+- Terraform version 1.2.2+
+- AzureRM provider version 3.9.0+
 
 ## Arguments and defaults
 
@@ -31,7 +31,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "service_bus_namespace_example" {
-  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/service_bus-namespace?ref=7.0.0"
 
   name                            = "example-name"
   project_name                    = "example-project-name"
@@ -41,7 +41,7 @@ module "service_bus_namespace_example" {
   location                        = "westeurope"
   private_endpoint_subnet_id      = "private-endpoint-subnet-id"
   log_analytics_workspace_id      = "example-log-analytics-workspace"
-  
+
   auth_rules            = [
     {
       name    = "example-auth-rule-1"
@@ -64,7 +64,6 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-    "ModuleVersion" = "6.0.0"
     "ModuleId"      = "azure-service-bus-namespace"
   }
 }

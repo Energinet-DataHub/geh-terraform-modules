@@ -15,8 +15,8 @@ This module creates the following resources:
 
 ## Prerequisites
 
-- Terraform version 1.1.7+
-- AzureRM provider version 2.97.0+
+- Terraform version 1.2.2+
+- AzureRM provider version 3.9.0+
 
 ## Arguments and defaults
 
@@ -26,32 +26,16 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "plan_example" {
-<<<<<<< HEAD
-  source                = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=6.0.0"
+  source                          = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=7.0.0"
 
-  name                  = "example-name"
-  project_name          = "example-project-name"
-  environment_short     = "u"
-  environment_instance  = "001"
-  resource_group_name   = "example-resource-group-name"
-  location              = "westeurope"
-  sku                   = {
-=======
-  source                         = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/app-service-plan?ref=5.11.0"
-
-  name                           = "example-name"
-  project_name                   = "example-project-name"
-  environment_short              = "p"
-  environment_instance           = "001"
-  resource_group_name            = "example-resource-group-name"
-  location                       = "westeurope"
-  monitor_alerts_action_group_id = "example-action-group-id"
-
-  sku                            = {
->>>>>>> a47859ad862856e0be46cb59862f6ccdd06514c7
-    tier = "Free"
-    size = "F1"
-  }
+  name                            = "example-name"
+  project_name                    = "example-project-name"
+  environment_short               = "u"
+  environment_instance            = "001"
+  resource_group_name             = "example-resource-group-name"
+  location                        = "westeurope"
+  monitor_alerts_action_group_id  = "example-action-group-id"
+  sku_name                        = "sku-name"
 
   tags                           = {}
 }
@@ -62,11 +46,6 @@ Two tags are added by default:
 ```ruby
 locals {
   module_tags = {
-<<<<<<< HEAD
-    "ModuleVersion" = "6.0.0",
-=======
-    "ModuleVersion" = "5.11.0",
->>>>>>> a47859ad862856e0be46cb59862f6ccdd06514c7
     "ModuleId"      = "azure-app-service-plan"
   }
 }

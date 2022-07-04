@@ -15,8 +15,8 @@ This module creates the following resources:
 
 ## Prerequisites
 
-- Terraform version 1.1.7+
-- AzureRM provider version 2.97.0+
+- Terraform version 1.2.2+
+- AzureRM provider version 3.9.0+
 
 ## Arguments and defaults
 
@@ -26,7 +26,7 @@ See [variables.tf](./variables.tf)
 
 ```ruby
 module "eventhub_example" {
-  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/eventhub?ref=6.0.0"
+  source              = "git::https://github.com/Energinet-DataHub/geh-terraform-modules.git//azure/eventhub?ref=7.0.0"
   name                = "example-name"
   namespace_name      = "example-namespace-name"
   resource_group_name = "example-resource-group-name"
