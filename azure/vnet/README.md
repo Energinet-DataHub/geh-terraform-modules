@@ -15,8 +15,8 @@ This module creates the following resources:
 
 ## Prerequisites
 
-- Terraform version 1.1.2+
-- AzureRM provider version 2.91.0+
+- Terraform version 1.2.2+
+- AzureRM provider version 3.9.0+
 
 ## Arguments and defaults
 

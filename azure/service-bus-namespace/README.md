@@ -20,8 +20,8 @@ This module creates the following resources:
 
 ## Prerequisites
 
-- Terraform version 1.1.7+
-- AzureRM provider version 2.97.0+
+- Terraform version 1.2.2+
+- AzureRM provider version 3.9.0+
 
 ## Arguments and defaults
 
@@ -41,7 +41,7 @@ module "service_bus_namespace_example" {
   location                        = "westeurope"
   private_endpoint_subnet_id      = "private-endpoint-subnet-id"
   log_analytics_workspace_id      = "example-log-analytics-workspace"
-  
+
   auth_rules            = [
     {
       name    = "example-auth-rule-1"
