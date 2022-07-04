@@ -35,7 +35,7 @@ resource "azurerm_mssql_server" "this" {
   azuread_administrator {
     azuread_authentication_only = var.ad_authentication_only
 
-    login_username              = data.azurerm_client_config.this.client_id # TODO: Can we use Client ID or do we need login name?
+    login_username              = data.azurerm_client_config.this.client_id
     object_id                   = data.azurerm_client_config.this.object_id
   }
 
